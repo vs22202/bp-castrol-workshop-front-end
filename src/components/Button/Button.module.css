@@ -1,0 +1,10 @@
+button{
+    background-color: black;
+}
+.sm{
+    color:var(--primary-color);
+}
+.outline{
+    background-color: transparent;
+    border: 1 solid green;
+}
