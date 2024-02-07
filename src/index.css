@@ -39,6 +39,7 @@
   --error---main900: rgba(255, 77, 77, 1);
 
   /* Text-size styles */
+  --weight--regular:100;
   --display---x-l---regular: 64px;
   --display---x-l---bold: 64px;
   --display---x-l---extra-bold: 64px;
