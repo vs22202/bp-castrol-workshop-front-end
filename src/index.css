@@ -1,7 +1,102 @@
-#root{
-  --primary-color: blue;
+#root {
+  /* Color styles */
+  --primary---main100: rgba(51, 204, 0, 1);
+  --primary---main300: rgba(30, 178, 0, 1);
+  --primary---main500: rgba(0, 153, 0, 1);
+  --primary---main700: rgba(0, 153, 26, 1);
+  --primary---main900: rgba(0, 128, 32, 1);
+  --secondary---main100: rgba(255, 240, 102, 1);
+  --secondary---main300: rgba(255, 235, 51, 1);
+  --secondary---main500: rgba(255, 230, 0, 1);
+  --secondary---main700: rgba(229, 207, 0, 1);
+  --secondary---main900: rgba(217, 195, 0, 1);
+  --neutral---main50: rgba(230, 230, 230, 1);
+  --neutral---main150: rgba(204, 204, 204, 1);
+  --neutral---main250: rgba(179, 179, 179, 1);
+  --neutral---main350: rgba(153, 153, 153, 1);
+  --neutral---main450: rgba(128, 128, 128, 1);
+  --neutral---main550: rgba(115, 115, 115, 1);
+  --neutral---main650: rgba(128, 128, 128, 1);
+  --neutral---main750: rgba(102, 102, 102, 1);
+  --neutral---main850: rgba(77, 77, 77, 1);
+  --neutral---main950: rgba(51, 51, 51, 1);
+  --shades---main-white: rgba(255, 255, 255, 1);
+  --shades---main-black: rgba(0, 0, 0, 1);
+  --success---main100: rgba(229, 255, 232, 1);
+  --success---main300: rgba(191, 255, 197, 1);
+  --success---main500: rgba(153, 255, 161, 1);
+  --success---main700: rgba(102, 255, 115, 1);
+  --success---main900: rgba(51, 255, 68, 1);
+  --warning---main100: rgba(255, 252, 217, 1);
+  --warning---main300: rgba(255, 249, 166, 1);
+  --warning---main500: rgba(255, 246, 128, 1);
+  --warning---main700: rgba(255, 243, 89, 1);
+  --warning---main900: rgba(255, 241, 51, 1);
+  --error---main100: rgba(255, 242, 242, 1);
+  --error---main300: rgba(255, 191, 191, 1);
+  --error---main500: rgba(255, 153, 153, 1);
+  --error---main700: rgba(255, 128, 128, 1);
+  --error---main900: rgba(255, 77, 77, 1);
+
+  /* Text-size styles */
+  --display---x-l---regular: 64px;
+  --display---x-l---bold: 64px;
+  --display---x-l---extra-bold: 64px;
+  --display---l---regular: 56px;
+  --display---l---bold: 56px;
+  --display---l---extra-bold: 56px;
+  --display---m---regular: 48px;
+  --display---m---bold: 48px;
+  --display---m---extra-bold: 48px;
+  --display--7-x-s---extra-bold: 16px;
+  --heading---l---regular: 40px;
+  --heading---l---bold: 40px;
+  --heading---l---extra-bold: 40px;
+  --heading---m---regular: 36px;
+  --heading---m---bold: 36px;
+  --heading---m---extra-bold: 36px;
+  --heading---s---regular: 28px;
+  --heading---s---bold: 28px;
+  --heading---s---extra-bold: 28px;
+  --heading--4-x-s---medium: 12px;
+  --heading---x-s---bold: 24px;
+  --heading--2-x-s---bold: 20px;
+  --subheading---l---light: 28px;
+  --subheading---l---regular: 28px;
+  --subheading---l---medium: 28px;
+  --subheading---m---light: 24px;
+  --subheading---m---regular: 24px;
+  --subheading---m---medium: 24px;
+  --subheading---s---light: 20px;
+  --subheading---s---regular: 20px;
+  --subheading---s---medium: 20px;
+  --subheading---s---bold: 20px;
+  --subheading---x-s---regular: 16px;
+  --subheading---x-s---bold: 16px;
+  --subheading--2-x-s---regular: 12px;
+  --subheading--2-x-s---medium: 12px;
+  --paragraph---l---extra-light: 16px;
+  --paragraph---l---light: 16px;
+  --paragraph---l---regular: 16px;
+  --paragraph---m---extra-light: 12px;
+  --paragraph---m---light: 12px;
+  --paragraph---m---regular: 12px;
+  --paragraph---s---light: 8px;
+  --link---s---light: 16px;
+  --link---s---regular: 16px;
+  --link---m---light: 20px;
+  --link---m---medium: 20px;
+  --link---l---light: 24px;
+  --link---x-s---light: 12px;
+  --link--2-x-s---light: 8px;
+  --link--3-x-s---light: 4px;
+
+  /* Effect styles */
+  --primary--md: 4px 4px 6px rgba(0, 153, 25, 0.3);
+  --primary--lg: 4px 4px 6px rgba(0, 153, 25, 0.7);
+  --neutral--lg: 4px 4px 6px rgba(153, 153, 153, 0.7);
 }
-body{
+body {
   height: 85vh;
   display: flex;
   align-items: center;
