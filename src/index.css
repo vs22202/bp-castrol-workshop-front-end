@@ -91,7 +91,30 @@
   --link--2-x-s---light: 8px;
   --link--3-x-s---light: 4px;
 
-  /* Effect styles */
+  /* Spacing */
+  --spacing-none: 0px;
+  --spacing-4xs: 4px;
+  --spacing-3xs: 8px;
+  --spacing-2xs: 12px;
+  --spacing-xs: 16px;
+  --spacing-sm: 20px;
+  --spacing-md: 24px;
+  --spacing-lg: 28px;
+  --spacing-xl: 32px;
+  --spacing-2xl: 36px;
+  --spacing-3xl: 40px;
+  --spacing-4xl: 44px;
+  --spacing-5xl: 48px;
+  --spacing-6xl: 52px;
+  --spacing-7xl: 56px;
+  --spacing-8xl: 60px;
+  --spacing-9xl: 64px;
+  --spacing-10xl: 68px;
+  --spacing-11xl: 72px;
+  --spacing-12xl: 76px;
+  --spacing-13xl: 80px;
+
+  /* Box Shadow styles */
   --primary--md: 4px 4px 6px rgba(0, 153, 25, 0.3);
   --primary--lg: 4px 4px 6px rgba(0, 153, 25, 0.7);
   --neutral--lg: 4px 4px 6px rgba(153, 153, 153, 0.7);
