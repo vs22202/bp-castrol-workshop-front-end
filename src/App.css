@@ -1,1 +1,15 @@
+.button-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.button-row{
+    margin-top: 28px;
+}
+
+Button{
+    margin-right: 76px;
+    
+}
 

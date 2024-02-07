@@ -1,10 +1,19 @@
-button{
-    background-color: black;
-}
 .sm{
-    color:var(--primary---main100);
+    font-size: 12px;
+    width: var();
 }
-.outline{
+.md{
+    height: var(--spacing-4xl);
+    font-size: 16px;
+    width: var();
+}
+.lg{
+    height: var(--spacing-7xl);
+    font-size: 20px;
+    width: var();
+}
+
+/* .outline{
     background-color: transparent;
     border: 1 solid green;
-}
+} */
