@@ -9,39 +9,39 @@ function App() {
 
       <div className="button-container">
         <div className="button-row">
-          <Button state="active" size="sm"/>
-          <Button state="active" size="md"/>
-          <Button state="active" size="lg"/>
+          <Button state="activesolid" size="sm"/>
+          <Button state="activesolid" size="md"/>
+          <Button state="activesolid" size="lg"/>
         </div>
 
         <div className="button-row">
-          <Button state="hover" size="sm"/>
-          <Button state="hover" size="md"/>
-          <Button state="hover" size="lg"/>
+          <Button state="hoversolid" size="sm"/>
+          <Button state="hoversolid" size="md"/>
+          <Button state="hoversolid" size="lg"/>
         </div>
 
         <div className="button-row">
-          <Button state="disabled" size="sm"/>
-          <Button state="disabled" size="md"/>
-          <Button state="disabled" size="lg"/>
+          <Button state="disabledsolid" size="sm"/>
+          <Button state="disabledsolid" size="md"/>
+          <Button state="disabledsolid" size="lg"/>
         </div>
 
         <div className="button-row">
-          <Button solid={false} state="active" size="sm"/>
-          <Button solid={false}  state="active" size="md"/>
-          <Button solid={false} state="active" size="lg"/>
+          <Button state="activeoutline" size="sm"/>
+          <Button  state="activeoutline" size="md"/>
+          <Button state="activeoutline" size="lg"/>
         </div>
 
         <div className="button-row">
-          <Button solid={false} state="hover" size="sm"/>
-          <Button solid={false} state="hover" size="md"/>
-          <Button solid={false} state="hover" size="lg"/>
+          <Button state="hoveroutline" size="sm"/>
+          <Button state="hoveroutline" size="md"/>
+          <Button state="hoveroutline" size="lg"/>
         </div>
 
         <div className="button-row">
-          <Button solid={false} state="disabled" size="sm"/>
-          <Button solid={false} state="disabled" size="md"/>
-          <Button solid={false} state="disabled" size="lg"/>
+          <Button state="disabledoutline" size="sm"/>
+          <Button state="disabledoutline" size="md"/>
+          <Button state="disabledoutline" size="lg"/>
         </div>
       </div>
     </>
