@@ -4,7 +4,7 @@ import styles from "./Button.module.css";
 /** The props type of {@link Button | `Button`}. */
 export type ButtonProps = {
   /**
-   * Size of the button
+   * Size of the buttons
    */
   size: string;
 };
