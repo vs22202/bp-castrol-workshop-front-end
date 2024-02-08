@@ -5,10 +5,10 @@ export type ButtonProps = {
   /**
    * fill, state and size of the buttons
    */
-  solid?: boolean;
-  /* state: "active" | "hover" | "disabled"; */
-  state: "activesolid"|"activeoutline"|"hoversolid"|"hoveroutline"|"disabledsolid"|"disabledoutline"
+  disabled?: boolean;
+  state: "solid" | "outline";
   size: "sm" | "md" | "lg";
+  text: string
 };
 
 /**
@@ -24,13 +24,14 @@ export type ButtonProps = {
  * ```
  */
 
-export function Button ({ state="activesolid", size }: ButtonProps ){
+export function Button ({ text, state="solid", size, disabled=false }: ButtonProps ){
   return (
     <>
       <button 
         className={`${styles[state]} ${styles[size]}`}
+        disabled={disabled}
       >
-        Button
+        {text}
       </button>
     </>
   );

@@ -17,35 +17,35 @@ button{
     font-size: 20px;
     width: var();
 }
-.activesolid{
+.solid{
     background-color: var(--primary---main500);
     color: var(--shades---main-white);
     border: none;
     box-shadow: 2px var(--primaryshdw--md);
 }
-.activeoutline{
+.outline{
     border: 2px solid var(--primary---main500);
     color: var(--primary---main500);
     box-shadow: 2px var(--primaryshdw--md);
 }
-.hoversolid{
+.solid:hover{
     background-color: var(--primary---main300);
     color: var(--shades---main-white);
     border: none;
     box-shadow: 2px var(--primaryshdw--lg);
 }
-.hoveroutline{
+.outline:hover{
     border: 2px solid var(--primary---main300);
     color: var(--primary---main300);
     box-shadow: 2px var(--primaryshdw--lg);
 }
-.disabledsolid{
+.solid:disabled{
     background-color: var(--neutral---main150);
     color: var(--shades---main-white);
     border:none;
     box-shadow: 2px var(--neutralshdw--lg);
 }
-.disabledoutline{
+.outline:disabled{
     border: 2px solid var(--neutral---main150);
     color: var(--neutral---main150);
     box-shadow: 2px var(--neutralshdw--lg);
