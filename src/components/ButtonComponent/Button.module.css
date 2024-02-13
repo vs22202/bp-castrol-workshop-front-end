@@ -1,21 +1,20 @@
-button{
-    padding: var(--spacing-2xs);
-    border-radius: var(--spacing-4xs);
+*{
+  font-family: 'Noto Sans', sans-serif;
 }
 
+button{
+    padding-inline: var(--spacing-2xs);
+    border-radius: var(--spacing-4xs);
+    padding-block: var(--spacing-4xs);
+}
 .sm{
-    font-size: 12px;
-    width: var();
+    font-size: var(--spacing-xs);
 }
 .md{
-    height: var(--spacing-4xl);
-    font-size: 16px;
-    width: var();
+    font-size: var(--spacing-md);
 }
 .lg{
-    height: var(--spacing-7xl);
-    font-size: 20px;
-    width: var();
+    font-size: var(--spacing-lg);
 }
 .solid{
     background-color: var(--primary---main500);
@@ -49,4 +48,20 @@ button{
     border: 2px solid var(--neutral---main150);
     color: var(--neutral---main150);
     box-shadow: 2px var(--neutralshdw--lg);
+}
+
+.small{
+    height: var(--spacing-xs);
+    width: var(--spacing-xs);
+    vertical-align: middle;
+}
+.medium{
+    height: var(--spacing-md);
+    width: var(--spacing-md);
+    vertical-align: middle;
+}
+.large{
+    height: var(--spacing-xl);
+    width: var(--spacing-xl);
+    vertical-align: middle;
 }

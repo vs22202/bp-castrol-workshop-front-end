@@ -1,0 +1,123 @@
+
+*{
+    font-family: 'Noto Sans', sans-serif;
+    font-weight: var(--weight--regular);
+  }
+
+  /* input field colors */
+.isWronginputfieldcontainer{
+    position: relative;
+    border: 1px solid var(--error---main900);
+    margin:var(--spacing-xs); 
+    border-radius: var(--spacing-4xs);  
+}
+.isWronginputfield{
+    border: none;
+    color:var(--error---main900);
+    font-size: var(--spacing-xs);
+    padding: var(--spacing-2xs);
+    background: transparent;
+}
+.isWronginputfield:focus{
+    border: none;
+    outline: none;
+}
+
+.defaultinputfieldcontainer{
+    position: relative;
+    border: 1px solid var(--primary---main700);
+    margin:var(--spacing-xs);
+    border-radius: var(--spacing-4xs);
+}
+.defaultinputfield{
+    border: none;
+    color: var(--primary---main700);
+    font-size: var(--spacing-xs);
+    padding: var(--spacing-2xs);
+    background: transparent;
+}
+.defaultinputfield:focus{
+    border: none;
+    outline: none;
+}
+
+/* input field icons */
+.textRight{
+    position: absolute;
+    top: 50%;
+    right: 5px;
+    transform: translateY(-50%);
+    width: var(--spacing-sm);
+    height: var(--spacing-sm);
+    cursor: pointer;
+    background-image: url('../../assets/x-circle-right.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.textWrong{
+    position: absolute;
+    top: 50%;
+    right: 5px;
+    transform: translateY(-50%);
+    width: var(--spacing-sm);
+    height: var(--spacing-sm);
+    cursor: pointer;
+    background-image: url('../../assets/x-circle-wrong.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.passwordRight{
+    position: absolute;
+    top: 50%;
+    right: 5px;
+    transform: translateY(-50%);
+    width: var(--spacing-sm);
+    height: var(--spacing-sm);
+    cursor: pointer;
+    background-image: url('../../assets/eye-slash-right.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.passwordRight:active{
+    background-image: url(../../assets/eye.svg);
+}
+.passwordWrong{
+    position: absolute;
+    top: 50%;
+    right: 5px;
+    transform: translateY(-50%);
+    width: var(--spacing-sm);
+    height: var(--spacing-sm);
+    cursor: pointer;
+    background-image: url('../../assets/eye-slash-wrong.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* input field sizes */
+.sm{
+    height:var(--spacing-sm);
+    font-size: var(--spacing-xs);
+}
+.md{
+    height: var(--spacing-xl);
+    font-size: var(--spacing-sm);
+}
+.lg{
+    height: var(--spacing-4xl);
+    font-size: var(--spacing-lg);
+}
+/* icon sizes */
+.small{
+    height: var(--spacing-sm);
+    width: var(--spacing-sm);
+}
+.medium{
+    height: var(--spacing-sm);
+    width: var(--spacing-sm);
+}
+.large{
+    height: var(--spacing-sm);
+    width: var(--spacing-sm);
+}
+
