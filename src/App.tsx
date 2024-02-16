@@ -48,11 +48,11 @@ function App() {
     <ListItem  size="large" />
     </div> */}
 
-<Checkbox size="small" text="I consent to having my data processed according to the privacy statement" />
+{/* <Checkbox size="small" text="I consent to having my data processed according to the privacy statement" />
     <Checkbox size="medium" text="I consent to having my data processed according to the privacy statement" />
-    <Checkbox size="large" text="I consent to having my data processed according to the privacy statement" />
+    <Checkbox size="large" text="I consent to having my data processed according to the privacy statement" /> */}
 
-    {/* <FooterWithLogo /> */}
+    <FooterWithLogo />
 
     </>
   )
