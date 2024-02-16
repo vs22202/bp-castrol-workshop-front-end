@@ -1,0 +1,125 @@
+
+.footerContainer {
+    /* background-color: var(--neutral---main50); */
+    /* width: 375px;
+    height: 80px; */
+    /* border-top: 1px solid var(--color-accent); */
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    max-height: 3.5rem;
+    background-color: var(--neutral---main50);
+    text-align: center; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
+  }
+  
+  .footerLogo {
+   /*width: 189px;  Mobile width
+    height: 33px;  Mobile height*/
+    width: 222.25px; 
+    height: 33px;
+    max-width: 100%; /* Ensure the logo doesn't exceed its container */
+    display: block;
+    margin: 0 auto; /* Center the logo */
+    /* justify-content: center;
+    align-items: center; */
+  }
+  
+  .footerParagraph {
+    width: 131px; /* Mobile width */
+    height: 16px; /* Mobile height */
+    font-family: 'Noto Sans';
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: 0em;
+    text-align: center;
+    color: var(-neutral---main750);
+    
+    margin: 0 auto;
+    max-width: 50%;
+  }
+  
+  @media (min-width: 768px) {
+    /* Adjust styles for desktop width (e.g., tablets and desktops) */
+    /* .footerContainer {
+      width: 1,280px;
+      height: 120px;
+    } */
+    .footerLogo {
+      /*width: 284px;  Desktop width 
+      height: 49px;  Desktop height */
+      width: 346.5px; /* Width for desktop */
+      height: 60.75px; /* Height for desktop */
+    }
+  
+    .footerParagraph {
+      width: 220px; /* Desktop width */
+      height: 27px; /* Desktop height */
+      font-size: 20px;
+      font-weight: 500;
+      line-height: 27px;
+    }
+  }
+
+
+
+  /* 
+  footer.tsd-generator {
+    border-top: 1px solid var(--color-accent);
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    max-height: 3.5rem;
+    background-color: var(--light-color-text-aside);
+  }
+  
+  footer.tsd-generator > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+     /* background color 
+  }
+  
+  footer.tsd-generator > div img {
+    width: 346.5px; /* Width for desktop 
+    height: 60.75px; /* Height for desktop 
+    margin-right: 4px; /* Gap between image and text 
+  }
+  
+  footer.tsd-generator > div p {
+    width: 220px; /* Width for desktop 
+    height: 27px; /* Height for desktop 
+    font-family: "Noto Sans";
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 27px;
+    letter-spacing: 0;
+    text-align: center;
+    color: #666666;
+     /* Text color 
+  }
+  
+  /* Media query for mobile screens 
+  @media screen and (max-width: 768px) {
+    footer.tsd-generator > div img {
+      width: 222.25px; /* Width for mobile 
+      height: 33px; /* Height for mobile 
+    }
+  
+    footer.tsd-generator > div p {
+      width: 131px; /* Width for mobile 
+      height: 16px; /* Height for mobile 
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 16px;
+    }
+  }
+   */
+
+   /* footerStyles.module.css */
+
+/* footer.module.css */
+  

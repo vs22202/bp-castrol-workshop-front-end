@@ -1,0 +1,86 @@
+/* CheckboxComponent.css */
+
+.checkbox-component,
+.checkbox-component * {
+  box-sizing: border-box;
+}
+
+.checkbox-component {
+  background: var(--shades-mainwhite, #ffffff);
+  padding: 0px 0px 22px 0px;
+  display: flex;
+  flex-direction: row;
+  gap: var(--spacing-md, 24px);
+  align-items: center;
+  justify-content: flex-start;
+  position: relative;
+  overflow: hidden;
+}
+
+.size-small,
+.size-medium,
+.size-large {
+  display: flex;
+  flex-direction: row;
+  gap: var(--spacing-3xs, 8px);
+  align-items: center;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.icon,
+.icon2 {
+  flex-shrink: 0;
+  margin-right: 8px;
+  overflow: hidden;
+}
+
+.group {
+  display: flex;
+  flex-direction: row;
+  align-items: center; 
+}
+
+
+
+.text {
+  
+  color: var(--neutral-main750);
+  text-align: left;
+  font-family: var(--paragraph-m-light-font-family);
+  font-weight: var(--paragraph-m-light-font-weight);
+  /* position: relative; */
+  flex: 1;
+  /* width: 290px;
+  height: 40px; */
+}
+
+.size-small .text {
+  font-size: var(--paragraph-m-light-font-size-small);
+  line-height: 20px;
+  
+
+}
+
+.size-medium .text {
+  /* font-family: var(
+    --paragraph-l-light-font-family,
+    "NotoSans-Light",
+    sans-serif
+  ); */
+  font-size: var(--paragraph-l-light-font-size-medium);
+  line-height: 21.79px;
+  
+  
+}
+
+.size-large .text {
+  /* font-family: var(
+    --subheading-s-light-font-family,
+    "NotoSans-Light",
+    sans-serif
+  ); */
+  font-size: var(--subheading-s-light-font-size-large);
+  line-height: 34px;
+}

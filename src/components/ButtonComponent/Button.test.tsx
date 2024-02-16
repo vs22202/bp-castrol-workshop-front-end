@@ -7,6 +7,6 @@ test("demo", () => {
 });
 
 test("Renders the small Button", () => {
-  render(<Button size="sm" />);
+  render(<Button text="submit" size="sm" type="outline" />);
   expect(true).toBeTruthy();
 });

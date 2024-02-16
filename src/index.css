@@ -1,5 +1,6 @@
-#root {
+#root { 
   /* Color styles */
+
   --primary---main100: rgba(51, 204, 0, 1);
   --primary---main300: rgba(30, 178, 0, 1);
   --primary---main500: rgba(0, 153, 0, 1);
@@ -37,7 +38,7 @@
   --error---main500: rgba(255, 153, 153, 1);
   --error---main700: rgba(255, 128, 128, 1);
   --error---main900: rgba(255, 77, 77, 1);
-
+  --color-accent:rgb(144, 150, 162, 1);
   /* Text-size styles */
   --weight--regular:700;
   --display---x-l---regular: 64px;
@@ -124,6 +125,14 @@
   --primaryshdw--md: 3px 5px 1px rgba(0, 153, 25, 0.3);
   --primaryshdw--lg: 3px 6px 1px rgba(0, 153, 25, 0.2);
   --neutralshdw--lg: 3px 5px 1px rgba(153, 153, 153, 0.3);
+
+  /*Font Style*/
+  --paragraph-m-light-font-family:"NotoSans-Light",
+  sans-serif;
+
+  /*Font weight*/
+  --paragraph-m-light-font-weight: 300;
+    
 }
 body {
   height: 85vh;
