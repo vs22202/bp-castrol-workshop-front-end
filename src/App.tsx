@@ -57,7 +57,7 @@ function App() {
     <Checkbox size="medium" text="I consent to having my data processed according to the privacy statement" />
     <Checkbox size="large" text="I consent to having my data processed according to the privacy statement" /> */}
 
-    <FooterWithLogo />
+    {/* <FooterWithLogo /> */}
 
     </>
   )
