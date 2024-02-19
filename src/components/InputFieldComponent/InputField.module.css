@@ -9,14 +9,16 @@
     position: relative;
     border: 1px solid var(--error---main900);
     margin:var(--spacing-xs); 
-    border-radius: var(--spacing-4xs);  
+    border-radius: var(--spacing-4xs);
 }
 .isWronginputfield{
     border: none;
+    outline: none;
     color:var(--error---main900);
     font-size: var(--spacing-xs);
     padding: var(--spacing-2xs);
     background: transparent;
+    z-index: 1111;
 }
 .isWronginputfield:focus{
     border: none;
@@ -28,6 +30,7 @@
     border: 1px solid var(--primary---main700);
     margin:var(--spacing-xs);
     border-radius: var(--spacing-4xs);
+
 }
 .defaultinputfield{
     border: none;
@@ -35,6 +38,7 @@
     font-size: var(--spacing-xs);
     padding: var(--spacing-2xs);
     background: transparent;
+    z-index: 1111;
 }
 .defaultinputfield:focus{
     border: none;
@@ -78,9 +82,6 @@
     background-repeat: no-repeat;
     background-size: cover;
 }
-.passwordRight:active{
-    background-image: url(../../assets/eye.svg);
-}
 .passwordWrong{
     position: absolute;
     top: 50%;
@@ -93,6 +94,7 @@
     background-repeat: no-repeat;
     background-size: cover;
 }
+
 
 /* input field sizes */
 .sm{
@@ -113,11 +115,61 @@
     width: var(--spacing-sm);
 }
 .medium{
-    height: var(--spacing-sm);
-    width: var(--spacing-sm);
+    height: var(--spacing-md);
+    width: var(--spacing-md);
 }
 .large{
-    height: var(--spacing-sm);
-    width: var(--spacing-sm);
+    height: var(--spacing-lg);
+    width: var(--spacing-lg);
 }
+
+/* floating label */
+.floatingLabel {
+    position: absolute;
+    pointer-events: none; 
+    left: 8px;
+    top: 12px;
+    transition: 0.2s ease-out;
+    color: #7b7b7b;
+}
+
+.floatingLabeldefault {
+    position: absolute; 
+    left: 8px;
+    top: 50%; 
+    transform: translateY(-50%); 
+    transition: 0.2s ease-out;
+    color: var(--neutral---main350);
+    z-index: -1;
+}
+
+
+.defaultinputfield:focus + .floatingLabel,
+.defaultinputfield:not(:placeholder-shown) + .floatingLabel {
+    top: -6px;
+    color: var(--neutral---main750);
+    background-color: white;
+    padding: 0 6px 0 6px;
+}
+
+
+.isWronginputfield:focus + .floatingLabel,
+.isWronginputfield:not(:placeholder-shown) + .floatingLabel {
+    top: -6px;
+    color: var(--error---main900);
+    background-color: white;
+    padding: 0 6px 0 6px;
+}
+
+/* label sizes */
+.labellg{
+    font-size: var(--spacing-sm);
+}
+.labelmd{
+    font-size: var(--spacing-xs);
+}
+.labelsm{
+    font-size: var(--spacing-2xs);
+}
+
 
