@@ -18,7 +18,7 @@ export const ListItem = ({
     <div className={`${styles['list-item']} ${variantsClassName} ${className}`}>
       <img
         className={styles.icon}
-        src="docs\assets\images\icon.svg" 
+        src="src\assets\icon.svg" 
         alt="Icon"
       />
       <div className={styles.text}>{text}</div>
