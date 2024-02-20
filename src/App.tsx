@@ -43,6 +43,7 @@ function App() {
           <Button text="Button" type="outline" size="lg" disabled={true}/>
         </div>
       </div> */}
+      <InputField type="text" label='Label' size='sm' isWrong={true}/>
       {/* <InputField type="text" label='Label' size='sm' isWrong={false}/>
       <InputField type="text" label='Label' size='sm' isWrong={true}/>
       <InputField type="password" label='Label' size='md' isWrong={true}/>
