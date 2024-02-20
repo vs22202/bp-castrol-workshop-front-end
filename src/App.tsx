@@ -6,15 +6,16 @@ import {FooterWithLogo} from "./components/FooterComponent/Footer"
 import { Checkbox } from "./components/CheckboxComponent/CheckboxComponent";
 import './App.css'
 
+
 function App() {
 
   const checkboxtext = "I consent to having my data processed according to the privacy statement"
 
   return (
     <>
-      <h1>Component</h1>
+      {/* <h1>Component</h1> */}
 
-      <Navbar />
+      < Navbar/>
 
       {/* Buttons */}
       {/* <div className="button-container">
@@ -42,25 +43,24 @@ function App() {
           <Button text="Button" type="outline" size="lg" disabled={true}/>
         </div>
       </div> */}
-
-      {/* InputField */}
-      <InputField type="text" label='Label' size='sm' isWrong={false}/>
-      <InputField type="text" label='Label' size='sm' isWrong={true} required={true}/>
+      {/* <InputField type="text" label='Label' size='sm' isWrong={false}/>
+      <InputField type="text" label='Label' size='sm' isWrong={true}/>
       <InputField type="password" label='Label' size='md' isWrong={true}/>
-      <InputField type="password" label='Label' size='lg' isWrong={false}/>
-      {/* 
-            <div>
-          <ListItem />
-          </div>
-          <div>
-          <ListItem  size="large" />
-          </div> */}
+      <InputField type="password" label='Label' size='lg' isWrong={false}/> */}
+{/* 
+      <div>
+    <ListItem />
+    </div>
+    <div>
+    <ListItem  size="large" />
+    </div> */}
 
-{/* <Checkbox size="small" text="I consent to having my data processed according to the privacy statement" />
+ {/* <Checkbox size="small" text="I consent to having my data processed according to the privacy statement" />
     <Checkbox size="medium" text="I consent to having my data processed according to the privacy statement" />
     <Checkbox size="large" text="I consent to having my data processed according to the privacy statement" /> */}
 
-    <FooterWithLogo />
+    { /*<FooterWithLogo />*/ }
+
 
     </>
   )
