@@ -1,3 +1,4 @@
+import {Navbar} from "./components/Navbar/navbar";
 import { Button } from './components/ButtonComponent/Button'
 import {InputField} from './components/InputFieldComponent/InputField'
 import { ListItem } from "./components/Q&AComponent/ListeItem";
@@ -12,6 +13,8 @@ function App() {
   return (
     <>
       <h1>Component</h1>
+
+      <Navbar />
 
       {/* Buttons */}
       {/* <div className="button-container">
