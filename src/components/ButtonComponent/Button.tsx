@@ -70,7 +70,7 @@ export function Button ({ text, type="solid", size, disabled=false }: ButtonProp
         onMouseEnter={handleMousEnter}
         onMouseLeave={handleMousExit}
       >
-        <div className="button-items">
+        <div className={`${styles.buttonItems}`}>
           {text}
           <img src={iconSrc} className={`${iconsize}`} style={{paddingLeft:'var(--spacing-3xs)'}}/>
         </div>

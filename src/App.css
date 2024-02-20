@@ -1,19 +1,30 @@
-body, html {
-    font-family: 'Noto Sans', sans-serif;
+body,
+html {
+  font-family: "Noto Sans", sans-serif;
+  overflow: hidden;
+}
+.appContainer {
+  height: 79vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow-y: scroll;
+}
+.contentContainer {
+  padding-bottom: var(--spacing-sm);
+}
+.button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.button-container{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.button-row {
+  margin-top: 28px;
 }
 
-.button-row{
-    margin-top: 28px;
+@media screen and (max-width: 768px) {
+  .appContainer {
+    height: 90vh;
+  }
 }
-
-Button{
-    margin-right: 76px;
-
-}
-
