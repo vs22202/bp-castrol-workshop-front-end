@@ -45,19 +45,19 @@ function App() {
       <InputField type="text" label='Label' size='sm' isWrong={true} required={true}/>
       <InputField type="password" label='Label' size='md' isWrong={true}/>
       <InputField type="password" label='Label' size='lg' isWrong={false}/>
-{/* 
-      <div>
-    <ListItem />
-    </div>
-    <div>
-    <ListItem  size="large" />
-    </div> */}
+      {/* 
+            <div>
+          <ListItem />
+          </div>
+          <div>
+          <ListItem  size="large" />
+          </div> */}
 
 {/* <Checkbox size="small" text="I consent to having my data processed according to the privacy statement" />
     <Checkbox size="medium" text="I consent to having my data processed according to the privacy statement" />
     <Checkbox size="large" text="I consent to having my data processed according to the privacy statement" /> */}
 
-    {/* <FooterWithLogo /> */}
+    <FooterWithLogo />
 
     </>
   )

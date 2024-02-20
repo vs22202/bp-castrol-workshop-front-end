@@ -24,7 +24,7 @@ export type InputFieldProps = {
  * ```
  */
 
-export function InputField ({ label, isWrong=false, type, isDisabled=false, size } : InputFieldProps){
+export function InputField ({ label, isWrong=false, type, isDisabled=false, size, required=false } : InputFieldProps){
 
     const [inputValue, setInputValue] = useState('');
     const [inputType, setInputType] = useState(type);
@@ -78,9 +78,9 @@ export function InputField ({ label, isWrong=false, type, isDisabled=false, size
                     className={`${isWrong ? styles.isWronginputfield: styles.defaultinputfield} ${styles[size]}`} 
                     type={inputType} 
                     disabled={isDisabled} 
-                    required/>
+                    required={required}/>
                 <label className={`${isFocused || inputValue ? styles.floatingLabel : styles.floatingLabeldefault} ${isWrong ? styles.isWrongLabel : ''} ${isFocused || inputValue ? styles.labelsizefloating : labelsize}`}>
-                    {label}
+                    {label}{required && <span style={{ color: 'red' }}>*</span>}
                 </label>
                 {type==='password' 
                 ? (isWrong ? <div className={`${styles.passwordWrong} ${iconsize}`} onClick={togglefield} /> : <div className={`${styles.passwordRight} ${iconsize}`} onClick={togglefield}/>) 

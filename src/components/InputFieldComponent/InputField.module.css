@@ -19,6 +19,7 @@
     padding: var(--spacing-2xs);
     background: transparent;
     z-index: 1111;
+    width: 100%;
 }
 .isWronginputfield:focus{
     border: none;
@@ -39,6 +40,7 @@
     padding: var(--spacing-2xs);
     background: transparent;
     z-index: 1111;
+    width: 100%;
 }
 .defaultinputfield:focus{
     border: none;
@@ -98,7 +100,7 @@
 
 /* input field sizes */
 .sm{
-    height:var(--spacing-5xl);
+    height:var(--spacing-4xl);
     font-size: var(--spacing-xs);
 }
 .md{
@@ -147,33 +149,34 @@
 
     .defaultinputfield:focus + .floatingLabel,
     .defaultinputfield:not(:placeholder-shown) + .floatingLabel {
-        top: -12px;
+        top: -14px;
         color: var(--neutral---main750);
         background-color: white;
-        padding: 0 6px 0 6px;
+        padding-left: 4px;
+        padding-right: 4px;
     }
 
 
     .isWronginputfield:focus + .floatingLabel,
     .isWronginputfield:not(:placeholder-shown) + .floatingLabel {
-        top: -12px;
+        top: -14px;
         color: var(--error---main900);
         background-color: white;
-        padding: 0 6px 0 6px;
+        padding-right: 4px;
+        padding-left: 4px;
     }
 
     /* label sizes */
     .labellg{
         font-size: var(--spacing-md);
     }
-    
     .labelmd{
         font-size: var(--spacing-sm);
     }
     .labelsm{
         font-size: var(--spacing-xs);
     }
-    
+
     .labelsizefloating{
         font-size: var(--spacing-xs);
     }
