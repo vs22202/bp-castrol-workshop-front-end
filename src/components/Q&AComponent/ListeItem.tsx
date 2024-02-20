@@ -1,13 +1,13 @@
 import styles from './ListItem.module.css'; 
 
 export interface IListItemProps {
-  text?: string;
+  text: string;
   size?: "small" | "large";
   className?: string;
 }
 
 export const ListItem = ({
-  text = "Are you committed to quality maintenance and friendly customer service?",
+  text,
   size = "small",
   className,
   ...props
