@@ -215,13 +215,6 @@ select {
   --paragraph-m-light-font-family:"NotoSans-Light",
   sans-serif;
 
-  /*Font weight*/
-  --paragraph-m-light-font-weight: 300;
     
 }
-body {
-  height: 85vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+
