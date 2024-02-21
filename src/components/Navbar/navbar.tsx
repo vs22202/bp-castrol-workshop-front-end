@@ -50,7 +50,7 @@ function Navbar() {
       } else {
         setUserAuth(false);
       }
-    }
+    } 
     window.addEventListener("storage", checkUserAuth);
     checkUserAuth();
     return () => {
@@ -109,15 +109,15 @@ function Navbar() {
             </ul>
 
             <div className={`${styles.authContainer}`}>
-              <Button text="Login" type="solid" size="md" />
+              <Button text="Login" type="solid" size="md" iconimg="loginW" />
               <div className={`${styles.verticalDivider}`}></div>
-              <Button text="SignUp" type="outline" size="md" />
+              <Button text="SignUp" type="outline" size="md" iconimg="signupG"/>
             </div>
           </>
         )}
         <div className={`${styles.contactDetails}`}>
-          <Button text="developer@bpcap.com" type="outline" size="sm" />
-          <Button text="+91 97000 09045" type="outline" size="sm" />
+          <Button text="developer@bpcap.com" type="outline" size="sm" iconimg="checkcircleG"/>
+          <Button text="+91 97000 09045" type="outline" size="sm" iconimg="checkcircleG"/>
         </div>
       </div>
     </nav>
