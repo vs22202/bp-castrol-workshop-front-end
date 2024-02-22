@@ -39,13 +39,13 @@
 .group {
   display: flex;
   flex-direction: row;
-  align-items: center; 
+  align-items: center;
+}
+.group > input {
+  display: none;
 }
 
-
-
 .text {
-  
   color: var(--neutral-main750);
   text-align: left;
   font-family: var(--paragraph-m-light-font-family);
@@ -59,8 +59,6 @@
 .size-small .text {
   font-size: var(--paragraph-m-light-font-size-small);
   line-height: 20px;
-  
-
 }
 
 .size-medium .text {
@@ -71,8 +69,6 @@
   ); */
   font-size: var(--paragraph-l-light-font-size-medium);
   line-height: 21.79px;
-  
-  
 }
 
 .size-large .text {
