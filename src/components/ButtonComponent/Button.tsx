@@ -17,16 +17,22 @@ export type ButtonProps = {
  *
  * Button Component
  * @category component
+ * @param text text on the button
+ * @param type if the button is solid or outlined
+ * @param size the size of the button could be small, medium, large
+ * @param disabled the button could be active or disabled
+ * @param iconimg the image or icon that has to be included within the button
+ * 
  * @returns {JSX.Element} The rendered button component.
  * 
  * @example
- * Render a button of size small
+ * Render a button of size small, type outline, and text "button"
  * ```tsx
- * <Button text="Button" type="outline" size="sm" disabled={true}/>
+ * <Button text="Button" type="outline" size="sm" disabled={true} iconimg="chevronG"/>
  * ```
  */
 
-export function Button ({ text, type="solid", size, disabled=false, iconimg }: ButtonProps ){
+export function Button ({ text, type="solid", size, disabled=false, iconimg="" }: ButtonProps ){
 
   return (
     <>
@@ -35,10 +41,10 @@ export function Button ({ text, type="solid", size, disabled=false, iconimg }: B
         disabled={disabled}
       >
         <div className={`${styles.buttonItems}`}>
-          <Icon 
+          {iconimg && <Icon 
               src={iconimg} 
               size={size}
-           />
+           />}
           {text}
         </div>
       </button>

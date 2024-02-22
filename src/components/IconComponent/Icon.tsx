@@ -78,7 +78,7 @@ export type IconProps = {
             url = checkcircleG
             break
         default:
-            
+            url=""
         }
   
     return (
