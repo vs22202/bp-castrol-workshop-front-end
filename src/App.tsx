@@ -27,6 +27,7 @@ function App() {
           <Checkbox size="large" text="I consent to having my data processed according to the privacy statement" /> 
          {/*  <ListItem  size="large" /> */}
         </div>
+        <Button text="button" size="md" type="solid" />
         <FooterWithLogo />
       </div>
     </>

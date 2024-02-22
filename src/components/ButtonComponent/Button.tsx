@@ -10,7 +10,7 @@ export type ButtonProps = {
   type: "solid" | "outline";
   size: "sm" | "md" | "lg";
   text: string;
-  iconimg: string;
+  iconimg?: string;
 };
 
 /**
