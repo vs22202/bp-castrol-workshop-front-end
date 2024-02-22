@@ -59,9 +59,10 @@ const Checkbox: React.FC<ICheckboxProps> = ({ size, text,value }) => {
     );
   };
 
+  
   return (
     <div
-      className={`${styles.checkboxComponent} ${styles[`size-${size}`]}`}
+      className={`${styles.checkboxComponent} ${styles[`${size}`]}`}
       onClick={handleCheckboxClick}
     >
       <div className={`${styles.group} `}>
