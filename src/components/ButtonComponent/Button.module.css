@@ -1,14 +1,14 @@
-* {
-  font-family: "Noto Sans", sans-serif;
-}
-
 button {
-  background-color: var(--shades---main-white);    
+  background-color: var(--shades---main-white);
   padding-inline: var(--spacing-2xs);
-  border-radius: var(--spacing-4xs);
   padding-block: var(--spacing-4xs);
-  overflow:hidden;
-  text-overflow: ellipsis;
+  border-radius: var(--spacing-4xs);
+  width: max-content;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--spacing-3xs)
 }
 .sm {
   font-size: var(--spacing-xs);
@@ -23,41 +23,28 @@ button {
 .solid {
   background-color: var(--primary---main500);
   color: var(--shades---main-white);
-  border: none;
   box-shadow: 2px var(--primaryshdw--md);
+}
+.solid:hover {
+  background-color: var(--primary---main300);
+  box-shadow: 2px var(--primaryshdw--lg);
+}
+.solid:disabled {
+  background-color: var(--neutral---main150);
+  box-shadow: 2px var(--neutralshdw--lg);
 }
 .outline {
   border: 2px solid var(--primary---main500);
   color: var(--primary---main500);
   box-shadow: 2px var(--primaryshdw--md);
 }
-.solid:hover {
-  background-color: var(--primary---main300);
-  color: var(--shades---main-white);
-  border: none;
-  box-shadow: 2px var(--primaryshdw--lg);
-}
 .outline:hover {
   border: 2px solid var(--primary---main300);
   color: var(--primary---main300);
   box-shadow: 2px var(--primaryshdw--lg);
 }
-.solid:disabled {
-  background-color: var(--neutral---main150);
-  color: var(--shades---main-white);
-  border: none;
-  box-shadow: 2px var(--neutralshdw--lg);
-}
 .outline:disabled {
   border: 2px solid var(--neutral---main150);
   color: var(--neutral---main150);
   box-shadow: 2px var(--neutralshdw--lg);
-}
-
-
-.buttonItems {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: var(--spacing-3xs)
 }

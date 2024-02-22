@@ -116,8 +116,8 @@ function Navbar() {
           </>
         )}
         <div className={`${styles.contactDetails}`}>
-          <Button text="developer@bpcap.com" type="outline" size="sm" iconimg="checkcircleG"/>
-          <Button text="+91 97000 09045" type="outline" size="sm" iconimg="checkcircleG"/>
+          <Button text="developer@bpcap.com" type="outline" size="sm" iconimg="checkcircleW"/>
+          <Button text="+91 97000 09045" type="outline" size="sm" iconimg="checkcircleW"/>
         </div>
       </div>
     </nav>
