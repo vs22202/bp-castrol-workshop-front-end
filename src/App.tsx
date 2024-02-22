@@ -8,6 +8,7 @@ import {FooterWithLogo} from "./components/FooterComponent/Footer"
 
 import { Checkbox } from "./components/CheckboxComponent/CheckboxComponent";
 import "./App.css";
+import { Icon } from "./components/IconComponent/Icon";
 
 function App() {
 
@@ -26,7 +27,7 @@ function App() {
           <Checkbox size="large" text="I consent to having my data processed according to the privacy statement" value="Data Consent" /> 
           <List items={items} size="large" />
         </div>
-
+        <Button text="button" size="md" type="solid" />
         <FooterWithLogo />
       </div>
     </>
@@ -62,5 +63,4 @@ function App() {
 
     {/* <ListItem size="large" text="Are you committed to quality maintenance and friendly customer service?" />
     <ListItem size="small" text="Are you committed to quality maintenance and friendly customer service?" /> */}
-
 export default App;

@@ -7,6 +7,8 @@ button {
   padding-inline: var(--spacing-2xs);
   border-radius: var(--spacing-4xs);
   padding-block: var(--spacing-4xs);
+  overflow:hidden;
+  text-overflow: ellipsis;
 }
 .sm {
   font-size: var(--spacing-xs);
@@ -52,23 +54,10 @@ button {
   box-shadow: 2px var(--neutralshdw--lg);
 }
 
-.small {
-  height: var(--spacing-xs);
-  width: var(--spacing-xs);
-  
-}
-.medium {
-  height: var(--spacing-md);
-  width: var(--spacing-md);
- 
-}
-.large {
-  height: var(--spacing-xl);
-  width: var(--spacing-xl);
-  
-}
+
 .buttonItems {
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: var(--spacing-3xs)
 }
