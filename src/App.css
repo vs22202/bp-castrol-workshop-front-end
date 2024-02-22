@@ -23,8 +23,22 @@ html {
   margin-top: 28px;
 }
 
+.form{
+  width:100vh;
+}
+
+.formContainer{
+  width:100%;
+  padding-inline: var(--spacing-13xl);
+}
+
 @media screen and (max-width: 768px) {
   .appContainer {
     height: 90vh;
+  }
+  .formContainer{
+    width:100%;
+    display:flex;
+    padding-inline: var(--spacing-sm);
   }
 }

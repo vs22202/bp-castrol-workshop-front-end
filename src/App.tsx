@@ -5,7 +5,7 @@ import {InputField} from './components/InputFieldComponent/InputField'
 import { ListItem } from "./components/Q&AComponent/ListItem";
 import { List } from "./components/Q&AComponent/List";
 import {FooterWithLogo} from "./components/FooterComponent/Footer"
-
+import { ApplicationUpload } from "./components/applicationUpload";
 import { Checkbox } from "./components/CheckboxComponent/CheckboxComponent";
 import "./App.css";
 import { Icon } from "./components/IconComponent/Icon";
@@ -22,12 +22,13 @@ function App() {
       <Navbar />
       <div className="appContainer">
         <div className="contentContainer">
-        <Checkbox size="small" text="I consent to having my data processed according to the privacy statement" />
+        <ApplicationUpload />
+        {/* <Checkbox size="small" text="I consent to having my data processed according to the privacy statement" />
         <Checkbox size="medium" text="I consent to having my data processed according to the privacy statement" />
-          <Checkbox size="large" text="I consent to having my data processed according to the privacy statement" /> 
+          <Checkbox size="large" text="I consent to having my data processed according to the privacy statement" />  */}
          {/*  <ListItem  size="large" /> */}
         </div>
-        <Button text="button" size="md" type="solid" />
+        {/* <Button text="button" size="md" type="solid" /> */}
         <FooterWithLogo />
       </div>
     </>
