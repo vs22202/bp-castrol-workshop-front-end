@@ -20,10 +20,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "typedocOptions":{
-    "entryPoints" : ["src/components/ButtonComponent/Button.tsx"],
-    "out" : "docs"
-  },
   "include": ["src", "jest.config.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
