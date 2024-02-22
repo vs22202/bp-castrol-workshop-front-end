@@ -74,7 +74,13 @@ select {
     scroll-behavior: auto !important;
   }
 }
+svg,svg > path{
+  stroke: currentColor;
+}
 
+*{
+  font-family: "Noto Sans", sans-serif;
+}
 /* Global Variable Declaration */
 
 #root { 

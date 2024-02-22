@@ -10,6 +10,7 @@ import { Checkbox } from "./components/CheckboxComponent/CheckboxComponent";
 import "./App.css";
 import { Icon } from "./components/IconComponent/Icon";
 
+
 function App() {
 
   /*for list*/
@@ -27,7 +28,7 @@ function App() {
           <Checkbox size="large" text="I consent to having my data processed according to the privacy statement" value="Data Consent" /> 
           <List items={items} size="large" />
         </div>
-        <Button text="button" size="md" type="solid" />
+        <Button text="Button" size="lg" type="outline" iconimg="loginG"  />
         <FooterWithLogo />
       </div>
     </>

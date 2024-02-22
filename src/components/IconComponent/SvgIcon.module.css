@@ -2,13 +2,10 @@
     height: var(--spacing-xs);
     width:var(--spacing-xs); ;
 }
-
 .md{
     height: var(--spacing-md);
     width: var(--spacing-md);
 }
-
-
 .lg{
     height: var(--spacing-xl);
     width: var(--spacing-xl);
