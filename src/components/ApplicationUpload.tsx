@@ -213,7 +213,7 @@ const ApplicationUpload: React.FC = () => {
             key={input.id}
             text={input.label}
             // checked={isChecked}
-            size="large"
+            size="medium"
             value={input.name}
             onChange={onChange}
           />
