@@ -5,10 +5,11 @@ import {InputField} from './components/InputFieldComponent/InputField'
 import { ListItem } from "./components/Q&AComponent/ListItem";
 import { List } from "./components/Q&AComponent/List";
 import {FooterWithLogo} from "./components/FooterComponent/Footer"
-import { ApplicationUpload } from "./components/ApplicationUpload";
+import { ApplicationUpload } from "./components/applicationUpload";
 import { Checkbox } from "./components/CheckboxComponent/CheckboxComponent";
 import "./App.css";
 import { Icon } from "./components/IconComponent/Icon";
+import React from "react";
 
 
 function App() {

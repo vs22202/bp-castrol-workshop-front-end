@@ -3,9 +3,11 @@ import styles from './InputField.module.css'
 
 /** The props type of {@link InputField | `InputField`}. */
 export type InputFieldProps = {
+    value?: string| number;
+    onChange?: (value: string | number) => void;
     isWrong?:boolean;
     label: string;
-    type: "password" | "text" | "disabled";
+    type: "password" | "text" | "disabled"| "number";
     isDisabled?:boolean;
     size:'sm'|'md'|'lg';
     required?:boolean;
@@ -24,9 +26,9 @@ export type InputFieldProps = {
  * ```
  */
 
-export function InputField ({ label, isWrong=false, type, isDisabled=false, size, required=false } : InputFieldProps){
+export function InputField ({ value: propValue = '',onChange: propOnChange,label, isWrong=false, type, isDisabled=false, size, required=false } : InputFieldProps){
 
-    const [inputValue, setInputValue] = useState('');
+    const [inputValue, setInputValue] = useState(propValue);
     const [inputType, setInputType] = useState(type);
     const [isFocused, setIsFocused] = useState(false);
     let iconsize;
@@ -51,7 +53,13 @@ export function InputField ({ label, isWrong=false, type, isDisabled=false, size
       }
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) =>{
-        setInputValue(event.target.value)
+        const newValue = event.target.value;
+
+        setInputValue(newValue);
+
+        if (propOnChange) {
+            propOnChange(newValue);
+          }
     }
 
     const togglefield = ()=>{

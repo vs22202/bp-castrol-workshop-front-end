@@ -1,19 +1,21 @@
 // CheckboxComponent.tsx
 
 import React, { useState } from "react";
-import styles from "./CheckboxComponent.module.css";
+import styles from './CheckboxComponent.module.css'
 
 interface ICheckboxProps {
   size: "small" | "medium" | "large";
   text: string;
   value: string;
+  onCheckboxChange: (value: string, isChecked: boolean) => void;
 }
 
-const Checkbox: React.FC<ICheckboxProps> = ({ size, text,value }) => {
+const Checkbox: React.FC<ICheckboxProps> = ({ size, text,value, onCheckboxChange }) => {
   const [isChecked, setIsChecked] = useState(false);
   
   const handleCheckboxClick = () => {
     setIsChecked(!isChecked);
+    onCheckboxChange(value, !isChecked);
   };
 
   const getIcon = () => {

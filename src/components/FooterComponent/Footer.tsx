@@ -1,4 +1,5 @@
 // Import your CSS module file at the top
+import React from "react";
 import styles from "./Footer.module.css";
 
 export function FooterWithLogo() {

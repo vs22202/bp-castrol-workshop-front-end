@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent, FormEvent } from "react";
+import React, { ChangeEvent, FormEvent, useState } from "react";
 import {InputField} from '../../src/components/InputFieldComponent/InputField'
 import {Icon} from '../../src/components/IconComponent/Icon'
 import {Checkbox} from '../../src/components/CheckboxComponent/CheckboxComponent'
@@ -189,20 +189,11 @@ const ApplicationUpload: React.FC = () => {
     },
   ];
 
-  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, type, value, checked } = e.target;
 
-    switch (type) {
-      case "checkbox":
-        setValues({ ...values, [name]: checked });
-        break;
-      case "string[]":
-        // Handle string[] type separately, if needed
-        break;
-      default:
-        setValues({ ...values, [name]: value });
-        break;
-    }
+  const handleInputChange = (name: string, value: string| number|boolean|string[]) => {
+    // console.log(`Checkbox with value ${name} is now ${value? "checked" : "unchecked"}`);
+    // console.log(`Input Field with value ${name} is now ${value}`);
+    setValues({ ...values, [name]: value });
   };
 
   const renderInput = (input: Input) => {
@@ -210,30 +201,31 @@ const ApplicationUpload: React.FC = () => {
       case "checkbox":
         return (
           <Checkbox 
-            key={input.id}
-            text={input.label}
-            // checked={isChecked}
-            size="medium"
-            value={input.name}
-            onChange={onChange}
+          key={input.id}
+          text={input.label}
+          size="medium"
+          value={input.name}
+          // Pass a callback to handle state change
+          onCheckboxChange={(value, isChecked) => handleInputChange(value, isChecked)}
           />
         );
       case "string[]":
         return (
-          <InputField
-            key={input.id}
-            {...input}
-            value={values[input.name] as string[]}
-            onChange={onChange}
+          <InputField // it will be file upload 
+          key={input.id}
+          label={input.label}
+          // value={values[input.name] as string[]}
+          onChange={(value) => handleInputChange(input.name, value)}
           />
         );
       default:
         return (
           <InputField 
-            key={input.id}
-            {...input}
-            value={values[input.name] as number|string}
-            onChange={onChange}
+          key={input.id}
+          type={input.type as "number" | "text" | "password" | "disabled"}
+          label={input.label}
+          value={values[input.name] as string}
+          onChange={(value) => handleInputChange(input.name, value)}
           />
         );
     }
@@ -243,7 +235,7 @@ const ApplicationUpload: React.FC = () => {
     e.preventDefault();
 
     const { workshop_name, workshop_post_code, address, state, city, user_name, user_email, user_mobile, bay_count, services_offered, expertise, brands, consent_process_data, consent_being_contacted, consent_receive_info, file_paths } = values;
-    const res = await fetch("/applicationupload", {
+    const res = await fetch("http://localhost:5173/applicationupload", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -272,8 +264,8 @@ const ApplicationUpload: React.FC = () => {
       <h2 style={{ color: 'rgba(102, 102, 102, 1)' , fontSize: '20px',textAlign: 'left' }}>
       Take your workshop to the next level!
       </h2>
-      {inputs.map(renderInput)}
       
+      {inputs.map((input) => renderInput(input))}
         <Button text="Submit" size="sm" type="solid" iconimg="submitW" />
       </form>
     </div>
