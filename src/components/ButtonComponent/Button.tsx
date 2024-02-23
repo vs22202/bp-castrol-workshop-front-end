@@ -1,7 +1,5 @@
 import styles from "./Button.module.css";
 import { Icon } from "../IconComponent/Icon";
-import { useState } from "react";
-import React from "react";
 
 /** The props type of {@link Button | `Button`}. */
 

@@ -5,7 +5,7 @@ import {InputField} from './components/InputFieldComponent/InputField'
 import { ListItem } from "./components/Q&AComponent/ListItem";
 import { List } from "./components/Q&AComponent/List";
 import {FooterWithLogo} from "./components/FooterComponent/Footer"
-import { ApplicationUpload } from "./components/applicationUpload";
+import { ApplicationUpload } from "./components/ApplicationUpload";
 import { Checkbox } from "./components/CheckboxComponent/CheckboxComponent";
 import "./App.css";
 import { Icon } from "./components/IconComponent/Icon";
@@ -31,6 +31,11 @@ function App() {
         <Checkbox size="medium" text="I consent to having my data processed according to the privacy statement" value="Data Consent" />
           <Checkbox size="large" text="I consent to having my data processed according to the privacy statement" value="Data Consent" /> 
           <List items={items} size="large" />  */}
+{/* <List items={items} size="small" /> 
+<List items={items} size="large" />  */}
+              {/* <ListItem size="large" text="Are you committed to quality maintenance and friendly customer service?" />
+    <ListItem size="small" text="Are you committed to quality maintenance and friendly customer service?" />
+        </div> */}
         </div>
         <FooterWithLogo />
       </div>

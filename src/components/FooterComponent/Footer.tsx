@@ -1,10 +1,25 @@
-// Import your CSS module file at the top
-import React from "react";
+
 import styles from "./Footer.module.css";
+/** The props type of {@link Footer | `Footer`}. */
+
+/**
+ *
+ * Footer Component
+ * @category component
+ * 
+ *
+ * @returns {JSX.Element} The rendered footer component.
+ *
+ * @example
+ * Render a footer
+ * ```tsx
+ * <FooterWithLogo />
+ * ```
+ */
 
 export function FooterWithLogo() {
   return (
-    <div className={`${styles.footerContainer}`}>
+    <div data-testid="footerContainer" className={`${styles.footerContainer}`}>
       <img
         src="docs\assets\images\castrol_logo.svg"
         alt="logo-ct"

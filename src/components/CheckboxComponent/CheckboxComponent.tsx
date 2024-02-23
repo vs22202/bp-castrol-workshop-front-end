@@ -4,18 +4,44 @@ import React, { useState } from "react";
 import styles from './CheckboxComponent.module.css'
 
 interface ICheckboxProps {
+    /**
+   * size,text,value, onCheckboxChange of the Checkbox
+   */
   size: "small" | "medium" | "large";
   text: string;
   value: string;
-  onCheckboxChange: (value: string, isChecked: boolean) => void;
+  onCheckboxChange?: (value: string, isChecked: boolean) => void;
 }
 
+/** The props type of {@link Checkbox | `Checkbox`}. */
+
+
+/**
+ *
+ * Checkbox Component
+ * @category component
+ * @param size The size of the checkbox. It can be "small", "medium", or "large".
+ * @param text The label text associated with the checkbox.
+ * @param value The value of the checkbox.
+ * @param onCheckboxChange A function to handle checkbox state changes. It receives the value and the current checked state.
+ *
+ * @returns {JSX.Element} The rendered checkbox component.
+ *
+ * @example
+ * Render a checkbox of size medium,  text "I consent to having my data processed according to the privacy statement" and value="Data Consent"
+ * ```tsx
+ * <Checkbox size="medium" text="I consent to having my data processed according to the privacy statement" value="Data Consent" />
+ * ```
+ */
 const Checkbox: React.FC<ICheckboxProps> = ({ size, text,value, onCheckboxChange }) => {
+
   const [isChecked, setIsChecked] = useState(false);
   
   const handleCheckboxClick = () => {
     setIsChecked(!isChecked);
-    onCheckboxChange(value, !isChecked);
+    if (onCheckboxChange) {
+      onCheckboxChange(value, !isChecked);
+    }
   };
 
   const getIcon = () => {
@@ -69,7 +95,7 @@ const Checkbox: React.FC<ICheckboxProps> = ({ size, text,value, onCheckboxChange
       onClick={handleCheckboxClick}
     >
       <div className={`${styles.group} `}>
-        <input type="checkbox" checked={isChecked} value={value} />  
+        <input type="checkbox" checked={isChecked} value={value} onChange={() => {}}/>  
         <div className={styles.icon}>{getIcon()}</div>
         <div className={`${styles.text} ${styles[size]}`}>{text}</div>
       </div>
