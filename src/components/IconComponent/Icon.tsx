@@ -1,19 +1,53 @@
 
 
 import styles from './Icon.module.css';
-import loginW from '../../assets/loginW.svg'
-import loginG from '../../assets/loginG.svg'
-import signupW from '../../assets/signupW.svg'
-import signupG from '../../assets/signupG.svg'
-import submitW from '../../assets/submitW.svg'
-import submitG from '../../assets/submitG.svg'
-import chevronW from '../../assets/chevron-rightW.svg'
-import chevronG from '../../assets/chevron-rightG.svg'
-import editW from '../../assets/editW.svg'
-import editG from '../../assets/editG.svg'
-import checkcircleW from '../../assets/checkcircleW.svg'
-import checkcircleG from '../../assets/checkcircle-outline-activeG.svg'
 
+import loginW from '../../assets/button-icons/loginW.svg'
+import loginG from '../../assets/button-icons/loginG.svg'
+import loginD from '../../assets/button-icons/loginD.svg'
+
+import signupW from '../../assets/button-icons/signupW.svg'
+import signupG from '../../assets/button-icons/signupG.svg'
+import signupD from '../../assets/button-icons/signupD.svg'
+
+import submitW from '../../assets/button-icons/submitW.svg'
+import submitG from '../../assets/button-icons/submitG.svg'
+import submitD from '../../assets/button-icons/submitD.svg'
+
+import chevronW from '../../assets/button-icons/chevron-rightW.svg'
+import chevronG from '../../assets/button-icons/chevron-rightG.svg'
+import chevronD from '../../assets/button-icons/chevron-rightD.svg'
+
+import editW from '../../assets/button-icons/editW.svg'
+import editG from '../../assets/button-icons/editG.svg'
+import editD from '../../assets/button-icons/editD.svg'
+
+import checkcircleW from '../../assets/button-icons/checkcircleW.svg'
+import checkcircleG from '../../assets/button-icons/checkcircleG.svg'
+import checkcircleD from '../../assets/button-icons/checkcircleD.svg'
+
+//G - Green outlined | W - White outlined | D - Disabled
+
+const icons : Record<string, string> = {
+    loginD,
+    loginW,
+    loginG, 
+    signupD,
+    signupG,
+    signupW,
+    submitD,
+    submitW,
+    submitG,
+    chevronD,
+    chevronW,
+    chevronG,
+    editD,
+    editW,
+    editG,
+    checkcircleD,
+    checkcircleW,
+    checkcircleG,
+}
 
 /** The props type of {@link Icon | `Icon`}. */
 export type IconProps = {
@@ -38,52 +72,10 @@ export type IconProps = {
    */
   
   export function Icon ({size, src}: IconProps ){
-
-    let url;
-    switch(src){
-        case "loginW":
-            url = loginW
-            break;
-        case "loginG":
-            url = loginG
-            break;
-        case "signupW":
-            url = signupW
-            break;
-        case "signupG":
-            url = signupG
-            break;
-        case "submitW":
-            url = submitW
-            break;
-        case "submitG":
-            url = submitG
-            break;
-        case "ChevronW":
-            url = chevronW
-            break;
-        case "chevronG":
-            url = chevronG
-            break;
-        case "editW":
-            url = editW
-            break;
-        case "editG":
-            url = editG
-            break;
-        case "checkcircleW":
-            url = checkcircleW
-            break
-        case "checkcircleG":
-            url = checkcircleG
-            break
-        default:
-            url=""
-        }
   
     return (
       <>
-        <img src={url} className={`${styles[size]}`}/>
+        <img src={icons[src]} className={`${styles[size]}`}/>
       </>
     );
   };

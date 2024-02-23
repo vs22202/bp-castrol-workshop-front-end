@@ -42,6 +42,9 @@ button {
   color: var(--primary---main300);
   box-shadow: 2px var(--primaryshdw--lg);
 }
+
+
+
 .solid:disabled {
   background-color: var(--neutral---main150);
   color: var(--shades---main-white);
