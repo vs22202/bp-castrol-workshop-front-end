@@ -10,3 +10,7 @@
     height: var(--spacing-xl);
     width: var(--spacing-xl);
 }
+.xlg{
+    height: var(--spacing-4xl);
+    width: var(--spacing-4xl);
+}

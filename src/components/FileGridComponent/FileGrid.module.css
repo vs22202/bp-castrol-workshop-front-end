@@ -1,0 +1,9 @@
+.dropzone{
+    border: 1px solid black;
+    padding:2em 2em;
+}
+.thumbsContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+

@@ -3,6 +3,7 @@ import {InputField} from '../../src/components/InputFieldComponent/InputField'
 import {Icon} from '../../src/components/IconComponent/Icon'
 import {Checkbox} from '../../src/components/CheckboxComponent/CheckboxComponent'
 import { Button } from "./ButtonComponent/Button";
+import FileGrid from "./FileGridComponent/FileGrid";
 interface Input {
   id: number;
   name: string;
@@ -272,7 +273,7 @@ const ApplicationUpload: React.FC = () => {
       <h2 style={{ color: 'rgba(102, 102, 102, 1)' , fontSize: '20px',textAlign: 'left' }}>
       Take your workshop to the next level!
       </h2>
-      {inputs.map(renderInput)}
+            {inputs.map(renderInput)}
       
         <Button text="Submit" size="sm" type="solid" iconimg="submitW" />
       </form>
