@@ -14,18 +14,18 @@
   flex: 1;
 }
 
-.small .text{
-  font-size: var(--paragraph-m-light);
+.small{
+  font-size: var(--paragraph---m---light);
   line-height: 20px;
 }
 
-.medium .text{
-  font-size: var(--paragraph-l-light);
+.medium{
+  font-size: var(--paragraph---l---light);
   line-height: 21px;
 }
 
-.large .text{
-  font-size: var(--subheading-s-light);
+.large{
+  font-size: var(--subheading---s---light);
   line-height: 34px;
 }
 
@@ -44,6 +44,7 @@
 .group > input {
   display: none;
 }
+
 
 
 

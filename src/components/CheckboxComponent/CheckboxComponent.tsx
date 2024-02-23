@@ -21,6 +21,7 @@ const Checkbox: React.FC<ICheckboxProps> = ({ size, text,value }) => {
       <svg
         width={size === "large" ? "32" : size === "medium" ? "24" : "16"}
         height={size === "large" ? "32" : size === "medium" ? "24" : "16"}
+        /* className={`${styles[size]}`} */
         viewBox="0 0 56 56"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -68,7 +69,7 @@ const Checkbox: React.FC<ICheckboxProps> = ({ size, text,value }) => {
       <div className={`${styles.group} `}>
         <input type="checkbox" checked={isChecked} value={value} />  
         <div className={styles.icon}>{getIcon()}</div>
-        <div className={styles.text}>{text}</div>
+        <div className={`${styles.text} ${styles[size]}`}>{text}</div>
       </div>
     </div>
   );
