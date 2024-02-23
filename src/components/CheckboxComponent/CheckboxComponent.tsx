@@ -6,11 +6,12 @@ import styles from "./CheckboxComponent.module.css";
 interface ICheckboxProps {
   size: "small" | "medium" | "large";
   text: string;
+  value: string;
 }
 
-const Checkbox: React.FC<ICheckboxProps> = ({ size, text }) => {
+const Checkbox: React.FC<ICheckboxProps> = ({ size, text,value }) => {
   const [isChecked, setIsChecked] = useState(false);
-
+  
   const handleCheckboxClick = () => {
     setIsChecked(!isChecked);
   };
@@ -58,12 +59,14 @@ const Checkbox: React.FC<ICheckboxProps> = ({ size, text }) => {
     );
   };
 
+  
   return (
     <div
-      className={`${styles.checkboxComponent} ${styles[`size-${size}`]}`}
+      className={`${styles.checkboxComponent} ${styles[`${size}`]}`}
       onClick={handleCheckboxClick}
     >
-      <div className={styles.group}>
+      <div className={`${styles.group} `}>
+        <input type="checkbox" checked={isChecked} value={value} />  
         <div className={styles.icon}>{getIcon()}</div>
         <div className={styles.text}>{text}</div>
       </div>
