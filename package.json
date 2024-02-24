@@ -11,6 +11,9 @@
     "test": "jest"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.3",
+    "@emotion/styled": "^11.11.0",
+    "@mui/material": "^5.15.10",
     "jest-environment-jsdom": "^29.7.0",
     "jsdoc": "^4.0.2",
     "react": "^18.2.0",

@@ -6,6 +6,13 @@ import { ListItem } from "./components/Q&AComponent/ListItem";
 import { List } from "./components/Q&AComponent/List";
 import {FooterWithLogo} from "./components/FooterComponent/Footer"
 import { ApplicationUpload } from "./components/ApplicationUpload";
+import { SignUpFormWithImage } from "./components/SIGNUP-FORM/signupform";
+import { LoginFormWithImage } from "./components/login/login";
+import { VerifiedWithImage } from "./components/verification/verified";
+import { VerifyWithImage } from "./components/verification/verify";
+
+import { ResetFormWithImage } from "./components/Reset password/reset";
+
 import { Checkbox } from "./components/CheckboxComponent/CheckboxComponent";
 import "./App.css";
 import { Icon } from "./components/IconComponent/Icon";
@@ -16,6 +23,16 @@ function App() {
   /*for list*/
   const items = ['Are you committed to quality maintenance and friendly customer service?', 'Do you have at least 3 bays in your workshop?', 'Are you a full service workshop?', 'Are you ready to benefit from branding with Castrol?'];
 
+      /*         <SignUpFormWithImage/>  
+                <LoginFormWithImage/>
+                <ResetFormWithImage/>
+                <VerifiedWithImage/>
+                <VerifyWithImage/>
+
+                
+                <ApplicationUpload/>
+      */
+
 
   return (
     <>
@@ -23,15 +40,21 @@ function App() {
       <Navbar />
       <div className="appContainer">
         <div className="contentContainer">
+        
+        <SignUpFormWithImage/>  
+                <LoginFormWithImage/>
+                <ResetFormWithImage/>
+                <VerifiedWithImage/>
+                <VerifyWithImage/>
 
-        <ApplicationUpload />
-
+                
+                <ApplicationUpload/>
+          
        {/* <Checkbox size="small" text="I consent to having my data processed according to the privacy statement" value="Data Consent" />
         <Checkbox size="medium" text="I consent to having my data processed according to the privacy statement" value="Data Consent" />
           <Checkbox size="large" text="I consent to having my data processed according to the privacy statement" value="Data Consent" /> 
           <List items={items} size="large" />  */}
         </div>
-        <Button text="Button" size="lg" type="outline" iconimg="loginG"  />
         <FooterWithLogo />
       </div>
     </>
