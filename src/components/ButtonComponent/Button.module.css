@@ -43,7 +43,6 @@ button {
   color: var(--primary---main300);
   box-shadow: 2px var(--primaryshdw--lg);
 }
-<<<<<<< HEAD
 
 
 
@@ -53,8 +52,6 @@ button {
   border: none;
   box-shadow: 2px var(--neutralshdw--lg);
 }
-=======
->>>>>>> a593751c3e67f7c821c743e8ada0bb75837a3e2c
 .outline:disabled {
   border: 2px solid var(--neutral---main150);
   color: var(--neutral---main150);
