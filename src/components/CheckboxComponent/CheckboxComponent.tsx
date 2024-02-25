@@ -8,9 +8,10 @@ export type CheckboxProps = {
   required?:boolean;
   register:any;
   value?:boolean;
+  errors?:any;
 }
 
-export function Checkbox({name, size, text, required=false, register} : CheckboxProps){
+export function Checkbox({name, size, text, required=false, register, errors} : CheckboxProps){
    const checkboxRegister = register(name)
   
   return (

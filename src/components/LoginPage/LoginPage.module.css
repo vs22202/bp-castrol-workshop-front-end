@@ -1,0 +1,31 @@
+/* SignUpFormWithImage.css */
+
+.logincontainer {
+    display: flex;
+  }
+  
+.imagecontainer {
+  flex: 1;
+  display: flex;
+  justify-content: center; 
+  margin: 20px 20px 100px 20px ;
+}
+  
+.loginform {
+  flex: 1;
+  display: flex;
+}
+.buttonscontainer{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap:10px
+}
+.buttonscontainer span{
+  font-size: 12px;
+  font-weight: 600;
+  align-items: center;
+}
+
+  
+  

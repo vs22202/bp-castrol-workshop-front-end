@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styles from './InputField.module.css'
-import {useForm} from 'react-hook-form'
 
 /** The props type of {@link InputField | `InputField`}. */
 export type InputFieldProps = {
@@ -9,15 +8,14 @@ export type InputFieldProps = {
     placeholder?:string;
     label: string;
     //type: "password" | "text" | "disabled";
-    type:string;
+    type:string; //password, text, disabled
     isDisabled?:boolean;
-    size:"small" |"medium" |"large";
+    size:"small" | "medium"| "large";
     required?:boolean;
     maxlen?:number;
     register:any;
     validationSchema?:any;
     errors:any;
-    isWrong?:boolean;
 }
 
 /**
@@ -76,6 +74,7 @@ export function InputField ({ name, label, placeholder, value, type, isDisabled=
                         handleInputChange(e)
                     }}
                     value={inputValue}
+                    //value={placeholder}
                     placeholder={placeholderText}
                     onFocus={handleInputFocus}
                     onBlur={handleInputBlur}
@@ -88,7 +87,7 @@ export function InputField ({ name, label, placeholder, value, type, isDisabled=
                     {label}{required && <span style={{ color: 'red' }}>*</span>}
                 </label>
                 {type==='password' 
-                ? (errors[name] ? <div className={`${styles.passwordWrong} ${styles[iconsize]}`} onClick={togglefield} /> : <div className={`${styles.passwordRight} ${styles[iconsize]}`} onClick={togglefield}/>) 
+                ? inputValue&&(errors[name] ? <div className={`${styles.passwordWrong} ${styles[iconsize]}`} onClick={togglefield} /> : <div className={`${styles.passwordRight} ${styles[iconsize]}`} onClick={togglefield}/>) 
                 : (inputValue && 
                     (errors[name] ? <div className={`${styles.textWrong} ${styles[iconsize]}`} onClick={()=>setInputValue('')}/> 
                      :<div className={`${styles.textRight} ${styles[iconsize]}`} onClick={()=>setInputValue('')}/>

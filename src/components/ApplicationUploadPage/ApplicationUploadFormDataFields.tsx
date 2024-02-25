@@ -1,35 +1,10 @@
-import React from "react";
-import { Checkbox } from "./CheckboxComponent/CheckboxComponent";
-import { InputField } from "./InputFieldComponent/InputField";
-import { Button } from "./ButtonComponent/Button";
-import {useForm, SubmitHandler, Controller} from 'react-hook-form'
-
-type Input = {
-  id: number;
-  name: string;
-  type: string;
-  text_type?:string;
-  value?:string;
-  placeholder?: string;
-  errorMessage?: string;
-  label: string;
-  pattern?: RegExp;
-  required?: boolean;
-  maxlen?:number;
-  minlen?:number;
-}
-
-
-const ApplicationUpload: React.FC = () =>{
-
-  const {register, handleSubmit, formState:{errors}, control} = useForm<Input>();
-
-  //input fields can be : text, password, phone number, email id, number, 
-  const inputs: Input[] = [{
+import { Input } from "components/FormInputs";
+const ApplicationFormInputFields: Input[] = [{
     id: 1,
+    size:"medium",
     name: "workshop_name",
     type: "text",
-    text_type: "string",
+    text_type: "text",
     placeholder: "Raj's Car Shop",
     errorMessage:
         "Workshop name should be 3-16 characters and shouldn't include any special character and Numbers!",
@@ -41,6 +16,7 @@ const ApplicationUpload: React.FC = () =>{
 },
 {
     id: 2,
+    size:"medium",
     name: "workshop_post_code",
     type: "text",
     text_type: "number",
@@ -54,9 +30,10 @@ const ApplicationUpload: React.FC = () =>{
 },
 {
     id: 3,
+    size:"medium",
     name: "address",
     type: "text",
-    text_type:"string",
+    text_type:"text",
     placeholder: "Abj 11th cross street, silk mill",
     errorMessage: "It should be a valid address!",
     label: "Address",
@@ -67,9 +44,10 @@ const ApplicationUpload: React.FC = () =>{
 },
 {
     id: 4,
+    size:"medium",
     name: "state",
     type: "text",
-    text_type:"string",
+    text_type:"text",
     placeholder: "Tamil Nadu",
     errorMessage:
         "It should be a valid state!",
@@ -81,9 +59,10 @@ const ApplicationUpload: React.FC = () =>{
 },
 {
     id: 5,
+    size:"medium",
     name: "city",
     type: "text",
-    text_type:"string",
+    text_type:"text",
     placeholder: "Vellore",
     errorMessage: "It should be a valid City!",
     label: "City",
@@ -94,9 +73,10 @@ const ApplicationUpload: React.FC = () =>{
 },
 {
     id: 6,
+    size:"medium",
     name: "user_name",
     type: "text",
-    text_type:"string",
+    text_type:"text",
     placeholder: "Rajesh",
     errorMessage: "Workshop name should be 3-16 characters and shouldn't include any special character and Numbers!",
     label: "Your Name",
@@ -107,6 +87,7 @@ const ApplicationUpload: React.FC = () =>{
 },
 {
     id: 7,
+    size:"medium",
     name: "user_email",
     type: "text",
     text_type:"email",
@@ -120,10 +101,11 @@ const ApplicationUpload: React.FC = () =>{
 },
 {
     id: 8,
+    size:"medium",
     name: "user_mobile",
     type: "text",
-    text_type:"string",
-    placeholder: "044-2222-1234",
+    text_type:"text",
+    placeholder: "04422221234",
     errorMessage: "Mobile No. should be 11-12 digit(including country code)!",
     label: "Your telephone number",
     //minlen:15,
@@ -136,6 +118,7 @@ const ApplicationUpload: React.FC = () =>{
 },
 {
     id: 9,
+    size:"medium",
     name: "bay_count",
     type: "text",
     text_type:"number",
@@ -149,9 +132,10 @@ const ApplicationUpload: React.FC = () =>{
 },
 {
     id: 10,
+    size:"medium",
     name: "services_offered",
     type: "text",
-    text_type:"string",
+    text_type:"text",
     placeholder: "Bodywork, Paint Jobs",
     errorMessage:"Please enter a valid services that are offered",
     label: "Services Offered",
@@ -162,9 +146,10 @@ const ApplicationUpload: React.FC = () =>{
 },
 {
     id: 11,
+    size:"medium",
     name: "expertise",
     type: "text",
-    text_type:"string",
+    text_type:"text",
     placeholder: "German Cars",
     errorMessage: "It should be a valid expertise!",
     label: "Expertise",
@@ -175,9 +160,10 @@ const ApplicationUpload: React.FC = () =>{
 },
 {
     id: 12,
+    size:"medium",
     name: "brands",
     type: "text",
-    text_type:"string",
+    text_type:"text",
     placeholder: "ABC,BCA",
     errorMessage: "Workshop name should be 3-16 characters and shouldn't include any special character and Numbers!",
     label: "Manufacturer Specializations",
@@ -188,6 +174,7 @@ const ApplicationUpload: React.FC = () =>{
 },
 {
     id: 13,
+    size:"medium",
     name: "file_paths",
     type: "string[]",
     label: "File Upload",
@@ -196,105 +183,31 @@ const ApplicationUpload: React.FC = () =>{
 },
 {
     id: 14,
+    size:"medium",
     name: "consent_process_data",
     type: "checkbox",
     label: "I consent to having my data processed according to the privacy statement",
+    errorMessage:"Click to continue.",
     required: true,
 },
 {
     id: 15,
+    size:"medium",
     name: "consent_being_contacted",
     type: "checkbox",
     label: "I consent to being contacted by a Castrol distributor for the purpose of discussing my interest in joining the Castrol network",
+    errorMessage:"Click to continue.",
     required: true,
 },
 {
     id: 16,
+    size:"medium",
     name: "consent_receive_info",
     type: "checkbox",
     label: "I am interested in receiving additional information by email on Castrol products or services from time to time",
-    required: true,
+    errorMessage:"Click to continue.",
+    required: false,
 },
   ]
 
-  const renderInput = (input:Input)=>{
-    switch(input.type){
-      case "checkbox":
-        return(
-              <Checkbox
-                key={input.id}
-                name={input.name}
-                size="medium"
-                text={input.label}
-                register={register}
-                //OnChange={(e)=>field.onChange(e.target.checked)}
-                //checked={field.value}
-              />
-        );
-      case "text":
-        return (
-          <>
-          <InputField 
-            key={input.id}
-            type="text"
-            name={input.name}
-            label={input.label}
-            size="large"
-            register={register}
-            maxlen={input.maxlen}
-            errors={errors}
-            placeholder={input.placeholder}
-
-            /* input field validation conditions */
-            validationSchema={{
-              required: input.required,
-              minLength: {
-                value: input.minlen,
-                message: input.errorMessage
-              },
-              maxLength: {
-                value: input.maxlen,
-                message: input.errorMessage
-              },
-              pattern: {
-                value: input.pattern,
-                message: `${input.label} format is wrong.`
-              }
-            }}
-          />
-          </>
-        );
-      default:
-        //file/image upload inputs
-  
-    }
-  }
-
-
-  const submitForm:SubmitHandler<Input> = (data) => {
-    console.log(data) //submit funciton
-  }
-
-
-  return(
-    <div className="appContainer">
-    <div className="contentContainer">
-    <div className="formContainer">
-      <form onSubmit={handleSubmit(submitForm)}>
-      <h1 style={{ color: 'rgba(0, 153, 0, 1)' , fontSize: '28px',textAlign: 'left', fontWeight: 'bold'  }}>
-        Certified Castrol Workshop Application
-      </h1>
-      <h2 style={{ color: 'rgba(102, 102, 102, 1)' , fontSize: '20px',textAlign: 'left' }}>
-      Take your workshop to the next level!
-      </h2> 
-       {inputs.map(renderInput)}
-         <Button text="Submit" size="sm" type="solid" iconimg="submitW"/>
-      </form>
-    </div>
-    </div>
-    </div>
-  )
-}
-
-export {ApplicationUpload} 
-
+  export default ApplicationFormInputFields;

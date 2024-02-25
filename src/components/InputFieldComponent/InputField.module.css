@@ -105,21 +105,6 @@
     background-size: cover;
 }
 
-
-/* input field font sizes*/
-.small{
-    height:var(--spacing-4xl);
-    font-size: var(--spacing-xs);
-}
-.medium{
-    height: var(--spacing-6xl);
-    font-size: var(--spacing-sm);
-}
-.large{
-    height: var(--spacing-7xl);
-    font-size: var(--spacing-md);
-}
-
 /* floating label */
 .floatingLabel {
     position: absolute;
@@ -143,11 +128,11 @@
 .defaultinputfield:focus + .floatingLabel,
 .defaultinputfield:not(:placeholder-shown) + .floatingLabel,
 .defaultinputfield:valid + .floatingLabel {
-top: -14px;
-color: var(--neutral---main750);
-background-color: white;
-padding-left: 4px;
-padding-right: 4px;
+    top: -14px;
+    color: var(--neutral---main750);
+    background-color: white;
+    padding-left: 4px;
+    padding-right: 4px;
 }
 
 .isWronginputfield:focus + .floatingLabel,
@@ -160,6 +145,19 @@ padding-right: 4px;
     padding-left: 4px;
 }
 
+/* input field and font sizes*/
+.small{
+    height:var(--spacing-3xl);
+    font-size: var(--spacing-xs);
+}
+.medium{
+    height: var(--spacing-4xl);
+    font-size: var(--spacing-sm);
+}
+.large{
+    height: var(--spacing-7xl);
+    font-size: var(--spacing-md);
+}
 
 /* label sizes */
 .labellarge{
@@ -193,6 +191,7 @@ padding-right: 4px;
 /* error class */
 .error{
     color:var(--error---main900);
+    font-size: var(--link---s---regular);
 }
 
 
