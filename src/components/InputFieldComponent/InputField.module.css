@@ -1,10 +1,15 @@
 
 *{
-    font-family: 'Noto Sans', sans-serif;
-    font-weight: var(--weight--regular);
-  }
+font-family: 'Noto Sans', sans-serif;
+font-weight: var(--weight--regular);
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0; /* Optional: Remove margin */
+}
 
-  /* input field colors */
+
 .isWronginputfieldcontainer{
     position: relative;
     border: 1px solid var(--error---main900);

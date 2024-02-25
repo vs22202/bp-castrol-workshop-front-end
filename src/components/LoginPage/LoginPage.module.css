@@ -1,20 +1,23 @@
-/* SignUpFormWithImage.css */
+/* LoginForm css */
 
 .logincontainer {
-    display: flex;
-  }
-  
+  display: flex;
+}
+
 .imagecontainer {
   flex: 1;
   display: flex;
   justify-content: center; 
-  margin: 20px 20px 100px 20px ;
+  margin: 20px 20px 100px 20px;
+  /* Set a fixed height for the image container */
+  height: 100%; /* Adjust the height as needed */
 }
-  
+
 .loginform {
   flex: 1;
   display: flex;
 }
+
 .buttonscontainer{
   display: flex;
   justify-content: center;

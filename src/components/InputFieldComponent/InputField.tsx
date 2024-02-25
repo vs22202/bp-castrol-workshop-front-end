@@ -55,9 +55,10 @@ export function InputField ({ name, label, placeholder, value, type, isDisabled=
         setPlaceholderText(placeholder+"")
     }
 
-    const handleInputBlur = () => {
+    const handleInputBlur = (event: React.FocusEvent<HTMLInputElement>) => {
         setIsFocused(inputValue !== '');
         setPlaceholderText("")
+        setIsFocused(event.target.value !== '')
     }
 
     return(
@@ -77,7 +78,7 @@ export function InputField ({ name, label, placeholder, value, type, isDisabled=
                     //value={placeholder}
                     placeholder={placeholderText}
                     onFocus={handleInputFocus}
-                    onBlur={handleInputBlur}
+                    onBlur={(e)=>handleInputBlur(e)}
                     maxLength={maxlen}
                     className={`${errors[name] ? styles.isWronginputfield : styles.defaultinputfield} ${styles[size]}`} 
                     disabled={isDisabled} 

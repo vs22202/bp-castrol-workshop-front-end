@@ -24,7 +24,7 @@ const LoginPageFields: Input[] = [{
     pattern: /^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*()-_=+{}|;:'",.<>?]).{10,100}$/, //contains 1-special char, capital letter, number and should have 10 to 100 characters
     minlen:10,
     maxlen:100,
-    errorMessage: "Password should have minimum 10 characters",
+    errorMessage: "Password should be 10 characters long. Add special characters, number and Capital Letters.",
     label: "Enter Password",
     required: true,
 },

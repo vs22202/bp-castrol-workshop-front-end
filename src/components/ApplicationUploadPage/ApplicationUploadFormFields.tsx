@@ -1,4 +1,6 @@
 import { Input } from "components/FormInputs";
+//numbers like postal codes, are set as text in text_type
+
 const ApplicationFormInputFields: Input[] = [{
     id: 1,
     size:"medium",
@@ -7,11 +9,11 @@ const ApplicationFormInputFields: Input[] = [{
     text_type: "text",
     placeholder: "Raj's Car Shop",
     errorMessage:
-        "Workshop name should be 3-16 characters and shouldn't include any special character and Numbers!",
+        "Workshop name should be 3-50 characters and shouldn't include any special character and Numbers!",
     label: "Workshop name",
     minlen:3,
-    maxlen:16,
-    pattern: /^[A-Za-z,' ]{3,16}$/,
+    maxlen:50,
+    pattern: /^[A-Za-z,' ]{3,50}$/,
     required: true,
 },
 {

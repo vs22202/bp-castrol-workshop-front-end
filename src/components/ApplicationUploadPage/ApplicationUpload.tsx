@@ -4,7 +4,7 @@ import { InputField } from "../InputFieldComponent/InputField";
 import { Button } from "../ButtonComponent/Button";
 import {useForm, SubmitHandler, Controller} from 'react-hook-form'
 import { Input } from "components/FormInputs";
-import inputs from './ApplicationUploadFormDataFields'
+import inputs from './ApplicationUploadFormFields'
 
 
 const ApplicationUpload: React.FC = () =>{

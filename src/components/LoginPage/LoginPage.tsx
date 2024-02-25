@@ -61,7 +61,7 @@ const LoginPage: React.FC = () => {
                   },
                   pattern: {
                     value: input.pattern,
-                    message: `${input.label} format is wrong.`
+                    message: input.errorMessage
                   }
                 }}
               />
