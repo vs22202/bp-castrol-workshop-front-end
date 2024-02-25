@@ -25,8 +25,13 @@ function App() {
       <div className="appContainer">
         <div className="contentContainer">
 
-        {/* <ApplicationUpload /> */}
-        <LoginPage />
+        <ApplicationUpload />
+
+        {/* <List items={items} size="small" /> 
+<List items={items} size="large" />  
+              <ListItem size="large" text="Are you committed to quality maintenance and friendly customer service?" />
+    <ListItem size="small" text="Are you committed to quality maintenance and friendly customer service?" />  */}
+
         
 
        {/* <Checkbox size="small" text="I consent to having my data processed according to the privacy statement" value="Data Consent" />
@@ -51,14 +56,7 @@ function App() {
       <InputField type="password" label='Label' size='md' isWrong={true}/>
       <InputField type="password" label='Label' size='lg' isWrong={false}/> */}
 
-    {
-    /*List-QnA*/
-    /* <div>
-      <List items={items} size="large" />
-    </div>
-    <div>
-      <List items={items} size="small" />
-    </div> */}
+    
 
 
  {/* <Checkbox size="small" text="I consent to having my data processed according to the privacy statement" />
@@ -67,6 +65,4 @@ function App() {
 
     { /*<FooterWithLogo />*/ }
 
-    {/* <ListItem size="large" text="Are you committed to quality maintenance and friendly customer service?" />
-    <ListItem size="small" text="Are you committed to quality maintenance and friendly customer service?" /> */}
 export default App;
