@@ -1,48 +1,75 @@
 
 /* CheckboxComponent.css */
-.checkbox-component {
-  background: var(--shades-mainwhite, #ffffff);
-  padding: 0px 0px 22px 0px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-start;
+
+/* checkbox input customized */
+input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  border: 1px solid var(--primary---main500); 
+  outline: none;
+  position: relative; 
 }
+input[type="checkbox"]:checked {
+  background-color: var(--shades---main-white); 
+  border-color: var(--primary---main500);
+}
+input[type="checkbox"]:checked::before {
+  content: "\2713";
+  display: block;
+  text-align: center;
+  color: var(--shades---main-black);
+  position: absolute;
+  top: 50%; 
+  left: 50%; 
+  transform: translate(-50%, -50%); 
+}
+
 .text {
   color: var(--neutral-main750);
   text-align: left;
   flex: 1;
+  margin:0 0 0 var(--spacing-4xs);
 }
 
+/* label sizes */
 .small{
   font-size: var(--paragraph---m---light);
-  line-height: 20px;
+  line-height: var(--spacing-sm);
 }
 
 .medium{
   font-size: var(--paragraph---l---light);
-  line-height: 21px;
+  line-height: var(--spacing-md);
 }
 
 .large{
   font-size: var(--subheading---s---light);
-  line-height: 34px;
+  line-height: var(--spacing-xl);
 }
 
-.icon,
-.icon2 {
-  flex-shrink: 0;
-  margin-right: 8px;
-  overflow: hidden;
+/* checkbox sizes */
+.iconsmall{
+  height: var(--spacing-xs);
+  width: var(--spacing-xs);
 }
 
+.iconmedium{
+  height: var(--spacing-md);
+  width: var(--spacing-md);
+}
+
+.iconlarge{
+  height: 32px;
+  width: 32px;
+}
+
+/* checkbox + label */
 .group {
   display: flex;
   flex-direction: row;
   align-items: center;
-}
-.group > input {
-  display: none;
+  margin: var(--spacing-3xs) 0;
 }
 
 

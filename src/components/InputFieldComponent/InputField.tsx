@@ -1,14 +1,23 @@
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './InputField.module.css'
+import {useForm} from 'react-hook-form'
 
 /** The props type of {@link InputField | `InputField`}. */
 export type InputFieldProps = {
-    isWrong?:boolean;
+    name:string;
+    value?: string;
+    placeholder?:string;
     label: string;
-    type: "password" | "text" | "disabled";
+    //type: "password" | "text" | "disabled";
+    type:string;
     isDisabled?:boolean;
-    size:'sm'|'md'|'lg';
+    size:"small" |"medium" |"large";
     required?:boolean;
+    maxlen?:number;
+    register:any;
+    validationSchema?:any;
+    errors:any;
+    isWrong?:boolean;
 }
 
 /**
@@ -24,34 +33,19 @@ export type InputFieldProps = {
  * ```
  */
 
-export function InputField ({ label, isWrong=false, type, isDisabled=false, size, required=false } : InputFieldProps){
+export function InputField ({ name, label, placeholder, value, type, isDisabled=false, size, required=false, maxlen, register, validationSchema, errors } : InputFieldProps){
 
-    const [inputValue, setInputValue] = useState('');
+    const [inputValue, setInputValue] = useState(value);
     const [inputType, setInputType] = useState(type);
     const [isFocused, setIsFocused] = useState(false);
-    let iconsize;
-    let labelsize;
-
-    switch(size){
-        case "lg":
-          iconsize=styles.large;
-          labelsize = styles.labellg;
-          break
-        case "md":
-          iconsize=styles.medium;
-          labelsize = styles.labelmd;
-          break
-        case "sm":
-          iconsize=styles.small;
-          labelsize = styles.labelsm;
-          break
-        default:
-          iconsize=styles.small;
-          labelsize=styles.labelsm;
-      }
+    const [placeholderText, setPlaceholderText] = useState("");
+    const inputfieldRegister = register(name, validationSchema)
+    const iconsize = "icon"+size;
+    const labelsize = "label"+size;
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) =>{
         setInputValue(event.target.value)
+        value = inputValue
     }
 
     const togglefield = ()=>{
@@ -60,38 +54,52 @@ export function InputField ({ label, isWrong=false, type, isDisabled=false, size
 
     const handleInputFocus = () => {
         setIsFocused(true);
+        setPlaceholderText(placeholder+"")
     }
 
     const handleInputBlur = () => {
         setIsFocused(inputValue !== '');
+        setPlaceholderText("")
     }
 
     return(
         <>
         <div className="form-container">
-            <div className={`${isWrong ? styles.isWronginputfieldcontainer: styles.defaultinputfieldcontainer} `}>
+            <div className={`${errors[name] ? styles.isWronginputfieldcontainer : styles.defaultinputfieldcontainer} `}
+            >
                 <input 
-                    value={inputValue} 
-                    onChange={handleInputChange} 
+                    name={name}
+                    type={inputType}
+                    {...inputfieldRegister}
+                    onChange={(e)=>{
+                        inputfieldRegister.onChange(e)
+                        handleInputChange(e)
+                    }}
+                    value={inputValue}
+                    placeholder={placeholderText}
                     onFocus={handleInputFocus}
                     onBlur={handleInputBlur}
-                    className={`${isWrong ? styles.isWronginputfield: styles.defaultinputfield} ${styles[size]}`} 
-                    type={inputType} 
+                    maxLength={maxlen}
+                    className={`${errors[name] ? styles.isWronginputfield : styles.defaultinputfield} ${styles[size]}`} 
                     disabled={isDisabled} 
-                    required={required}/>
-                <label className={`${isFocused || inputValue ? styles.floatingLabel : styles.floatingLabeldefault} ${isWrong ? styles.isWrongLabel : ''} ${isFocused || inputValue ? styles.labelsizefloating : labelsize}`}>
+                    required={required}
+                    />
+                <label className={`${isFocused || inputValue ? styles.floatingLabel : styles.floatingLabeldefault} ${errors[name] ? styles.isWrongLabel : ''} ${isFocused || inputValue ? styles.labelsizefloating : styles[labelsize]}`}>
                     {label}{required && <span style={{ color: 'red' }}>*</span>}
                 </label>
                 {type==='password' 
-                ? (isWrong ? <div className={`${styles.passwordWrong} ${iconsize}`} onClick={togglefield} /> : <div className={`${styles.passwordRight} ${iconsize}`} onClick={togglefield}/>) 
+                ? (errors[name] ? <div className={`${styles.passwordWrong} ${styles[iconsize]}`} onClick={togglefield} /> : <div className={`${styles.passwordRight} ${styles[iconsize]}`} onClick={togglefield}/>) 
                 : (inputValue && 
-                    (isWrong ? <div className={`${styles.textWrong} ${iconsize}`} onClick={()=>setInputValue('')}/> 
-                     :<div className={`${styles.textRight} ${iconsize}`} onClick={()=>setInputValue('')}/>
+                    (errors[name] ? <div className={`${styles.textWrong} ${styles[iconsize]}`} onClick={()=>setInputValue('')}/> 
+                     :<div className={`${styles.textRight} ${styles[iconsize]}`} onClick={()=>setInputValue('')}/>
                     )
                   )
                 }
             </div>
         </div>
+        {errors && errors[name] && (
+        <span className={`${styles.error}`}>{errors[name]?.message}</span>
+        )}
         </>
     )
 

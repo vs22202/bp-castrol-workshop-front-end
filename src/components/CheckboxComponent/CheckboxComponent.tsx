@@ -1,78 +1,35 @@
 // CheckboxComponent.tsx
-
-import React, { useState } from "react";
 import styles from "./CheckboxComponent.module.css";
 
-interface ICheckboxProps {
+export type CheckboxProps = {
+  name:string;
   size: "small" | "medium" | "large";
   text: string;
-  value: string;
+  required?:boolean;
+  register:any;
+  value?:boolean;
 }
 
-const Checkbox: React.FC<ICheckboxProps> = ({ size, text,value }) => {
-  const [isChecked, setIsChecked] = useState(false);
-  
-  const handleCheckboxClick = () => {
-    setIsChecked(!isChecked);
-  };
-
-  const getIcon = () => {
-    return (
-      <svg
-        width={size === "large" ? "32" : size === "medium" ? "24" : "16"}
-        height={size === "large" ? "32" : size === "medium" ? "24" : "16"}
-        /* className={`${styles[size]}`} */
-        viewBox="0 0 56 56"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        {isChecked ? (
-          <>
-            {/* Add SVG path for the checked state */}
-            <path
-              d="M10.5 29.75L24.5 43.75L45.5 12.25"
-              stroke="#009900"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <rect
-              x="3"
-              y="4.16667"
-              width="47.6667"
-              height="47.6667"
-              stroke="#009900"
-            />
-          </>
-        ) : (
-          <>
-            {/* Add SVG path for the unchecked state */}
-            <rect
-              x="3"
-              y="4.16675"
-              width="47.6667"
-              height="47.6667"
-              stroke="#009900"
-            />
-          </>
-        )}
-      </svg>
-    );
-  };
-
+export function Checkbox({name, size, text, required=false, register} : CheckboxProps){
+   const checkboxRegister = register(name)
   
   return (
+    <>
     <div
-      className={`${styles.checkboxComponent} ${styles[`${size}`]}`}
-      onClick={handleCheckboxClick}
+      className={`${styles[size]}`}
+      id={name}
     >
-      <div className={`${styles.group} `}>
-        <input type="checkbox" checked={isChecked} value={value} />  
-        <div className={styles.icon}>{getIcon()}</div>
-        <div className={`${styles.text} ${styles[size]}`}>{text}</div>
+      <div className={`${styles.group} ${styles[size]}`}>
+        <input
+              name={name}
+              {...checkboxRegister}
+              type="checkbox"
+              required={required}
+              className={`${styles["icon"+size]}`}
+        />
+        <div className={`${styles.text} ${styles[size]}`}>{text}{required && <span style={{ color: 'red' }}>*</span>}</div>
       </div>
     </div>
+    </>
   );
 };
-
-export { Checkbox };

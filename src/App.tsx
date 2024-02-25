@@ -25,6 +25,7 @@ function App() {
         <div className="contentContainer">
 
         <ApplicationUpload />
+        
 
        {/* <Checkbox size="small" text="I consent to having my data processed according to the privacy statement" value="Data Consent" />
         <Checkbox size="medium" text="I consent to having my data processed according to the privacy statement" value="Data Consent" />
