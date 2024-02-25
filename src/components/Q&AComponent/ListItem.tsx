@@ -1,14 +1,13 @@
 import styles from './ListItem.module.css'; 
 /** The props type of {@link ListItem | `ListItem`}. */
 export interface IListItemProps {
-   /**
+    /**
    * text, size and classname of the listitem
    */
   text: string;
   size?: "small" | "large";
   className?: string;
-}
-
+};
 /**
  *
  * ListItem Component
@@ -27,6 +26,7 @@ export interface IListItemProps {
  * ```
  */
 
+
 export const ListItem = ({
   text,
   size = "small",
@@ -35,7 +35,7 @@ export const ListItem = ({
   const variantsClassName = size === 'small' ? styles['size-small'] : styles['size-large'];
 
   return (
-    <div className={`${styles['list-item']} ${variantsClassName} ${className}`}>
+    <div data-testid='list-item' className={`${styles['list-item']} ${variantsClassName} ${className}`}>
       <img
         className={styles.icon}
         src="src\assets\icon.svg" 

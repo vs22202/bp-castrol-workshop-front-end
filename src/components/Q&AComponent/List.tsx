@@ -5,7 +5,7 @@ import styles from './List.module.css';
 import { ListItem } from './ListItem';
 /** The props type of {@link List | `List`}. */
 export interface IListProps {
-  /**
+   /**
    * item and size of the list
    */
   items: string[];

@@ -26,8 +26,8 @@ export type CheckboxProps = {
  * @returns {JSX.Element} The rendered checkbox component.
  *
  * @example
- * // Render a medium-sized checkbox with the label text "I consent to having my data processed according to the privacy statement" and value "Data Consent"
- * <Checkbox name="dataConsent" size="medium" text="I consent to having my data processed according to the privacy statement" required={true} register={register} value="Data Consent" />
+ * // Render a medium-sized checkbox with the label text "I consent to having my data processed according to the privacy statement" and value "true"
+ * <Checkbox name="dataConsent" size="medium" text="I consent to having my data processed according to the privacy statement" required={true} register={register} value="true" />
  */
 export function Checkbox({name, size, text, required=false, register} : CheckboxProps){
    const checkboxRegister = register(name)
