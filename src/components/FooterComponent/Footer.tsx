@@ -1,5 +1,21 @@
 // Import your CSS module file at the top
 import styles from "./Footer.module.css";
+/** The props type of {@link Footer | `Footer`}. */
+
+/**
+ *
+ * Footer Component
+ * @category component
+ * 
+ *
+ * @returns {JSX.Element} The rendered footer component.
+ *
+ * @example
+ * Render a footer
+ * ```tsx
+ * <FooterWithLogo />
+ * ```
+ */
 
 export function FooterWithLogo() {
   return (
