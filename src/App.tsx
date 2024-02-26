@@ -10,6 +10,7 @@ import { Checkbox } from "./components/CheckboxComponent/CheckboxComponent";
 import "./App.css";
 import { Icon } from "./components/IconComponent/Icon";
 import { LoginPage } from "./components/LoginPage/LoginPage";
+import { SignupPage } from "./components/SignupPage/SignupPage";
 
 
 function App() {
@@ -26,7 +27,8 @@ function App() {
         <div className="contentContainer">
 
         {/* <ApplicationUpload /> */}
-        <LoginPage />
+       {/*  <LoginPage /> */}
+        <SignupPage/>
 
         {/* <List items={items} size="small" /> 
 <List items={items} size="large" />  

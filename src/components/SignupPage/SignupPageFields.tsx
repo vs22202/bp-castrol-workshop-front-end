@@ -1,6 +1,6 @@
 import { Input } from "../FormInputs";
 
-const LoginPageFields: Input[] = [{
+const SignupPageFields: Input[] = [{
     id: 1,
     size:"medium",
     name: "user_email_id",
@@ -20,7 +20,7 @@ const LoginPageFields: Input[] = [{
     name: "user_password",
     type: "text",
     text_type: "password",
-    placeholder: "Enter password here",
+    placeholder: "RICHAkiran123!@#",
     pattern: /^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*()-_=+{}|;:'",.<>?]).{10,100}$/, //contains 1-special char, capital letter, number and should have 10 to 100 characters
     minlen:10,
     maxlen:100,
@@ -31,12 +31,18 @@ const LoginPageFields: Input[] = [{
 {
     id: 3,
     size:"medium",
-    name: "remember_me?",
-    type: "checkbox",
-    label: "Remember me?",
-    errorMessage:"remember me error",
-    required: false,
+    name: "user_password_confirm",
+    type: "text",
+    text_type: "password",
+    placeholder: "RICHAkiran123!@#",
+    pattern: /^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*()-_=+{}|;:'",.<>?]).{10,100}$/, //should match with the above password
+    minlen:10,
+    maxlen:100,
+    errorMessage: "Passwords do not match.",
+    label: "Confirm Password",
+    required: true,
+    //customValidation: {(value)=>value === getValue("user_password")}
 },
 ]
 
-  export default LoginPageFields;
+  export default SignupPageFields;

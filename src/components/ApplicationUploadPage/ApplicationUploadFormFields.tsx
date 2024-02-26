@@ -21,7 +21,7 @@ const ApplicationFormInputFields: Input[] = [{
     size:"medium",
     name: "workshop_post_code",
     type: "text",
-    text_type: "number",
+    text_type: "text",
     placeholder: "600062",
     pattern: /^\d{6}$/,
     minlen:6,

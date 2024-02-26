@@ -16,6 +16,7 @@ export type InputFieldProps = {
     register:any;
     validationSchema?:any;
     errors:any;
+    customValidation?:any;
 }
 
 /**
@@ -82,7 +83,7 @@ export function InputField ({ name, label, placeholder, value, type, isDisabled=
                     maxLength={maxlen}
                     className={`${errors[name] ? styles.isWronginputfield : styles.defaultinputfield} ${styles[size]}`} 
                     disabled={isDisabled} 
-                    required={required}
+                    //required={required}
                     />
                 <label className={`${isFocused || inputValue ? styles.floatingLabel : styles.floatingLabeldefault} ${errors[name] ? styles.isWrongLabel : ''} ${isFocused || inputValue ? styles.labelsizefloating : styles[labelsize]}`}>
                     {label}{required && <span style={{ color: 'red' }}>*</span>}
@@ -96,6 +97,9 @@ export function InputField ({ name, label, placeholder, value, type, isDisabled=
                   )
                 }
             </div>
+        </div>
+        <div>
+            
         </div>
         {errors && errors[name] && (
         <span className={`${styles.error}`}>{errors[name]?.message}</span>

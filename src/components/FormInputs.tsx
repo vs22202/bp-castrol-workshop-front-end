@@ -1,7 +1,7 @@
 export interface Input {
     id: number;
     name: string;
-    type: string;
+    type: string; //numbers like phone numbers and pincode or otp are included as a "text"
     text_type?:string;
     value?:string;
     placeholder?: string;
@@ -12,7 +12,4 @@ export interface Input {
     maxlen?:number;
     minlen?:number;
     size?:"small" | "medium" | "large";
-    /* button_size?:string;
-    button_type?:"solid"|"outline",
-    button_img?:string; */
   }

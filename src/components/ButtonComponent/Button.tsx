@@ -13,6 +13,7 @@ export type ButtonProps = {
   size: "sm" | "md" | "lg";
   text: string;
   iconimg?: string;
+  onClick?:(event: React.MouseEvent<HTMLButtonElement, MouseEvent>)=>void;
 };
 
 /**
@@ -35,10 +36,10 @@ export type ButtonProps = {
  * ```
  */
 
-export function Button ({ text, type="solid", size, disabled=false, iconimg }: ButtonProps ){
+export function Button ({ text, type="solid", size, disabled=false, iconimg, onClick }: ButtonProps ){
 
   return (
-    <button className={`${styles[type]} ${styles[size]}`} disabled={disabled}>
+    <button className={`${styles[type]} ${styles[size]}`} disabled={disabled} onClick={onClick}>
       {iconimg && <Icon src={iconimg} size={size} />}
       <div>{text}</div>
     </button>
