@@ -10,6 +10,8 @@ input[type="checkbox"] {
   outline: none;
   position: relative; 
 }
+
+
 input[type="checkbox"]:checked {
   background-color: var(--shades---main-white); 
   border-color: var(--primary---main500);
@@ -70,6 +72,12 @@ input[type="checkbox"]:checked::before {
   flex-direction: row;
   align-items: center;
   margin: var(--spacing-3xs) 0;
+}
+
+/* error class */
+.error{
+  color:var(--error---main900);
+  font-size: var(--link---s---regular);
 }
 
 

@@ -13,6 +13,8 @@ const SignupPage: React.FC = () => {
     const {register, handleSubmit, formState:{errors}, watch, trigger} = useForm();
     const [otpActivated, setOtpActivated] = useState(false);
     const [isAllFieldsValid, setIsAllFieldsValid] = useState(false);
+    const [password, setPassword] = useState("");
+    
     const email = watch("user_email_id")
     const pass = watch("user_password");
     const confirmpass = watch("user_password_confirm");
@@ -20,12 +22,19 @@ const SignupPage: React.FC = () => {
 
     useEffect(() => {
         // if all three fields are filled and valid, enables GET OTP button
-        if (email && pass && confirmpass && Object.keys(errors).length === 0) {
+        if (email && pass && confirmpass && Object.keys(errors).length === 0 && pass===confirmpass) {
             setIsAllFieldsValid(true);
         } else {
             setIsAllFieldsValid(false);
         }
     }, [email, pass, confirmpass, errors]);
+
+    /* useEffect(()=>{
+      if(pass){
+        setPassword(pass);
+        //password = pass;
+      }
+    }) */
 
 
     //Handles all three buttons
@@ -119,5 +128,6 @@ const SignupPage: React.FC = () => {
     </div>
   );
 };
+
 
 export { SignupPage };

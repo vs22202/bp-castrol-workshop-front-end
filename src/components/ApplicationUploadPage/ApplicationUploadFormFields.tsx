@@ -189,7 +189,7 @@ const ApplicationFormInputFields: Input[] = [{
     name: "consent_process_data",
     type: "checkbox",
     label: "I consent to having my data processed according to the privacy statement",
-    errorMessage:"Click to continue.",
+    //errorMessage:"Click to continue.",
     required: true,
 },
 {
@@ -198,7 +198,7 @@ const ApplicationFormInputFields: Input[] = [{
     name: "consent_being_contacted",
     type: "checkbox",
     label: "I consent to being contacted by a Castrol distributor for the purpose of discussing my interest in joining the Castrol network",
-    errorMessage:"Click to continue.",
+    //errorMessage:"Click to continue.",
     required: true,
 },
 {
@@ -207,7 +207,7 @@ const ApplicationFormInputFields: Input[] = [{
     name: "consent_receive_info",
     type: "checkbox",
     label: "I am interested in receiving additional information by email on Castrol products or services from time to time",
-    errorMessage:"Click to continue.",
+    //errorMessage:"Click to continue.",
     required: false,
 },
   ]

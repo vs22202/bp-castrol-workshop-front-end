@@ -21,6 +21,10 @@ export const renderInput = (input: Input, { register, errors }: FormUtilsProps) 
                     size={input.size ? input.size : "medium"}
                     text={input.label}
                     register={register}
+                    validationSchema={{
+                        required:input.required,
+                    }}
+                    required={input.required}
                 />
             );
         case "text":

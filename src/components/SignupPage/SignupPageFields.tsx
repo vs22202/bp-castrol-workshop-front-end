@@ -35,7 +35,7 @@ const SignupPageFields: Input[] = [{
     type: "text",
     text_type: "password",
     placeholder: "RICHAkiran123!@#",
-    pattern: /^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*()-_=+{}|;:'",.<>?]).{10,100}$/, //should match with the above password
+    pattern: /^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*()-_=+{}|;:'",.<>?]).{10,100}$/,//new RegExp(password as string) ,
     minlen:10,
     maxlen:100,
     errorMessage: "Passwords do not match.",
