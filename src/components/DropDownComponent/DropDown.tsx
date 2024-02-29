@@ -112,7 +112,7 @@ export function DropDown({
     const concatenatedValues = orderOptions(newValue)
       .map((v) => v.value)
       .join(", ");
-    console.log("Current Values:", concatenatedValues);
+    // console.log("Current Values:", concatenatedValues);
 
 
       onchange(concatenatedValues);
@@ -132,7 +132,7 @@ export function DropDown({
   };
   
   //to format label when creating new options and adding them 
-  const formatCreateLabel = (inputValue: any) => `Add new option ${inputValue}`; // Customize the create label
+  const formatCreateLabel = (inputValue: any) => `Add new option "${inputValue}"`; // Customize the create label
 
 // for having floating label when there is selected values in the select box
   const { ValueContainer, Placeholder } = components;
