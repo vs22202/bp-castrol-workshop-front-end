@@ -1,0 +1,90 @@
+.container {
+  width: 90%;
+  margin-inline: auto;
+}
+.dropzone {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: var(--spacing-xs);
+  border: 2px dashed var(--neutral---main350);
+  padding: var(--spacing-2xs);
+}
+.uploadOptions {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+.uploadOptions > svg {
+  color: var(--neutral---main350);
+}
+.uploadOptions > h3 {
+  font-size: var(--subheading---l---regular);
+  font-weight: var(--weight--regular);
+  color: var(--neutral---main850);
+}
+.optionSeparator {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--spacing-3xs);
+}
+.optionSeparator > p {
+  font-size: var(--link---m---light);
+  font-weight: var(--weight--light);
+  color: var(--neutral---main750);
+}
+.horizontalLine {
+  background-color: var(--neutral---main550);
+  width: 54px;
+  height: 2px;
+}
+.thumbsContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-auto-rows: 1fr;
+  column-gap: 1%;
+  row-gap: 1%;
+}
+.addFile {
+  color: var(--neutral---main350);
+  width: 100%;
+  display: flex;
+  font-size:var(--subheading---m---regular);
+  font-weight: var(--weight--regular);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: color 300ms ease-in, background-color 100ms ease-in;
+}
+.addFile:hover {
+  color: var(--primary---main300);
+  background-color: var(--neutral---main50);
+}
+.acceptanceFormats{
+  font-size:var(--paragraph---m---regular);
+  font-weight: var(--weight--regular);
+  color:var(--neutral---main550);
+}
+
+@media (max-width: 768px) {
+  .dropzone {
+  }
+  .dropzone > h3 {
+    font-size: var(--subheading---xs---regular);
+  }
+  .optionSeparator > p {
+    font-size: var(--link---xs---light);
+  }
+  .thumbsContainer {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  .addFile > p{
+    display: none;
+  }
+  .acceptanceFormats {
+    font-size: var(--paragraph---m---light);
+  }
+}

@@ -8,17 +8,20 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: var(--spacing-3xs)
+  gap: var(--spacing-3xs);
+}
+.button {
+  font-size: var(--spacing-lg);
 }
 .sm {
-  font-size: var(--spacing-xs);
+  font-size: var(--spacing-xs) !important;
 }
 .md {
-  font-size: var(--spacing-md);
+  font-size: var(--spacing-md) !important;
   min-width: 130px;
 }
 .lg {
-  font-size: var(--spacing-lg);
+  font-size: var(--spacing-lg) !important;
 }
 .solid {
   background-color: var(--primary---main500);
@@ -43,17 +46,13 @@ button {
   color: var(--primary---main300);
   box-shadow: 2px var(--primaryshdw--lg);
 }
-
-
-
-.solid:disabled {
-  background-color: var(--neutral---main150);
-  color: var(--shades---main-white);
-  border: none;
-  box-shadow: 2px var(--neutralshdw--lg);
-}
 .outline:disabled {
   border: 2px solid var(--neutral---main150);
   color: var(--neutral---main150);
   box-shadow: 2px var(--neutralshdw--lg);
+}
+@media (max-width: 768px) {
+  .button {
+    font-size: var(--spacing-xs);
+  }
 }

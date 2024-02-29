@@ -17,7 +17,7 @@ export function SvgIcon(props: IProps) {
         <span className="rounded-full bg-slate-400 animate-pulse h-8 w-8"></span>
       )}
       {Svg && (
-          <Svg className={`${styles[wrapperStyle || ""]}`} {...svgProp} />
+          <Svg className={`${styles[wrapperStyle || ""] } ${styles.icon}`} {...svgProp} />
       )}
     </>
   );

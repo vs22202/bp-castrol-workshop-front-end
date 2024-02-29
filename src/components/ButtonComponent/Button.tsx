@@ -1,7 +1,5 @@
 import styles from "./Button.module.css";
-import { Icon } from "../IconComponent/Icon";
-import { useState } from "react";
-
+import { SvgIcon } from "../IconComponent/SvgIcon";
 /** The props type of {@link Button | `Button`}. */
 
 export type ButtonProps = {
@@ -10,7 +8,7 @@ export type ButtonProps = {
    */
   disabled?: boolean;
   type: "solid" | "outline";
-  size: "sm" | "md" | "lg";
+  size?: "sm" | "md" | "lg";
   text: string;
   iconimg?: string;
   onClick?:(event: React.MouseEvent<HTMLButtonElement, MouseEvent>)=>void;
@@ -36,11 +34,11 @@ export type ButtonProps = {
  * ```
  */
 
-export function Button ({ text, type="solid", size, disabled=false, iconimg, onClick }: ButtonProps ){
+export function Button ({ text, type="solid", size, disabled=false, iconimg,onClick }: ButtonProps ){
 
   return (
-    <button className={`${styles[type]} ${styles[size]}`} disabled={disabled} onClick={onClick}>
-      {iconimg && <Icon src={iconimg} size={size} />}
+    <button className={`${styles[type]} ${styles[size || ""]} ${styles.button}`} disabled={disabled} onClick={onClick}>
+      {iconimg && <SvgIcon iconName={iconimg} wrapperStyle={size} />}
       <div>{text}</div>
     </button>
   );
