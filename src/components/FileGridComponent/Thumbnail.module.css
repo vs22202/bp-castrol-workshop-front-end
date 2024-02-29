@@ -1,4 +1,7 @@
 .thumb {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: var(--shades---main-white);
   position: relative;
 }
@@ -17,16 +20,26 @@
 .thumb:hover:before {
   opacity: 0.6;
 }
-.thumb > img {
+.thumb::backdrop {
+  background-color: var(--neutral---main50);
+  opacity: 0.4;
+}
+.thumb > img,
+.thumb > video {
+  max-width: 100%;
   object-fit: cover;
-  min-height: 310px;
   aspect-ratio: 1/1;
+}
+img.fullScreen,
+video.fullScreen {
+  object-fit: contain;
+  z-index: 1;
 }
 .deleteIcon > svg {
   position: absolute;
   top: 5%;
   right: 5%;
-  z-index: 1;
+  z-index: 2;
   transition: color 100ms ease-in;
 }
 .deleteIcon > svg:hover {
@@ -56,4 +69,15 @@
 }
 .thumb:hover .viewButton {
   opacity: 1;
+}
+@media (max-width: 768px) {
+  .thumb::before {
+    opacity: 0.6;
+  }
+  .viewButton {
+    opacity: 1;
+  }
+  .viewButton > span {
+    display: none;
+  }
 }
