@@ -18,7 +18,7 @@ const ApplicationUpload: React.FC = () =>{
 
   //triggers validation as soon as input is given
   const handleInputChange  = async(event:any) => {
-    console.log(errors)
+   // console.log(errors)
     const name = event?.target.name;
     await trigger(name)
   }
