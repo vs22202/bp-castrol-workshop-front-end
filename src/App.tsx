@@ -28,7 +28,7 @@ function App() {
 
         <ApplicationUpload />
        {/*  <LoginPage /> */}
-       {/*  <SignupPage/> */}
+        {/* <SignupPage/> */}
 
         {/* <List items={items} size="small" /> 
 <List items={items} size="large" />  

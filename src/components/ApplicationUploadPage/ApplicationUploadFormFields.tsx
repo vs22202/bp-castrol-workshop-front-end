@@ -1,4 +1,5 @@
 import { Input } from "components/FormInputs";
+import { Option } from "components/DropDownComponent/Option";
 //numbers like postal codes, are set as text in text_type
 
 const ApplicationFormInputFields: Input[] = [{
@@ -136,28 +137,42 @@ const ApplicationFormInputFields: Input[] = [{
     id: 10,
     size:"medium",
     name: "services_offered",
-    type: "text",
-    text_type:"text",
+    type: "dropdown",
+    text_type:"string",
+    compulsorylist:[{ value: 'Oil Change', label: 'Oil Change', isFixed: true },
+    { value: 'Fluid Checks', label: 'Fluid Checks', isFixed: true },
+    { value: 'Routine Maintenance', label: 'Routine Maintenance', isFixed: true },],
+    optionlist:[
+      { value: 'Filter Replacements', label: 'Filter Replacements' },
+      { value: 'Brake Services', label: 'Brake Services' },
+      { value: 'Tire Services', label: 'Tire Services',  },
+      { value: 'Exhaust System Inspection', label: 'Exhaust System Inspection' },
+      { value: 'Diagnostic Services', label: 'Diagnostic Services' },
+      { value: 'Battery Checks and Replacements', label: 'Battery Checks and Replacements',  },
+    ],
     placeholder: "Bodywork, Paint Jobs",
     errorMessage:"Please enter a valid services that are offered",
     label: "Services Offered",
-    pattern: /^[^0-9]*$/,
-    minlen:5,
-    maxlen:1000,
     required: true,
+
 },
 {
     id: 11,
     size:"medium",
     name: "expertise",
-    type: "text",
+    type: "dropdown",
     text_type:"text",
+    compulsorylist:[],
+    optionlist:[
+      { value: 'Hybrid and Electric Luxury Cars', label: 'Hybrid and Electric Luxury Cars' },
+      { value: 'German Cars', label: 'German Car' },
+      { value: 'Luxury SUV', label: 'Luxury SUV' },
+      { value: 'Exotic Car', label: 'Exotic Car' },
+      { value: 'Classic Luxury Car', label: 'Classic Luxury Car' },
+    ],
     placeholder: "German Cars",
     errorMessage: "It should be a valid expertise!",
     label: "Expertise",
-    pattern: /^[A-Za-z\s]+$/,// only alphabets allowed
-    minlen:5,
-    maxlen:1000,
     required: true,
 },
 {
