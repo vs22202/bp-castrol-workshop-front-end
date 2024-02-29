@@ -1,60 +1,38 @@
-.list-item,
-.list-item * {
-  box-sizing: border-box;
-}
-
 .list-item {
   display: flex;
   flex-direction: row;
-  align-items: center; /* Align items vertically in the center */
+  align-items: center; 
 }
 
 .icon-container {
     display: flex;
-    align-items: center; /* Align items vertically in the center */
+    align-items: center; 
   }
   
   .icon {
     flex-shrink: 0;
-    width: var(--spacing-xs, 16px); 
-    height: var(--spacing-xs, 16px); 
     object-fit: contain; 
+  }
+  .size-small .icon {
+    width: 16px;
+    height: 16px;
+  }
+  .size-large .icon {
+    width: 24px;
+    height: 24px;
   }
   
   .text {
     margin-left: 8px; 
     color: var(--neutral-main750, #666666);
     font-family: var(--paragraph-m-light-font-family, "NotoSans-Light", sans-serif);
-    font-size: var(--paragraph-m-light-font-size, 12px);
-    line-height: var(--paragraph-m-light-line-height, 20.4px);
-    font-weight: var(--paragraph-m-light-font-weight, 300);
-  }
-
-  .size-small .icon {
-    width: var(--small-icon-width, 16px);
-    height: var(--small-icon-height, 16px);
-  }
-  
+    font-weight: var(--weight--light);
+  }  
   .size-small .text {
-    margin-left: 8px; 
-    color: var(--neutral-main750, #666666);
-    font-family: var(--paragraph-m-light-font-family, "NotoSans-Light", sans-serif);
-    font-size: var(--paragraph-m-light-font-size, 12px);
-    line-height: var(--paragraph-m-light-line-height, 20.4px);
-    font-weight: var(--paragraph-m-light-font-weight, 300);
-  }
-  
-  /* Styles for large size */
-  .size-large .icon {
-    width: var(--large-icon-width, 24px);
-    height: var(--large-icon-height, 24px);
-  }
-  
-  .size-large .text {
-    margin-left: 8px; 
-    color: var(--neutral-main750, #666666);
-    font-family: var(--paragraph-m-light-font-family, "NotoSans-Light", sans-serif);
-    font-size: 20px;
-    line-height: 34px;
-    font-weight: var(--paragraph-m-light-font-weight, 300);
+    font-size: var(--paragraph---m---light);
+    line-height: var(--spacing-sm);
+  } 
+  .size-large .text{
+    font-size: var(--subheading---s---regular);
+    line-height: var(--spacing-xl);
   }

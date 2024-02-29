@@ -11,7 +11,7 @@ export type ButtonProps = {
   size?: "sm" | "md" | "lg";
   text: string;
   iconimg?: string;
-  onClick?:React.MouseEventHandler<HTMLButtonElement>;
+  onClick?:(event: React.MouseEvent<HTMLButtonElement, MouseEvent>)=>void;
 };
 
 /**

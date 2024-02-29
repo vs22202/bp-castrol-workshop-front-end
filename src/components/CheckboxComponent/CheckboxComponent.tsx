@@ -1,78 +1,58 @@
 // CheckboxComponent.tsx
-
-import React, { useState } from "react";
+import { useEffect } from "react";
 import styles from "./CheckboxComponent.module.css";
-
-interface ICheckboxProps {
+/** The props type of {@link Checkbox | `Checkbox`}. */
+export type CheckboxProps = {
+   /**
+   * name,size,text,required, register, value of the Checkbox
+   */
+  name:string;
   size: "small" | "medium" | "large";
   text: string;
-  value: string;
+  required?:boolean;
+  register:any;
+  value?:boolean;
+  errors?:any;
+  validationSchema?:any;
 }
+/**
+ * Checkbox Component
+ * @category Component
+ *
+ * @param {string} name - The name of the checkbox.
+ * @param {string} size - The size of the checkbox. It can be "small", "medium", or "large".
+ * @param {string} text - The label text associated with the checkbox.
+ * @param {boolean} required - Indicates whether the checkbox is required.
+ * @param {function} register - A function to register the checkbox in a form.
+ * @param {boolean} value - The value of the checkbox checked or not.
+ *
+ * @returns {JSX.Element} The rendered checkbox component.
+ *
+ * @example
+ * // Render a medium-sized checkbox with the label text "I consent to having my data processed according to the privacy statement" and value "true"
+ * <Checkbox name="dataConsent" size="medium" text="I consent to having my data processed according to the privacy statement" required={true} register={register} value="true" />
+ */
+export function Checkbox({name, size, text, required=false, register, errors, validationSchema} : CheckboxProps){
+   const checkboxRegister = register(name, validationSchema)
 
-const Checkbox: React.FC<ICheckboxProps> = ({ size, text,value }) => {
-  const [isChecked, setIsChecked] = useState(false);
-  
-  const handleCheckboxClick = () => {
-    setIsChecked(!isChecked);
-  };
-
-  const getIcon = () => {
-    return (
-      <svg
-        width={size === "large" ? "32" : size === "medium" ? "24" : "16"}
-        height={size === "large" ? "32" : size === "medium" ? "24" : "16"}
-        /* className={`${styles[size]}`} */
-        viewBox="0 0 56 56"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        {isChecked ? (
-          <>
-            {/* Add SVG path for the checked state */}
-            <path
-              d="M10.5 29.75L24.5 43.75L45.5 12.25"
-              stroke="#009900"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <rect
-              x="3"
-              y="4.16667"
-              width="47.6667"
-              height="47.6667"
-              stroke="#009900"
-            />
-          </>
-        ) : (
-          <>
-            {/* Add SVG path for the unchecked state */}
-            <rect
-              x="3"
-              y="4.16675"
-              width="47.6667"
-              height="47.6667"
-              stroke="#009900"
-            />
-          </>
-        )}
-      </svg>
-    );
-  };
-
+  //  useEffect(()=>{
+  //   console.log(errors);
+  //  })
   
   return (
-    <div
-      className={`${styles.checkboxComponent} ${styles[`${size}`]}`}
-      onClick={handleCheckboxClick}
-    >
-      <div className={`${styles.group} `}>
-        <input type="checkbox" checked={isChecked} value={value} />  
-        <div className={styles.icon}>{getIcon()}</div>
-        <div className={`${styles.text} ${styles[size]}`}>{text}</div>
+    <>
+    <div className={`${styles[size]}`} id={name}>
+      <div className={`${styles.group} ${styles[size]}`}>
+        <input
+              name={name}
+              {...checkboxRegister}
+              type="checkbox"
+              required={required}
+              className={`${styles["icon"+size]}`}
+        />
+        <div className={`${styles.text} ${styles[size]}`}>{text}{required && <span style={{ color: 'red' }}>*</span>}</div>
       </div>
     </div>
+    </>
   );
 };
-
-export { Checkbox };
