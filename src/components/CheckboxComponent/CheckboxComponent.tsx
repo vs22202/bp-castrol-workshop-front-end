@@ -35,9 +35,9 @@ export type CheckboxProps = {
 export function Checkbox({name, size, text, required=false, register, errors, validationSchema} : CheckboxProps){
    const checkboxRegister = register(name, validationSchema)
 
-   useEffect(()=>{
-    console.log(errors);
-   })
+  //  useEffect(()=>{
+  //   console.log(errors);
+  //  })
   
   return (
     <>

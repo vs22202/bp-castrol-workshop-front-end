@@ -1,3 +1,4 @@
+import { Option } from "../components/DropDownComponent/Option";
 export interface Input {
     id: number;
     name: string;
@@ -7,6 +8,8 @@ export interface Input {
     placeholder?: string;
     errorMessage?: string;
     label: string;
+    compulsorylist?: Option[] | undefined;
+    optionlist?: Option[] | undefined;
     pattern?: RegExp;
     required?: boolean;
     maxlen?:number;
