@@ -1,6 +1,6 @@
 // SignUpFormWithImage.tsx
 
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { InputField } from '../InputFieldComponent/InputField';
 import { Button } from "../ButtonComponent/Button";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -9,9 +9,11 @@ import inputs from './SignupPageFields';
 import SignupImg from "../../assets/signup.svg";
 import styles from './SignupPage.module.css';
 import { SvgIcon } from "../IconComponent/SvgIcon";
+import AuthContext, { AuthContextProps } from "../../contexts/AuthContext";
 
 const SignupPage: React.FC = () => {
-    const {register, handleSubmit, formState:{errors}, watch, trigger} = useForm();
+  const { register, handleSubmit, formState: { errors }, watch, trigger } = useForm();
+  const{ signup,generateOtp} = useContext(AuthContext) as AuthContextProps
     const [otpActivated, setOtpActivated] = useState(false);
     const [isAllFieldsValid, setIsAllFieldsValid] = useState(false);
     const [password, setPassword] = useState("");
@@ -40,10 +42,12 @@ const SignupPage: React.FC = () => {
 
     //Handles all three buttons
         //Get OTP Button
-    function getOtp(event: React.MouseEvent<HTMLButtonElement, MouseEvent>){
+    async function getOtp(event: React.MouseEvent<HTMLButtonElement, MouseEvent>){
         event.preventDefault()
-        console.log(`Your OTP: ${otp}`);
-        setOtpActivated(true);
+      console.log(`Your OTP: ${otp}`);
+      generateOtp(watch("user_email_id"))
+      setOtpActivated(true);
+        
     }
 
         //Login Button
@@ -55,7 +59,8 @@ const SignupPage: React.FC = () => {
     const handleSignup: SubmitHandler<Record<string, any>> = (data, event) => {
         event?.preventDefault();
         // Submit function for Application Upload form
-        console.log(data);
+      console.log(data);
+      signup(data.user_email_id, data.user_password,data.otp);
     }
 
 
@@ -104,10 +109,10 @@ const SignupPage: React.FC = () => {
                             value: 6,
                             message: "Enter 6 digit OTP."
                         },
-                        pattern: {
-                            value: otp,
-                            message: "Incorrect OTP."
-                        }
+                        // pattern: {
+                        //     value: otp,
+                        //     message: "Incorrect OTP."
+                        // }
                 }}
             />
             <Button 
@@ -119,10 +124,10 @@ const SignupPage: React.FC = () => {
              />
           </div>
             <div className={`${styles.buttonscontainer}`}>
-                <Button text="SignUp" size="md" type="solid" iconimg="signupW"/>
+                <Button text="SignUp" size="md" type="solid" iconimg="signup_icon" action="submit"/>
                 <span>or</span>
                 <span>Already have an account?</span>
-                <Button text="Login" size="md" type="outline" iconimg="loginG" onClick={handleLogin}/>
+                <Button text="Login" size="md" type="outline" iconimg="login_icon" onClick={handleLogin}/>
             </div>
         </form>
       </div>
