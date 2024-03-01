@@ -13,6 +13,10 @@ import { SignupPage } from "./components/SignupPage/SignupPage";
 import { Alert } from "./components/AlertComponent/Alert";
 import AlertContext, { AlertContextProps } from "./contexts/AlertContext";
 import { useContext } from "react";
+import RequireAuth from "./components/RequireAuthComponent/RequireAuth";
+import { Routes, Route } from "react-router-dom";
+import HomePage from "./views/HomePage/HomePage";
+import LogoutPage from "./views/LogoutPage/LogoutPage";
 
 function App() {
   const { alert } = useContext(AlertContext) as AlertContextProps;
@@ -30,9 +34,43 @@ function App() {
       <Navbar />
       <div className="appContainer">
         <div className="contentContainer">
+          <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route
+                path="/login"
+                element={
+                  <RequireAuth requireAuth={false}>
+                    <LoginPage />
+                  </RequireAuth>
+                }
+              />
+              <Route
+                path="/signup"
+                element={
+                  <RequireAuth requireAuth={false}>
+                    <SignupPage />
+                  </RequireAuth>
+                }
+              />
+              <Route
+                path="/upload"
+                element={
+                  <RequireAuth>
+                    <ApplicationUpload />
+                  </RequireAuth>
+                }
+            />
+            <Route
+                path="/logout"
+                element={
+                  <RequireAuth>
+                    <LogoutPage />
+                  </RequireAuth>
+                }
+              />
+          </Routes>
           {/* <ApplicationUpload /> */}
           {/* <LoginPage /> */}
-          <SignupPage />
 
           {/*  <List items={items} size="small" /> 
 <List items={items} size="large" /> 
