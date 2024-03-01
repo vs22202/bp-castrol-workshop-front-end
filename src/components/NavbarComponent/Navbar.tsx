@@ -1,11 +1,7 @@
 import { useState, useEffect } from "react";
 import styles from "./navbar.module.css";
 import { Button } from "../ButtonComponent/Button";
-import HamburgerIcon from "../../assets/hamburger_icon.svg";
-import CrossIcon from "../../assets/cross_icon.svg";
-import ApplicationsIcon from "../../assets/application_icon.svg";
-import ProfileIcon from "../../assets/profile_icon.svg";
-import LogoutIcon from "../../assets/logout_icon.svg";
+import { SvgIcon } from "../IconComponent/SvgIcon";
 
 /** The props type of {@link Navbar | `Navbar`}. */
 export type NavbarProps = {
@@ -44,13 +40,12 @@ function Navbar() {
   useEffect(() => {
     function checkUserAuth() {
       const item = localStorage.getItem("userAuth");
-      console.log(item);
       if (item == "true") {
         setUserAuth(true);
       } else {
         setUserAuth(false);
       }
-    } 
+    }
     window.addEventListener("storage", checkUserAuth);
     checkUserAuth();
     return () => {
@@ -69,10 +64,11 @@ function Navbar() {
           className={`${isActive ? styles.active : ""}`}
           onClick={toggleActiveClass}
         >
-          <img
-            src={isActive ? CrossIcon : HamburgerIcon}
-            alt={isActive ? "Cross" : "Hamburger"}
-          />
+          {!isActive ? (
+            <SvgIcon iconName="hamburger" data-testid="hamburger_icon"/>
+          ) : (
+            <SvgIcon iconName="cross" />
+          )}
         </div>
       </div>
       <div
@@ -83,15 +79,15 @@ function Navbar() {
         {userAuth ? (
           <ul className={`${styles.navMenu}`}>
             <li onClick={removeActive}>
-              <img src={ApplicationsIcon} alt="Applications" />
+              <SvgIcon iconName="application" />
               <a href="#home">Applications</a>
             </li>
             <li onClick={removeActive}>
-              <img src={ProfileIcon} alt="Profile" />
+              <SvgIcon iconName="profile" />
               <a href="#home">Profile</a>
             </li>
             <li onClick={removeActive}>
-              <img src={LogoutIcon} alt="Logout" />
+              <SvgIcon iconName="logout" />
               <a href="#home">Logout</a>
             </li>
           </ul>
@@ -99,11 +95,11 @@ function Navbar() {
           <>
             <ul className={`${styles.navMenu} ${styles.mobileNav}`}>
               <li onClick={removeActive}>
-                <img src={ApplicationsIcon} alt="Login" />
+                <SvgIcon iconName="login_icon" />
                 <a href="#home">Login</a>
               </li>
               <li onClick={removeActive}>
-                <img src={ProfileIcon} alt="SignUp" />
+                <SvgIcon iconName="signup_icon" />
                 <a href="#home">SignUp</a>
               </li>
             </ul>
@@ -111,13 +107,28 @@ function Navbar() {
             <div className={`${styles.authContainer}`}>
               <Button text="Login" type="solid" size="md" iconimg="loginW" />
               <div className={`${styles.verticalDivider}`}></div>
-              <Button text="SignUp" type="outline" size="md" iconimg="signupG"/>
+              <Button
+                text="SignUp"
+                type="outline"
+                size="md"
+                iconimg="signupG"
+              />
             </div>
           </>
         )}
         <div className={`${styles.contactDetails}`}>
-          <Button text="developer@bpcap.com" type="outline" size="sm" iconimg="checkcircleW"/>
-          <Button text="+91 97000 09045" type="outline" size="sm" iconimg="checkcircleW"/>
+          <Button
+            text="developer@bpcap.com"
+            type="outline"
+            size="sm"
+            iconimg="checkcircleW"
+          />
+          <Button
+            text="+91 97000 09045"
+            type="outline"
+            size="sm"
+            iconimg="checkcircleW"
+          />
         </div>
       </div>
     </nav>

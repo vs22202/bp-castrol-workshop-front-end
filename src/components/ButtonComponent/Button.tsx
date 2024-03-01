@@ -11,6 +11,7 @@ export type ButtonProps = {
   size?: "sm" | "md" | "lg";
   text: string;
   iconimg?: string;
+  action?: "button" | "submit" | "reset";
   onClick?:(event: React.MouseEvent<HTMLButtonElement, MouseEvent>)=>void;
 };
 
@@ -34,10 +35,10 @@ export type ButtonProps = {
  * ```
  */
 
-export function Button ({ text, type="solid", size, disabled=false, iconimg,onClick }: ButtonProps ){
+export function Button ({ text, type="solid", size, disabled=false,action ="button", iconimg,onClick }: ButtonProps ){
 
   return (
-    <button className={`${styles[type]} ${styles[size || ""]} ${styles.button}`} disabled={disabled} onClick={onClick}>
+    <button className={`${styles[type]} ${styles[size || ""]} ${styles.button}`} type={action} disabled={disabled} onClick={onClick}>
       {iconimg && <SvgIcon iconName={iconimg} wrapperStyle={size} />}
       <div>{text}</div>
     </button>

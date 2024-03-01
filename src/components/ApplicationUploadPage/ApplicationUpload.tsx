@@ -3,7 +3,6 @@ import { Checkbox } from "../CheckboxComponent/CheckboxComponent";
 import { InputField } from "../InputFieldComponent/InputField";
 import { Button } from "../ButtonComponent/Button";
 import { DropDown, DropDownProps } from "../DropDownComponent/DropDown";
-import FileGrid from "../FileGridComponent/FileGrid"
 import {
   useForm,
   SubmitHandler,
@@ -153,7 +152,7 @@ const ApplicationUpload: React.FC = () => {
                 Take your workshop to the next level!
               </h2>
               {inputs.map((input) => renderInput(input, { register, errors }))}
-              <Button text="Submit" size="sm" type="solid" iconimg="submitW" />
+              <Button text="Submit" size="sm" type="solid" action="submit"/>
             </form>
           </FormProvider>
         </div>

@@ -59,10 +59,10 @@ a {
 .navMenu.mobileNav {
   display: none;
 }
-.navMenu > li > img {
+.navMenu > li > svg {
   display: none;
+  color: var(--neutral---main750);
 }
-
 .navMenu > li > a {
   color: var(--neutral---main750);
   font-size: var(--subheading---l---regular);
@@ -115,6 +115,7 @@ a {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    color: var(--primary---main900);
   }
   .logoContainer > a > img {
     height: 36px;
@@ -139,8 +140,10 @@ a {
   .navMenu > li {
     display: flex;
     gap: var(--spacing-sm);
+    align-items: center;
   }
-  .navMenu > li > img {
+  .navMenu > li > svg {
+    color: var(--primary---main900);
     display: block;
   }
   .navMenu > li > a {

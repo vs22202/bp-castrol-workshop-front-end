@@ -2,7 +2,7 @@
 
 import React from "react";
 import { Button } from "../ButtonComponent/Button";
-import loginimg from "../../assets/login.svg";
+import LoginImg from "../../assets/login.svg";
 import inputs from "./LoginPageFields"
 import styles from './LoginPage.module.css';
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -32,8 +32,8 @@ const LoginPage: React.FC = () => {
   return(
     <>
     <div className={`${styles.logincontainer}`}>
-      <div className={`${styles.imagecontainer}`}>
-        <img src={loginimg} alt="login" />
+      <div className={`${styles.imagecontainer} illustration`}>
+          <LoginImg />
       </div>
         <div className={`${styles.loginform}`}>
             <div className="formContainer">

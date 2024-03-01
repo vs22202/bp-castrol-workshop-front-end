@@ -1,9 +1,9 @@
-import { Navbar } from "./components/Navbar/navbar";
+import { Navbar } from "./components/NavbarComponent/Navbar";
 import { Button } from "./components/ButtonComponent/Button";
 import { InputField } from "./components/InputFieldComponent/InputField";
 import { ListItem } from "./components/Q&AComponent/ListItem";
 import { List } from "./components/Q&AComponent/List";
-import {FooterWithLogo} from "./components/FooterComponent/Footer"
+import { FooterWithLogo } from "./components/FooterComponent/Footer";
 import { ApplicationUpload } from "./components/ApplicationUploadPage/ApplicationUpload";
 import { Checkbox } from "./components/CheckboxComponent/CheckboxComponent";
 import "./App.css";
@@ -21,23 +21,21 @@ function App() {
   ];
   return (
     <>
+      
       {/* <h1>Component</h1> */}
       <Navbar />
       <div className="appContainer">
         <div className="contentContainer">
+          <ApplicationUpload />
+          {/*  <LoginPage /> */}
+          {/* <SignupPage/> */}
 
-        <ApplicationUpload />
-       {/*  <LoginPage /> */}
-        {/* <SignupPage/> */}
-
-        {/* <List items={items} size="small" /> 
+          {/* <List items={items} size="small" /> 
 <List items={items} size="large" />  
               <ListItem size="large" text="Are you committed to quality maintenance and friendly customer service?" />
     <ListItem size="small" text="Are you committed to quality maintenance and friendly customer service?" />  */}
 
-        
-
-       {/* <Checkbox size="small" text="I consent to having my data processed according to the privacy statement" value="Data Consent" />
+          {/* <Checkbox size="small" text="I consent to having my data processed according to the privacy statement" value="Data Consent" />
         <Checkbox size="medium" text="I consent to having my data processed according to the privacy statement" value="Data Consent" />
           <Checkbox size="large" text="I consent to having my data processed according to the privacy statement" value="Data Consent" /> 
           <List items={items} size="large" />  */}
@@ -59,8 +57,6 @@ function App() {
       <InputField type="password" label='Label' size='md' isWrong={true}/>
       <InputField type="password" label='Label' size='lg' isWrong={false}/> */
 }
-
-    
 
 {
   /* <Checkbox size="small" text="I consent to having my data processed according to the privacy statement" />
