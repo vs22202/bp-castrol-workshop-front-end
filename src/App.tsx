@@ -30,8 +30,8 @@ function App() {
       <Navbar />
       <div className="appContainer">
         <div className="contentContainer">
-          {/* <ApplicationUpload /> */}
-          <LoginPage />
+          <ApplicationUpload />
+          {/* <LoginPage /> */}
           {/* <SignupPage /> */}
 
           {/* <List items={items} size="small" /> 
