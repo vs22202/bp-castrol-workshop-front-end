@@ -19,6 +19,7 @@ export type DropDownProps = {
   register: any;  
   validationSchema?:any;
   errors:any;
+  size?:string;
   onchange: (values: string) => void;
 };
 
@@ -68,6 +69,7 @@ export function DropDown({
   required = false,
   optionList,
   compulsoryList,
+  size,
   onchange,
 
 }: DropDownProps) {
@@ -179,19 +181,20 @@ export function DropDown({
                 ...(!state.hasValue &&errors[name]&& {borderColor: 'rgba(255, 77, 77, 1)','&:hover': {borderColor: 'rgba(255, 77, 77, 1)',} }),
               }),
 
+
               placeholder: (provided, state) => ({
                 ...provided,
-                top: state.hasValue ? -15 : (state.selectProps.menuIsOpen ? -23 : "50%"),
+                top: state.hasValue ? -16 : (state.selectProps.menuIsOpen ? -22 : "50%"),
                 backgroundColor: (state.hasValue || state.selectProps.menuIsOpen) ? "white" : "transparent",
                 color:(!state.hasValue && state.selectProps.menuIsOpen&& errors[name])? "rgba(255, 77, 77, 1)": "rgba(102, 102, 102, 1)",
                 transition: "top 0.2s ease-out, font-size 0.1s",
-                fontSize: ( state.hasValue || state.selectProps.menuIsOpen) ? '16px' : '24px',
+                fontSize: ( state.hasValue || state.selectProps.menuIsOpen|| size=="small") ? '16px' : '24px',
                 position: (state.hasValue || state.selectProps.menuIsOpen) ? 'absolute' : 'none',
               }),
               
               valueContainer: (provided, state) => ({
                 ...provided,
-                padding: '12px',//changing size of box using padding
+                padding: size=="large"?'12px':'6px',//changing size of box using padding
                 overflow: "visible",
 
               }),
@@ -233,6 +236,7 @@ export function DropDown({
               color: 'black', 
               
              }),
+
               
             }}
               value={value}

@@ -1,7 +1,7 @@
 import { Navbar } from "./components/NavbarComponent/Navbar";
 import { Button } from "./components/ButtonComponent/Button";
 import { InputField } from "./components/InputFieldComponent/InputField";
-import { ListItem } from "./components/Q&AComponent/ListItem";
+import ListItem from "./components/Q&AComponent/ListItem";
 import { List } from "./components/Q&AComponent/List";
 import { FooterWithLogo } from "./components/FooterComponent/Footer";
 import { ApplicationUpload } from "./components/ApplicationUploadPage/ApplicationUpload";
@@ -30,12 +30,12 @@ function App() {
       <Navbar />
       <div className="appContainer">
         <div className="contentContainer">
-          {/* <ApplicationUpload /> */}
-          <LoginPage />
+          <ApplicationUpload />
+          {/* <LoginPage /> */}
           {/* <SignupPage /> */}
 
-          {/* <List items={items} size="small" /> 
-<List items={items} size="large" />  
+          {/*  <List items={items} size="small" /> 
+<List items={items} size="large" /> 
               <ListItem size="large" text="Are you committed to quality maintenance and friendly customer service?" />
     <ListItem size="small" text="Are you committed to quality maintenance and friendly customer service?" />  */}
 
