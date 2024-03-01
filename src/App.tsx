@@ -31,8 +31,8 @@ function App() {
       <div className="appContainer">
         <div className="contentContainer">
           {/* <ApplicationUpload /> */}
-          {/* <LoginPage /> */}
-          <SignupPage />
+          <LoginPage />
+          {/* <SignupPage /> */}
 
           {/* <List items={items} size="small" /> 
 <List items={items} size="large" />  
