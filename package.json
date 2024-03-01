@@ -11,12 +11,14 @@
     "test": "jest --watch"
   },
   "dependencies": {
+    "@types/react-router-dom": "^5.3.3",
     "jest-environment-jsdom": "^29.7.0",
     "jsdoc": "^4.0.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-dropzone": "^14.2.3",
     "react-hook-form": "^7.50.1",
+    "react-router-dom": "^6.22.2",
     "react-select": "^5.8.0"
   },
   "devDependencies": {

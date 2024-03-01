@@ -12,8 +12,8 @@ type User = {
 
 export type AuthContextProps = {
   currentUser: User | null;
-  login: (email: string, password: string) => void;
-  signup: (email: string, password: string, otp: string) => void;
+  login: (email: string, password: string) => Promise<string>;
+  signup: (email: string, password: string, otp: string) => Promise<string>;
   generateOtp: (email: string) => void;
   logout: () => void;
 };
@@ -36,48 +36,58 @@ const AuthContext = createContext<AuthContextProps | null>(null);
  */
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [currentUser, setCurrentUser] = useState<User | null>(null);
-  const {sendAlert} = useContext(AlertContext) as AlertContextProps
+  const { sendAlert } = useContext(AlertContext) as AlertContextProps;
   //can return success message or promise if needed
   //pass one more parameter to verify if mobile / email login and change logic accordingly
-  const login = async (email: string, password: string): Promise<void> => {
+  const login = async (email: string, password: string): Promise<string> => {
     const formData = new FormData();
     formData.append("user_email", email);
     formData.append("password", password);
     try {
       //try login
-    fetch("http://localhost:3000/login", {
+      const result = await fetch("http://localhost:3000/login", {
         method: "POST",
         headers: {},
         body: formData,
-    }).then((result):void => {
-      result.json().then((res)=>{
-        if (res.output == "fail") {
-          sendAlert({ message: res.msg as string, type: "error" })
-          return;
-        }
-        console.log(res.user)
-        setCurrentUser(res.user)
       })
-      })
-      
+      const res = await result.json();
+      if(res.output == "fail") {
+        sendAlert({ message: res.msg as string, type: "error" });
+        return "failure";
+      }
+      setCurrentUser(res.user);
+      return "success";
     } catch (err) {
       // send error message to user
       console.log(err);
+      return "failure";
     }
   };
-  const signup = async (email: string, password: string, otp: string): Promise<void> => {
+  const signup = async (
+    email: string,
+    password: string,
+    otp: string
+  ): Promise<string> => {
     const formData = new FormData();
     formData.append("user_email", email);
     formData.append("password", password);
-    formData.append("otp",otp)
+    formData.append("otp", otp);
     try {
-      const res = await fetch("http://localhost:3000/register", {
+      const result = await fetch("http://localhost:3000/register", {
         method: "POST",
         headers: {},
         body: formData,
       });
+      const res = await result.json();
+      if(res.output == "fail") {
+        sendAlert({ message: res.msg as string, type: "error" });
+        return "failure";
+      }
+      return "success";
+
     } catch (err) {
       console.log(err);
+      return "failure"
     }
   };
   const generateOtp = async (email: string): Promise<void> => {
