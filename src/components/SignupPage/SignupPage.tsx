@@ -6,8 +6,9 @@ import { Button } from "../ButtonComponent/Button";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { renderInput } from "../FormFieldRenderLogic";
 import inputs from './SignupPageFields';
-import signupimg from "../../assets/signup.svg";
+import SignupImg from "../../assets/signup.svg";
 import styles from './SignupPage.module.css';
+import { SvgIcon } from "../IconComponent/SvgIcon";
 
 const SignupPage: React.FC = () => {
     const {register, handleSubmit, formState:{errors}, watch, trigger} = useForm();
@@ -67,8 +68,8 @@ const SignupPage: React.FC = () => {
 
   return (
     <div className={`${styles.signupcontainer}`}>
-      <div className={`${styles.imagecontainer}`}>
-        <img src={signupimg} alt="Signup" />
+      <div className={`${styles.imagecontainer} illustration`}>
+        <SignupImg/>
       </div>
       <div className={`${styles.signupform}`}>
         <form onSubmit={handleSubmit(handleSignup)} onChange={handleInputChange}>

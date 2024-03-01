@@ -77,6 +77,9 @@ select {
 svg,svg > path{
   stroke: currentColor;
 }
+.illustration >svg{
+  stroke:none;
+}
 
 *{
   font-family: "Noto Sans", sans-serif;

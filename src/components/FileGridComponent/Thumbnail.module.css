@@ -1,0 +1,83 @@
+.thumb {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--shades---main-white);
+  position: relative;
+}
+.thumb::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: var(--shades---main-black);
+  opacity: 0.2;
+  z-index: 1;
+  transition: opacity 100ms ease-in;
+}
+.thumb:hover:before {
+  opacity: 0.6;
+}
+.thumb::backdrop {
+  background-color: var(--neutral---main50);
+  opacity: 0.4;
+}
+.thumb > img,
+.thumb > video {
+  max-width: 100%;
+  object-fit: cover;
+  aspect-ratio: 1/1;
+}
+img.fullScreen,
+video.fullScreen {
+  object-fit: contain;
+  z-index: 1;
+}
+.deleteIcon > svg {
+  position: absolute;
+  top: 5%;
+  right: 5%;
+  z-index: 2;
+  transition: color 100ms ease-in;
+}
+.deleteIcon > svg:hover {
+  color: var(--primary---main300);
+}
+.viewButton {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 1;
+  transform: translateY(-50%) translateX(-50%);
+  transition: color 100ms ease-in;
+}
+.viewButton {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 100ms ease-in;
+}
+.viewButton:hover {
+  color: var(--primary---main300);
+}
+.viewButton > span {
+  font-size: var(--subheading---m---regular);
+  font-weight: var(--weight--bold);
+}
+.thumb:hover .viewButton {
+  opacity: 1;
+}
+@media (max-width: 768px) {
+  .thumb::before {
+    opacity: 0.6;
+  }
+  .viewButton {
+    opacity: 1;
+  }
+  .viewButton > span {
+    display: none;
+  }
+}

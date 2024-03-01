@@ -1,4 +1,4 @@
-import React, { ReactComponentElement, useEffect, useRef, useState } from "react";
+import React, {useEffect, useRef, useState } from "react";
 
 
 /**
@@ -16,7 +16,7 @@ export function useDynamicSvgImport(svgName: string) {
     const importSvgIcon = async (): Promise<void> => {
         try {
         importedIconRef.current = 
-          (await import(`../assets/${svgName}.svg?react`)).default
+          (await import(`../assets/${svgName}.svg`)).default
         ;
       } catch (err) {
         setError(err);
