@@ -14,7 +14,7 @@ const ListItem: React.FC<IListItemProps> = ({ text, size = 'small', className })
     <div data-testid='list-item' className={`${styles['list-item']} ${variantsClassName} ${className}`}>
       <img
         className={styles.icon}
-        src="src\assets\icon.svg" // Update this path based on your actual file structure
+        src="src\assets\icon.svg" 
         alt="Icon"
       />
       <div className={styles.text}>{text}</div>
