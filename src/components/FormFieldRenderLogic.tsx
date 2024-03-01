@@ -6,6 +6,7 @@ import { Control, Controller, FieldValues, SubmitHandler, useForm } from "react-
 import { DropDown } from "./DropDownComponent/DropDown";
 import ListItem from "./Q&AComponent/ListItem";
 import FileGrid from "./FileGridComponent/FileGrid";
+import { useScreenSize } from "./ScreenSizeLogic";
 
 interface FormUtilsProps {
     register: any;
@@ -15,28 +16,7 @@ interface FormUtilsProps {
 
 export const renderInput = (input: Input, { register, errors, control }: FormUtilsProps) => {
 
-    const [screenSize, setScreenSize] = useState(getScreenSize())
-
-    function getScreenSize(){
-        if(window.innerWidth < 500){
-          return "small"
-        }else if(window.innerWidth < 1000){
-          return "medium"
-        }else{
-          return "large"
-        }
-      }
-    
-      function handleResize(){
-        setScreenSize(getScreenSize)
-      }
-    
-      useEffect(() => {
-        window.addEventListener("resize", handleResize);
-        return () => {
-          window.removeEventListener("resize", handleResize);
-        };
-      }, []);
+    const inputSize = useScreenSize()
 
     switch (input.type) {
         case "checkbox":
@@ -45,7 +25,7 @@ export const renderInput = (input: Input, { register, errors, control }: FormUti
                     key={input.id}
                     name={input.name}
                     //size={input.size ? input.size : "medium"}
-                    size={screenSize}
+                    size={inputSize}
                     text={input.label}
                     register={register}
                     errors={errors}
@@ -73,7 +53,7 @@ export const renderInput = (input: Input, { register, errors, control }: FormUti
                         compulsoryList={input.compulsorylist}
                         optionList= {input.optionlist}
                         // {...field}
-                        size={screenSize}
+                        size={inputSize}
                         required={input.required}
                         register={register}
                         errors={errors}
@@ -93,7 +73,7 @@ export const renderInput = (input: Input, { register, errors, control }: FormUti
                     type={input.text_type ? input.text_type : "text"}
                     name={input.name}
                     label={input.label}
-                    size={screenSize}
+                    size={inputSize}
                     //size={input.size ? input.size : "medium"}
                     register={register}
                     maxlen={input.maxlen}
@@ -122,8 +102,8 @@ export const renderInput = (input: Input, { register, errors, control }: FormUti
             return (
                 <>
                 <FileGrid/>
-                <ListItem size={screenSize} text="Upload the videos and images of workshop and garage"/>
-                <ListItem size={screenSize}text="The images and videos of the services provided by the workshop can also be uploaded"/>
+                <ListItem size={inputSize} text="Upload the videos and images of workshop and garage"/>
+                <ListItem size={inputSize}text="The images and videos of the services provided by the workshop can also be uploaded"/>
                 </>
             );
     }

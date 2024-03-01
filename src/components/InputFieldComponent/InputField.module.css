@@ -67,7 +67,6 @@ input[type="number"]::-webkit-outer-spin-button {
     right: 5px;
     transform: translateY(-50%);
     cursor: pointer;
-    background-color: white;
 }
 
 /* floating label */

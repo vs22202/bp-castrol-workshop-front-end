@@ -8,6 +8,7 @@ import styles from "./LoginPage.module.css";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { renderInput } from "../FormFieldRenderLogic";
 import AuthContext, { AuthContextProps } from "../../contexts/AuthContext";
+import { useScreenSize } from "../ScreenSizeLogic";
 
 const LoginPage: React.FC = () => {
   const {
@@ -17,6 +18,7 @@ const LoginPage: React.FC = () => {
     trigger,
   } = useForm();
   const { login } = useContext(AuthContext) as AuthContextProps;
+  const inputSize = useScreenSize();
 
   //triggers validation as soon as the input is given
   const handleInputChange = async (e: any) => {
@@ -73,7 +75,7 @@ const LoginPage: React.FC = () => {
               <div className={`${styles.buttonscontainer}`}>
                 <Button
                   text="Login"
-                  size="md"
+                  size={inputSize==="small" ? "sm" : inputSize==="medium" ? "md" : "lg"}
                   type="solid"
                   iconimg="login_icon"
                   action="submit"
@@ -82,7 +84,7 @@ const LoginPage: React.FC = () => {
                 <span>New to Castrol?</span>
                 <Button
                   text="SignUp"
-                  size="md"
+                  size={inputSize==="small" ? "sm" : inputSize==="medium" ? "md" : "lg"}
                   type="outline"
                   iconimg="signup_icon"
                   onClick={handleSignup}
