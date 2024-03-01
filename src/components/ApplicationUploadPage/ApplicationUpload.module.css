@@ -1,0 +1,24 @@
+.formContainer {
+  padding-inline: var(--spacing-13xl);
+}
+.formContainer.loadingState {
+  pointer-events: none;
+  position: relative;
+}
+.formContainer.loadingState::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: var(--neutral---main250);
+  opacity: 0.3;
+  z-index: 1;
+}
+@media (max-width: 768px) {
+    .formContainer{
+      display:flex;
+      padding-inline: var(--spacing-sm);
+    }
+  }
