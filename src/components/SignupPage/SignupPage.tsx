@@ -86,7 +86,7 @@ const SignupPage: React.FC = () => {
 
 
 
-        //Login Button
+    /*     //Login Button
     function handleLogin(event: React.MouseEvent<HTMLButtonElement, MouseEvent>){
         event.preventDefault()
         console.log("Redirect to login page...");
@@ -97,7 +97,7 @@ const SignupPage: React.FC = () => {
         // Submit function for Application Upload form
       console.log(data);
       signup(data.user_email_id, data.user_password,data.otp);
-    }
+    } */
 
   //Login Button
   function handleLogin(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
@@ -195,31 +195,6 @@ const SignupPage: React.FC = () => {
                 //     message: "Incorrect OTP."
                 // }
               }}
-            />
-            <Button
-              text="Get OTP"
-              size="md"
-              type="solid"
-              onClick={getOtp}
-              disabled={!isAllFieldsValid}
-            />
-          </div>
-          <div className={`${styles.buttonscontainer}`}>
-            <Button
-              text="SignUp"
-              size="md"
-              type="solid"
-              iconimg="signup_icon"
-              action="submit"
-            />
-            <span>or</span>
-            <span>Already have an account?</span>
-            <Button
-              text="Login"
-              size="md"
-              type="outline"
-              iconimg="login_icon"
-              onClick={handleLogin}
             />
             {!otpSent ? 
               <Button 
