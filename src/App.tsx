@@ -11,11 +11,11 @@ import { Icon } from "./components/IconComponent/Icon";
 import { LoginPage } from "./components/LoginPage/LoginPage";
 import { SignupPage } from "./components/SignupPage/SignupPage";
 import { Alert } from "./components/AlertComponent/Alert";
-import AlertContext ,{ AlertContextProps} from "./contexts/AlertContext";
+import AlertContext, { AlertContextProps } from "./contexts/AlertContext";
 import { useContext } from "react";
 
 function App() {
-  const { alert } = useContext(AlertContext) as AlertContextProps
+  const { alert } = useContext(AlertContext) as AlertContextProps;
   /*for list*/
   const items = [
     "Are you committed to quality maintenance and friendly customer service?",
