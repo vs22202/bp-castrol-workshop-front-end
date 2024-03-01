@@ -25,13 +25,14 @@
   justify-content: center;
   flex-direction: column;
   gap: 10px;
+  max-width: fit-content;
+  text-align: center;
 }
 
 .buttonscontainer span {
   font-size: 12px;
   font-weight: 600;
    /* align this between the two buttons */
-  align-items: center;
 }
 
 /* Media query for mobile screens */
@@ -56,6 +57,7 @@
 .buttonscontainer {
     margin-top: 20px;
     text-align: center;
+    max-width: fit-content;
 }
 
 .buttonscontainer span {

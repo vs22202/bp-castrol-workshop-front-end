@@ -24,7 +24,9 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
-  gap:10px
+  gap:10px;
+  text-align: center;
+  max-width: fit-content;
 }
 .buttonscontainer span{
   font-size: 12px;
@@ -55,6 +57,7 @@
   .buttonscontainer {
     margin-top: 20px;
     text-align: center;
+    max-width: fit-content;
   }
   .buttonscontainer span {
     font-size: 12px;
