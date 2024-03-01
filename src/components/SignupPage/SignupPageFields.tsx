@@ -20,7 +20,7 @@ const SignupPageFields: Input[] = [{
     name: "user_password",
     type: "text",
     text_type: "password",
-    placeholder: "RICHAkiran123!@#",
+    placeholder: "Enter password",
     pattern: /^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*()-_=+{}|;:'",.<>?]).{10,100}$/, //contains 1-special char, capital letter, number and should have 10 to 100 characters
     minlen:10,
     maxlen:100,
@@ -34,7 +34,7 @@ const SignupPageFields: Input[] = [{
     name: "user_password_confirm",
     type: "text",
     text_type: "password",
-    placeholder: "RICHAkiran123!@#",
+    placeholder: "Enter password",
     pattern: /^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*()-_=+{}|;:'",.<>?]).{10,100}$/,//new RegExp(password as string) ,
     minlen:10,
     maxlen:100,
