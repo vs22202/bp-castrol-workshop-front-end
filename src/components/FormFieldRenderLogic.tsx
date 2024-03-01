@@ -9,15 +9,32 @@ interface FormUtilsProps {
     register: any;
     errors: any;
     control?:any;
-    screenSize:"small"|"medium"|"large";
 }
 
-export const renderInput = (input: Input, { register, errors, control, screenSize }: FormUtilsProps) => {
-    const [inputsize, setInputSize] = useState("");
+export const renderInput = (input: Input, { register, errors, control }: FormUtilsProps) => {
 
-    useEffect(()=>{
-        setInputSize(screenSize);
-    })
+    const [screenSize, setScreenSize] = useState(getScreenSize())
+
+    function getScreenSize(){
+        if(window.innerWidth < 500){
+          return "small"
+        }else if(window.innerWidth < 1000){
+          return "medium"
+        }else{
+          return "large"
+        }
+      }
+    
+      function handleResize(){
+        setScreenSize(getScreenSize)
+      }
+    
+      useEffect(() => {
+        window.addEventListener("resize", handleResize);
+        return () => {
+          window.removeEventListener("resize", handleResize);
+        };
+      }, []);
 
     switch (input.type) {
         case "checkbox":
@@ -26,7 +43,7 @@ export const renderInput = (input: Input, { register, errors, control, screenSiz
                     key={input.id}
                     name={input.name}
                     //size={input.size ? input.size : "medium"}
-                    size={inputsize ? inputsize : "medium"}
+                    size={screenSize}
                     text={input.label}
                     register={register}
                     errors={errors}
@@ -74,7 +91,7 @@ export const renderInput = (input: Input, { register, errors, control, screenSiz
                     type={input.text_type ? input.text_type : "text"}
                     name={input.name}
                     label={input.label}
-                    size={inputsize}
+                    size={screenSize}
                     //size={input.size ? input.size : "medium"}
                     register={register}
                     maxlen={input.maxlen}

@@ -21,7 +21,7 @@ const SignupPage: React.FC = () => {
     const email = watch("user_email_id")
     const pass = watch("user_password");
     const confirmpass = watch("user_password_confirm");
-    //const otp = /398392/; //should be as a regex
+    const otp = /398392/; //should be as a regex
 
     useEffect(() => {
         // if all three fields are filled and valid, enables GET OTP button
@@ -35,7 +35,8 @@ const SignupPage: React.FC = () => {
     //Handles all three buttons
         //Get OTP Button
     async function getOtp(event: React.MouseEvent<HTMLButtonElement, MouseEvent>){
-      event.preventDefault()
+        event.preventDefault()
+      console.log(`Your OTP: ${otp}`);
       generateOtp(watch("user_email_id"))
       setOtpActivated(true);
         
