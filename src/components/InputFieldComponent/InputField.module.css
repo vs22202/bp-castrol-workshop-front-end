@@ -61,53 +61,13 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 /* input field icons */
-.textRight{
+.icon{
     position: absolute;
     top: 50%;
     right: 5px;
     transform: translateY(-50%);
-    width: var(--spacing-sm);
-    height: var(--spacing-sm);
     cursor: pointer;
-    background-image: url('../../assets/x-circle-right.svg');
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-.textWrong{
-    position: absolute;
-    top: 50%;
-    right: 5px;
-    transform: translateY(-50%);
-    width: var(--spacing-sm);
-    height: var(--spacing-sm);
-    cursor: pointer;
-    background-image: url('../../assets/x-circle-wrong.svg');
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-.passwordRight{
-    position: absolute;
-    top: 50%;
-    right: 5px;
-    transform: translateY(-50%);
-    width: var(--spacing-sm);
-    height: var(--spacing-sm);
-    cursor: pointer;
-    background-image: url('../../assets/eye-slash-right.svg');
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-.passwordWrong{
-    position: absolute;
-    top: 50%;
-    right: 5px;
-    transform: translateY(-50%);
-    width: var(--spacing-sm);
-    height: var(--spacing-sm);
-    cursor: pointer;
-    background-image: url('../../assets/eye-slash-wrong.svg');
-    background-repeat: no-repeat;
-    background-size: cover;
+    background-color: white;
 }
 
 /* floating label */
@@ -177,20 +137,6 @@ input[type="number"]::-webkit-outer-spin-button {
 
 .labelsizefloating{
     font-size: var(--spacing-xs);
-}
-
-/* icon sizes */
-.iconsmall{
-    height: var(--spacing-sm);
-    width: var(--spacing-sm);
-}
-.iconmedium{
-    height: var(--spacing-md);
-    width: var(--spacing-md);
-}
-.iconlarge{
-    height: var(--spacing-lg);
-    width: var(--spacing-lg);
 }
 
 /* error class */

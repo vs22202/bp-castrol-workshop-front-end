@@ -73,7 +73,7 @@ export const renderInput = (input: Input, { register, errors, control }: FormUti
                         compulsoryList={input.compulsorylist}
                         optionList= {input.optionlist}
                         // {...field}
-                        //size={screenSize}
+                        size={screenSize}
                         required={input.required}
                         register={register}
                         errors={errors}

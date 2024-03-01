@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styles from './InputField.module.css'
+import { SvgIcon } from '../IconComponent/SvgIcon';
 
 /** The props type of {@link InputField | `InputField`}. */
 export type InputFieldProps = {
@@ -40,8 +41,9 @@ export function InputField ({ name, label, placeholder, value, type, isDisabled=
     const [isFocused, setIsFocused] = useState(false);
     const [placeholderText, setPlaceholderText] = useState("");
     const inputfieldRegister = register(name, validationSchema)
-    const iconsize = "icon"+size;
+    const iconsize = size==="small" ? "sm" : size==="medium" ? "md" : "lg";
     const labelsize = "label"+size;
+    const [passIconName, setPassIconName] = useState("eye-slash")
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) =>{
         setInputValue(event.target.value)
@@ -50,6 +52,7 @@ export function InputField ({ name, label, placeholder, value, type, isDisabled=
 
     const togglefield = ()=>{
         setInputType(inputType==='password'?'text' : 'password')
+        setPassIconName(passIconName==="eye-slash" ? "eye" : "eye-slash")
     }
 
     const handleInputFocus = () => {
@@ -86,16 +89,21 @@ export function InputField ({ name, label, placeholder, value, type, isDisabled=
                     disabled={isDisabled} 
                     //required={required}
                     />
+
+                {/* floatingLabel */}
                 <label className={`${isFocused || inputValue ? styles.floatingLabel : styles.floatingLabeldefault} ${errors[name] ? styles.isWrongLabel : ''} ${isFocused || inputValue ? styles.labelsizefloating : styles[labelsize]}`}>
                     {label}{required && <span style={{ color: 'red' }}>*</span>}
                 </label>
-                {type==='password' 
-                ? inputValue&&(errors[name] ? <div className={`${styles.passwordWrong} ${styles[iconsize]}`} onClick={togglefield} /> : <div className={`${styles.passwordRight} ${styles[iconsize]}`} onClick={togglefield}/>) 
-                : (inputValue && 
-                    (errors[name] ? <div className={`${styles.textWrong} ${styles[iconsize]}`} onClick={()=>setInputValue('')}/> 
-                     :<div className={`${styles.textRight} ${styles[iconsize]}`} onClick={()=>setInputValue('')}/>
-                    )
-                  )
+
+                {/* cross/eye-icon - color of svg will change based on the presence of error */}
+                {
+                    type==='password'
+                    ? inputValue&&<div className={`${styles.icon}`} onClick={togglefield} style={{color: errors[name] ? "var(--neutral---main350)" : "var(--primary---main300)"}}>
+                                    <SvgIcon iconName={passIconName} wrapperStyle={iconsize} />
+                                  </div>
+                    : inputValue&&<div className={`${styles.icon}`} onClick={()=>setInputValue('')} style={{color: errors[name] ? "var(--error---main900)" : "var(--neutral---main350)"}}>
+                                    <SvgIcon iconName='x-circle' wrapperStyle={iconsize} />
+                                  </div>
                 }
             </div>
         </div>

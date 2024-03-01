@@ -71,7 +71,6 @@ function App() {
           </Routes>
           {/* <ApplicationUpload /> */}
           {/* <LoginPage /> */}
-          {/* <SignupPage /> */}
 
           {/*  <List items={items} size="small" /> 
 <List items={items} size="large" /> 
