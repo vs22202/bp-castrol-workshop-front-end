@@ -63,7 +63,7 @@ const Thumbnail = ({ src, fileName, removeFile, type }: ThumbnailProps) => {
     <div className={styles.thumb} ref={thumb}>
       {fullScreen && (
         <span className={styles.deleteIcon} onClick={toggleFullScreenFile}>
-          <SvgIcon iconName="x-circle-wrong" />
+          <SvgIcon iconName="x-circle" />
         </span>
       )}
       {!fullScreen && (

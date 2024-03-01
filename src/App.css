@@ -27,10 +27,7 @@ html {
   width:100vh;
 }
 
-.formContainer{
-  width:100%;
-  padding-inline: var(--spacing-13xl);
-}
+
 
 @media screen and (max-width: 768px) {
   .appContainer {

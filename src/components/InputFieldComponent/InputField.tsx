@@ -68,7 +68,7 @@ export function InputField ({ name, label, placeholder, value, type, isDisabled=
 
     return(
         <>
-        <div className="form-container">
+            <div className={`${type=="hidden" ? styles.hidden : ""}`}>
             <div className={`${errors[name] ? styles.isWronginputfieldcontainer : styles.defaultinputfieldcontainer} `}
             >
                 <input 

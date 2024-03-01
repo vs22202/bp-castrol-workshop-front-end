@@ -1,20 +1,30 @@
 import React, { useEffect, useState } from "react";
-import { InputField } from '../components/InputFieldComponent/InputField';
-import { Checkbox } from '../components/CheckboxComponent/CheckboxComponent';
+import { InputField } from "../components/InputFieldComponent/InputField";
+import { Checkbox } from "../components/CheckboxComponent/CheckboxComponent";
 import { Input } from "./FormInputs";
-import { Control, Controller, FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import {
+  Control,
+  Controller,
+  FieldValues,
+  SubmitHandler,
+  useForm,
+} from "react-hook-form";
 import { DropDown } from "./DropDownComponent/DropDown";
 import ListItem from "./Q&AComponent/ListItem";
 import FileGrid from "./FileGridComponent/FileGrid";
 import { useScreenSize } from "./ScreenSizeLogic";
 
 interface FormUtilsProps {
-    register: any;
-    errors: any;
-    control?:any;
+  register: any;
+  errors: any;
+  control?: any;
 }
 
-export const renderInput = (input: Input, { register, errors, control }: FormUtilsProps) => {
+export const renderInput = (
+  input: Input,
+  { register, errors, control }: FormUtilsProps
+) => {
+  const [screenSize, setScreenSize] = useState(getScreenSize());
 
     const inputSize = useScreenSize()
 
