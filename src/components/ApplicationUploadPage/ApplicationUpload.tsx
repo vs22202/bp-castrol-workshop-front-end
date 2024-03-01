@@ -22,6 +22,7 @@ interface FormUtilsProps {
 }
 
 const ApplicationUpload: React.FC = () => {
+  const screenSize = window.innerWidth < 500 ? "small" : window.innerWidth <100 ? "medium" : "large";
   const methods = useForm<Input>();
   const {
     register,
@@ -154,7 +155,7 @@ const ApplicationUpload: React.FC = () => {
               >
                 Take your workshop to the next level!
               </h2>
-              {inputs.map((input) => renderInput(input, { register, errors, control }))}
+              {inputs.map((input) => renderInput(input, { register, errors, control, screenSize }))}
               <Button text="Submit" size="sm" type="solid" action="submit"/>
             </form>
           </FormProvider>

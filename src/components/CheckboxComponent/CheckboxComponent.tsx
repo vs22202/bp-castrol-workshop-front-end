@@ -7,7 +7,8 @@ export type CheckboxProps = {
    * name,size,text,required, register, value of the Checkbox
    */
   name:string;
-  size: "small" | "medium" | "large";
+  size:string;
+  //size:"small" | "medium"| "large";
   text: string;
   required?:boolean;
   register:any;

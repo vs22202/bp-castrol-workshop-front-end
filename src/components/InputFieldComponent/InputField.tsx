@@ -10,7 +10,8 @@ export type InputFieldProps = {
     //type: "password" | "text" | "disabled";
     type:string; //password, text, disabled
     isDisabled?:boolean;
-    size:"small" | "medium"| "large";
+    //size:"small" | "medium"| "large";
+    size:string;
     required?:boolean;
     maxlen?:number;
     register:any;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { InputField } from '../components/InputFieldComponent/InputField';
 import { Checkbox } from '../components/CheckboxComponent/CheckboxComponent';
 import { Input } from "./FormInputs";
@@ -9,9 +9,15 @@ interface FormUtilsProps {
     register: any;
     errors: any;
     control?:any;
+    screenSize:"small"|"medium"|"large";
 }
 
-export const renderInput = (input: Input, { register, errors, control }: FormUtilsProps) => {
+export const renderInput = (input: Input, { register, errors, control, screenSize }: FormUtilsProps) => {
+    const [inputsize, setInputSize] = useState("");
+
+    useEffect(()=>{
+        setInputSize(screenSize);
+    })
 
     switch (input.type) {
         case "checkbox":
@@ -19,7 +25,8 @@ export const renderInput = (input: Input, { register, errors, control }: FormUti
                 <Checkbox
                     key={input.id}
                     name={input.name}
-                    size={input.size ? input.size : "medium"}
+                    //size={input.size ? input.size : "medium"}
+                    size={inputsize ? inputsize : "medium"}
                     text={input.label}
                     register={register}
                     errors={errors}
@@ -47,6 +54,7 @@ export const renderInput = (input: Input, { register, errors, control }: FormUti
                         compulsoryList={input.compulsorylist}
                         optionList= {input.optionlist}
                         // {...field}
+                        //size={screenSize}
                         required={input.required}
                         register={register}
                         errors={errors}
@@ -66,7 +74,8 @@ export const renderInput = (input: Input, { register, errors, control }: FormUti
                     type={input.text_type ? input.text_type : "text"}
                     name={input.name}
                     label={input.label}
-                    size={input.size ? input.size : "medium"}
+                    size={inputsize}
+                    //size={input.size ? input.size : "medium"}
                     register={register}
                     maxlen={input.maxlen}
                     errors={errors}
