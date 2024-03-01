@@ -24,7 +24,7 @@ export const renderInput = (
   input: Input,
   { register, errors, control }: FormUtilsProps
 ) => {
-  const [screenSize, setScreenSize] = useState(getScreenSize());
+
 
     const inputSize = useScreenSize()
 
@@ -76,6 +76,7 @@ export const renderInput = (
                 />
                 </>
             ) 
+        case "hidden":
         case "text":
             return (
                 <InputField

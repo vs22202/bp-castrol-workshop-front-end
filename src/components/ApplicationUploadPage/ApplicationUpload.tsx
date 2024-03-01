@@ -40,12 +40,9 @@ const ApplicationUpload: React.FC = () => {
     formState: { errors },
     trigger,
     control,
-
   } = methods;
 
-
   const inputSize = useScreenSize();
-
 
   const { currentUser } = useContext(AuthContext) as AuthContextProps;
   const handleInputChange = async (event: any) => {
@@ -104,7 +101,11 @@ const ApplicationUpload: React.FC = () => {
   };
 
   return (
-    <div className={`${styles.formContainer} ${loading ? styles.loadingState : ""}`}>
+    <div
+      className={`${styles.formContainer} ${
+        loading ? styles.loadingState : ""
+      }`}
+    >
       <FormProvider {...methods}>
         <form onSubmit={handleSubmit(submitForm)} onChange={handleInputChange}>
           <h1
@@ -129,10 +130,20 @@ const ApplicationUpload: React.FC = () => {
           {inputs.map((input) =>
             renderInput(input, { register, errors, control })
           )}
-          <Button text="Submit" size={inputSize==="small" ? "sm" : inputSize==="medium" ? "md" : "lg"} type="solid" action="submit" />
+          <Button
+            text="Submit"
+            size={
+              inputSize === "small"
+                ? "sm"
+                : inputSize === "medium"
+                ? "md"
+                : "lg"
+            }
+            type="solid"
+            action="submit"
+          />
         </form>
       </FormProvider>
-
     </div>
   );
 };
