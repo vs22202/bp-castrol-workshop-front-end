@@ -33,6 +33,22 @@ const ApplicationUpload: React.FC = () => {
     control,
   } = methods
 
+
+  const handleInputChange = async (event: any) => {
+    const name = event?.target.name;
+  
+    // Find the corresponding input field in the inputs array
+    const inputField = inputs.find((input) => input.name === name);
+  
+    // Check if the input field is of type "input" or "checkbox"
+    if (inputField && (inputField.type === 'text' || inputField.type === 'checkbox')) {
+      // Trigger validation for the specified input fields
+      await trigger(name);
+    }
+  
+    console.log(errors);
+  };
+  
 /*   const renderInput = (input: Input, { register, errors }: FormUtilsProps) => {
     switch (input.type) {
       case "checkbox":
@@ -135,7 +151,7 @@ const ApplicationUpload: React.FC = () => {
       <div className="contentContainer">
         <div className="formContainer">
           <FormProvider {...methods}>
-            <form onSubmit={handleSubmit(submitForm)}>
+            <form onSubmit={handleSubmit(submitForm)} onChange={handleInputChange}>
               <h1
                 style={{
                   color: "rgba(0, 153, 0, 1)",
