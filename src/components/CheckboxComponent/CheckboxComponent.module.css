@@ -10,8 +10,6 @@ input[type="checkbox"] {
   outline: none;
   position: relative; 
 }
-
-
 input[type="checkbox"]:checked {
   background-color: var(--shades---main-white); 
   border-color: var(--primary---main500);
@@ -75,9 +73,20 @@ input[type="checkbox"]:checked::before {
 }
 
 /* error class */
-.error{
-  color:var(--error---main900);
-  font-size: var(--link---s---regular);
+input[type="checkbox"].error{
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  border: 1px solid var(--error---main900); 
+  outline: none;
+  position: relative; 
+}
+
+.texterror {
+  color: var(--error---main900);
+  text-align: left;
+  flex: 1;
+  margin:0 0 0 var(--spacing-4xs);
 }
 
 

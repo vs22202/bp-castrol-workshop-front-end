@@ -1,5 +1,5 @@
 // CheckboxComponent.tsx
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import styles from "./CheckboxComponent.module.css";
 /** The props type of {@link Checkbox | `Checkbox`}. */
 export type CheckboxProps = {
@@ -12,7 +12,7 @@ export type CheckboxProps = {
   required?:boolean;
   register:any;
   value?:boolean;
-  errors?:any;
+  errors:any;
   validationSchema?:any;
 }
 /**
@@ -34,10 +34,7 @@ export type CheckboxProps = {
  */
 export function Checkbox({name, size, text, required=false, register, errors, validationSchema} : CheckboxProps){
    const checkboxRegister = register(name, validationSchema)
-
-  //  /* useEffect(()=>{
-  //   console.log(errors);
-  //  }) */
+  
   
   return (
     <>
@@ -47,10 +44,11 @@ export function Checkbox({name, size, text, required=false, register, errors, va
               name={name}
               {...checkboxRegister}
               type="checkbox"
-              required={required}
-              className={`${styles["icon"+size]}`}
+              //required={required}
+              className={`${styles["icon"+size]} ${errors&&errors[name] ? styles.error : ""}`}
         />
-        <div className={`${styles.text} ${styles[size]}`}>{text}{required && <span style={{ color: 'red' }}>*</span>}</div>
+        {/* <div className={`${styles.text} ${styles[size]}`}>{text}{required && <span style={{ color: 'red' }}>*</span>}</div> */}
+        <div className={`${errors&&errors[name] ? styles.texterror : styles.text} ${styles[size]}`}>{text}{required && <span style={{ color: 'red' }}>*</span>}</div>
       </div>
     </div>
     </>

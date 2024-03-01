@@ -72,10 +72,11 @@ export function DropDown({
 
 }: DropDownProps) {
 
-  //    useEffect(()=>{
-  //   console.log(errors);
-  //  })
   const dropdownRegister = register(name, validationSchema)// for validation
+
+  useEffect(()=>{
+    console.log(React.Children);
+  })
 
   //function to prepopulate the fixed options
   const orderOptions = (values: readonly Option[]) => {
@@ -84,9 +85,9 @@ export function DropDown({
       .concat(values.filter((v) => !v.isFixed));
   };
 
-    const [value, setValue] = useState<readonly Option[]>(
-      orderOptions(compulsoryList as Option[])
-    );
+  const [value, setValue] = useState<readonly Option[]>(
+    orderOptions(compulsoryList as Option[])
+  );
 
 // function to add values and turn them in strings to store it and pass it to backend when form submitted
   const onChange = (
@@ -119,7 +120,7 @@ export function DropDown({
 
   };
 
-//to give customized tooltip when hovered over fixed options for drop down
+  //to give customized tooltip when hovered over fixed options for drop down
   const Tooltip = (props: any) => {
     const data = props.data as Option;
     const tooltipText = data.isFixed ? 'Pre-selected services need to be offered' : '';
@@ -134,33 +135,31 @@ export function DropDown({
   //to format label when creating new options and adding them 
   const formatCreateLabel = (inputValue: any) => `Add new option "${inputValue}"`; // Customize the create label
 
+
+  
 // for having floating label when there is selected values in the select box
   const { ValueContainer, Placeholder } = components;
-
   const CustomPlaceholder = ({ children, ...props }: any) => {
-    const customPlaceholder = (
-      <div>
-        {props.selectProps.placeholder} <span style={{ color: "red" }}>*</span>
-      </div>
-    );
     return (
+      <>
       <ValueContainer {...props}>
         <Placeholder {...props} isFocused={props.isFocused }>
-        {customPlaceholder}
+        <div>
+          {props.selectProps.placeholder} <span style={{ color: "red" }}>*</span>
+        </div>
         </Placeholder>
         {React.Children.map(children, (child) =>
           child && child.type !== Placeholder ? child : null
         )}
       </ValueContainer>
+      </>
     );
   }; 
-
-  
-
   const customComponents = {
     MultiValueLabel: Tooltip,
     ValueContainer: CustomPlaceholder,
   };
+  
 
   return (
     <>
@@ -251,7 +250,6 @@ export function DropDown({
 
 
         </div>
-
     </>
   );
 }
