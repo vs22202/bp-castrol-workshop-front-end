@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from "react";
-import styles from "./navbar.module.css";
+import styles from "./Navbar.module.css";
 import { Button } from "../ButtonComponent/Button";
 import { SvgIcon } from "../IconComponent/SvgIcon";
 import AlertContext, { AlertContextProps } from "../../contexts/AlertContext";
