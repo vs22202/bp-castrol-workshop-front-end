@@ -4,7 +4,7 @@ import styles from "./FileGrid.module.css";
 import Thumbnail from "./Thumbnail";
 import { Button } from "../ButtonComponent/Button";
 import { SvgIcon } from "../IconComponent/SvgIcon";
-
+import { useFormContext } from "react-hook-form";
 /** The props type of {@link FileGrid| `FileGrid`}. */
 type FileGridProps = React.DetailedHTMLProps<
   React.InputHTMLAttributes<HTMLInputElement>,
@@ -31,14 +31,12 @@ type FileGridProps = React.DetailedHTMLProps<
  * <FileGrid oldFile={someArrayOfFiles} />
  * ```
  */
-export default function FileGrid({ oldFiles }: FileGridProps) {
-  const [files, setFiles] = useState<
-    (File & { preview: string; key: string })[]
-  >([]);
+export default function FileGrid({ oldFiles, name = "files" }: FileGridProps) {
+  const { register, unregister, setValue, watch } = useFormContext();
+  const files: (File & { preview: string; key: string })[] = watch(name);
   useEffect(() => {
     if (!oldFiles) return;
-    setFiles((s) => [
-      ...s,
+    setValue(name, [
       ...oldFiles.map((file) => {
         return Object.assign(file, {
           key: file.name + "|" + Date.now(),
@@ -48,6 +46,12 @@ export default function FileGrid({ oldFiles }: FileGridProps) {
     ]);
     return () => files.forEach((file) => URL.revokeObjectURL(file.preview));
   }, []);
+  useEffect(() => {
+    register(name);
+    return () => {
+      unregister(name);
+    };
+  }, [register, unregister, name]);
   const { getRootProps, getInputProps, open, acceptedFiles } = useDropzone({
     noClick: true,
     noKeyboard: true,
@@ -56,8 +60,8 @@ export default function FileGrid({ oldFiles }: FileGridProps) {
       "video/*": [],
     },
     onDrop: (acceptedFiles) => {
-      setFiles((s) => [
-        ...s,
+      setValue(name, [
+        ...(files || []),
         ...acceptedFiles.map((file) => {
           return Object.assign(file, {
             key: file.name + "|" + Date.now(),
@@ -71,24 +75,26 @@ export default function FileGrid({ oldFiles }: FileGridProps) {
     const key = e.currentTarget.getAttribute("data-filename");
     const newFiles = files.filter((file) => file.name != key);
     acceptedFiles.filter((file) => file.name != key);
-    setFiles(newFiles);
+    setValue(name, newFiles);
   };
 
-  const thumbs = files.map((file) => (
-    <Thumbnail
-      src={file.preview}
-      fileName={file.name}
-      removeFile={(e) => removeFile(e)}
-      key={file.key}
-      type={file.type}
-    />
-  ));
+  const thumbs =
+    files &&
+    files.map((file) => (
+      <Thumbnail
+        src={file.preview}
+        fileName={file.name}
+        removeFile={(e) => removeFile(e)}
+        key={file.key}
+        type={file.type}
+      />
+    ));
 
   return (
     <section className={styles.container}>
       <div {...getRootProps({ className: styles.dropzone })}>
         <input {...getInputProps()} />
-        {files.length == 0 ? (
+        {!files?.length ? (
           <div className={styles.uploadOptions}>
             <SvgIcon iconName="upload" />
             <h3>Drag files to upload</h3>
