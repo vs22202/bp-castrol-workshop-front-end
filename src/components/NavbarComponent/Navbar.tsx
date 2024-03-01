@@ -1,7 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import styles from "./navbar.module.css";
 import { Button } from "../ButtonComponent/Button";
 import { SvgIcon } from "../IconComponent/SvgIcon";
+import AlertContext, { AlertContextProps } from "../../contexts/AlertContext";
 
 /** The props type of {@link Navbar | `Navbar`}. */
 export type NavbarProps = {
@@ -27,7 +28,6 @@ function Navbar() {
   // adding the states
   const [isActive, setIsActive] = useState(false);
   const [userAuth, setUserAuth] = useState(false);
-
   // add the active class
   const toggleActiveClass = () => {
     setIsActive(!isActive);
@@ -52,7 +52,6 @@ function Navbar() {
       window.removeEventListener("storage", checkUserAuth);
     };
   }, []);
-
   return (
     <nav className={`${styles.navbar}`}>
       {/* logo */}
@@ -65,7 +64,7 @@ function Navbar() {
           onClick={toggleActiveClass}
         >
           {!isActive ? (
-            <SvgIcon iconName="hamburger" data-testid="hamburger_icon"/>
+            <SvgIcon iconName="hamburger" data-testid="hamburger_icon" />
           ) : (
             <SvgIcon iconName="cross" />
           )}
@@ -105,13 +104,18 @@ function Navbar() {
             </ul>
 
             <div className={`${styles.authContainer}`}>
-              <Button text="Login" type="solid" size="md" iconimg="loginW" />
+              <Button
+                text="Login"
+                type="solid"
+                size="md"
+                iconimg="login-icon"
+              />
               <div className={`${styles.verticalDivider}`}></div>
               <Button
                 text="SignUp"
                 type="outline"
                 size="md"
-                iconimg="signupG"
+                iconimg="signup-icon"
               />
             </div>
           </>
@@ -121,13 +125,13 @@ function Navbar() {
             text="developer@bpcap.com"
             type="outline"
             size="sm"
-            iconimg="checkcircleW"
+            iconimg="mail"
           />
           <Button
             text="+91 97000 09045"
             type="outline"
             size="sm"
-            iconimg="checkcircleW"
+            iconimg="phone"
           />
         </div>
       </div>
