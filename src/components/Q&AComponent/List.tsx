@@ -2,7 +2,7 @@
 
 import React from 'react';
 import styles from './List.module.css';
-import { ListItem } from './ListItem';
+import ListItem  from './ListItem';
 /** The props type of {@link List | `List`}. */
 export interface IListProps {
    /**

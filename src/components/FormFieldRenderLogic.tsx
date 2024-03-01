@@ -4,6 +4,8 @@ import { Checkbox } from '../components/CheckboxComponent/CheckboxComponent';
 import { Input } from "./FormInputs";
 import { Control, Controller, FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { DropDown } from "./DropDownComponent/DropDown";
+import ListItem from "./Q&AComponent/ListItem";
+import FileGrid from "./FileGridComponent/FileGrid";
 
 interface FormUtilsProps {
     register: any;
@@ -117,6 +119,12 @@ export const renderInput = (input: Input, { register, errors, control }: FormUti
             );
         default:
             // Handle other input types or return null
-            return null;
+            return (
+                <>
+                <FileGrid/>
+                <ListItem size={screenSize} text="Upload the videos and images of workshop and garage"/>
+                <ListItem size={screenSize}text="The images and videos of the services provided by the workshop can also be uploaded"/>
+                </>
+            );
     }
 }

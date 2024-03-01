@@ -24,8 +24,7 @@
   
   .text {
     margin-left: 8px; 
-    color: var(--neutral-main750, #666666);
-    font-family: var(--paragraph-m-light-font-family, "NotoSans-Light", sans-serif);
+    color: var(--neutral---main750);
     font-weight: var(--weight--light);
   }  
   .size-small .text {
