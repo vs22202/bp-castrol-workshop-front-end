@@ -3,6 +3,7 @@ import styles from "./navbar.module.css";
 import { Button } from "../ButtonComponent/Button";
 import { SvgIcon } from "../IconComponent/SvgIcon";
 import AlertContext, { AlertContextProps } from "../../contexts/AlertContext";
+import AuthContext, { AuthContextProps } from "../../contexts/AuthContext";
 
 /** The props type of {@link Navbar | `Navbar`}. */
 export type NavbarProps = {
@@ -27,7 +28,8 @@ export type NavbarProps = {
 function Navbar() {
   // adding the states
   const [isActive, setIsActive] = useState(false);
-  const [userAuth, setUserAuth] = useState(false);
+  const { currentUser } = useContext(AuthContext) as AuthContextProps;
+  const userAuth = currentUser;
   // add the active class
   const toggleActiveClass = () => {
     setIsActive(!isActive);
@@ -37,21 +39,6 @@ function Navbar() {
   const removeActive = () => {
     setIsActive(false);
   };
-  useEffect(() => {
-    function checkUserAuth() {
-      const item = localStorage.getItem("userAuth");
-      if (item == "true") {
-        setUserAuth(true);
-      } else {
-        setUserAuth(false);
-      }
-    }
-    window.addEventListener("storage", checkUserAuth);
-    checkUserAuth();
-    return () => {
-      window.removeEventListener("storage", checkUserAuth);
-    };
-  }, []);
   return (
     <nav className={`${styles.navbar}`}>
       {/* logo */}
@@ -108,14 +95,14 @@ function Navbar() {
                 text="Login"
                 type="solid"
                 size="md"
-                iconimg="login-icon"
+                iconimg="login_icon"
               />
               <div className={`${styles.verticalDivider}`}></div>
               <Button
                 text="SignUp"
                 type="outline"
                 size="md"
-                iconimg="signup-icon"
+                iconimg="signup_icon"
               />
             </div>
           </>
