@@ -4,6 +4,7 @@ import { Button } from "../ButtonComponent/Button";
 import { SvgIcon } from "../IconComponent/SvgIcon";
 import AlertContext, { AlertContextProps } from "../../contexts/AlertContext";
 import AuthContext, { AuthContextProps } from "../../contexts/AuthContext";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 
 /** The props type of {@link Navbar | `Navbar`}. */
 export type NavbarProps = {
@@ -29,6 +30,7 @@ function Navbar() {
   // adding the states
   const [isActive, setIsActive] = useState(false);
   const { currentUser } = useContext(AuthContext) as AuthContextProps;
+  const navigate = useNavigate()
   const userAuth = currentUser;
   // add the active class
   const toggleActiveClass = () => {
@@ -40,89 +42,99 @@ function Navbar() {
     setIsActive(false);
   };
   return (
-    <nav className={`${styles.navbar}`}>
-      {/* logo */}
-      <div className={`${styles.logoContainer}`}>
-        <a href="#home">
-          <img src="src\assets\Castrol.svg" alt="Logo" />
-        </a>
-        <div
-          className={`${isActive ? styles.active : ""}`}
-          onClick={toggleActiveClass}
-        >
-          {!isActive ? (
-            <SvgIcon iconName="hamburger" data-testid="hamburger_icon" />
-          ) : (
-            <SvgIcon iconName="cross" />
-          )}
+    <>
+      <nav className={`${styles.navbar}`}>
+        {/* logo */}
+        <div className={`${styles.logoContainer}`}>
+          <Link to="/">
+            <img src="src\assets\Castrol.svg" alt="Logo" />
+          </Link>
+
+          <div
+            className={`${isActive ? styles.active : ""}`}
+            onClick={toggleActiveClass}
+          >
+            {!isActive ? (
+              <SvgIcon iconName="hamburger" data-testid="hamburger_icon" />
+            ) : (
+              <SvgIcon iconName="cross" />
+            )}
+          </div>
         </div>
-      </div>
-      <div
-        className={`${styles.optionsContainer} ${
-          isActive ? styles.active : ""
-        }`}
-      >
-        {userAuth ? (
-          <ul className={`${styles.navMenu}`}>
-            <li onClick={removeActive}>
-              <SvgIcon iconName="application" />
-              <a href="#home">Applications</a>
-            </li>
-            <li onClick={removeActive}>
-              <SvgIcon iconName="profile" />
-              <a href="#home">Profile</a>
-            </li>
-            <li onClick={removeActive}>
-              <SvgIcon iconName="logout" />
-              <a href="#home">Logout</a>
-            </li>
-          </ul>
-        ) : (
-          <>
-            <ul className={`${styles.navMenu} ${styles.mobileNav}`}>
+        <div
+          className={`${styles.optionsContainer} ${
+            isActive ? styles.active : ""
+          }`}
+        >
+          {userAuth ? (
+            <ul className={`${styles.navMenu}`}>
               <li onClick={removeActive}>
-                <SvgIcon iconName="login_icon" />
-                <a href="#home">Login</a>
+                <SvgIcon iconName="application" />
+                <Link to="/upload">Applications</Link>
+                <a href="#home"></a>
               </li>
               <li onClick={removeActive}>
-                <SvgIcon iconName="signup_icon" />
-                <a href="#home">SignUp</a>
+                <SvgIcon iconName="profile" />
+                <Link to="/profile">Profile</Link>
+              </li>
+              <li onClick={removeActive}>
+                <SvgIcon iconName="logout" />
+                <Link to="/logout">Logout</Link>
               </li>
             </ul>
+          ) : (
+            <>
+              <ul className={`${styles.navMenu} ${styles.mobileNav}`}>
+                <li onClick={removeActive}>
+                  <SvgIcon iconName="login_icon" />
+                  <Link to="/login">Login</Link>
+                </li>
+                <li onClick={removeActive}>
+                  <SvgIcon iconName="signup_icon" />
+                  <Link to="/signup">SignUp</Link>
+                </li>
+              </ul>
 
-            <div className={`${styles.authContainer}`}>
-              <Button
-                text="Login"
-                type="solid"
-                size="md"
-                iconimg="login_icon"
-              />
-              <div className={`${styles.verticalDivider}`}></div>
-              <Button
-                text="SignUp"
-                type="outline"
-                size="md"
-                iconimg="signup_icon"
-              />
-            </div>
-          </>
-        )}
-        <div className={`${styles.contactDetails}`}>
-          <Button
-            text="developer@bpcap.com"
-            type="outline"
-            size="sm"
-            iconimg="mail"
-          />
-          <Button
-            text="+91 97000 09045"
-            type="outline"
-            size="sm"
-            iconimg="phone"
-          />
+              <div className={`${styles.authContainer}`}>
+                <Button
+                  text="Login"
+                  type="solid"
+                  size="md"
+                    iconimg="login_icon"
+                    onClick={() => {
+                      navigate('/login', { replace: true });
+                    }}
+                />
+                <div className={`${styles.verticalDivider}`}></div>
+                <Button
+                  text="SignUp"
+                  type="outline"
+                  size="md"
+                    iconimg="signup_icon"
+                    onClick={() => {
+                      navigate('/signup', { replace: true });
+                    }}
+                />
+              </div>
+            </>
+          )}
+          <div className={`${styles.contactDetails}`}>
+            <Button
+              text="developer@bpcap.com"
+              type="outline"
+              size="sm"
+              iconimg="mail"
+            />
+            <Button
+              text="+91 97000 09045"
+              type="outline"
+              size="sm"
+              iconimg="phone"
+            />
+          </div>
         </div>
-      </div>
-    </nav>
+      </nav>
+    </>
   );
 }
 

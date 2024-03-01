@@ -1,6 +1,6 @@
 // LoginFormWithImage.tsx
 
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Button } from "../ButtonComponent/Button";
 import LoginImg from "../../assets/login.svg";
 import inputs from "./LoginPageFields";
@@ -8,6 +8,7 @@ import styles from "./LoginPage.module.css";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { renderInput } from "../FormFieldRenderLogic";
 import AuthContext, { AuthContextProps } from "../../contexts/AuthContext";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const LoginPage: React.FC = () => {
   const {
@@ -17,6 +18,10 @@ const LoginPage: React.FC = () => {
     trigger,
   } = useForm();
   const { login } = useContext(AuthContext) as AuthContextProps;
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [loading, setLoading] = useState(false);
+  const from = location.state?.from?.pathname || "/";
 
   //triggers validation as soon as the input is given
   const handleInputChange = async (e: any) => {
@@ -29,18 +34,21 @@ const LoginPage: React.FC = () => {
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     event.preventDefault();
-    console.log("redirecting to Signup page...");
+    navigate("/signup", { replace: true });
   };
 
   //Handles Login Button click
-  const handleLogin: SubmitHandler<Record<string, any>> = (data) => {
-    console.log(data);
-    login(data.user_email_id, data.user_password);
+  const handleLogin: SubmitHandler<Record<string, any>> = async (data) => {
+    setLoading(true);
+    const result = await login(data.user_email_id, data.user_password);
+    setLoading(false);
+    if (result == "success") navigate(from, { replace: true });
+    
   };
 
   return (
     <>
-      <div className={`${styles.logincontainer}`}>
+      <div className={`${styles.logincontainer} ${loading ? styles.loadingState:""}`}>
         <div className={`${styles.imagecontainer} illustration`}>
           <LoginImg />
         </div>
