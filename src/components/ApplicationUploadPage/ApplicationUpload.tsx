@@ -15,6 +15,7 @@ import { Input } from "components/FormInputs";
 import { Option } from "components/DropDownComponent/Option";
 import inputs from "./ApplicationUploadFormFields";
 import { renderInput } from "../FormFieldRenderLogic";
+import { useScreenSize } from "../ScreenSizeLogic";
 // import { renderInput } from "../FormFieldRenderLogic";
 interface FormUtilsProps {
   register: any;
@@ -31,6 +32,8 @@ const ApplicationUpload: React.FC = () => {
     trigger,
     control,
   } = methods
+
+  const inputSize = useScreenSize();
 
 
   const handleInputChange = async (event: any) => {
@@ -171,7 +174,12 @@ const ApplicationUpload: React.FC = () => {
                 Take your workshop to the next level!
               </h2>
               {inputs.map((input) => renderInput(input, { register, errors, control }))}
-              <Button text="Submit" size="sm" type="solid" action="submit"/>
+              <Button 
+                text="Submit" 
+                size={inputSize==="small" ? "sm" : inputSize==="medium" ? "md" : "lg"}
+                type="solid" 
+                action="submit"
+              />
             </form>
           </FormProvider>
         </div>

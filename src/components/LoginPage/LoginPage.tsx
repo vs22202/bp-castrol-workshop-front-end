@@ -8,6 +8,7 @@ import styles from "./LoginPage.module.css";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { renderInput } from "../FormFieldRenderLogic";
 import AuthContext, { AuthContextProps } from "../../contexts/AuthContext";
+import { useScreenSize } from "../ScreenSizeLogic";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const LoginPage: React.FC = () => {
@@ -18,6 +19,7 @@ const LoginPage: React.FC = () => {
     trigger,
   } = useForm();
   const { login } = useContext(AuthContext) as AuthContextProps;
+  const inputSize = useScreenSize();
   const navigate = useNavigate();
   const location = useLocation();
   const [loading, setLoading] = useState(false);
@@ -81,7 +83,7 @@ const LoginPage: React.FC = () => {
               <div className={`${styles.buttonscontainer}`}>
                 <Button
                   text="Login"
-                  size="md"
+                  size={inputSize==="small" ? "sm" : inputSize==="medium" ? "md" : "lg"}
                   type="solid"
                   iconimg="login_icon"
                   action="submit"
@@ -90,7 +92,7 @@ const LoginPage: React.FC = () => {
                 <span>New to Castrol?</span>
                 <Button
                   text="SignUp"
-                  size="md"
+                  size={inputSize==="small" ? "sm" : inputSize==="medium" ? "md" : "lg"}
                   type="outline"
                   iconimg="signup_icon"
                   onClick={handleSignup}
