@@ -12,53 +12,92 @@ import { SvgIcon } from "../IconComponent/SvgIcon";
 import AuthContext, { AuthContextProps } from "../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import AlertContext, { AlertContextProps } from "../../contexts/AlertContext";
+import { useScreenSize } from "../ScreenSizeLogic";
 
 const SignupPage: React.FC = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    watch,
-    trigger,
-  } = useForm();
-  const { signup, generateOtp } = useContext(AuthContext) as AuthContextProps;
-  const { sendAlert } = useContext(AlertContext) as AlertContextProps;
-  const [otpActivated, setOtpActivated] = useState(false);
-  const [isAllFieldsValid, setIsAllFieldsValid] = useState(false);
-  const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
+  const { register, handleSubmit, formState: { errors }, watch, trigger } = useForm();
+  const{ signup,generateOtp} = useContext(AuthContext) as AuthContextProps
+    const [otpActivated, setOtpActivated] = useState(false);
+    const { sendAlert } = useContext(AlertContext) as AlertContextProps;
+    const [isAllFieldsValid, setIsAllFieldsValid] = useState(false);
+    const [password, setPassword] = useState("");
+    const [otpSent, setOtpSent] = useState(false);
+    const [otpTimer, setOtpTimer] = useState("02:00");
+    const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
+    
+    const email = watch("user_email_id")
+    const pass = watch("user_password");
+    const confirmpass = watch("user_password_confirm");
+    const otp = /398392/; //should be as a regex
+    const inputSize = useScreenSize()
 
-  const email = watch("user_email_id");
-  const pass = watch("user_password");
-  const confirmpass = watch("user_password_confirm");
-  const otp = /398392/; //should be as a regex
+    useEffect(() => {
+        // if all three fields are filled and valid, enables GET OTP button
+        console.log(errors);
+        if (email && pass && confirmpass && Object.keys(errors).length === 0 && pass===confirmpass) {
+            setIsAllFieldsValid(true);
+        } else {
+            setIsAllFieldsValid(false);
+        }
+    }, [email, pass, confirmpass, errors]);
 
-  useEffect(() => {
-    // if all three fields are filled and valid, enables GET OTP button
-    if (
-      email &&
-      pass &&
-      confirmpass &&
-      Object.keys(errors).length === 0 &&
-      pass === confirmpass
-    ) {
-      setIsAllFieldsValid(true);
-    } else {
-      setIsAllFieldsValid(false);
+    //Handles all three buttons
+        //Get OTP Button
+    async function getOtp(event: React.MouseEvent<HTMLButtonElement, MouseEvent>){
+      event.preventDefault()
+      
+      setOtpSent(true);
+      startOtpTimer();
+      
+      generateOtp(watch("user_email_id"))
+      setOtpActivated(true);
     }
-  }, [email, pass, confirmpass, errors]);
 
-  //Handles all three buttons
-  //Get OTP Button
-  async function getOtp(
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) {
-    event.preventDefault();
-    console.log(`Your OTP: ${otp}`);
-    generateOtp(watch("user_email_id"));
-    setOtpActivated(true);
-  }
+    //for otp button timer
+    const startOtpTimer = () => {
+      let seconds = 120; // 2 minutes = 120 seconds
+    
+      const interval = setInterval(() => {
+        const mins = Math.floor(seconds / 60);
+        const secs = seconds % 60;
+    
+        // Format minutes and seconds with leading zeros if needed
+        const formattedMins = mins < 10 ? `0${mins}` : `${mins}`;
+        const formattedSecs = secs < 10 ? `0${secs}` : `${secs}`;
+    
+        // Set the formatted timer string
+        const timerString = `${formattedMins}:${formattedSecs}`;
+    
+        setOtpTimer(timerString);
+    
+        if (seconds === 0) {
+          clearInterval(interval);
+          // Reset OTP sent state and timer when timer reaches 0
+          setOtpSent(false);
+          setOtpTimer("02:00"); // Reset the timer to initial value
+        } else {
+          seconds -= 1;
+        }
+      }, 1000);
+    };
+    
+
+
+
+
+    /*     //Login Button
+    function handleLogin(event: React.MouseEvent<HTMLButtonElement, MouseEvent>){
+        event.preventDefault()
+        console.log("Redirect to login page...");
+    }
+        //Handles Signup Button
+    const handleSignup: SubmitHandler<Record<string, any>> = (data, event) => {
+        event?.preventDefault();
+        // Submit function for Application Upload form
+      console.log(data);
+      signup(data.user_email_id, data.user_password,data.otp);
+    } */
 
   //Login Button
   function handleLogin(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
@@ -157,32 +196,41 @@ const SignupPage: React.FC = () => {
                 // }
               }}
             />
-            <Button
-              text="Get OTP"
-              size="md"
-              type="solid"
-              onClick={getOtp}
-              disabled={!isAllFieldsValid}
-            />
-          </div>
-          <div className={`${styles.buttonscontainer}`}>
-            <Button
-              text="SignUp"
-              size="md"
-              type="solid"
-              iconimg="signup_icon"
-              action="submit"
-            />
-            <span>or</span>
-            <span>Already have an account?</span>
-            <Button
-              text="Login"
-              size="md"
+            {!otpSent ? 
+              <Button 
+                text="Get OTP" 
+                size= {inputSize==="small" ? "sm" : inputSize==="medium" ? "md" : "lg"} 
+                type="solid"
+                onClick={getOtp}
+                disabled={!isAllFieldsValid}
+             />
+             :
+             <Button
+              text={`Resend OTP ${otpTimer}`}
+              size={inputSize==="small" ? "sm" : inputSize==="medium" ? "md" : "lg"}
               type="outline"
-              iconimg="login_icon"
-              onClick={handleLogin}
-            />
+              disabled={true}
+              />
+            }
           </div>
+            <div className={`${styles.buttonscontainer}`}>
+                <Button 
+                  text="SignUp" 
+                  size={inputSize==="small" ? "sm" : inputSize==="medium" ? "md" : "lg"}
+                  type="solid" 
+                  iconimg="signup_icon" 
+                  action="submit"
+                />
+                <span>or</span>
+                <span>Already have an account?</span>
+                <Button 
+                  text="Login" 
+                  size={inputSize==="small" ? "sm" : inputSize==="medium" ? "md" : "lg"}
+                  type="outline" 
+                  iconimg="login_icon" 
+                  onClick={handleLogin}
+                />
+            </div>
         </form>
       </div>
     </div>

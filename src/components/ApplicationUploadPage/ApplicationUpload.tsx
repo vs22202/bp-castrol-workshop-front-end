@@ -15,10 +15,13 @@ import { ApplicationInputFields } from "../FormInputs";
 import { Option } from "components/DropDownComponent/Option";
 import inputs from "./ApplicationUploadFormFields";
 import { renderInput } from "../FormFieldRenderLogic";
+
 import AuthContext, { AuthContextProps } from "../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import AlertContext, { AlertContextProps } from "../../contexts/AlertContext";
 import styles from "./ApplicationUpload.module.css";
+
+import { useScreenSize } from "../ScreenSizeLogic";
 // import { renderInput } from "../FormFieldRenderLogic";
 interface FormUtilsProps {
   register: any;
@@ -37,7 +40,12 @@ const ApplicationUpload: React.FC = () => {
     formState: { errors },
     trigger,
     control,
+
   } = methods;
+
+
+  const inputSize = useScreenSize();
+
 
   const { currentUser } = useContext(AuthContext) as AuthContextProps;
   const handleInputChange = async (event: any) => {
@@ -121,9 +129,10 @@ const ApplicationUpload: React.FC = () => {
           {inputs.map((input) =>
             renderInput(input, { register, errors, control })
           )}
-          <Button text="Submit" size="sm" type="solid" action="submit" />
+          <Button text="Submit" size={inputSize==="small" ? "sm" : inputSize==="medium" ? "md" : "lg"} type="solid" action="submit" />
         </form>
       </FormProvider>
+
     </div>
   );
 };
