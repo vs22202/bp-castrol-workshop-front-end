@@ -2,18 +2,22 @@
 
 .logincontainer {
   display: flex;
-  min-width: 568px;
+  /* min-width: 568px; */
 }
 
 .imagecontainer {
   flex: 1;
   display: flex;
   justify-content: center;
+  align-items: center;
   height: 100%;
 }
 .loginform {
   flex: 1;
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .buttonscontainer{
@@ -25,7 +29,37 @@
 .buttonscontainer span{
   font-size: 12px;
   font-weight: 600;
+  /* align this between the two buttons */
   align-items: center;
+}
+
+/* Media query for mobile screens */
+@media screen and (max-width: 768px) {
+  .logincontainer {
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    min-width: 300px;
+  }
+
+  .imagecontainer {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .loginform {
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .buttonscontainer {
+    margin-top: 20px;
+    text-align: center;
+  }
+  .buttonscontainer span {
+    font-size: 12px;
+    font-weight: 600;
+  }
 }
 
   

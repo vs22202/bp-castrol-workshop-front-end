@@ -14,6 +14,7 @@ import {
 import { Input } from "components/FormInputs";
 import { Option } from "components/DropDownComponent/Option";
 import inputs from "./ApplicationUploadFormFields";
+import { renderInput } from "../FormFieldRenderLogic";
 // import { renderInput } from "../FormFieldRenderLogic";
 interface FormUtilsProps {
   register: any;
@@ -31,7 +32,7 @@ const ApplicationUpload: React.FC = () => {
     control,
   } = methods
 
-  const renderInput = (input: Input, { register, errors }: FormUtilsProps) => {
+/*   const renderInput = (input: Input, { register, errors }: FormUtilsProps) => {
     switch (input.type) {
       case "checkbox":
         return (
@@ -41,6 +42,7 @@ const ApplicationUpload: React.FC = () => {
             size="medium"
             text={input.label}
             register={register}
+            errors={errors}
             validationSchema={{
               required: input.required,
             }}
@@ -63,7 +65,7 @@ const ApplicationUpload: React.FC = () => {
               maxlen={input.maxlen}
               errors={errors}
               placeholder={input.placeholder}
-              /* input field validation conditions */
+              
               validationSchema={{
                 required: input.required,
                 minLength: {
@@ -121,7 +123,8 @@ const ApplicationUpload: React.FC = () => {
       //file/image upload inputs
     }
   };
-
+ */
+  
   const submitForm: SubmitHandler<Input> = (data) => {
     console.log(data); //submit funciton
   };
@@ -151,7 +154,7 @@ const ApplicationUpload: React.FC = () => {
               >
                 Take your workshop to the next level!
               </h2>
-              {inputs.map((input) => renderInput(input, { register, errors }))}
+              {inputs.map((input) => renderInput(input, { register, errors, control }))}
               <Button text="Submit" size="sm" type="solid" action="submit"/>
             </form>
           </FormProvider>

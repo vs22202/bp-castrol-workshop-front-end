@@ -5,12 +5,14 @@ import { Button } from "../ButtonComponent/Button";
 import LoginImg from "../../assets/login.svg";
 import inputs from "./LoginPageFields"
 import styles from './LoginPage.module.css';
-import { SubmitHandler, useForm } from "react-hook-form";
+import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import { renderInput } from "../FormFieldRenderLogic";
+import { Input } from "components/FormInputs";
 
 
 const LoginPage: React.FC = () => {
-    const {register, handleSubmit, formState:{errors}, trigger} = useForm();
+    const methods = useForm<Input>();
+    const {register, handleSubmit, formState:{errors}, trigger} = methods;
 
     //triggers validation as soon as the input is given
     const handleInputChange = async(e:any) =>{
@@ -25,9 +27,9 @@ const LoginPage: React.FC = () => {
     }
 
     //Handles Login Button click
-    const handleLogin: SubmitHandler<Record<string, any>> = (data) => {
-        console.log(data);
-    }
+    const handleLogin: SubmitHandler<Input> = (data) => {
+      console.log(data); //submit funciton
+    };
 
   return(
     <>
@@ -37,6 +39,7 @@ const LoginPage: React.FC = () => {
       </div>
         <div className={`${styles.loginform}`}>
             <div className="formContainer">
+            <FormProvider {...methods}>
                 <form onSubmit={handleSubmit(handleLogin)} onChange={handleInputChange}>
                     <h1 style={{ color: 'rgba(0, 153, 0, 1)' , fontSize: '28px',textAlign: 'left', fontWeight: 'bold'  }}>
                         Login
@@ -46,12 +49,13 @@ const LoginPage: React.FC = () => {
                     </h2> 
                     {inputs.map(input => renderInput(input, { register, errors }))}
                     <div className={`${styles.buttonscontainer}`}>
-                        <Button text="Login" size="md" type="solid" iconimg="loginW"/>
+                        <Button text="Login" size="md" type="solid" iconimg="loginW" action="submit"/>
                         <span>or</span>
                         <span>New to Castrol?</span>
                         <Button text="SignUp" size="md" type="outline" iconimg="signupG" onClick={handleSignup}/>
                     </div>
                 </form>
+                </FormProvider>
             </div>
         </div>
     </div>

@@ -53,8 +53,6 @@ export const renderInput = (input: Input, { register, errors, control }: FormUti
                         onchange={onChange}
                         validationSchema={{
                         required: input.required,
-
-
                     }}
                     />
                 )}

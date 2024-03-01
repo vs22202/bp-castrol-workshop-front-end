@@ -1,35 +1,65 @@
 /* SignUpFormWithImage.css */
 
 .signupcontainer {
-    display: flex;
-    min-width: 568px;
-  }
-  
-  .imagecontainer {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-  }
-  
-  .signupform {
-    flex: 1;
-    display: flex;
+  display: flex;
+}
+
+.imagecontainer {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.signupform {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.buttonscontainer {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.buttonscontainer span {
+  font-size: 12px;
+  font-weight: 600;
+   /* align this between the two buttons */
+  align-items: center;
+}
+
+/* Media query for mobile screens */
+@media screen and (max-width: 768px) {
+  .signupcontainer {
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-  }
-  
-  .buttonscontainer{
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    gap:10px
-  }
-  .buttonscontainer span{
+    padding: 20px;
+    min-width: 300px;
+}
+
+.imagecontainer {
+    max-width: 100%; 
+    height: auto; 
+}
+
+.signupform {
+    width: 100%;
+    max-width: 400px;
+}
+
+.buttonscontainer {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.buttonscontainer span {
     font-size: 12px;
     font-weight: 600;
-    align-items: center;
-  }
-  
+}
+}

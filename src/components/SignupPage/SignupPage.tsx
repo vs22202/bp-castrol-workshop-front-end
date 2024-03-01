@@ -30,14 +30,6 @@ const SignupPage: React.FC = () => {
         }
     }, [email, pass, confirmpass, errors]);
 
-    /* useEffect(()=>{
-      if(pass){
-        setPassword(pass);
-        //password = pass;
-      }
-    }) */
-
-
     //Handles all three buttons
         //Get OTP Button
     function getOtp(event: React.MouseEvent<HTMLButtonElement, MouseEvent>){
@@ -79,7 +71,7 @@ const SignupPage: React.FC = () => {
             <h2 style={{ color: 'rgba(102, 102, 102, 1)' , fontSize: '20px',textAlign: 'left' }}>
               Join the Castrol Community and take your workshop to the next level!
             </h2>
-           {inputs.map(input => renderInput(input, { register, errors, /* watch */ }))}
+           {inputs.map(input => renderInput(input, { register, errors }))}
 
         {/* this div will be rendered here itself */}
           <div style={{ display: 'flex', alignItems: 'center',gap:"20px" }}>
@@ -119,7 +111,7 @@ const SignupPage: React.FC = () => {
              />
           </div>
             <div className={`${styles.buttonscontainer}`}>
-                <Button text="SignUp" size="md" type="solid" iconimg="signupW"/>
+                <Button text="SignUp" size="md" type="solid" iconimg="signupW" action="submit"/>
                 <span>or</span>
                 <span>Already have an account?</span>
                 <Button text="Login" size="md" type="outline" iconimg="loginG" onClick={handleLogin}/>
