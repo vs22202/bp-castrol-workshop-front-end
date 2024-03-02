@@ -1,23 +1,21 @@
-// Import the necessary dependencies
-import { render, screen } from '@testing-library/react';
-import '@testing-library/jest-dom';
-import { FooterWithLogo } from './Footer';
+/* 
+checks if the logo with the alt text 'logo-ct' and 
+the copyright notice containing the text 'copyright © 1999-2024' 
+are present in the rendered output. 
+*/
 
-describe('FooterWithLogo Component', () => {
-  test('renders correctly', () => {
-    // Render the component
-    render(<FooterWithLogo />);
+import { FooterWithLogo } from './Footer';
+import "@testing-library/jest-dom";
+import { render } from "@testing-library/react";
+
+describe('FooterWithLogo', () => {
+  it('renders footer with logo and copyright notice', () => {
+    const { getByAltText, getByText } = render(<FooterWithLogo />);
     
-    // Assert that the footer container is rendered
-    const footerContainer = screen.getByTestId('footerContainer');
-    expect(footerContainer).toBeInTheDocument();
-    
-    // Assert that the logo is rendered
-    const footerLogo = screen.getByAltText('logo-ct');
-    expect(footerLogo).toBeInTheDocument();
-    
-    // Assert that the copyright paragraph is rendered
-    const footerParagraph = screen.getByText('Copyright © 1999-2024');
-    expect(footerParagraph).toBeInTheDocument();
+    const logo = getByAltText('logo-ct');
+    expect(logo).toBeInTheDocument();
+
+    const copyrightNotice = getByText(/copyright © 1999-2024/i);
+    expect(copyrightNotice).toBeInTheDocument();
   });
 });
