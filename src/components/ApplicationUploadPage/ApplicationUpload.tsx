@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { Checkbox } from "../CheckboxComponent/CheckboxComponent";
 import { InputField } from "../InputFieldComponent/InputField";
 import { Button } from "../ButtonComponent/Button";
@@ -14,7 +14,7 @@ import {
 import { ApplicationInputFields } from "../FormInputs";
 import { Option } from "components/DropDownComponent/Option";
 import inputs from "./ApplicationUploadFormFields";
-import { renderInput } from "../FormFieldRenderLogic";
+import { OptionsUtilsProps, renderInput } from "../FormFieldRenderLogic";
 
 import AuthContext, { AuthContextProps } from "../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
@@ -30,7 +30,17 @@ interface FormUtilsProps {
 
 const ApplicationUpload: React.FC = () => {
   const methods = useForm<ApplicationInputFields>();
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [formMode, setFormMode] = useState<"new" | "edit">("new");
+  const [existingOptionsList, setExistingOptionsList] =
+    useState<OptionsUtilsProps>({
+      services_offered: [],
+      expertise: [],
+    });
+  const [existingFiles, setExistingFiles] = useState<
+    (File & { preview: string; key: string })[]
+  >([]);
+  const formRef = useRef<HTMLFormElement>(null);
   const navigate = useNavigate();
   const { sendAlert } = useContext(AlertContext) as AlertContextProps;
   const {
@@ -39,12 +49,78 @@ const ApplicationUpload: React.FC = () => {
     setValue,
     formState: { errors },
     trigger,
+    reset,
     control,
   } = methods;
 
   const inputSize = useScreenSize();
 
   const { currentUser } = useContext(AuthContext) as AuthContextProps;
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      const result = await fetch(
+        `${import.meta.env.VITE_BACKEND_URL}/application/${
+          currentUser?.user_email
+        }`
+      );
+      const res = await result.json();
+      if (res.output == "success") {
+        setFormMode("edit");
+        const data = res.result as ApplicationInputFields;
+        reset({ ...data });
+        const inputs = formRef.current?.querySelectorAll("input");
+        if (inputs) {
+          for (let i = inputs.length; i >= 0; i--) {
+            inputs[i]?.focus();
+          }
+        }
+        const services_options = data.services_offered.split(",");
+        const expertise_options = data.expertise.split(",");
+        const services: Option[] = [];
+        const expertise: Option[] = [];
+        const fileList: (File & { preview: string; key: string })[] = [];
+        services_options.forEach((option) => {
+          const v = option.trim();
+          services.push({ value: v, label: v, isFixed: false });
+        });
+        expertise_options.forEach((option) => {
+          const v = option.trim();
+          expertise.push({ value: v, label: v, isFixed: false });
+        });
+        const fileUrls = JSON.parse(data.file_paths);
+        fileUrls.forEach(async (url: string) => {
+          const name = url.split("userFiles")[1].split("?")[0].slice(3);
+          const result = await fetch(url, { mode: "no-cors" });
+          const ext = name.split(".")[1].split("-")[0];
+          let fileType;
+          const data = await result.blob();
+          if (ext == "mp4" || ext == "mov") {
+            fileType = `video/${ext}`;
+          } else {
+            fileType = `image${ext}`;
+          }
+          let file = new File([data], name, { type: fileType });
+          const newFile: File & { preview: string; key: string } =
+            Object.assign(file, {
+              key: file.name + "|" + Date.now(),
+              preview: url,
+            });
+          fileList.push(newFile);
+        });
+        setExistingOptionsList({
+          services_offered: services,
+          expertise: expertise,
+        });
+        setExistingFiles(fileList);
+        setLoading(false);
+        return;
+      }
+      setLoading(false);
+    };
+    fetchData();
+  }, []);
   const handleInputChange = async (event: any) => {
     const name = event?.target.name;
 
@@ -67,7 +143,6 @@ const ApplicationUpload: React.FC = () => {
     setLoading(true);
     const formData = new FormData();
     let key: keyof ApplicationInputFields;
-    console.log(data.files);
     for (key in data) {
       if (key == "files") {
         continue;
@@ -76,7 +151,6 @@ const ApplicationUpload: React.FC = () => {
     }
     for (const file in data.files) formData.append("files", data.files[file]);
     formData.set("user_email", currentUser?.user_email || "");
-    console.log(formData.getAll("files"));
     try {
       const result = await fetch("http://localhost:3000/application", {
         method: "POST",
@@ -107,7 +181,11 @@ const ApplicationUpload: React.FC = () => {
       }`}
     >
       <FormProvider {...methods}>
-        <form onSubmit={handleSubmit(submitForm)} onChange={handleInputChange}>
+        <form
+          onSubmit={handleSubmit(submitForm)}
+          onChange={handleInputChange}
+          ref={formRef}
+        >
           <h1
             style={{
               color: "rgba(0, 153, 0, 1)",
@@ -127,9 +205,29 @@ const ApplicationUpload: React.FC = () => {
           >
             Take your workshop to the next level!
           </h2>
-          {inputs.map((input) =>
-            renderInput(input, { register, errors, control })
-          )}
+          {formMode == "edit"
+            ? existingOptionsList.services_offered.length > 0
+              ? inputs.map((input) =>
+                  renderInput(input, {
+                    register,
+                    errors,
+                    control,
+                    formMode,
+                    existingOptionsList,
+                    existingFiles,
+                  })
+                )
+              : ""
+            : inputs.map((input) =>
+                renderInput(input, {
+                  register,
+                  errors,
+                  control,
+                  formMode,
+                  existingOptionsList,
+                  existingFiles,
+                })
+              )}
           <Button
             text="Submit"
             size={
