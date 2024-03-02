@@ -1,24 +1,54 @@
+// ListItem.test.tsx
+
+/* 
+Test 1:
+Renders a small ListItem with text.
+Checks if the list item, icon, and text are rendered correctly.
+
+Test 2:
+Renders a large ListItem with text.
+Checks if the list item, icon, and text are rendered correctly.
+*/
+
 import "@testing-library/jest-dom";
+
 import { render, screen } from '@testing-library/react';
-import { ListItem } from "./ListItem";
-import styles from './ListItem.module.css';
+import ListItem from './ListItem';
 
 describe('ListItem Component', () => {
-  test('renders a small ListItem with text', () => {
+  it('renders a small ListItem with text', () => {
+    // Render the ListItem component with the appropriate props
     render(<ListItem text="Test Item" size="small" />);
 
-    // Assert that the icon is rendered with the small size
-    // const icon = screen.getByAltText('Icon') as HTMLImageElement;
-    // expect(icon.getAttribute('width')).toBe('16');
-    // expect(icon.getAttribute('height')).toBe('16');
-    console.log(styles);
+    // Assert that the list item is rendered
+    const listItem = screen.getByTestId('list-item');
+    expect(listItem).toBeInTheDocument();
+
+    // Assert that the icon is rendered
+    const icon = screen.getByAltText('Icon');
+    expect(icon).toBeInTheDocument();
+
     // Assert that the text is rendered
     const text = screen.getByText('Test Item');
-    expect(text).toBeTruthy();
+    expect(text).toBeInTheDocument();
 
-    // // Assert that the ListItem has the correct classes
-    // const listItem = screen.getByTestId('list-item') as HTMLElement;
-    // expect(listItem.classList.contains('list-item')).toBe(true);
-    // expect(listItem.classList.contains('size-small')).toBe(true);
+  });
+
+  it('renders a large ListItem with text', () => {
+    // Render the ListItem component with the appropriate props
+    render(<ListItem text="Test Item" size="large" />);
+
+    // Assert that the list item is rendered
+    const listItem = screen.getByTestId('list-item');
+    expect(listItem).toBeInTheDocument();
+
+    // Assert that the icon is rendered
+    const icon = screen.getByAltText('Icon');
+    expect(icon).toBeInTheDocument();
+
+    // Assert that the text is rendered
+    const text = screen.getByText('Test Item');
+    expect(text).toBeInTheDocument();
+
   });
 });
