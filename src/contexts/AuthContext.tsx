@@ -35,11 +35,22 @@ const AuthContext = createContext<AuthContextProps | null>(null);
  *
  */
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-  const [currentUser, setCurrentUser] = useState<User | null>(null);
+  const checkUserAuth = () => {
+    const user = window.localStorage.getItem("user");
+    if (user != null) {
+      return JSON.parse(user) as User;
+    }
+    return user;
+  };
+  const [currentUser, setCurrentUser] = useState<User | null>(checkUserAuth());
   const { sendAlert } = useContext(AlertContext) as AlertContextProps;
   //can return success message or promise if needed
   //pass one more parameter to verify if mobile / email login and change logic accordingly
   const login = async (email: string, password: string): Promise<string> => {
+    if (currentUser) {
+      console.log("local login");
+      return "success";
+    }
     const formData = new FormData();
     formData.append("user_email", email);
     formData.append("password", password);
@@ -49,13 +60,14 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         method: "POST",
         headers: {},
         body: formData,
-      })
+      });
       const res = await result.json();
-      if(res.output == "fail") {
+      if (res.output == "fail") {
         sendAlert({ message: res.msg as string, type: "error" });
         return "failure";
       }
       setCurrentUser(res.user);
+      window.localStorage.setItem("user", JSON.stringify(res.user));
       return "success";
     } catch (err) {
       // send error message to user
@@ -79,15 +91,14 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         body: formData,
       });
       const res = await result.json();
-      if(res.output == "fail") {
+      if (res.output == "fail") {
         sendAlert({ message: res.msg as string, type: "error" });
         return "failure";
       }
       return "success";
-
     } catch (err) {
       console.log(err);
-      return "failure"
+      return "failure";
     }
   };
   const generateOtp = async (email: string): Promise<void> => {
@@ -105,6 +116,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
   const logout = () => {
+    window.localStorage.removeItem("user");
     setCurrentUser(null);
   };
 

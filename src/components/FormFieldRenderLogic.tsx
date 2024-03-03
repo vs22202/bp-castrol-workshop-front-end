@@ -19,14 +19,18 @@ export interface OptionsUtilsProps {
   services_offered: Option[];
   expertise: Option[];
 }
+export interface FileData {
+  filename: string; type: string; fileurl: string; key: string;
+}
 interface FormUtilsProps {
   register: any;
   errors: any;
   control?: any;
   formMode?: string;
   existingOptionsList?: OptionsUtilsProps;
-  existingFiles?: (File & { preview: string; key: string })[];
+  existingFiles?: FileData[];
 }
+
 
 export const renderInput = (
   input: Input,

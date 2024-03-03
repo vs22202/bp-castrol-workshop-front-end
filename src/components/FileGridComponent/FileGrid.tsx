@@ -5,13 +5,14 @@ import Thumbnail from "./Thumbnail";
 import { Button } from "../ButtonComponent/Button";
 import { SvgIcon } from "../IconComponent/SvgIcon";
 import { useFormContext } from "react-hook-form";
+import { FileData } from "components/FormFieldRenderLogic";
 /** The props type of {@link FileGrid| `FileGrid`}. */
 type FileGridProps = React.DetailedHTMLProps<
   React.InputHTMLAttributes<HTMLInputElement>,
   HTMLInputElement
 > & {
   /** Existing files the user has already uploaded of they exist */
-  oldFiles?: (File & { preview: string; key: string })[];
+  oldFiles?: FileData[];
 };
 
 /**
@@ -34,13 +35,6 @@ type FileGridProps = React.DetailedHTMLProps<
 export default function FileGrid({ oldFiles, name = "files" }: FileGridProps) {
   const { register, unregister, setValue, watch } = useFormContext();
   const files: (File & { preview: string; key: string })[] = watch(name);
-  const [oldF, setOldF] = useState<boolean>(false);
-  useEffect(() => {
-    const value = watch("brands");
-    setTimeout(() => {
-      setValue("brands", value, { shouldValidate: true });
-    }, 3000);
-  }, [oldFiles]);
   useEffect(() => {
     register(name);
     return () => {
@@ -66,20 +60,6 @@ export default function FileGrid({ oldFiles, name = "files" }: FileGridProps) {
       ]);
     },
   });
-  const handleBlur = () => {
-    console.log("hello");
-    if (!oldFiles) return;
-    console.log("hello");
-    console.log(oldFiles);
-    setValue(name, [
-      ...oldFiles.map((file) => {
-        return Object.assign(file, {
-          key: file.name + "|" + Date.now(),
-          preview: URL.createObjectURL(file),
-        });
-      }),
-    ]);
-  };
   const removeFile = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
     const key = e.currentTarget.getAttribute("data-filename");
     const newFiles = files.filter((file) => file.name != key);
@@ -97,12 +77,21 @@ export default function FileGrid({ oldFiles, name = "files" }: FileGridProps) {
         type={file.type}
       />
     ));
-
+  const oldThumbs = oldFiles &&
+  oldFiles.map((file) => (
+    <Thumbnail
+      src={file.fileurl}
+      fileName={file.filename}
+      removeFile={(e) => removeFile(e)}
+      key={file.key}
+      type={file.type}
+    />
+  ))
   return (
     <section className={styles.container}>
       <div {...getRootProps({ className: styles.dropzone })}>
         <input {...getInputProps()} />
-        {files?.length == 0 && oldFiles?.length == 0 ? (
+        {(!files?.length && !oldFiles?.length) ? (
           <div className={styles.uploadOptions}>
             <SvgIcon iconName="upload" />
             <h3>Drag files to upload</h3>
@@ -115,16 +104,7 @@ export default function FileGrid({ oldFiles, name = "files" }: FileGridProps) {
           </div>
         ) : (
           <aside className={styles.thumbsContainer}>
-            {oldFiles &&
-              oldFiles.map((file) => (
-                <Thumbnail
-                  src={file.preview}
-                  fileName={file.name}
-                  removeFile={(e) => removeFile(e)}
-                  key={file.key}
-                  type={file.type}
-                />
-              ))}
+            {oldThumbs}
             {thumbs}
             <div className={styles.addFile} onClick={open}>
               <SvgIcon iconName="round-plus" />

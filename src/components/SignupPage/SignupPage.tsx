@@ -119,7 +119,7 @@ const SignupPage: React.FC = () => {
     setLoading(false);
     if (result == "success") {
       sendAlert({
-        message: "You have logged in successfully",
+        message: "SignUp was successful",
         type: "success",
       });
       navigate("/login", { replace: true });

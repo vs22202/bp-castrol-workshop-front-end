@@ -14,7 +14,11 @@ import {
 import { ApplicationInputFields } from "../FormInputs";
 import { Option } from "components/DropDownComponent/Option";
 import inputs from "./ApplicationUploadFormFields";
-import { OptionsUtilsProps, renderInput } from "../FormFieldRenderLogic";
+import {
+  FileData,
+  OptionsUtilsProps,
+  renderInput,
+} from "../FormFieldRenderLogic";
 
 import AuthContext, { AuthContextProps } from "../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
@@ -37,9 +41,7 @@ const ApplicationUpload: React.FC = () => {
       services_offered: [],
       expertise: [],
     });
-  const [existingFiles, setExistingFiles] = useState<
-    (File & { preview: string; key: string })[]
-  >([]);
+  const [existingFiles, setExistingFiles] = useState<FileData[]>([]);
   const formRef = useRef<HTMLFormElement>(null);
   const navigate = useNavigate();
   const { sendAlert } = useContext(AlertContext) as AlertContextProps;
@@ -66,21 +68,15 @@ const ApplicationUpload: React.FC = () => {
         }`
       );
       const res = await result.json();
+      return res;
+    };
+    fetchData().then((res) => {
       if (res.output == "success") {
-        setFormMode("edit");
         const data = res.result as ApplicationInputFields;
-        reset({ ...data });
-        const inputs = formRef.current?.querySelectorAll("input");
-        if (inputs) {
-          for (let i = inputs.length; i >= 0; i--) {
-            inputs[i]?.focus();
-          }
-        }
         const services_options = data.services_offered.split(",");
         const expertise_options = data.expertise.split(",");
         const services: Option[] = [];
         const expertise: Option[] = [];
-        const fileList: (File & { preview: string; key: string })[] = [];
         services_options.forEach((option) => {
           const v = option.trim();
           services.push({ value: v, label: v, isFixed: false });
@@ -90,36 +86,41 @@ const ApplicationUpload: React.FC = () => {
           expertise.push({ value: v, label: v, isFixed: false });
         });
         const fileUrls = JSON.parse(data.file_paths);
-        fileUrls.forEach(async (url: string) => {
+        let fileData: FileData[] = [];
+        fileUrls.forEach((url: string) => {
           const name = url.split("userFiles")[1].split("?")[0].slice(3);
-          const result = await fetch(url, { mode: "no-cors" });
           const ext = name.split(".")[1].split("-")[0];
           let fileType;
-          const data = await result.blob();
           if (ext == "mp4" || ext == "mov") {
             fileType = `video/${ext}`;
           } else {
             fileType = `image${ext}`;
           }
-          let file = new File([data], name, { type: fileType });
-          const newFile: File & { preview: string; key: string } =
-            Object.assign(file, {
-              key: file.name + "|" + Date.now(),
-              preview: url,
-            });
-          fileList.push(newFile);
+          fileData.push({
+            filename: name,
+            type: fileType,
+            fileurl: url,
+            key: name + Date.now(),
+          });
         });
+        reset({ ...data });
+        const inputs = formRef.current?.querySelectorAll("input");
+        if (inputs) {
+          for (let i = inputs.length; i >= 0; i--) {
+            inputs[i]?.focus();
+          }
+        }
+        setFormMode("edit")
         setExistingOptionsList({
           services_offered: services,
           expertise: expertise,
         });
-        setExistingFiles(fileList);
+        setExistingFiles(fileData);
         setLoading(false);
         return;
       }
       setLoading(false);
-    };
-    fetchData();
+    });
   }, []);
   const handleInputChange = async (event: any) => {
     const name = event?.target.name;
@@ -205,29 +206,16 @@ const ApplicationUpload: React.FC = () => {
           >
             Take your workshop to the next level!
           </h2>
-          {formMode == "edit"
-            ? existingOptionsList.services_offered.length > 0
-              ? inputs.map((input) =>
-                  renderInput(input, {
-                    register,
-                    errors,
-                    control,
-                    formMode,
-                    existingOptionsList,
-                    existingFiles,
-                  })
-                )
-              : ""
-            : inputs.map((input) =>
-                renderInput(input, {
-                  register,
-                  errors,
-                  control,
-                  formMode,
-                  existingOptionsList,
-                  existingFiles,
-                })
-              )}
+          {inputs.map((input) =>
+            renderInput(input, {
+              register,
+              errors,
+              control,
+              formMode,
+              existingOptionsList,
+              existingFiles,
+            })
+          )}
           <Button
             text="Submit"
             size={

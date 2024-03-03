@@ -77,8 +77,17 @@ export function DropDown({
   onblur,
 }: DropDownProps) {
   const dropdownRegister = register(name, validationSchema); // for validation
-
-
+  const [oldDataSet, setOldDataSet] = useState<boolean>(false);
+  useEffect(() => {
+    if (existingDataList && existingDataList.length > 0 && !oldDataSet) {
+      setValue((options) => {
+        const newOptions = existingDataList?.filter((option) => !options.includes(option, 0))
+        console.log([...options,...(newOptions as Option[])])
+        return [...options,...(newOptions as Option[])];
+      });
+      setOldDataSet(true);
+    }
+  }, [existingDataList]);
 
   //function to prepopulate the fixed options
   const orderOptions = (values: readonly Option[]) => {
@@ -88,9 +97,8 @@ export function DropDown({
   };
 
   const [value, setValue] = useState<readonly Option[]>(
-   orderOptions(compulsoryList as Option[])
+    orderOptions(compulsoryList as Option[])
   );
-  const [oldDataSet, setOldDataSet] = useState<boolean>(false);
 
   // function to add values and turn them in strings to store it and pass it to backend when form submitted
   const onChange = (
@@ -120,15 +128,6 @@ export function DropDown({
     onchange(concatenatedValues);
   };
   const onBlur = (e: React.FocusEvent<HTMLElement>) => {
-    if (!oldDataSet) {
-      if (existingDataList && existingDataList.length > 0) {
-        setValue((options) => 
-          [...options,
-          ...(existingDataList as Option[])]
-        )
-        setOldDataSet(true);
-      }
-    }
     onblur();
   };
   //to give customized tooltip when hovered over fixed options for drop down
