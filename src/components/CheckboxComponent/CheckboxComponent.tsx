@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // CheckboxComponent.tsx
-import { useEffect, useState } from "react";
+//import { useEffect, useState } from "react";
 import styles from "./CheckboxComponent.module.css";
 /** The props type of {@link Checkbox | `Checkbox`}. */
 export type CheckboxProps = {
@@ -54,4 +55,4 @@ export function Checkbox({name, size, text, required=false, register, errors, va
     </div>
     </>
   );
-};
+}
