@@ -111,7 +111,6 @@ export const renderInput = (
                 register={register}
                 errors={errors}
                 onchange={onChange}
-                onblur={onBlur}
                 validationSchema={{
                   required: input.required,
                 }}

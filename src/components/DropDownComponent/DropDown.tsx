@@ -1,9 +1,6 @@
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import { components, ActionMeta, OnChangeValue } from "react-select";
 import CreatableSelect from "react-select/creatable";
-import styles from "./DropDown.module.css";
-import { FormState } from "react-hook-form";
-import { Input } from "components/FormInputs";
 import { Option } from "./Option";
 /** The props type of {@link DropDown | `DropDown`}. */
 export type DropDownProps = {
@@ -22,7 +19,6 @@ export type DropDownProps = {
   errors: any;
   size?: string;
   onchange: (values: string) => void;
-  onblur: () => void;
 };
 
 /**
@@ -63,18 +59,19 @@ export type DropDownProps = {
 
 export function DropDown({
   name,
+  // @ts-ignore
   value: propValue = "",
   placeholder = "",
   register,
   validationSchema,
   errors,
+  // @ts-ignore
   required = false,
   optionList,
   compulsoryList,
   existingDataList,
   size,
   onchange,
-  onblur,
 }: DropDownProps) {
   const dropdownRegister = register(name, validationSchema); // for validation
   const [oldDataSet, setOldDataSet] = useState<boolean>(false);
@@ -127,9 +124,7 @@ export function DropDown({
 
     onchange(concatenatedValues);
   };
-  const onBlur = (e: React.FocusEvent<HTMLElement>) => {
-    onblur();
-  };
+
   //to give customized tooltip when hovered over fixed options for drop down
   const Tooltip = (props: any) => {
     const data = props.data as Option;
@@ -160,9 +155,9 @@ export function DropDown({
               <span style={{ color: "red" }}>*</span>
             </div>
           </Placeholder>
-          {React.Children.map(children, (child) =>
-            child && child.type !== Placeholder ? child : null
-          )}
+          {children && children.map((child: any) =>
+  child && child.type !== Placeholder ? child : null
+)}
         </ValueContainer>
       </>
     );
@@ -174,7 +169,7 @@ export function DropDown({
 
   return (
     <>
-      <div className="form-container">
+      <div className="form-container" data-testid="dropdown">
         <CreatableSelect
           styles={{
             //for select box
@@ -223,7 +218,7 @@ export function DropDown({
                   : "none",
             }),
 
-            valueContainer: (provided, state) => ({
+            valueContainer: (provided) => ({
               ...provided,
               padding: size == "large" ? "12px" : "6px", //changing size of box using padding
               overflow: "visible",
@@ -243,6 +238,7 @@ export function DropDown({
             },
 
             multiValueLabel: (base, state) => {
+              // @ts-ignore
               const data = state.data as Option;
               return {
                 ...base,
@@ -279,7 +275,6 @@ export function DropDown({
           isClearable={value.some((v) => !v.isFixed)}
           options={optionList}
           onChange={onChange}
-          onBlur={onBlur}
           isSearchable={true}
           isMulti={true}
           components={customComponents}
