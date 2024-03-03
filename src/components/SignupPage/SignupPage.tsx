@@ -8,7 +8,6 @@ import { renderInput } from "../FormFieldRenderLogic";
 import inputs from "./SignupPageFields";
 import SignupImg from "../../assets/signup.svg";
 import styles from "./SignupPage.module.css";
-import { SvgIcon } from "../IconComponent/SvgIcon";
 import AuthContext, { AuthContextProps } from "../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import AlertContext, { AlertContextProps } from "../../contexts/AlertContext";
@@ -20,7 +19,6 @@ const SignupPage: React.FC = () => {
     const [otpActivated, setOtpActivated] = useState(false);
     const { sendAlert } = useContext(AlertContext) as AlertContextProps;
     const [isAllFieldsValid, setIsAllFieldsValid] = useState(false);
-    const [password, setPassword] = useState("");
     const [otpSent, setOtpSent] = useState(false);
     const [otpTimer, setOtpTimer] = useState("02:00");
     const [loading, setLoading] = useState(false);
@@ -29,7 +27,6 @@ const SignupPage: React.FC = () => {
     const email = watch("user_email_id")
     const pass = watch("user_password");
     const confirmpass = watch("user_password_confirm");
-    const otp = /398392/; //should be as a regex
     const inputSize = useScreenSize()
 
     useEffect(() => {

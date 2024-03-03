@@ -1,5 +1,4 @@
 import { Input } from "components/FormInputs";
-import { Option } from "components/DropDownComponent/Option";
 //numbers like postal codes, are set as text in text_type
 
 const ApplicationFormInputFields: Input[] = [{
