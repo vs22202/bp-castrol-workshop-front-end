@@ -23,7 +23,7 @@ export function FooterWithLogo() {
   return (
     <div className={`${styles.footerContainer}`}>
       <img
-        src="docs\assets\images\castrol_logo.svg"
+        src="src\assets\castrol_logo.svg"
         alt="logo-ct"
         className={`${styles.footerLogo}`}
       />
