@@ -1,5 +1,6 @@
 // Import your CSS module file at the top
 import styles from "./Footer.module.css";
+import { SvgIcon } from "../IconComponent/SvgIcon";
 /** The props type of {@link Footer | `Footer`}. */
 
 /**
@@ -23,7 +24,7 @@ export function FooterWithLogo() {
   return (
     <div className={`${styles.footerContainer}`}>
       <img
-        src="docs\assets\images\castrol_logo.svg"
+        src="../../assets/castrol_logo.svg"
         alt="logo-ct"
         className={`${styles.footerLogo}`}
       />
