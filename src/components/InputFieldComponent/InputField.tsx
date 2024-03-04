@@ -89,6 +89,7 @@ export function InputField({
           } `}
         >
           <input
+            id={name}
             name={name}
             type={inputType}
             {...inputfieldRegister}
@@ -111,6 +112,7 @@ export function InputField({
 
           {/* floatingLabel */}
           <label
+            htmlFor={name} 
             className={`${
               isFocused || inputValue
                 ? styles.floatingLabel
