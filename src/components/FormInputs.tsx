@@ -14,6 +14,7 @@ export interface Input {
   required?: boolean;
   maxlen?: number;
   minlen?: number;
+  datatestid?:string;
   size?: "small" | "medium" | "large";
 }
 export interface ApplicationInputFields {

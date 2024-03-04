@@ -19,6 +19,7 @@ export type InputFieldProps = {
   validationSchema?: any;
   errors: any;
   customValidation?: any;
+  datatestid?:string;
 };
 
 /**
@@ -84,6 +85,7 @@ export type InputFieldProps = {
  * - `validationSchema`: (Optional) Schema used for validation (compatible with form validation libraries).
  * - `errors`: Object containing validation errors, where each key corresponds to an input name.
  * - `customValidation`: (Optional) Additional custom validation logic.
+ * - `datatestid`: (Optional) For unit testing of the component and the pages it is used in.
  */
 
 export function InputField({
@@ -99,6 +101,7 @@ export function InputField({
   register,
   validationSchema,
   errors,
+  datatestid,
 }: InputFieldProps) {
   const [inputValue, setInputValue] = useState(value);
   const [inputType, setInputType] = useState(type);
@@ -158,6 +161,7 @@ export function InputField({
               errors[name] ? styles.isWronginputfield : styles.defaultinputfield
             } ${styles[size]}`}
             disabled={isDisabled}
+            data-testid = {datatestid}
             //required={required}
           />
 

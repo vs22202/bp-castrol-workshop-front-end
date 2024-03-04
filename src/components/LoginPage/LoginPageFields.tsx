@@ -9,6 +9,7 @@ const LoginPageFields: Input[] = [{
     placeholder: "raj_car@gmail.com",
     //errorMessage:"email id should be of minimum 5 characters.",
     label: "Enter Email ID",
+    datatestid:'loginemailid',
     //minlen:5,
     //maxlen:100,
     //pattern: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
@@ -26,6 +27,7 @@ const LoginPageFields: Input[] = [{
     //maxlen:100,
     //errorMessage: "Password should be 10 characters long. Add special characters, number and Capital Letters.",
     label: "Enter Password",
+    datatestid:'loginpassword',
     required: true,
 },
 {
