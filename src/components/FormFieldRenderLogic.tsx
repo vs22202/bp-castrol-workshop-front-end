@@ -125,6 +125,7 @@ export const renderInput = (
           name={input.name}
           label={input.label}
           size={inputSize}
+          datatestid = {input.datatestid}
           //size={input.size ? input.size : "medium"}
           register={register}
           maxlen={input.maxlen}

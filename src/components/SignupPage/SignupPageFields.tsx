@@ -12,6 +12,7 @@ const SignupPageFields: Input[] = [{
     minlen:5,
     maxlen:100,
     pattern: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+    datatestid:'signupemailid',
     required: true,
 },
 {
@@ -26,6 +27,7 @@ const SignupPageFields: Input[] = [{
     maxlen:100,
     errorMessage: "Password should be 10 characters long. Add special characters, number and Capital Letters.",
     label: "Enter Password",
+    datatestid:'signuppassword',
     required: true,
 },
 {

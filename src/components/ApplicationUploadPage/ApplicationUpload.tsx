@@ -215,6 +215,7 @@ const ApplicationUpload: React.FC = () => {
                 : "lg"
             }
             type="solid"
+            datatestid="AppUploadSubmitBtn"
             action="submit"
           />
         </form>
