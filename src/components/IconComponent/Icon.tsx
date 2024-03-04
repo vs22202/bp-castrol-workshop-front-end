@@ -49,27 +49,39 @@ const icons : Record<string, string> = {
     checkcircleG,
 }
 
-/** The props type of {@link Icon | `Icon`}. */
+/**
+ * Props for the Icon component.
+ * 
+ * @property {string} src - The source key for the icon to display. It should match one of the keys in the `icons` object.
+ * @property {"sm" | "md" | "lg"} size - The size of the icon. Can be 'sm' for small, 'md' for medium, or 'lg' for large.
+ */
+
 export type IconProps = {
-    /**
-     *size of the icons
+     /**
+     * The source key for the icon. This should correspond to one of the keys in the `icons` object.
      */
     src: string;
+    /**
+     * The size of the icon. Can be 'sm' for small, 'md' for medium, or 'lg' for large.
+     */
     size: "sm" | "md" | "lg";
   };
   
-  /**
-   *
-   * Icon Component
-   * @category component
-   * @returns {JSX.Element} The rendered icon component.
-   * 
-   * @example
-   * Render a icon of size small
-   * ```tsx
-   * <Icon size="sm"/>
-   * ```
-   */
+ /**
+ * Renders an Icon component.
+ * 
+ * This component is designed to render an icon based on the `src` prop provided. The `src` prop corresponds to keys in the `icons` object, which maps to different SVG assets. The size of the icon can be controlled via the `size` prop.
+ * 
+ * @category Component
+ * @param props The props for the Icon component.
+ * @returns {JSX.Element} The rendered Icon component.
+ * 
+ * @example
+ * Here's how to render an icon of size small with the 'loginW' key:
+ * ```tsx
+ * <Icon src="loginW" size="sm" />
+ * ```
+ */
   
   export function Icon ({size, src}: IconProps ){
   

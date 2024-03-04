@@ -3,15 +3,17 @@ import styles from "./Footer.module.css";
 /** The props type of {@link Footer | `Footer`}. */
 
 /**
- *
- * Footer Component
- * @category component
+ * A footer component with a logo.
  * 
- *
- * @returns {JSX.Element} The rendered footer component.
+ * This component is designed to render a static footer that includes a logo and copyright information.
+ * It's a simple, reusable component that can be added to any page within an application to maintain consistency in branding and copyright notices.
+ * 
+ * @category Component
+ * @returns {JSX.Element} The rendered footer component, including a logo image and copyright text.
  *
  * @example
- * Render a footer
+ * Here's how you can render the `FooterWithLogo` component within your application:
+ * 
  * ```tsx
  * <FooterWithLogo />
  * ```
