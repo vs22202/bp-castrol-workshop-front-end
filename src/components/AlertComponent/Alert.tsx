@@ -1,20 +1,30 @@
 import styles from "./Alert.module.css";
-/** The props type of {@link Alert | `Alert`}. */
+
+/**
+ * Properties for the `Alert` component.
+ */
 
 export type AlertProps = {
-  /**
-   * fill, state and size of the buttons
+  /** 
+   * Defines the alert style type, either "success", "error", "info" or "warning".
    */
   type: "success" | "error" | "info" | "warning";
+    /** 
+   * The text to display for the alert.
+   */
   message: string;
 };
 
 /**
  *
- * Alert Component
+ * Renders a customizable `Alert` component.
+ * 
+ * This component allows for the creation of a alert with customizable properties such as message and type.
+ * It gives a alert message.
+ * 
  * @category component
- *
- * @returns {JSX.Element} The rendered alert component.
+ * @param props The {@link AlertProps} for the alert.
+ * @returns The rendered 'Alert' component as a `JSX.Element`.
  *
  * @example
  * Render a error alert.
