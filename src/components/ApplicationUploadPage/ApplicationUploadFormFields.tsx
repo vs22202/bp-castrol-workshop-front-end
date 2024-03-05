@@ -1,5 +1,4 @@
 import { Input } from "components/FormInputs";
-import { Option } from "components/DropDownComponent/Option";
 //numbers like postal codes, are set as text in text_type
 
 const ApplicationFormInputFields: Input[] = [{
@@ -15,6 +14,7 @@ const ApplicationFormInputFields: Input[] = [{
     minlen:3,
     maxlen:50,
     pattern: /^[A-Za-z,' ]{3,50}$/,
+    datatestid:'workshopname',
     required: true,
 },
 {
@@ -29,6 +29,7 @@ const ApplicationFormInputFields: Input[] = [{
     maxlen:6,
     errorMessage: "It should be a valid postcode!",
     label: "Workshop postcode",
+    datatestid:'workshoppostcode',
     required: true,
 },
 {
@@ -43,6 +44,7 @@ const ApplicationFormInputFields: Input[] = [{
     minlen: 15,
     maxlen:1000,
     pattern: /^[a-zA-Z0-9 ,.-]+$/,
+    datatestid:'address',
     required: true,
 },
 {
@@ -58,6 +60,7 @@ const ApplicationFormInputFields: Input[] = [{
     minlen:3,
     maxlen:50,
     pattern: /^[A-Za-z\s]+$/,
+    datatestid:'state',
     required: true,
 },
 {
@@ -72,6 +75,7 @@ const ApplicationFormInputFields: Input[] = [{
     minlen:3,
     maxlen:100,
     pattern: /^[A-Za-z\s]+$/,// only alphabets allowed
+    datatestid:'city',
     required: true,
 },
 {
@@ -86,6 +90,7 @@ const ApplicationFormInputFields: Input[] = [{
     minlen:3,
     maxlen:16,
     pattern: /^[A-Za-z\s]{3,16}$/,
+    datatestid:'user_name',
     required: true,
 },
 {
@@ -98,6 +103,7 @@ const ApplicationFormInputFields: Input[] = [{
     errorMessage:"It should be a valid email address!",
     label: "Your Email",
     minlen:5,
+    datatestid:'user_email',
     maxlen:100,
 },
 {
@@ -115,6 +121,7 @@ const ApplicationFormInputFields: Input[] = [{
     minlen:11,
     maxlen:12,
     pattern:   /\d{11,12}/,
+    datatestid:'user_mobile',
     required: true,
 },
 {
@@ -129,6 +136,7 @@ const ApplicationFormInputFields: Input[] = [{
     pattern:/\d{1,10}/,
     minlen:1,
     maxlen:10,
+    datatestid:'bay_count',
     required: true,
 },
 {
@@ -185,6 +193,7 @@ const ApplicationFormInputFields: Input[] = [{
     pattern: /^[A-Za-z,\s]+$/,
     minlen:5,
     maxlen:1000,
+    datatestid:'brand',
     required: true,
 },
 {

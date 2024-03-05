@@ -1,14 +1,8 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { Checkbox } from "../CheckboxComponent/CheckboxComponent";
-import { InputField } from "../InputFieldComponent/InputField";
 import { Button } from "../ButtonComponent/Button";
-import { DropDown, DropDownProps } from "../DropDownComponent/DropDown";
 import {
   useForm,
   SubmitHandler,
-  Controller,
-  Control,
-  FieldValues,
   FormProvider,
 } from "react-hook-form";
 import { ApplicationInputFields } from "../FormInputs";
@@ -27,10 +21,6 @@ import styles from "./ApplicationUpload.module.css";
 
 import { useScreenSize } from "../ScreenSizeLogic";
 // import { renderInput } from "../FormFieldRenderLogic";
-interface FormUtilsProps {
-  register: any;
-  errors: any;
-}
 
 const ApplicationUpload: React.FC = () => {
   const methods = useForm<ApplicationInputFields>();
@@ -48,7 +38,6 @@ const ApplicationUpload: React.FC = () => {
   const {
     register,
     handleSubmit,
-    setValue,
     formState: { errors },
     trigger,
     reset,
@@ -226,6 +215,7 @@ const ApplicationUpload: React.FC = () => {
                 : "lg"
             }
             type="solid"
+            datatestid="AppUploadSubmitBtn"
             action="submit"
           />
         </form>

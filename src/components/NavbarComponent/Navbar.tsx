@@ -8,7 +8,13 @@ import AuthContext, { AuthContextProps } from "../../contexts/AuthContext";
 //import { Link, Outlet, useNavigate } from "react-router-dom";
 import { Link, useNavigate } from "react-router-dom";
 
-/** The props type of {@link Navbar | `Navbar`}. */
+/**
+ * Properties for the `Navbar` component.
+ * 
+ * Defines the configuration and behavior of the Navbar component,
+ * including its display when screen size changes and hamburger slider menu option for smaller screen size
+ * and changing of the navbar display options based on if user is logged in or not.
+ */
 export type NavbarProps = {
   /**
    * Authentication state of the user
@@ -17,9 +23,12 @@ export type NavbarProps = {
 };
 /**
  *
- * Navbar Component
- * @category component
- * @returns {JSX.Element} The rendered Navbar Component.
+ * Renders a `Navbar` component with customizable properties.
+ * 
+ * This component is designed to be used as a navbar for different pages.
+ * 
+ * @param props The {@link NavbarProps} to configure the navbar.
+ * @returns A JSX element representing Navbar Component.
  *
  * @example
  * Render the navbar when user is not authenticated

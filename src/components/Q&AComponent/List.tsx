@@ -3,23 +3,34 @@
 import React from 'react';
 import styles from './List.module.css';
 import ListItem  from './ListItem';
-/** The props type of {@link List | `List`}. */
+
+/**
+ * Properties for the `List` component.
+ * 
+ * Defines the configuration and behavior of the List component
+ * including its size and display text.
+ */
+
 export interface IListProps {
    /**
-   * item and size of the list
+   * An array of string containing labels of list
    */
   items: string[];
+  /** 
+   * Specifies the size of the list: "small" and "large".
+   */
   size: "small" | "large";
 }
 /**
- *
- * ListItem Component
- * @category component
+ * Renders a customizable `List` component.
  * 
- * @param items an array of string containing labels of list
- * @param size the size of the list could be small or large
+ * This component allows for the creation of a list with customizable properties such as text and size.
+ * 
+ * @category Components
+ * 
+ * @param props The {@link IListProps} for the List.
  *
- * @returns {JSX.Element} The rendered list component.
+ * @returns The rendered `List` component as a `JSX.Element`.
  *
  * @example
  * Render a list of size large and items array

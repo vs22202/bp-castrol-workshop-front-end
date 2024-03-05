@@ -1,40 +1,64 @@
 import styles from "./Button.module.css";
 import { SvgIcon } from "../IconComponent/SvgIcon";
-/** The props type of {@link Button | `Button`}. */
 
+/**
+ * Properties for the `Button` component.
+ */
 export type ButtonProps = {
-  /**
-   * fill, state and size of the buttons
+  /** 
+   * Determines if the button is disabled. Defaults to `false`.
    */
   disabled?: boolean;
+  /** 
+   * Defines the button style type, either "solid" or "outline".
+   */
   type: "solid" | "outline";
+  /** 
+   * Specifies the size of the button: "sm" for small, "md" for medium, and "lg" for large.
+   */
   size?: "sm" | "md" | "lg";
+  /** 
+   * The text to display on the button.
+   */
   text: string;
+  /** 
+   * Optional icon image to display on the button. Requires the name of the icon as defined in `SvgIcon` component.
+   */
   iconimg?: string;
+  /** 
+   * The button action type: "button", "submit", or "reset". Defaults to "button".
+   */
   action?: "button" | "submit" | "reset";
+  /** 
+   * Optional click handler for the button. Receives the mouse event as an argument.
+   */
   onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+  /** 
+   * Optional test id for testing the component as well as the pages it is used in.
+   */
+  datatestid?: string;
 };
 
 /**
- *
- * Button Component
- * @category component
- *
- * @param text text on the button
- * @param type if the button is solid or outlined
- * @param size the size of the button could be small, medium, large
- * @param disabled the button could be active or disabled
- * @param iconimg the image or icon that has to be included within the button
- *
- * @returns {JSX.Element} The rendered button component.
- *
+ * Renders a customizable `Button` component.
+ * 
+ * This component allows for the creation of a button with customizable properties such as text, type, size, and optional icons.
+ * It supports being disabled and can handle click events.
+ * 
+ * @category Components
+ * @param props The {@link ButtonProps} for the button.
+ * @returns The rendered `Button` component as a `JSX.Element`.
+ * 
  * @example
- * Render a button of size small, type outline, and text "button"
  * ```tsx
- * <Button text="Button" type="outline" size="sm" disabled={true} iconimg="chevronG"/>
+ * <Button text="Submit" type="solid" size="md" disabled={false} action="submit" />
+ * ```
+ * 
+ * @example
+ * ```tsx
+ * <Button text="Cancel" type="outline" size="sm" disabled iconimg="crossIcon" onClick={() => console.log('Clicked!')} />
  * ```
  */
-
 export function Button({
   text,
   type = "solid",
@@ -42,6 +66,7 @@ export function Button({
   disabled = false,
   action = "button",
   iconimg,
+  datatestid,
   onClick,
 }: ButtonProps) {
   return (
@@ -50,9 +75,10 @@ export function Button({
       type={action}
       disabled={disabled}
       onClick={onClick}
+      data-testid={datatestid}
     >
       {iconimg && <SvgIcon iconName={iconimg} wrapperStyle={size} />}
-      <div>{text}</div>
+      <span>{text}</span>
     </button>
   );
 }

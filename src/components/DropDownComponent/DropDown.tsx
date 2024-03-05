@@ -2,41 +2,69 @@ import  { useEffect, useState } from "react";
 import { components, ActionMeta, OnChangeValue } from "react-select";
 import CreatableSelect from "react-select/creatable";
 import { Option } from "./Option";
-/** The props type of {@link DropDown | `DropDown`}. */
+/**
+ * Properties for the `DropDown` component.
+ */
 export type DropDownProps = {
-  /**
-   * name,value,placeholder,required, optionlist,compulsorylist,register,validationschema,errors, onchange of the dropdown
+  /** 
+   * Determines the name of the dropdown.
    */
   name: string;
+  /** 
+   * Defines the value of dropdown.
+   */
   value?: string;
+    /** 
+   * Defines what placeholder/label the dropdown will have.
+   */
   placeholder?: string;
+    /**
+   * Indicates whether the dropdown input is required for form submission. Defaults to `false`.
+   */
   required?: boolean;
+    /**
+   * List of option to display for the dropdown.
+   */
   optionList: Option[] | undefined;
+    /**
+   * List of fixed selected option to prepopulated in the select box for the dropdown.
+   */
   compulsoryList: Option[] | undefined; // in this all options will be prepopulated and isfixed true
+   /**
+   * Existing selected options taken from the user mainly used for edit application.
+   */
   existingDataList?: Option[] | undefined;
+  /**
+   * Function to "register" the input in the context of a form library (like React Hook Form) for handling form submission and validation.
+   */
   register: any;
+   /**
+   * Schema or rules for validating the dropdown input, used in conjunction with `register` to enforce validation constraints.
+   */
   validationSchema?: any;
+  /**
+   * Object containing error messages or validation state, typically used with form libraries to indicate validation errors.
+   */
   errors: any;
+  /**
+   * The size of the dropdown. This controls the scaling of the dropdown's appearance.
+   * While currently a string, consider restricting this to specific size options like "small" or "large" for consistency.
+   */
   size?: string;
+  /**
+   * A function to set value of dropdown when any change happens(option slected/removed/added)..
+   */
   onchange: (values: string) => void;
 };
 
 /**
- * dropdown Component
- * @category Component
- *
- * @param {string} name - The name of the dropdown.
- * @param {string} value - The value of the dropdown.
- * @param {string} placeholder - The placeholder text associated with the dropdown.
- * @param {boolean} required - Indicates whether the dropdown is required.
- * @param {Option[]| undefined} optionList - A list of options to be shown in dropdown menulist.
- * @param {Option[]| undefined} compulsoryList - A list of options to be prepopulated in select box.
- * @param {function} register - A function to register the dropdown in a form.
- * @param {function} validationSchema - A function for conditions for validating the dropdown.
- * @param {function} errors - A function to know errors for dropdown
- * @param {function} onchange - A function to set value of dropdown when any change happens(option slected/removed/added).
+ * Renders a `Dropdown` component with customizable properties.
  * 
- * @returns {JSX.Element} The rendered dropdown component.
+ * This component is designed to be used within forms, supporting custom sizes, required validation,
+ * and integration with form handling libraries through the `register` prop.
+ * 
+ * @param props The {@link DropDownProps} to configure the dropdown.
+ * @returns A JSX element representing a stylized dropdown, with fixed options already prepopulated and a menu list of options from which user can select or create new options.
  *
  * @example
  * // Render a dropdown with the placeholder text "Services Offered", optionList "{OptionList}" and compulsoryList "{CompulsoryList}"

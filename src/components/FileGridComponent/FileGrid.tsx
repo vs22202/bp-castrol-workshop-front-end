@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDropzone } from "react-dropzone";
 import styles from "./FileGrid.module.css";
 import Thumbnail from "./Thumbnail";
@@ -6,7 +6,11 @@ import { Button } from "../ButtonComponent/Button";
 import { SvgIcon } from "../IconComponent/SvgIcon";
 import { useFormContext } from "react-hook-form";
 import { FileData } from "components/FormFieldRenderLogic";
-/** The props type of {@link FileGrid| `FileGrid`}. */
+/**
+ * Properties for the `FileGrid` component.
+ * 
+ * Defines the configuration and behavior of the FileGrid component.
+ */
 type FileGridProps = React.DetailedHTMLProps<
   React.InputHTMLAttributes<HTMLInputElement>,
   HTMLInputElement
@@ -17,10 +21,11 @@ type FileGridProps = React.DetailedHTMLProps<
 
 /**
  *
- * File Upload Grid Component
- * @category component
- *
- * @returns {JSX.Element} The rendered button component.
+ * Renders a `FileGrid` component.
+ * This component is designed to be used within forms to take and display a file grid and to save those files' path when form is submitted. 
+ * 
+ * @param props The {@link FileGridProps} to configure the filegrid.
+ * @returns A JSX element representing a stylized filegrid.
  *
  * @example
  * Render a empty file grid where files can be uploaded

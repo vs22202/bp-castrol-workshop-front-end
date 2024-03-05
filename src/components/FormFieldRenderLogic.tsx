@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from "react";
 import { InputField } from "../components/InputFieldComponent/InputField";
 import { Checkbox } from "../components/CheckboxComponent/CheckboxComponent";
 import { Input } from "./FormInputs";
@@ -6,8 +5,6 @@ import {
   Control,
   Controller,
   FieldValues,
-  SubmitHandler,
-  useForm,
 } from "react-hook-form";
 import { DropDown } from "./DropDownComponent/DropDown";
 import ListItem from "./Q&AComponent/ListItem";
@@ -95,7 +92,7 @@ export const renderInput = (
             name={input.name}
             control={control as unknown as Control<FieldValues>}
             defaultValue={defaultValue}
-            render={({ field: { onChange, onBlur, value } }) => (
+            render={({ field: { onChange} }) => (
               <DropDown
                 name={input.name}
                 key={input.id}
@@ -128,6 +125,7 @@ export const renderInput = (
           name={input.name}
           label={input.label}
           size={inputSize}
+          datatestid = {input.datatestid}
           //size={input.size ? input.size : "medium"}
           register={register}
           maxlen={input.maxlen}
