@@ -18,9 +18,12 @@ import AuthContext, { AuthContextProps } from "../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import AlertContext, { AlertContextProps } from "../../contexts/AlertContext";
 import styles from "./ApplicationUpload.module.css";
-
 import { useScreenSize } from "../ScreenSizeLogic";
-// import { renderInput } from "../FormFieldRenderLogic";
+
+
+/**
+ * Properties for the `ApplicationUpload` page.
+ */
 
 const ApplicationUpload: React.FC = () => {
   const methods = useForm<ApplicationInputFields>();
@@ -43,6 +46,23 @@ const ApplicationUpload: React.FC = () => {
     reset,
     control,
   } = methods;
+
+/**
+ * Renders a Application Upload page component.
+ * 
+ * This page allows for the workshop to upload/submit application for their workshop containing information realated to workshop
+ * like services offered, name, expertise, address, telephone number, images and videos of the workshop and many more information needed for workshop onboarding.
+ * 
+ * @category Pages
+ * @returns The rendered `ApplicationUpload` page as a `JSX.Element`.
+ * 
+ * @example
+ * ```tsx
+ * <ApplicationUpload />
+ * ```
+ * 
+ */
+
 
   const inputSize = useScreenSize();
 

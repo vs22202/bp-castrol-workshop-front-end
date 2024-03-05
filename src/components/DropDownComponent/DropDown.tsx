@@ -153,7 +153,6 @@ export function DropDown({
     const concatenatedValues = orderOptions(newValue)
       .map((v) => v.value)
       .join(", ");
-    // console.log("Current Values:", concatenatedValues);
 
     onchange(concatenatedValues);
   };

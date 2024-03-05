@@ -48,7 +48,6 @@ export const renderInput = (
         <Checkbox
           key={input.id}
           name={input.name}
-          //size={input.size ? input.size : "medium"}
           size={inputSize}
           text={input.label}
           register={register}
@@ -97,13 +96,10 @@ export const renderInput = (
               <DropDown
                 name={input.name}
                 key={input.id}
-                //value
                 placeholder={input.label}
-                // register={register}
                 compulsoryList={input.compulsorylist}
                 optionList={input.optionlist}
                 existingDataList={optionsList || []}
-                // {...field}
                 size={inputSize}
                 required={input.required}
                 register={register}
@@ -128,7 +124,6 @@ export const renderInput = (
           label={input.label}
           size={inputSize}
           datatestid = {input.datatestid}
-          //size={input.size ? input.size : "medium"}
           register={register}
           maxlen={input.maxlen}
           errors={errors}

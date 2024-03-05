@@ -1,5 +1,3 @@
-// SignUpFormWithImage.tsx
-
 import React, { useContext, useEffect, useState } from "react";
 import { InputField } from "../InputFieldComponent/InputField";
 import { Button } from "../ButtonComponent/Button";
@@ -78,23 +76,6 @@ const SignupPage: React.FC = () => {
         }
       }, 1000);
     };
-    
-
-
-
-
-    /*     //Login Button
-    function handleLogin(event: React.MouseEvent<HTMLButtonElement, MouseEvent>){
-        event.preventDefault()
-        console.log("Redirect to login page...");
-    }
-        //Handles Signup Button
-    const handleSignup: SubmitHandler<Record<string, any>> = (data, event) => {
-        event?.preventDefault();
-        // Submit function for Application Upload form
-      console.log(data);
-      signup(data.user_email_id, data.user_password,data.otp);
-    } */
 
   //Login Button
   function handleLogin(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
@@ -189,10 +170,6 @@ const SignupPage: React.FC = () => {
                   value: 6,
                   message: "Enter 6 digit OTP.",
                 },
-                // pattern: {
-                //     value: otp,
-                //     message: "Incorrect OTP."
-                // }
               }}
             />
             {!otpSent ? 

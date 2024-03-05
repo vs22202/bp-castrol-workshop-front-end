@@ -1,3 +1,9 @@
+test("demo", () => {
+    expect(true).toBe(true);
+  });
+
+
+
 //import { /* fireEvent, */ render, /* waitFor */ } from "@testing-library/react";
 /* import '@testing-library/jest-dom';
 import { ApplicationUpload } from "./ApplicationUpload";

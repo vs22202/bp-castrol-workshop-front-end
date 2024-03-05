@@ -14,18 +14,6 @@ import { Button } from "./Button";
  * @module ButtonTests
  */
 
-/*
-test("demo", () => {
-  expect(true).toBe(true);
-});
-
-
-test("Renders the small Button", () => {
-  render(<Button text="submit" size="sm" type="outline" iconimg="submitG" />);
-  expect(true).toBeTruthy();
-});
-*/
-
 /**
    * Tests if the `Button` component renders without crashing and behaves as expected.
    * 
@@ -53,6 +41,5 @@ describe("Button component", () => {
     // Check if the button has the proper action
     expect(buttonRole).toHaveAttribute("type", "submit");
 
-    // You can add more assertions based on your component's requirements
   });
 });
