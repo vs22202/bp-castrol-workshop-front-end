@@ -1,4 +1,4 @@
-import { Input } from "../FormInputs";
+import { Input } from "../../components/FormInputs";
 
 const LoginPageFields: Input[] = [{
     id: 1,

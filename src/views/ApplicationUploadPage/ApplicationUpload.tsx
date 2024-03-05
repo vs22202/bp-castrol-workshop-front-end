@@ -1,24 +1,24 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { Button } from "../ButtonComponent/Button";
+import { Button } from "../../components/ButtonComponent/Button";
 import {
   useForm,
   SubmitHandler,
   FormProvider,
 } from "react-hook-form";
-import { ApplicationInputFields } from "../FormInputs";
+import { ApplicationInputFields } from "../../components/FormInputs";
 import { Option } from "components/DropDownComponent/Option";
 import inputs from "./ApplicationUploadFormFields";
 import {
   FileData,
   OptionsUtilsProps,
   renderInput,
-} from "../FormFieldRenderLogic";
+} from "../../components/FormFieldRenderLogic";
 
 import AuthContext, { AuthContextProps } from "../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import AlertContext, { AlertContextProps } from "../../contexts/AlertContext";
 import styles from "./ApplicationUpload.module.css";
-import { useScreenSize } from "../ScreenSizeLogic";
+import { useScreenSize } from "../../components/ScreenSizeLogic";
 
 
 /**

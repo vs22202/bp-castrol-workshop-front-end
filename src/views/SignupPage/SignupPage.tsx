@@ -1,15 +1,15 @@
 import React, { useContext, useEffect, useState } from "react";
-import { InputField } from "../InputFieldComponent/InputField";
-import { Button } from "../ButtonComponent/Button";
+import { InputField } from "../../components/InputFieldComponent/InputField";
+import { Button } from "../../components/ButtonComponent/Button";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { renderInput } from "../FormFieldRenderLogic";
+import { renderInput } from "../../components/FormFieldRenderLogic";
 import inputs from "./SignupPageFields";
 import SignupImg from "../../assets/signup.svg";
 import styles from "./SignupPage.module.css";
 import AuthContext, { AuthContextProps } from "../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import AlertContext, { AlertContextProps } from "../../contexts/AlertContext";
-import { useScreenSize } from "../ScreenSizeLogic";
+import { useScreenSize } from "../../components/ScreenSizeLogic";
 
 const SignupPage: React.FC = () => {
   const { register, handleSubmit, formState: { errors }, watch, trigger } = useForm();
