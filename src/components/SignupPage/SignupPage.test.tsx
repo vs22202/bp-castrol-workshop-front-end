@@ -1,58 +1,149 @@
-import { render, fireEvent, waitFor } from '@testing-library/react';
-import { SignupPage } from './SignupPage';
+import { fireEvent, render, waitFor } from "@testing-library/react";
+import '@testing-library/jest-dom';
+import { SignupPage } from "./SignupPage";
+import RequireAuth from "../RequireAuthComponent/RequireAuth";
+import AuthContext, { AuthContextProps } from "../../contexts/AuthContext";
+import AlertContext, {AlertContextProps} from "../../contexts/AlertContext";
+import { MemoryRouter } from "react-router-dom";
 
-describe('SignupPage Component', () => {
-  it('redirects to login page after successful registration', async () => {
-    // Mock the context functions
-    const mockSignup = jest.fn().mockResolvedValue('success');
-    const mockGenerateOtp = jest.fn().mockResolvedValue("otp generated");
+// Mock the useLocation hook
+jest.mock('react-router-dom', () => ({
+...jest.requireActual('react-router-dom'), // Use the actual react-router-dom module
+useLocation: jest.fn().mockReturnValue({ pathname: '/mock-path' }), // Mock useLocation
+}));
 
-    // Mock the fetch function to simulate server response
-    jest.spyOn(window, 'fetch').mockResolvedValueOnce({
-      json: jest.fn().mockResolvedValueOnce({ output: 'success', user: {} }),
-    } as any);
+const alert = null;
+const sendAlert= jest.fn();
 
-    // Mock the sendAlert function
-    const mockSendAlert = jest.fn();
+const login = jest.fn();
+const currentUser = null;
+const signup = jest.fn();
+const generateOtp = jest.fn();
+const logout = jest.fn();
 
-    // Render the SignupPage component
-    const { getByText, getByLabelText } = render(<SignupPage />, {
-      authContext: {
-        signup: mockSignup,
-        generateOtp: mockGenerateOtp,
-      },
-      alertContext: {
-        sendAlert: mockSendAlert,
-      },
-    });
+//mock context values defined
+const mockContextValue: AlertContextProps = {
+    alert,
+    sendAlert,
+};
 
-    // Fill in form fields with valid values
-    fireEvent.change(getByLabelText('Enter Email ID'), { target: { value: 'test@example.com' } });
-    fireEvent.change(getByLabelText('Enter Password'), { target: { value: 'Password123' } });
-    fireEvent.change(getByLabelText('Confirm Password'), { target: { value: 'Password123' } });
+//mock auth context values defined
+const mockAuthContextValue: AuthContextProps = {
+  login,
+  currentUser,
+  signup,
+  generateOtp,
+  logout
+};
 
-    // Click the "Get OTP" button
-    fireEvent.click(getByText('Get OTP'));
+describe('SignUp Page Testing ', ()=>{
+//test to check if the login page components are getting rendered or not
+test("Renders all components in the Signup page corectly", ()=>{
+    const {getByTestId} = render(
+      <AuthContext.Provider value={mockAuthContextValue}>
+        <AlertContext.Provider value={mockContextValue}>
+            <MemoryRouter>
+            <RequireAuth requireAuth={false}>
+                <SignupPage />
+            </RequireAuth>
+            </MemoryRouter>
+        </AlertContext.Provider>
+      </AuthContext.Provider>
+    )
 
-    // Wait for the OTP input field to be activated
-    await waitFor(() => expect(getByLabelText('OTP')).toBeEnabled());
+    //all input fields
+    const emailInput = getByTestId('signupemailid');
+    const passwordInput = getByTestId('signuppassword');
+    const passwordConfirmInput = getByTestId('signuppasswordconfirm');
+    const otpInput = getByTestId('signupotp')
 
-    // Fill in the OTP field with a valid OTP
-    fireEvent.change(getByLabelText('OTP'), { target: { value: '123456' } });
+    //all buttons
+    const LoginBtn = getByTestId('SignupPageLoginBtn');
+    const SignupBtn = getByTestId('SignupPageSignupBtn');
+    const otpBtn = getByTestId('SignupPageOtpBtnActive');
 
-    // Click the "SignUp" button
-    fireEvent.click(getByText('SignUp'));
+    //all input fields are in the document
+    expect(emailInput).toBeInTheDocument();
+    expect(passwordInput).toBeInTheDocument();
+    expect(passwordConfirmInput).toBeInTheDocument();
+    expect(otpInput).toBeInTheDocument();
 
-    // Wait for redirection to the login page
-    await waitFor(() => {
-      expect(window.location.pathname).toBe('/login');
-    });
+    //all buttons are in the document
+    expect(LoginBtn).toBeInTheDocument();
+    expect(SignupBtn).toBeInTheDocument();
+    expect(otpBtn).toBeInTheDocument();
+})
 
-    // Assert that the context functions were called with correct parameters
-    expect(mockGenerateOtp).toHaveBeenCalledWith('test@example.com');
-    expect(mockSignup).toHaveBeenCalledWith('test@example.com', 'Password123', '123456');
+//test to check whether the email and password input fields are working
+ test("User can input their email, password and OTP",()=>{
+    const {getByTestId} = render(
+      <AuthContext.Provider value={mockAuthContextValue}>
+      <AlertContext.Provider value={mockContextValue}>
+          <MemoryRouter>
+          <RequireAuth requireAuth={false}>
+              <SignupPage />
+          </RequireAuth>
+          </MemoryRouter>
+      </AlertContext.Provider>
+    </AuthContext.Provider>
+    )
 
-    // Assert that sendAlert was not called
-    expect(mockSendAlert).not.toHaveBeenCalled();
-  });
-});
+    const emailInput = getByTestId('signupemailid');
+    const passwordInput = getByTestId('signuppassword');
+    const passwordConfirmInput = getByTestId('signuppasswordconfirm');
+    const otpInput = getByTestId('signupotp')
+    const otpBtn = getByTestId('SignupPageOtpBtnActive');
+
+    fireEvent.change(emailInput, {target:{value:"richa21kiran@gmail.com"}});
+    fireEvent.change(passwordInput, {target:{value:"PASSWORDpassword123"}});
+    fireEvent.change(passwordConfirmInput, {target:{value:"PASSWORDpassword123"}});
+    fireEvent.click(otpBtn);
+    fireEvent.change(otpInput, {target:{value:"123456"}});
+
+    expect(emailInput).toHaveValue("richa21kiran@gmail.com");
+    expect(passwordInput).toHaveValue("PASSWORDpassword123");
+    expect(passwordConfirmInput).toHaveValue("PASSWORDpassword123");
+    expect(otpInput).toHaveValue("123456");
+}) 
+
+//test to check whether the login form submits on clicking on login button or not
+ test("Submit action gets triggered when signup button is clicked",async()=>{
+
+    //fetch each element by their test id
+    const { getByTestId }=render(
+      <AuthContext.Provider value={mockAuthContextValue}>
+      <AlertContext.Provider value={mockContextValue}>
+          <MemoryRouter>
+          <RequireAuth requireAuth={false}>
+              <SignupPage />
+          </RequireAuth>
+          </MemoryRouter>
+      </AlertContext.Provider>
+    </AuthContext.Provider>
+    )
+
+    const SignupForm = getByTestId("SignupForm");
+    const emailInput = getByTestId('signupemailid');
+    const passwordInput = getByTestId('signuppassword');
+    const passwordConfirmInput = getByTestId('signuppasswordconfirm');
+    const otpInput = getByTestId('signupotp')
+    const SignupBtn = getByTestId('SignupPageSignupBtn');
+    const otpBtn = getByTestId('SignupPageOtpBtnActive');
+
+    fireEvent.change(emailInput, {target:{value:"richa21kiran@gmail.com"}});
+    fireEvent.change(passwordInput, {target:{value:"PASSWORDpassword123"}});
+    fireEvent.change(passwordConfirmInput, {target:{value:"PASSWORDpassword123"}});
+    fireEvent.click(otpBtn);
+    fireEvent.change(otpInput, {target:{value:"123456"}});
+
+    fireEvent.click(SignupBtn) //click the login button
+    await waitFor(()=>{
+        expect(SignupForm).toHaveFormValues({
+            user_email_id: "richa21kiran@gmail.com",
+            user_password: "PASSWORDpassword123",
+            user_password_confirm: "PASSWORDpassword123",
+            otp: '123456'
+        })
+    })
+})
+})

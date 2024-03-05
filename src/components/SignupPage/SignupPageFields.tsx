@@ -44,6 +44,7 @@ const SignupPageFields: Input[] = [{
     label: "Confirm Password",
     required: true,
     //customValidation: {(value)=>value === getValue("user_password")}
+    datatestid:'signuppasswordconfirm'
 },
 ]
 
