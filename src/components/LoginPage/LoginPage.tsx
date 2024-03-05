@@ -59,6 +59,7 @@ const LoginPage: React.FC = () => {
             <form
               onSubmit={handleSubmit(handleLogin)}
               onChange={handleInputChange}
+              data-testid = "LoginForm"
             >
               <h1
                 style={{
