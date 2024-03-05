@@ -55,6 +55,10 @@ export type DropDownProps = {
    * A function to set value of dropdown when any change happens(option slected/removed/added)..
    */
   onchange: (values: string) => void;
+  /**
+   * To give an ID to the drop down component for testing
+   */
+  datatestid?:string;
 };
 
 /**
@@ -81,7 +85,7 @@ export type DropDownProps = {
               validationSchema={{
                 required: input.required,
               }}
-              
+              datatestid=
             />
  */
 
@@ -99,6 +103,7 @@ export function DropDown({
   compulsoryList,
   existingDataList,
   size,
+  datatestid,
   onchange,
 }: DropDownProps) {
   const dropdownRegister = register(name, validationSchema); // for validation
@@ -305,6 +310,7 @@ export function DropDown({
           onChange={onChange}
           isSearchable={true}
           isMulti={true}
+          data-testid={datatestid}
           components={customComponents}
         />
       </div>

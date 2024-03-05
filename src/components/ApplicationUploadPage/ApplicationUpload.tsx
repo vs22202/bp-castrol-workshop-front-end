@@ -50,7 +50,7 @@ const ApplicationUpload: React.FC = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      setLoading(true);
+      setLoading(false);
       const result = await fetch(
         `${import.meta.env.VITE_BACKEND_URL}/application/${
           currentUser?.user_email

@@ -56,6 +56,7 @@ export const renderInput = (
           validationSchema={{
             required: input.required,
           }}
+          datatestid={input.datatestid}
           required={input.required}
         />
       );
@@ -107,6 +108,7 @@ export const renderInput = (
                 required={input.required}
                 register={register}
                 errors={errors}
+                datatestid={input.datatestid}
                 onchange={onChange}
                 validationSchema={{
                   required: input.required,
