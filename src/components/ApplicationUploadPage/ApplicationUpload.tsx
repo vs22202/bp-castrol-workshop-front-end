@@ -23,6 +23,20 @@ import { useScreenSize } from "../ScreenSizeLogic";
 
 /**
  * Properties for the `ApplicationUpload` page.
+ * 
+ * Renders a Application Upload page component.
+ * 
+ * This page allows for the workshop to upload/submit application for their workshop containing information realated to workshop
+ * like services offered, name, expertise, address, telephone number, images and videos of the workshop and many more information needed for workshop onboarding.
+ * 
+ * @category Pages
+ * @returns The rendered `ApplicationUpload` page as a `JSX.Element`.
+ * 
+ * @example
+ * ```tsx
+ * <ApplicationUpload />
+ * ```
+ * 
  */
 
 const ApplicationUpload: React.FC = () => {
@@ -46,22 +60,6 @@ const ApplicationUpload: React.FC = () => {
     reset,
     control,
   } = methods;
-
-/**
- * Renders a Application Upload page component.
- * 
- * This page allows for the workshop to upload/submit application for their workshop containing information realated to workshop
- * like services offered, name, expertise, address, telephone number, images and videos of the workshop and many more information needed for workshop onboarding.
- * 
- * @category Pages
- * @returns The rendered `ApplicationUpload` page as a `JSX.Element`.
- * 
- * @example
- * ```tsx
- * <ApplicationUpload />
- * ```
- * 
- */
 
 
   const inputSize = useScreenSize();
