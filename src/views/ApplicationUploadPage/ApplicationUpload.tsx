@@ -55,9 +55,10 @@ const ApplicationUpload: React.FC = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors,dirtyFields },
     trigger,
     reset,
+    watch,
     control,
   } = methods;
 
@@ -149,6 +150,19 @@ const ApplicationUpload: React.FC = () => {
 
   const submitForm: SubmitHandler<ApplicationInputFields> = async (data) => {
     setLoading(true);
+    if (formMode == "edit") {
+      let field: keyof ApplicationInputFields;
+      for ( field in dirtyFields) {
+        console.log(watch(field))
+      }
+      sendAlert({
+        message: "Application Updated Succesfully",
+        type: "success",
+      });
+      return
+      navigate("/", { replace: true });
+      return;
+    }
     const formData = new FormData();
     let key: keyof ApplicationInputFields;
     for (key in data) {
@@ -166,7 +180,6 @@ const ApplicationUpload: React.FC = () => {
       });
       const res = await result.json();
       if (res.output == "success") {
-        console.log("hello");
         setLoading(false);
         sendAlert({
           message: "Application Submitted Succesfully",
