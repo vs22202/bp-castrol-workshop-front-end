@@ -1,4 +1,5 @@
 import { Option } from "../components/DropDownComponent/Option";
+import { FileData } from "./FormFieldRenderLogic";
 export interface Input {
   id: number;
   name: string;
@@ -35,7 +36,8 @@ export interface ApplicationInputFields {
   consent_being_contacted: boolean;
   consent_receive_info: boolean;
   file_paths: string;
-  files:File[];
+  files: File[];
+  filesOld: FileData[];
   application_status: string;
   last_modified_date: string;
 }
