@@ -133,14 +133,8 @@ const ApplicationUpload: React.FC = () => {
             key: name + Date.now(),
           });
         });
-        Object.assign(data,{filesOld:fileData})
+        Object.assign(data, { filesOld: fileData })
         reset({ ...data });
-        const inputs = formRef.current?.querySelectorAll("input");
-        if (inputs) {
-          for (let i = inputs.length; i >= 0; i--) {
-            inputs[i]?.focus();
-          }
-        }
         setFormMode("edit");
         setExistingOptionsList({
           services_offered: services,
