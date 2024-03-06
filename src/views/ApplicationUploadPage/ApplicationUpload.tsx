@@ -1,10 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { Button } from "../../components/ButtonComponent/Button";
-import {
-  useForm,
-  SubmitHandler,
-  FormProvider,
-} from "react-hook-form";
+import { useForm, SubmitHandler, FormProvider } from "react-hook-form";
 import { ApplicationInputFields } from "../../components/FormInputs";
 import { Option } from "components/DropDownComponent/Option";
 import inputs from "./ApplicationUploadFormFields";
@@ -19,7 +15,6 @@ import { useNavigate } from "react-router-dom";
 import AlertContext, { AlertContextProps } from "../../contexts/AlertContext";
 import styles from "./ApplicationUpload.module.css";
 import { useScreenSize } from "../../components/ScreenSizeLogic";
-
 
 /**
  * `ApplicationUpload` Page
@@ -83,13 +78,12 @@ const ApplicationUpload: React.FC = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors,dirtyFields },
+    formState: { errors, isDirty, dirtyFields },
     trigger,
     reset,
     watch,
     control,
   } = methods;
-
 
   const inputSize = useScreenSize();
 
@@ -97,7 +91,7 @@ const ApplicationUpload: React.FC = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      setLoading(false);
+      setLoading(true);
       const result = await fetch(
         `${import.meta.env.VITE_BACKEND_URL}/application/${
           currentUser?.user_email
@@ -139,6 +133,7 @@ const ApplicationUpload: React.FC = () => {
             key: name + Date.now(),
           });
         });
+        Object.assign(data,{filesOld:fileData})
         reset({ ...data });
         const inputs = formRef.current?.querySelectorAll("input");
         if (inputs) {
@@ -146,7 +141,7 @@ const ApplicationUpload: React.FC = () => {
             inputs[i]?.focus();
           }
         }
-        setFormMode("edit")
+        setFormMode("edit");
         setExistingOptionsList({
           services_offered: services,
           expertise: expertise,
@@ -172,23 +167,41 @@ const ApplicationUpload: React.FC = () => {
       // Trigger validation for the specified input fields
       await trigger(name);
     }
-
-    console.log(errors);
   };
 
   const submitForm: SubmitHandler<ApplicationInputFields> = async (data) => {
     setLoading(true);
     if (formMode == "edit") {
       let field: keyof ApplicationInputFields;
-      for ( field in dirtyFields) {
-        console.log(watch(field))
+      const formData = new FormData();
+      for (field in dirtyFields) {
+        if (field == "files" || field == "filesOld") continue;
+        formData.append(field as string, `${data[field]}`);
       }
-      sendAlert({
-        message: "Application Updated Succesfully",
-        type: "success",
-      });
-      return
-      navigate("/", { replace: true });
+      for (const file in data.files) formData.append("files", data.files[file]);
+      formData.append("user_email", currentUser?.user_email || "");
+      formData.append("filesOld", JSON.stringify(data.filesOld));
+      console.log(formData.getAll("user_email"));
+      try {
+        const result = await fetch("http://localhost:3000/application/edit", {
+          method: "POST",
+          body: formData,
+        });
+        const res = await result.json();
+        if (res.output == "success") {
+          setLoading(false);
+          sendAlert({
+            message: "Application Updated Succesfully",
+            type: "success",
+          });
+          navigate("/", { replace: true });
+          return;
+        }
+        sendAlert({ message: res.msg, type: "error" });
+      } catch (err) {
+        console.log(err);
+      }
+      setLoading(false);
       return;
     }
     const formData = new FormData();
@@ -276,6 +289,7 @@ const ApplicationUpload: React.FC = () => {
             type="solid"
             datatestid="AppUploadSubmitBtn"
             action="submit"
+            disabled={!isDirty}
           />
         </form>
       </FormProvider>
