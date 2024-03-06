@@ -17,21 +17,49 @@ import styles from "./ApplicationUpload.module.css";
 import { useScreenSize } from "../../components/ScreenSizeLogic";
 
 /**
- * Properties for the `ApplicationUpload` page.
- *
- * Renders a Application Upload page component.
- *
- * This page allows for the workshop to upload/submit application for their workshop containing information realated to workshop
- * like services offered, name, expertise, address, telephone number, images and videos of the workshop and many more information needed for workshop onboarding.
- *
+ * `ApplicationUpload` Page
+ * 
+ * Renders a comprehensive page designed for workshop owners to seamlessly upload and submit applications, providing crucial 
+ * information related to their workshop. This page serves as a pivotal hub for onboarding workshops into the system, facilitating 
+ * the inclusion of essential details.
+ * The form allows input for workshop details, services offered, expertise, address, contact information, and file uploads.
+ * Supports both new submissions and editing existing applications.
+ * 
  * @category Pages
  * @returns The rendered `ApplicationUpload` page as a `JSX.Element`.
- *
+ * 
+ * 
+ * ## Features
+ * - **Form Modes**: Supports both new application submissions and editing existing applications.
+ * - **Dynamic Input Fields**: Utilizes dynamic input fields based on the specified configuration for each form field.
+ * - **Data Fetching for Edit Mode**: Retrieves existing application data for editing and pre-fills the form.
+ * - **File Uploads**: Allows users to upload files such as images and videos related to the workshop.
+ * - **Form Validation**: Utilizes React Hook Form for form validation and error handling.
+ * - **Alerts**: Provides feedback alerts for successful submission or any encountered errors.
+ * - **Responsive Design**: Adapts to different screen sizes for optimal user experience.
+ * 
+ * ## Form Fields
+ * - `workshop_name`: Workshop name (3-50 characters, no special characters or numbers).
+ * - `workshop_post_code`: Workshop postcode (6 digits).
+ * - `address`: Workshop address (15-1000 characters, alphanumeric, and special characters allowed).
+ * - `state`: Workshop state (3-50 characters, alphabets and spaces only).
+ * - `city`: Workshop city (3-100 characters, alphabets and spaces only).
+ * - `user_name`: Owner's name (3-16 characters, no special characters or numbers).
+ * - `user_email`: Owner's email address (valid email format).
+ * - `user_mobile`: Owner's telephone number (11-12 digits including country code).
+ * - `bay_count`: Number of bays in the workshop (positive integer).
+ * - `services_offered`: Dropdown for services offered by the workshop.
+ * - `expertise`: Dropdown for the workshop's expertise.
+ * - `brands`: Manufacturer specializations (3-16 characters, alphanumeric and commas allowed).
+ * - `file_paths`: File uploads (array of strings representing file paths).
+ * - `consent_process_data`: Checkbox for consenting to data processing.
+ * - `consent_being_contacted`: Checkbox for consenting to being contacted.
+ * - `consent_receive_info`: Checkbox for expressing interest in receiving additional information.
+ * 
  * @example
  * ```tsx
  * <ApplicationUpload />
  * ```
- *
  */
 
 const ApplicationUpload: React.FC = () => {
