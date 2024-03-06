@@ -1,26 +1,43 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { Button } from "../ButtonComponent/Button";
+import { Button } from "../../components/ButtonComponent/Button";
 import {
   useForm,
   SubmitHandler,
   FormProvider,
 } from "react-hook-form";
-import { ApplicationInputFields } from "../FormInputs";
+import { ApplicationInputFields } from "../../components/FormInputs";
 import { Option } from "components/DropDownComponent/Option";
 import inputs from "./ApplicationUploadFormFields";
 import {
   FileData,
   OptionsUtilsProps,
   renderInput,
-} from "../FormFieldRenderLogic";
+} from "../../components/FormFieldRenderLogic";
 
 import AuthContext, { AuthContextProps } from "../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import AlertContext, { AlertContextProps } from "../../contexts/AlertContext";
 import styles from "./ApplicationUpload.module.css";
+import { useScreenSize } from "../../components/ScreenSizeLogic";
 
-import { useScreenSize } from "../ScreenSizeLogic";
-// import { renderInput } from "../FormFieldRenderLogic";
+
+/**
+ * Properties for the `ApplicationUpload` page.
+ * 
+ * Renders a Application Upload page component.
+ * 
+ * This page allows for the workshop to upload/submit application for their workshop containing information realated to workshop
+ * like services offered, name, expertise, address, telephone number, images and videos of the workshop and many more information needed for workshop onboarding.
+ * 
+ * @category Pages
+ * @returns The rendered `ApplicationUpload` page as a `JSX.Element`.
+ * 
+ * @example
+ * ```tsx
+ * <ApplicationUpload />
+ * ```
+ * 
+ */
 
 const ApplicationUpload: React.FC = () => {
   const methods = useForm<ApplicationInputFields>();
@@ -38,11 +55,13 @@ const ApplicationUpload: React.FC = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors,dirtyFields },
     trigger,
     reset,
+    watch,
     control,
   } = methods;
+
 
   const inputSize = useScreenSize();
 
@@ -50,7 +69,7 @@ const ApplicationUpload: React.FC = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      setLoading(true);
+      setLoading(false);
       const result = await fetch(
         `${import.meta.env.VITE_BACKEND_URL}/application/${
           currentUser?.user_email
@@ -131,6 +150,19 @@ const ApplicationUpload: React.FC = () => {
 
   const submitForm: SubmitHandler<ApplicationInputFields> = async (data) => {
     setLoading(true);
+    if (formMode == "edit") {
+      let field: keyof ApplicationInputFields;
+      for ( field in dirtyFields) {
+        console.log(watch(field))
+      }
+      sendAlert({
+        message: "Application Updated Succesfully",
+        type: "success",
+      });
+      return
+      navigate("/", { replace: true });
+      return;
+    }
     const formData = new FormData();
     let key: keyof ApplicationInputFields;
     for (key in data) {
@@ -148,7 +180,6 @@ const ApplicationUpload: React.FC = () => {
       });
       const res = await result.json();
       if (res.output == "success") {
-        console.log("hello");
         setLoading(false);
         sendAlert({
           message: "Application Submitted Succesfully",

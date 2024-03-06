@@ -1,5 +1,3 @@
-// List.tsx
-
 import React from 'react';
 import styles from './List.module.css';
 import ListItem  from './ListItem';

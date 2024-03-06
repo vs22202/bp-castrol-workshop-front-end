@@ -1,14 +1,14 @@
 // LoginFormWithImage.tsx
 
 import React, { useContext, useState } from "react";
-import { Button } from "../ButtonComponent/Button";
+import { Button } from "../../components/ButtonComponent/Button";
 import LoginImg from "../../assets/login.svg";
 import inputs from "./LoginPageFields";
 import styles from "./LoginPage.module.css";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { renderInput } from "../FormFieldRenderLogic";
+import { renderInput } from "../../components/FormFieldRenderLogic";
 import AuthContext, { AuthContextProps } from "../../contexts/AuthContext";
-import { useScreenSize } from "../ScreenSizeLogic";
+import { useScreenSize } from "../../components/ScreenSizeLogic";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const LoginPage: React.FC = () => {
@@ -59,6 +59,7 @@ const LoginPage: React.FC = () => {
             <form
               onSubmit={handleSubmit(handleLogin)}
               onChange={handleInputChange}
+              data-testid = "LoginForm"
             >
               <h1
                 style={{

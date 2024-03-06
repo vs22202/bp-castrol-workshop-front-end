@@ -40,6 +40,10 @@ export type CheckboxProps = {
    * Schema or rules for validating the checkbox input, used in conjunction with `register` to enforce validation constraints.
    */
   validationSchema?: any; // Consider providing a more specific type for better type safety.
+  /**
+   * to provide an ID for testing checkbox
+   */
+  datatestid?:string;
 }
 
 /**
@@ -51,7 +55,7 @@ export type CheckboxProps = {
  * @param props The {@link CheckboxProps} to configure the checkbox.
  * @returns A JSX element representing a stylized checkbox input, with associated label text.
  */
-export function Checkbox({ name, size, text, required = false, register, errors, validationSchema }: CheckboxProps) {
+export function Checkbox({ name, size, text, required = false, register, errors, validationSchema, datatestid }: CheckboxProps) {
   const checkboxRegister = register(name, validationSchema);
 
   return (
@@ -62,6 +66,7 @@ export function Checkbox({ name, size, text, required = false, register, errors,
             name={name}
             {...checkboxRegister}
             type="checkbox"
+            data-testid={datatestid}
             className={`${styles["icon" + size]} ${errors && errors[name] ? styles.error : ""}`}
           />
           <div className={`${errors && errors[name] ? styles.texterror : styles.text} ${styles[size]}`}>{text}{required && <span style={{ color: 'red' }}>*</span>}</div>

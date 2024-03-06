@@ -1,17 +1,15 @@
-// SignUpFormWithImage.tsx
-
 import React, { useContext, useEffect, useState } from "react";
-import { InputField } from "../InputFieldComponent/InputField";
-import { Button } from "../ButtonComponent/Button";
+import { InputField } from "../../components/InputFieldComponent/InputField";
+import { Button } from "../../components/ButtonComponent/Button";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { renderInput } from "../FormFieldRenderLogic";
+import { renderInput } from "../../components/FormFieldRenderLogic";
 import inputs from "./SignupPageFields";
 import SignupImg from "../../assets/signup.svg";
 import styles from "./SignupPage.module.css";
 import AuthContext, { AuthContextProps } from "../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import AlertContext, { AlertContextProps } from "../../contexts/AlertContext";
-import { useScreenSize } from "../ScreenSizeLogic";
+import { useScreenSize } from "../../components/ScreenSizeLogic";
 
 const SignupPage: React.FC = () => {
   const { register, handleSubmit, formState: { errors }, watch, trigger } = useForm();
@@ -78,23 +76,6 @@ const SignupPage: React.FC = () => {
         }
       }, 1000);
     };
-    
-
-
-
-
-    /*     //Login Button
-    function handleLogin(event: React.MouseEvent<HTMLButtonElement, MouseEvent>){
-        event.preventDefault()
-        console.log("Redirect to login page...");
-    }
-        //Handles Signup Button
-    const handleSignup: SubmitHandler<Record<string, any>> = (data, event) => {
-        event?.preventDefault();
-        // Submit function for Application Upload form
-      console.log(data);
-      signup(data.user_email_id, data.user_password,data.otp);
-    } */
 
   //Login Button
   function handleLogin(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
@@ -142,6 +123,7 @@ const SignupPage: React.FC = () => {
         <form
           onSubmit={handleSubmit(handleSignup)}
           onChange={handleInputChange}
+          data-testid = "SignupForm"
         >
           <h1
             style={{
@@ -188,10 +170,6 @@ const SignupPage: React.FC = () => {
                   value: 6,
                   message: "Enter 6 digit OTP.",
                 },
-                // pattern: {
-                //     value: otp,
-                //     message: "Incorrect OTP."
-                // }
               }}
             />
             {!otpSent ? 

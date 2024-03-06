@@ -1,9 +1,9 @@
 import { Navbar } from "./components/NavbarComponent/Navbar";
 import { FooterWithLogo } from "./components/FooterComponent/Footer";
-import { ApplicationUpload } from "./components/ApplicationUploadPage/ApplicationUpload";
+import { ApplicationUpload } from "./views/ApplicationUploadPage/ApplicationUpload";
 import "./App.css";
-import { LoginPage } from "./components/LoginPage/LoginPage";
-import { SignupPage } from "./components/SignupPage/SignupPage";
+import { LoginPage } from "./views/LoginPage/LoginPage";
+import { SignupPage } from "./views/SignupPage/SignupPage";
 import { Alert } from "./components/AlertComponent/Alert";
 import AlertContext, { AlertContextProps } from "./contexts/AlertContext";
 import { useContext } from "react";

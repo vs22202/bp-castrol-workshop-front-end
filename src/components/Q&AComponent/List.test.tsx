@@ -1,5 +1,3 @@
-//List.test.tsx
-
 /*
 The test in List.test.tsx checks that the List component renders with the specified 
 items and size. It iterates through each item in the mockItems array and ensures that 

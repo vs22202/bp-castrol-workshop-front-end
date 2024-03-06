@@ -90,7 +90,7 @@ const ApplicationFormInputFields: Input[] = [{
     minlen:3,
     maxlen:16,
     pattern: /^[A-Za-z\s]{3,16}$/,
-    datatestid:'user_name',
+    datatestid:'appuploadusername',
     required: true,
 },
 {
@@ -103,7 +103,7 @@ const ApplicationFormInputFields: Input[] = [{
     errorMessage:"It should be a valid email address!",
     label: "Your Email",
     minlen:5,
-    datatestid:'user_email',
+    datatestid:'appuploaduseremail',
     maxlen:100,
 },
 {
@@ -121,7 +121,7 @@ const ApplicationFormInputFields: Input[] = [{
     minlen:11,
     maxlen:12,
     pattern:   /\d{11,12}/,
-    datatestid:'user_mobile',
+    datatestid:'appuploadusermobile',
     required: true,
 },
 {
@@ -136,7 +136,7 @@ const ApplicationFormInputFields: Input[] = [{
     pattern:/\d{1,10}/,
     minlen:1,
     maxlen:10,
-    datatestid:'bay_count',
+    datatestid:'baycount',
     required: true,
 },
 {
@@ -159,6 +159,7 @@ const ApplicationFormInputFields: Input[] = [{
     placeholder: "Bodywork, Paint Jobs",
     errorMessage:"Please enter a valid services that are offered",
     label: "Services Offered",
+    datatestid:'appuploadservices',
     required: true,
 
 },
@@ -179,6 +180,7 @@ const ApplicationFormInputFields: Input[] = [{
     placeholder: "German Cars",
     errorMessage: "It should be a valid expertise!",
     label: "Expertise",
+    datatestid:'appuploadexpertise',
     required: true,
 },
 {
@@ -203,6 +205,7 @@ const ApplicationFormInputFields: Input[] = [{
     type: "string[]",
     label: "File Upload",
     // pattern: "^[A-Za-z]{3,16}$",
+    datatestid:"appuploadfileupload",
     required: true,
 },
 {
@@ -212,6 +215,7 @@ const ApplicationFormInputFields: Input[] = [{
     type: "checkbox",
     label: "I consent to having my data processed according to the privacy statement",
     //errorMessage:"Click to continue.",
+    datatestid:"appuploadconsentdata",
     required: true,
 },
 {
@@ -221,6 +225,7 @@ const ApplicationFormInputFields: Input[] = [{
     type: "checkbox",
     label: "I consent to being contacted by a Castrol distributor for the purpose of discussing my interest in joining the Castrol network",
     //errorMessage:"Click to continue.",
+    datatestid:"appuploadconsentcontacted",
     required: true,
 },
 {
@@ -230,6 +235,7 @@ const ApplicationFormInputFields: Input[] = [{
     type: "checkbox",
     label: "I am interested in receiving additional information by email on Castrol products or services from time to time",
     //errorMessage:"Click to continue.",
+    datatestid:"appuploadconsentrecinfo",
     required: false,
 },
   ]

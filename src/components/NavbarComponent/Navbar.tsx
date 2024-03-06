@@ -1,11 +1,8 @@
-//import { useEffect } from "react";
 import { useState, useContext } from "react";
 import styles from "./Navbar.module.css";
 import { Button } from "../ButtonComponent/Button";
 import { SvgIcon } from "../IconComponent/SvgIcon";
-//import AlertContext, { AlertContextProps } from "../../contexts/AlertContext";
 import AuthContext, { AuthContextProps } from "../../contexts/AuthContext";
-//import { Link, Outlet, useNavigate } from "react-router-dom";
 import { Link, useNavigate } from "react-router-dom";
 
 /**

@@ -153,7 +153,6 @@ export function InputField({
               handleInputChange(e);
             }}
             value={inputValue}
-            //value={placeholder}
             placeholder={placeholderText}
             onFocus={handleInputFocus}
             onBlur={(e) => handleInputBlur(e)}
@@ -163,7 +162,6 @@ export function InputField({
             } ${styles[size]}`}
             disabled={isDisabled}
             data-testid = {datatestid}
-            //required={required}
           />
 
           {/* floatingLabel */}

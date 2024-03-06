@@ -1,4 +1,4 @@
-import { Input } from "../FormInputs";
+import { Input } from "../../components/FormInputs";
 
 const SignupPageFields: Input[] = [{
     id: 1,
@@ -37,13 +37,9 @@ const SignupPageFields: Input[] = [{
     type: "text",
     text_type: "password",
     placeholder: "Enter password",
-    //pattern: /^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*()-_=+{}|;:'",.<>?]).{10,100}$/,//new RegExp(password as string) ,
-    //minlen:10,
-    //maxlen:100,
-    //errorMessage: "Passwords do not match.",
     label: "Confirm Password",
     required: true,
-    //customValidation: {(value)=>value === getValue("user_password")}
+    datatestid:'signuppasswordconfirm'
 },
 ]
 

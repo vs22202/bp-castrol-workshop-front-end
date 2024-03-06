@@ -1,6 +1,4 @@
-// Import your CSS module file at the top
 import styles from "./Footer.module.css";
-import { SvgIcon } from "../IconComponent/SvgIcon";
 /** The props type of {@link Footer | `Footer`}. */
 
 /**

@@ -1,5 +1,3 @@
-// ListItem.test.tsx
-
 /* 
 Test 1:
 Renders a small ListItem with text.
