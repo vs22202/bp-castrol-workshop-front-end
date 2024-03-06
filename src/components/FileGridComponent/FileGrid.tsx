@@ -15,7 +15,7 @@ type FileGridProps = React.DetailedHTMLProps<
   React.InputHTMLAttributes<HTMLInputElement>,
   HTMLInputElement
 > & {
-  /** Existing files the user has already uploaded of they exist */
+  /** Existing files the user has already uploaded if they exist */
   oldFiles?: FileData[];
 };
 
@@ -40,9 +40,12 @@ type FileGridProps = React.DetailedHTMLProps<
 export default function FileGrid({ oldFiles, name = "files" }: FileGridProps) {
   const { register, unregister, setValue, watch } = useFormContext();
   const files: (File & { preview: string; key: string })[] = watch(name);
+  oldFiles = watch(name+"Old") || oldFiles
   useEffect(() => {
     register(name);
+    register(name+"Old")
     return () => {
+      unregister(name+"Old")
       unregister(name);
     };
   }, [register, unregister, name]);
@@ -62,14 +65,18 @@ export default function FileGrid({ oldFiles, name = "files" }: FileGridProps) {
             preview: URL.createObjectURL(file),
           });
         }),
-      ]);
+      ],{ shouldDirty: true });
     },
   });
   const removeFile = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
     const key = e.currentTarget.getAttribute("data-filename");
-    const newFiles = files.filter((file) => file.name != key);
-    acceptedFiles.filter((file) => file.name != key);
-    setValue(name, newFiles);
+    oldFiles = oldFiles?.filter((file) => file.filename != key)
+    setValue(name+"Old",oldFiles, { shouldDirty: true })
+    if (files) {
+      const newFiles = files.filter((file) => file.name != key);
+      acceptedFiles.filter((file) => file.name != key);
+      setValue(name, newFiles,{ shouldDirty: true });
+    }
   };
   const thumbs =
     files &&
