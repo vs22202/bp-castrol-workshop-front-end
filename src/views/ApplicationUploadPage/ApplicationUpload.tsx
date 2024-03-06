@@ -18,17 +18,17 @@ import { useScreenSize } from "../../components/ScreenSizeLogic";
 
 /**
  * `ApplicationUpload` Page
- * 
- * Renders a comprehensive page designed for workshop owners to seamlessly upload and submit applications, providing crucial 
- * information related to their workshop. This page serves as a pivotal hub for onboarding workshops into the system, facilitating 
+ *
+ * Renders a comprehensive page designed for workshop owners to seamlessly upload and submit applications, providing crucial
+ * information related to their workshop. This page serves as a pivotal hub for onboarding workshops into the system, facilitating
  * the inclusion of essential details.
  * The form allows input for workshop details, services offered, expertise, address, contact information, and file uploads.
  * Supports both new submissions and editing existing applications.
- * 
+ *
  * @category Pages
  * @returns The rendered `ApplicationUpload` page as a `JSX.Element`.
- * 
- * 
+ *
+ *
  * ## Features
  * - **Form Modes**: Supports both new application submissions and editing existing applications.
  * - **Dynamic Input Fields**: Utilizes dynamic input fields based on the specified configuration for each form field.
@@ -37,7 +37,7 @@ import { useScreenSize } from "../../components/ScreenSizeLogic";
  * - **Form Validation**: Utilizes React Hook Form for form validation and error handling.
  * - **Alerts**: Provides feedback alerts for successful submission or any encountered errors.
  * - **Responsive Design**: Adapts to different screen sizes for optimal user experience.
- * 
+ *
  * ## Form Fields
  * - `workshop_name`: Workshop name (3-50 characters, no special characters or numbers).
  * - `workshop_post_code`: Workshop postcode (6 digits).
@@ -55,7 +55,7 @@ import { useScreenSize } from "../../components/ScreenSizeLogic";
  * - `consent_process_data`: Checkbox for consenting to data processing.
  * - `consent_being_contacted`: Checkbox for consenting to being contacted.
  * - `consent_receive_info`: Checkbox for expressing interest in receiving additional information.
- * 
+ *
  * @example
  * ```tsx
  * <ApplicationUpload />
@@ -66,6 +66,7 @@ const ApplicationUpload: React.FC = () => {
   const methods = useForm<ApplicationInputFields>();
   const [loading, setLoading] = useState<boolean>(false);
   const [formMode, setFormMode] = useState<"new" | "edit">("new");
+  const [applicationStatus, setApplicationStatus] = useState<string>();
   const [existingOptionsList, setExistingOptionsList] =
     useState<OptionsUtilsProps>({
       services_offered: [],
@@ -133,7 +134,7 @@ const ApplicationUpload: React.FC = () => {
             key: name + Date.now(),
           });
         });
-        Object.assign(data, { filesOld: fileData })
+        Object.assign(data, { filesOld: fileData });
         reset({ ...data });
         setFormMode("edit");
         setExistingOptionsList({
@@ -141,6 +142,7 @@ const ApplicationUpload: React.FC = () => {
           expertise: expertise,
         });
         setExistingFiles(fileData);
+        setApplicationStatus(data.application_status);
         setLoading(false);
         return;
       }
@@ -236,6 +238,18 @@ const ApplicationUpload: React.FC = () => {
         loading ? styles.loadingState : ""
       }`}
     >
+      {formMode == "edit" ? (
+        <div className={styles.applicationStatus}>
+          <h2>Application Status</h2>
+          <p>
+            Your application is currently <span>{applicationStatus}</span>. You
+            should receive an email when your status is updated.{" "}
+          </p>
+        </div>
+      ) : (
+        ""
+      )}
+
       <FormProvider {...methods}>
         <form
           onSubmit={handleSubmit(submitForm)}
@@ -250,7 +264,9 @@ const ApplicationUpload: React.FC = () => {
               fontWeight: "bold",
             }}
           >
-            Certified Castrol Workshop Application
+            {formMode != "edit"
+              ? "Certified Castrol Workshop Application"
+              : "Edit Your Application"}
           </h1>
           <h2
             style={{
@@ -259,7 +275,9 @@ const ApplicationUpload: React.FC = () => {
               textAlign: "left",
             }}
           >
-            Take your workshop to the next level!
+            {formMode != "edit"
+              ? "Take your workshop to the next level!"
+              : "Updating the form will lead to loss of old data!"}
           </h2>
           {inputs.map((input) =>
             renderInput(input, {
