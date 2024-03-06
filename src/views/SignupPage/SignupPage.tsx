@@ -11,6 +11,45 @@ import { useNavigate } from "react-router-dom";
 import AlertContext, { AlertContextProps } from "../../contexts/AlertContext";
 import { useScreenSize } from "../../components/ScreenSizeLogic";
 
+/**
+ * `SignupPage` Page
+ * 
+ * Renders a signup page for users to join the Castrol Community and elevate their workshop experience. 
+ * The page includes a signup form with dynamic validations, OTP generation, and user-friendly interactions.
+ * 
+ * @category Page
+ * @returns The rendered `SignupPage` component as a `JSX.Element`.
+ * 
+ * 
+ * ## Features
+ * - **Dynamic Form Fields**: The signup form adapts to different screen sizes and includes fields for user email, password, password confirmation, and OTP.
+ * - **Form Validation**: Utilizes React Hook Form for form validation, providing real-time error feedback and ensuring data integrity.
+ * - **OTP Generation**: Allows users to request and receive a one-time password (OTP) for secure account creation.
+ * - **Loading State**: Displays a loading state while the signup process is in progress to provide visual feedback to the user.
+ * - **Alerts**: Utilizes the `AlertContext` to display success messages upon successful signup.
+ * - **Responsive Design**: The component is designed to be responsive, ensuring a seamless user experience across different devices and screen sizes.
+ * 
+ * ## Form Fields
+ * The signup form includes the following fields:
+ * - `user_email_id`: User's email address (required, valid email format).
+ * - `user_password`: User's password (required, 10-100 characters with special characters, numbers, and capital letters).
+ * - `user_password_confirm`: Confirmation of the user's password (required, matches the entered password).
+ * - `otp`: One-time password for account verification (required, 6 digits).
+ * 
+ * @example
+ * ```tsx
+ * <SignupPage />
+ * ```
+ * 
+ * ## Props
+ * - None
+ * 
+ * 
+ * Whether users are setting up their workshop for the first time or returning to the Castrol Community, 
+ * the `SignupPage` offers a smooth and secure signup process.
+ */
+
+
 const SignupPage: React.FC = () => {
   const { register, handleSubmit, formState: { errors }, watch, trigger } = useForm();
   const{ signup,generateOtp} = useContext(AuthContext) as AuthContextProps

@@ -37,7 +37,7 @@ const mockAuthContextValue: AuthContextProps = {
 };
 
 describe('SignUp Page Testing ', ()=>{
-//test to check if the login page components are getting rendered or not
+//test to check if the signup page components are getting rendered or not
 test("Renders all components in the Signup page corectly", ()=>{
     const {getByTestId} = render(
       <AuthContext.Provider value={mockAuthContextValue}>
@@ -106,7 +106,7 @@ test("Renders all components in the Signup page corectly", ()=>{
     expect(otpInput).toHaveValue("123456");
 }) 
 
-//test to check whether the login form submits on clicking on login button or not
+//test to check whether the signup form submits on clicking on signup button or not
  test("Submit action gets triggered when signup button is clicked",async()=>{
 
     //fetch each element by their test id
@@ -136,7 +136,7 @@ test("Renders all components in the Signup page corectly", ()=>{
     fireEvent.click(otpBtn);
     fireEvent.change(otpInput, {target:{value:"123456"}});
 
-    fireEvent.click(SignupBtn) //click the login button
+    fireEvent.click(SignupBtn) //click the signup button
     await waitFor(()=>{
         expect(SignupForm).toHaveFormValues({
             user_email_id: "richa21kiran@gmail.com",
