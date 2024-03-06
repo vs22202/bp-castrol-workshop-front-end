@@ -6,7 +6,7 @@
 }
 .logincontainer.loadingState {
   pointer-events: none;
-  position: relative;
+
 }
 .logincontainer.loadingState::after {
   content: "";

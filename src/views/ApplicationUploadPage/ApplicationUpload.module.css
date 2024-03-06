@@ -3,7 +3,6 @@
 }
 .formContainer.loadingState {
   pointer-events: none;
-  position: relative;
 }
 .formContainer.loadingState::after {
   content: "";
