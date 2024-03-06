@@ -123,7 +123,7 @@ export const renderInput = (
           name={input.name}
           label={input.label}
           size={inputSize}
-          datatestid = {input.datatestid}
+          datatestid={input.datatestid}
           register={register}
           maxlen={input.maxlen}
           errors={errors}
@@ -144,6 +144,7 @@ export const renderInput = (
               message: input.errorMessage,
             },
           }}
+          hasFocus={formMode == "edit" ? true : false}
         />
       );
     default:

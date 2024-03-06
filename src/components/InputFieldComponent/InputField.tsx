@@ -19,6 +19,7 @@ export type InputFieldProps = {
   validationSchema?: any;
   errors: any;
   customValidation?: any;
+  hasFocus?: boolean;
   datatestid?:string;
 };
 
@@ -85,6 +86,7 @@ export type InputFieldProps = {
  * - `validationSchema`: (Optional) Schema used for validation (compatible with form validation libraries).
  * - `errors`: Object containing validation errors, where each key corresponds to an input name.
  * - `customValidation`: (Optional) Additional custom validation logic.
+ * - `hasFocus`: (Optional) should the button be focused when rendering(controls the floating label).
  * - `datatestid`: (Optional) For unit testing of the component and the pages it is used in.
  */
 
@@ -101,11 +103,12 @@ export function InputField({
   register,
   validationSchema,
   errors,
+  hasFocus = false,
   datatestid,
 }: InputFieldProps) {
   const [inputValue, setInputValue] = useState(value);
   const [inputType, setInputType] = useState(type);
-  const [isFocused, setIsFocused] = useState(false);
+  const [isFocused, setIsFocused] = useState<boolean>(hasFocus);
   const [placeholderText, setPlaceholderText] = useState("");
   const inputfieldRegister = register(name, validationSchema);
   const iconsize = size === "small" ? "sm" : size === "medium" ? "md" : "lg";
@@ -168,11 +171,11 @@ export function InputField({
           <label
             htmlFor={name} 
             className={`${
-              isFocused || inputValue
+              isFocused || hasFocus || inputValue
                 ? styles.floatingLabel
                 : styles.floatingLabeldefault
             } ${errors[name] ? styles.isWrongLabel : ""} ${
-              isFocused || inputValue
+              isFocused || hasFocus || inputValue
                 ? styles.labelsizefloating
                 : styles[labelsize]
             }`}

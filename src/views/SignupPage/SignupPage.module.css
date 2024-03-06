@@ -4,7 +4,7 @@
 }
 .signupcontainer.loadingState{
   pointer-events: none;
-  position: relative;
+
 }
 .signupcontainer.loadingState::after {
   content: "";
