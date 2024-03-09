@@ -38,7 +38,7 @@ export const AlertProvider = ({ children }: { children: React.ReactNode }) => {
     setAlert(alert);
     setTimeout(() => {
       setAlert(null);
-    }, 1500);
+    }, 5500);
   };
   return (
     <AlertContext.Provider value={{ alert, sendAlert }}>

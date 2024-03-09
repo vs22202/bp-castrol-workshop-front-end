@@ -66,6 +66,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       }
       setCurrentUser(res.user);
       window.localStorage.setItem("user", JSON.stringify(res.user));
+      sendAlert({ message: "Logged In Successfully", type: "success" });
       return "success";
     } catch (err) {
       // send error message to user
@@ -116,6 +117,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const logout = () => {
     window.localStorage.removeItem("user");
     setCurrentUser(null);
+    sendAlert({ message: "Logged Out Successfully", type: "success" });
   };
 
   return (

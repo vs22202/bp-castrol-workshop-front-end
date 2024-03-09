@@ -12,6 +12,7 @@ html {
 }
 .contentContainer {
   padding-bottom: var(--spacing-sm);
+  padding-inline: var(--spacing-11xl);
 }
 .button-container {
   display: flex;
@@ -23,17 +24,24 @@ html {
   margin-top: 28px;
 }
 
-.form{
-  width:100vh;
+.form {
+  width: 100vh;
 }
-
+@media screen and (max-width: 1000px) {
+  .contentContainer {
+    padding-inline: var(--spacing-4xl);
+  }
+}
 @media screen and (max-width: 768px) {
   .appContainer {
     height: 90vh;
   }
-  .formContainer{
-    width:100%;
-    display:flex;
+  .contentContainer {
+    padding-inline: var(--spacing-xs);
+  }
+  .formContainer {
+    width: 100%;
+    display: flex;
     padding-inline: var(--spacing-sm);
   }
 }

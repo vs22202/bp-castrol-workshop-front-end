@@ -4,7 +4,7 @@ export const useScreenSize = () => {
   const [screenSize, setScreenSize] = useState(getScreenSize());
 
   function getScreenSize() {
-    if (window.innerWidth < 500) {
+    if (window.innerWidth < 768) {
       return 'small';
     } else if (window.innerWidth < 1000) {
       return 'medium';

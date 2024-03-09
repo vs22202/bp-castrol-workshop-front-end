@@ -1,0 +1,131 @@
+.statCard {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-rows: 1fr;
+  gap: 3em;
+  position: relative;
+}
+.statCard::before {
+  content: "";
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  width: var(--line-width);
+  height: 50%;
+  background-color: var(--secondary---main700);
+  z-index: 1;
+  transform: translateX(-50%) translateY(-25%);
+}
+.statCard > svg {
+  width: 100%;
+  height: max-content;
+}
+button {
+  margin-inline: auto;
+  margin-top: 1em;
+}
+.aboutProgram {
+  margin-top: 1em;
+  display: grid;
+  grid-template-columns: 2fr 10fr;
+  gap: 2em;
+  row-gap: 0.25em;
+}
+.aboutProgram > h2 {
+  grid-row: 1 / 3;
+}
+.aboutProgram > h2 > span {
+  position: relative;
+}
+.aboutProgram > h2 > span::before {
+  content: "";
+  position: absolute;
+  top: -20.5%;
+  left: 0;
+  height: var(--line-width);
+  width: 90%;
+  background-color: var(--secondary---main700);
+  z-index: 1;
+}
+.qnaContainer {
+  position: relative;
+}
+.qnaContainer::before {
+  content: "";
+  position: absolute;
+  top: 1.5%;
+  left: -1.5%;
+  width: var(--line-width);
+  height: 25%;
+  background-color: var(--secondary---main700);
+  z-index: 1;
+}
+h2 {
+  color: var(--primary---main500);
+  font-size: var(--subheading---m---regular);
+  font-weight: var(--weight--extra-bold);
+}
+.answer {
+  color: var(--neutral---main750);
+  font-size: var(--subheading---s---regular);
+  font-weight: var(--weight--light);
+  line-height: 170%;
+}
+.answer > span.primary {
+  color: var(--primary---main500);
+}
+@media (max-width: 1000px) {
+  h2 {
+    font-size: var(--subheading--2-x-s---regular);
+  }
+  .aboutProgram {
+    gap: 0.5em;
+    --line-width: 2px;
+  }
+  .answer {
+    font-size: var(--paragraph---m---light);
+  }
+}
+@media (max-width: 600px) {
+  .statCard {
+    grid-template-columns: 1fr;
+    justify-content: center;
+  }
+  .statCard::before {
+    display: none;
+  }
+  .statCard > svg {
+    margin-inline: auto;
+  }
+  .statCard > svg:last-child {
+    display: none;
+  }
+  .aboutProgram {
+    grid-template-columns: 4fr 8fr;
+  }
+  .qnaContainer {
+    grid-column: 1/-1;
+  }
+  .qnaContainer::before {
+    display: none;
+  }
+  .aboutProgram > h2 {
+    grid-row: 1 / 1;
+  }
+  .aboutProgram > h2 > span::before {
+    top: -3.5%;
+  }
+  .aboutProgram > p {
+    position: relative;
+  }
+  .aboutProgram > p::before {
+    content: "";
+    position: absolute;
+    bottom: 1.5%;
+    left: -3.5%;
+    width: var(--line-width);
+    height: 50px;
+    background-color: var(--secondary---main700);
+    z-index: 1;
+  }
+}

@@ -240,11 +240,11 @@ const ApplicationUpload: React.FC = () => {
     >
       {formMode == "edit" ? (
         <div className={styles.applicationStatus}>
-          <h2>Application Status</h2>
-          <p>
+          <h1>Application Status</h1>
+          <h2>
             Your application is currently <span>{applicationStatus}</span>. You
             should receive an email when your status is updated.{" "}
-          </p>
+          </h2>
         </div>
       ) : (
         ""
@@ -256,29 +256,18 @@ const ApplicationUpload: React.FC = () => {
           onChange={handleInputChange}
           ref={formRef}
         >
-          <h1
-            style={{
-              color: "rgba(0, 153, 0, 1)",
-              fontSize: "28px",
-              textAlign: "left",
-              fontWeight: "bold",
-            }}
-          >
-            {formMode != "edit"
-              ? "Certified Castrol Workshop Application"
-              : "Edit Your Application"}
-          </h1>
-          <h2
-            style={{
-              color: "rgba(102, 102, 102, 1)",
-              fontSize: "20px",
-              textAlign: "left",
-            }}
-          >
-            {formMode != "edit"
-              ? "Take your workshop to the next level!"
-              : "Updating the form will lead to loss of old data!"}
-          </h2>
+          <div className={styles.formHeader}>
+            <h1>
+              {formMode != "edit"
+                ? "Certified Castrol Workshop Application"
+                : "Edit Your Application"}
+            </h1>
+            <h2>
+              {formMode != "edit"
+                ? "Take your workshop to the next level!"
+                : "Updating the form will lead to loss of old data!"}
+            </h2>
+          </div>
           {inputs.map((input) =>
             renderInput(input, {
               register,

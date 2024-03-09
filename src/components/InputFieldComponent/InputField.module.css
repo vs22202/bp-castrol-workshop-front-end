@@ -3,6 +3,9 @@
 font-family: 'Noto Sans', sans-serif;
 font-weight: var(--weight--regular);
 }
+.inputFieldContainer{
+    width:100%;
+}
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
     -webkit-appearance: none;
@@ -37,7 +40,6 @@ input[type="number"]::-webkit-outer-spin-button {
 .defaultinputfieldcontainer{
     position: relative;
     border: 1px solid var(--primary---main700);
-    margin:var(--spacing-xs) 0;
     border-radius: var(--spacing-4xs);
 
 }

@@ -138,7 +138,7 @@ export function InputField({
 
   return (
     <>
-      <div className={`${type == "hidden" ? styles.hidden : ""}`}>
+      <div className={`${type == "hidden" ? styles.hidden : ""} ${styles.inputFieldContainer}`}>
         <div
           className={`${
             errors[name]

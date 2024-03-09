@@ -94,7 +94,7 @@ const LoginPage: React.FC = () => {
           <LoginImg />
         </div>
         <div className={`${styles.loginform}`}>
-          <div className="formContainer">
+          
             <form
               onSubmit={handleSubmit(handleLogin)}
               onChange={handleInputChange}
@@ -141,7 +141,6 @@ const LoginPage: React.FC = () => {
                 />
               </div>
             </form>
-          </div>
         </div>
       </div>
     </>
