@@ -17,6 +17,7 @@ const HomePage: React.FC = () => {
         {screenSize == "small" ? <MobileLandingStat2 /> : <LandingStat1 />}
         <LandingStat2 />
       </div>
+      <div className={styles.homePageButton}>   
       <Button
         type="solid"
         text="Apply Now"
@@ -26,6 +27,7 @@ const HomePage: React.FC = () => {
           navigate("/upload", { replace: true });
         }}
       />
+      </div>
       <div className={styles.aboutProgram}>
         <h2>
           {" "}

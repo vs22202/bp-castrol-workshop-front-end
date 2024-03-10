@@ -20,7 +20,7 @@
   width: 100%;
   height: max-content;
 }
-button {
+.homePageButton > button {
   margin-inline: auto;
   margin-top: 1em;
 }
