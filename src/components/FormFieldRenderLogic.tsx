@@ -151,6 +151,14 @@ export const renderInput = (
       // Handle other input types or return null
       return (
         <>
+          <ListItem
+            size={inputSize}
+            text="Upload high quality videos and images of the workshop and garage service bays."
+          />
+          <ListItem
+            size={inputSize}
+            text="Make sure to upload images and videos showcasing the various services your workshop offers."
+          />
           {formMode == "edit" ? (
             <FileGrid
               oldFiles={existingFiles}
@@ -159,14 +167,6 @@ export const renderInput = (
             <FileGrid />
           )}
 
-          <ListItem
-            size={inputSize}
-            text="Upload the videos and images of workshop and garage"
-          />
-          <ListItem
-            size={inputSize}
-            text="The images and videos of the services provided by the workshop can also be uploaded"
-          />
         </>
       );
   }

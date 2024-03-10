@@ -46,7 +46,18 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   //pass one more parameter to verify if mobile / email login and change logic accordingly
   const login = async (email: string, password: string): Promise<string> => {
     if (currentUser) {
-      console.log("local login");
+      const result = await fetch("http://localhost:3000/login", {
+        method: "POST",
+        headers: {
+          Authorization:(currentUser.auth_token as string)
+        },
+      });
+      const res = await result.json();
+      if (res.output == "fail") {
+        setCurrentUser(null)
+        window.localStorage.removeItem("user");
+        return "failure"
+      }
       return "success";
     }
     const formData = new FormData();
@@ -64,8 +75,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         sendAlert({ message: res.msg as string, type: "error" });
         return "failure";
       }
-      setCurrentUser(res.user);
-      window.localStorage.setItem("user", JSON.stringify(res.user));
+      setCurrentUser({ auth_token:res.auth_token,...res.user });
+      window.localStorage.setItem("user", JSON.stringify({ auth_token:res.auth_token,...res.user }));
       sendAlert({ message: "Logged In Successfully", type: "success" });
       return "success";
     } catch (err) {

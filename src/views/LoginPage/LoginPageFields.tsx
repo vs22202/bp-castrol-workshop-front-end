@@ -29,7 +29,7 @@ const LoginPageFields: Input[] = [{
     type: "checkbox",
     label: "Remember me?",
     errorMessage:"remember me error",
-    required: true,
+    required: false,
 },
 ]
 

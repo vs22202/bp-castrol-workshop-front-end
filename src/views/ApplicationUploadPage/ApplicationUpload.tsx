@@ -94,9 +94,12 @@ const ApplicationUpload: React.FC = () => {
     const fetchData = async () => {
       setLoading(true);
       const result = await fetch(
-        `${import.meta.env.VITE_BACKEND_URL}/application/${
-          currentUser?.user_email
-        }`
+        `${import.meta.env.VITE_BACKEND_URL}/application/getUserApplication`,
+        {
+          headers: {
+            Authorization: currentUser?.auth_token as string,
+          },
+        }
       );
       const res = await result.json();
       return res;
@@ -181,6 +184,9 @@ const ApplicationUpload: React.FC = () => {
       try {
         const result = await fetch("http://localhost:3000/application/edit", {
           method: "POST",
+          headers: {
+            Authorization: currentUser?.auth_token as string,
+          },
           body: formData,
         });
         const res = await result.json();
@@ -213,6 +219,9 @@ const ApplicationUpload: React.FC = () => {
     try {
       const result = await fetch("http://localhost:3000/application", {
         method: "POST",
+        headers: {
+          Authorization: currentUser?.auth_token as string,
+        },
         body: formData,
       });
       const res = await result.json();

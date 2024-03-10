@@ -44,6 +44,10 @@ h2 {
   gap: 0.5em;
   justify-content: space-between;
 }
+.otpContainer > button > span {
+  font-size: var(--subheading---x-s---bold);
+  font-weight: var(--weight--extra-bold);
+}
 .buttonscontainer {
   display: flex;
   justify-content: center;
@@ -59,7 +63,7 @@ h2 {
 }
 
 /* Media query for mobile screens */
-@media(max-width: 884px) {
+@media (max-width: 884px) {
   .signupcontainer {
     grid-template-columns: 1fr;
     min-width: 300px;
@@ -86,7 +90,9 @@ h2 {
   .signupform > form {
     gap: var(--spacing-3xs);
   }
-
+  .otpContainer > button > span {
+    font-size: var(--paragraph---m---light);
+  }
   .buttonscontainer {
     text-align: center;
     max-width: fit-content;
