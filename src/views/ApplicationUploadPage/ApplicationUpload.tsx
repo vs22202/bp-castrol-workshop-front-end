@@ -71,6 +71,7 @@ const ApplicationUpload: React.FC = () => {
     useState<OptionsUtilsProps>({
       services_offered: [],
       expertise: [],
+      brands:[]
     });
   const [existingFiles, setExistingFiles] = useState<FileData[]>([]);
   const formRef = useRef<HTMLFormElement>(null);
@@ -109,8 +110,10 @@ const ApplicationUpload: React.FC = () => {
         const data = res.result as ApplicationInputFields;
         const services_options = data.services_offered.split(",");
         const expertise_options = data.expertise.split(",");
+        const brands_options  = data.brands.split(",")
         const services: Option[] = [];
         const expertise: Option[] = [];
+        const brands: Option[] = [];
         services_options.forEach((option) => {
           const v = option.trim();
           services.push({ value: v, label: v, isFixed: false });
@@ -118,6 +121,10 @@ const ApplicationUpload: React.FC = () => {
         expertise_options.forEach((option) => {
           const v = option.trim();
           expertise.push({ value: v, label: v, isFixed: false });
+        });
+        brands_options.forEach((option) => {
+          const v = option.trim();
+          brands.push({ value: v, label: v, isFixed: false });
         });
         const fileUrls = JSON.parse(data.file_paths);
         let fileData: FileData[] = [];
@@ -143,6 +150,7 @@ const ApplicationUpload: React.FC = () => {
         setExistingOptionsList({
           services_offered: services,
           expertise: expertise,
+          brands:brands,
         });
         setExistingFiles(fileData);
         setApplicationStatus(data.application_status);
