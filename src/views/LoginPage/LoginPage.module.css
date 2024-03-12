@@ -27,15 +27,27 @@
 .loginform {
   width: 100%;
 }
-h1 {
+.loginform h1 {
   color: var(--primary---main500);
   font-size: var(--heading---m---bold);
   font-weight: var(--weight--extra-bold);
 }
-h2 {
+.loginform h2 {
   color: var(--neutral---main750);
   font-size: var(--subheading---m---regular);
   font-weight: var(--weight--light);
+}
+.loginOptionToggler{
+  color: var(--neutral---main750);
+  font-size: var(--subheading---xs---regular);
+  font-weight: var(--weight--light);
+  width:max-content;
+  margin-left:auto;
+  cursor:pointer;
+  transition: color 100ms ease-in;
+}
+.loginOptionToggler:hover{
+  color: var(--neutral---main500);
 }
 .loginform > form {
   display: flex;
@@ -73,11 +85,11 @@ h2 {
     height: auto;
   }
 
-  h1 {
+  .loginform h1 {
     font-size: var(--subheading---s---bold);
     font-weight: var(--weight--extra-bold);
   }
-  h2 {
+  .loginform h2 {
     color: var(--neutral---main750);
     font-size: var(--paragraph---m---light);
     font-weight: var(--weight--medium);

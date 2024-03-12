@@ -186,9 +186,7 @@ const ApplicationUpload: React.FC = () => {
         formData.append(field as string, `${data[field]}`);
       }
       for (const file in data.files) formData.append("files", data.files[file]);
-      formData.append("user_email", currentUser?.user_email || "");
       formData.append("filesOld", JSON.stringify(data.filesOld));
-      console.log(formData.getAll("user_email"));
       try {
         const result = await fetch("http://localhost:3000/application/edit", {
           method: "POST",
@@ -223,7 +221,6 @@ const ApplicationUpload: React.FC = () => {
       formData.append(key, `${data[key]}`);
     }
     for (const file in data.files) formData.append("files", data.files[file]);
-    formData.set("user_email", currentUser?.user_email || "");
     try {
       const result = await fetch("http://localhost:3000/application", {
         method: "POST",

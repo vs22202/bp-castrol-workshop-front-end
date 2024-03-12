@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./InputField.module.css";
 import { SvgIcon } from "../IconComponent/SvgIcon";
 
@@ -20,17 +20,17 @@ export type InputFieldProps = {
   errors: any;
   customValidation?: any;
   hasFocus?: boolean;
-  datatestid?:string;
+  datatestid?: string;
 };
 
 /**
  * `InputField` Component
- * 
+ *
  * This component is designed to be a versatile input field for forms, supporting various configurations
  * including dynamic type switching (e.g., for password visibility) and extensive validation feedback.
  * It integrates with form validation libraries (like React Hook Form) through the `register`
  * and `validationSchema` props.
- * 
+ *
  * ## Features
  * - **Dynamic Type Switching**: Particularly useful for password fields, allowing users to toggle visibility.
  * - **Validation Feedback**: Displays error messages based on the provided `errors` prop, which is expected to
@@ -38,7 +38,7 @@ export type InputFieldProps = {
  * - **Floating Label**: Enhances UX by transitioning the label based on the input focus and value state.
  * - **Customizable**: Supports different sizes, disabled state, and required fields, with styling that adapts
  *   to the presence of errors.
- * 
+ *
  * @category Component
  * @param props The props for the InputField component.
  * @returns {JSX.Element} The rendered input field component.
@@ -56,7 +56,7 @@ export type InputFieldProps = {
  *   errors={{ username: { message: "Username is required" } }}
  * />
  * ```
- * 
+ *
  * @example
  * Usage with password visibility toggle:
  * ```tsx
@@ -70,9 +70,9 @@ export type InputFieldProps = {
  *   errors={{}}
  * />
  * ```
- * 
+ *
  * ## Props
- * 
+ *
  * - `name`: The name of the input, used for form submission and validation.
  * - `value`: (Optional) The default value of the input.
  * - `placeholder`: (Optional) The input's placeholder text.
@@ -115,6 +115,10 @@ export function InputField({
   const labelsize = "label" + size;
   const [passIconName, setPassIconName] = useState("eye-slash");
 
+  useEffect(() => {
+    setInputType(type);
+  }, [type]);
+
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);
     value = inputValue;
@@ -138,7 +142,11 @@ export function InputField({
 
   return (
     <>
-      <div className={`${type == "hidden" ? styles.hidden : ""} ${styles.inputFieldContainer}`}>
+      <div
+        className={`${type == "hidden" ? styles.hidden : ""} ${
+          styles.inputFieldContainer
+        }`}
+      >
         <div
           className={`${
             errors[name]
@@ -164,12 +172,12 @@ export function InputField({
               errors[name] ? styles.isWronginputfield : styles.defaultinputfield
             } ${styles[size]}`}
             disabled={isDisabled}
-            data-testid = {datatestid}
+            data-testid={datatestid}
           />
 
           {/* floatingLabel */}
           <label
-            htmlFor={name} 
+            htmlFor={name}
             className={`${
               isFocused || hasFocus || inputValue
                 ? styles.floatingLabel
