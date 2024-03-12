@@ -29,6 +29,10 @@ export type ButtonProps = {
    * The button action type: "button", "submit", or "reset". Defaults to "button".
    */
   action?: "button" | "submit" | "reset";
+  /**
+   * The place the icon aftert the text
+   */
+  placeIconAfter?:boolean;
   /** 
    * Optional click handler for the button. Receives the mouse event as an argument.
    */
@@ -65,13 +69,14 @@ export function Button({
   size,
   disabled = false,
   action = "button",
+  placeIconAfter,
   iconimg,
   datatestid,
   onClick,
 }: ButtonProps) {
   return (
     <button
-      className={`${styles[type]} ${styles[size || ""]} ${styles.button}`}
+      className={`${styles[type]} ${styles[size || ""]} ${styles.button} ${placeIconAfter ? styles.reverse : ""}`}
       type={action}
       disabled={disabled}
       onClick={onClick}

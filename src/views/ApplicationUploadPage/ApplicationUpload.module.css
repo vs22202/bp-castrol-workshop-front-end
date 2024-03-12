@@ -1,22 +1,24 @@
-.applicationStatus {
+.formContainer {
 }
-.applicationStatus > h2 {
+.formContainer h1 {
   color: var(--primary---main500);
-  font-size: var(--heading---s---bold);
-  font-weight: var(--weight--bold);
+  font-size: var(--heading---m---bold);
+  font-weight: var(--weight--extra-bold);
 }
-.applicationStatus > p {
-  font-size: var(--subheading---s---regular);
-  font-weight: var(--weight--regular);
+.formContainer h2 {
   color: var(--neutral---main750);
+  font-size: var(--subheading---m---regular);
+  font-weight: var(--weight--light);
+  margin-bottom: var(--spacing-3xs);
 }
-.applicationStatus > p > span {
+.formHeader{
+  display:flex;
+  flex-direction:column;
+}
+.applicationStatus > h2 > span {
   font-size: var(--subheading---m---regular);
   color: var(--primary---main500);
   font-weight: var(--weight--bold);
-}
-.formContainer {
-  padding-inline: var(--spacing-13xl);
 }
 .formContainer.loadingState {
   pointer-events: none;
@@ -32,9 +34,27 @@
   opacity: 0.3;
   z-index: 1;
 }
+.formContainer > form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3xs);
+}
 @media (max-width: 768px) {
   .formContainer {
     display: flex;
-    padding-inline: var(--spacing-sm);
+    flex-direction: column;
+  }
+  .formContainer h1 {
+    font-size: var(--subheading---s---bold);
+    font-weight: var(--weight--extra-bold);
+  }
+  .formContainer h2 {
+    color: var(--neutral---main750);
+    font-size: var(--paragraph---m---light);
+    font-weight: var(--weight--medium);
+    margin-bottom: var(--spacing-3xs);
+  }
+  .applicationStatus > h2 > span {
+    font-size: var(--paragraph---l---light);
   }
 }

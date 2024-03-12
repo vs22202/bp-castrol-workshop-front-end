@@ -1,12 +1,14 @@
 /* LoginForm css */
 
 .logincontainer {
-  display: flex;
-  /* min-width: 568px; */
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1em;
 }
 .logincontainer.loadingState {
   pointer-events: none;
-
 }
 .logincontainer.loadingState::after {
   content: "";
@@ -19,62 +21,87 @@
   opacity: 0.3;
   z-index: 1;
 }
-
-.imagecontainer {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
+.imageContainer > svg {
+  width: 100%;
 }
 .loginform {
-  flex: 1;
+  width: 100%;
+}
+.loginform h1 {
+  color: var(--primary---main500);
+  font-size: var(--heading---m---bold);
+  font-weight: var(--weight--extra-bold);
+}
+.loginform h2 {
+  color: var(--neutral---main750);
+  font-size: var(--subheading---m---regular);
+  font-weight: var(--weight--light);
+}
+.loginOptionToggler{
+  color: var(--neutral---main750);
+  font-size: var(--subheading---xs---regular);
+  font-weight: var(--weight--light);
+  width:max-content;
+  margin-left:auto;
+  cursor:pointer;
+  transition: color 100ms ease-in;
+}
+.loginOptionToggler:hover{
+  color: var(--neutral---main500);
+}
+.loginform > form {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  gap: var(--spacing-3xs);
+  width: 100%;
+}
+.imagecontainer {
+  display: flex;
   justify-content: center;
 }
-
 .buttonscontainer {
   display: flex;
   justify-content: center;
   flex-direction: column;
-  gap:10px;
-  text-align: center;
+  gap: 10px;
   max-width: fit-content;
+  text-align: center;
 }
-.buttonscontainer span {
-  font-size: 12px;
-  font-weight: 600;
-  /* align this between the two buttons */
-  align-items: center;
+
+.buttonscontainer > span {
+  font-size: var(--paragraph---m---light);
+  font-weight: var(--weight--medium);
 }
 
 /* Media query for mobile screens */
-@media screen and (max-width: 768px) {
+@media(max-width: 884px) {
   .logincontainer {
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
+    grid-template-columns: 1fr;
     min-width: 300px;
   }
 
-  .imagecontainer {
+  .imagecontainer > svg {
     max-width: 100%;
     height: auto;
   }
 
-  .loginform {
-    width: 100%;
-    max-width: 400px;
+  .loginform h1 {
+    font-size: var(--subheading---s---bold);
+    font-weight: var(--weight--extra-bold);
   }
-
+  .loginform h2 {
+    color: var(--neutral---main750);
+    font-size: var(--paragraph---m---light);
+    font-weight: var(--weight--medium);
+  }
+  .loginform > form {
+    gap: var(--spacing-3xs);
+  }
   .buttonscontainer {
-    margin-top: 20px;
     text-align: center;
     max-width: fit-content;
   }
-  .buttonscontainer span {
+  .buttonscontainer > span {
     font-size: 12px;
     font-weight: 600;
   }

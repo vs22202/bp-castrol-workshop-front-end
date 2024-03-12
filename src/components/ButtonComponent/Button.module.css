@@ -9,19 +9,25 @@ button {
   justify-content: center;
   align-items: center;
   gap: var(--spacing-3xs);
+  cursor:pointer;
 }
 .button {
   font-size: var(--spacing-lg);
 }
 .sm {
   font-size: var(--spacing-xs) !important;
+  height: var(--spacing-3xl);
+  min-width: 110px;
 }
 .md {
   font-size: var(--spacing-md) !important;
+  height: var(--spacing-4xl);
   min-width: 130px;
 }
 .lg {
   font-size: var(--spacing-lg) !important;
+  height: var(--spacing-7xl);
+  min-width: 160px;
 }
 .solid {
   background-color: var(--primary---main500);
@@ -50,6 +56,9 @@ button {
   border: 2px solid var(--neutral---main150);
   color: var(--neutral---main150);
   box-shadow: 2px var(--neutralshdw--lg);
+}
+.reverse{
+  flex-direction: row-reverse;
 }
 @media (max-width: 768px) {
   .button {

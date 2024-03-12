@@ -15,6 +15,7 @@ import { Option } from "./DropDownComponent/Option";
 export interface OptionsUtilsProps {
   services_offered: Option[];
   expertise: Option[];
+  brands: Option[];
 }
 export interface FileData {
   filename: string; type: string; fileurl: string; key: string;
@@ -70,13 +71,21 @@ export const renderInput = (
           optionsList = existingOptionsList?.services_offered.slice(
             input.compulsorylist?.length
           );
-        } else {
+        } else if (input.name == "expertise") {
           defaultValue = existingOptionsList?.expertise
             .map((option) => option.value)
             .join(",");
           optionsList = existingOptionsList?.expertise.slice(
             input.compulsorylist?.length
           );
+        }
+        else {
+          defaultValue = existingOptionsList?.brands
+          .map((option) => option.value)
+          .join(",");
+        optionsList = existingOptionsList?.brands.slice(
+          input.compulsorylist?.length
+        );
         }
         defaultValue += input.compulsorylist
           ? input.compulsorylist.map((option) => option.value).join(",")
@@ -151,6 +160,14 @@ export const renderInput = (
       // Handle other input types or return null
       return (
         <>
+          <ListItem
+            size={inputSize}
+            text="Upload high quality videos and images of the workshop and garage service bays."
+          />
+          <ListItem
+            size={inputSize}
+            text="Make sure to upload images and videos showcasing the various services your workshop offers."
+          />
           {formMode == "edit" ? (
             <FileGrid
               oldFiles={existingFiles}
@@ -159,14 +176,6 @@ export const renderInput = (
             <FileGrid />
           )}
 
-          <ListItem
-            size={inputSize}
-            text="Upload the videos and images of workshop and garage"
-          />
-          <ListItem
-            size={inputSize}
-            text="The images and videos of the services provided by the workshop can also be uploaded"
-          />
         </>
       );
   }
