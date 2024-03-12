@@ -1,0 +1,108 @@
+/* LoginForm css */
+
+.logincontainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1em;
+}
+.logincontainer.loadingState {
+  pointer-events: none;
+}
+.logincontainer.loadingState::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: var(--neutral---main250);
+  opacity: 0.3;
+  z-index: 1;
+}
+.imageContainer > svg {
+  width: 100%;
+}
+.loginform {
+  width: 100%;
+}
+.loginform h1 {
+  color: var(--primary---main500);
+  font-size: var(--heading---m---bold);
+  font-weight: var(--weight--extra-bold);
+}
+.loginform h2 {
+  color: var(--neutral---main750);
+  font-size: var(--subheading---m---regular);
+  font-weight: var(--weight--light);
+}
+.loginOptionToggler{
+  color: var(--neutral---main750);
+  font-size: var(--subheading---xs---regular);
+  font-weight: var(--weight--light);
+  width:max-content;
+  margin-left:auto;
+  cursor:pointer;
+  transition: color 100ms ease-in;
+}
+.loginOptionToggler:hover{
+  color: var(--neutral---main500);
+}
+.loginform > form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3xs);
+  width: 100%;
+}
+.imagecontainer {
+  display: flex;
+  justify-content: center;
+}
+.buttonscontainer {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 10px;
+  max-width: fit-content;
+  text-align: center;
+}
+
+.buttonscontainer > span {
+  font-size: var(--paragraph---m---light);
+  font-weight: var(--weight--medium);
+}
+
+/* Media query for mobile screens */
+@media(max-width: 884px) {
+  .logincontainer {
+    grid-template-columns: 1fr;
+    min-width: 300px;
+  }
+
+  .imagecontainer > svg {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .loginform h1 {
+    font-size: var(--subheading---s---bold);
+    font-weight: var(--weight--extra-bold);
+  }
+  .loginform h2 {
+    color: var(--neutral---main750);
+    font-size: var(--paragraph---m---light);
+    font-weight: var(--weight--medium);
+  }
+  .loginform > form {
+    gap: var(--spacing-3xs);
+  }
+  .buttonscontainer {
+    text-align: center;
+    max-width: fit-content;
+  }
+  .buttonscontainer > span {
+    font-size: 12px;
+    font-weight: 600;
+  }
+}

@@ -1,0 +1,9 @@
+.list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-3xs)
+  }
+  
+  .list-item {
+    margin-bottom: 0px; 
+  }

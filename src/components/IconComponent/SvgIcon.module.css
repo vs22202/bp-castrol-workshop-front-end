@@ -1,0 +1,26 @@
+.sm {
+  height: var(--spacing-xs) !important;
+  width: var(--spacing-xs) !important;
+}
+.md {
+  height: var(--spacing-md) !important;
+  width: var(--spacing-md) !important;
+}
+.lg {
+  height: var(--spacing-xl) !important;
+  width: var(--spacing-xl) !important;
+}
+.xlg {
+  height: var(--spacing-4xl) !important;
+  width: var(--spacing-4xl) !important;
+}
+.icon {
+  height: var(--spacing-4xl);
+  width: var(--spacing-4xl);
+}
+@media (max-width: 768px) {
+  .icon {
+    height: var(--spacing-md);
+    width: var(--spacing-md);
+  }
+}

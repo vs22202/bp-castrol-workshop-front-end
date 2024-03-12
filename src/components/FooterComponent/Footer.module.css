@@ -1,0 +1,38 @@
+/*Mobile*/
+.footerContainer {
+  width: 100vw;
+  min-height: 80px;
+  background-color: var(--neutral---main50);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.footerLogo {
+  height: 30px;
+  display: block;
+}
+
+.footerParagraph {
+  font-size: var(--paragraph---m---regular);
+  font-weight: var(--weight--regular);
+  color: var(-neutral---main750);
+  width: fit-content;
+}
+
+/*Desktop*/
+
+@media (min-width: 768px) {
+  .footerContainer {
+    min-height: 120px;
+  }
+  .footerLogo {
+    height: 60px;
+  }
+
+  .footerParagraph {
+    font-size: var(--subheading---s---medium);
+    font-weight: var(--weight--medium);
+  }
+}

@@ -1,0 +1,60 @@
+.formContainer {
+}
+.formContainer h1 {
+  color: var(--primary---main500);
+  font-size: var(--heading---m---bold);
+  font-weight: var(--weight--extra-bold);
+}
+.formContainer h2 {
+  color: var(--neutral---main750);
+  font-size: var(--subheading---m---regular);
+  font-weight: var(--weight--light);
+  margin-bottom: var(--spacing-3xs);
+}
+.formHeader{
+  display:flex;
+  flex-direction:column;
+}
+.applicationStatus > h2 > span {
+  font-size: var(--subheading---m---regular);
+  color: var(--primary---main500);
+  font-weight: var(--weight--bold);
+}
+.formContainer.loadingState {
+  pointer-events: none;
+}
+.formContainer.loadingState::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: var(--neutral---main250);
+  opacity: 0.3;
+  z-index: 1;
+}
+.formContainer > form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3xs);
+}
+@media (max-width: 768px) {
+  .formContainer {
+    display: flex;
+    flex-direction: column;
+  }
+  .formContainer h1 {
+    font-size: var(--subheading---s---bold);
+    font-weight: var(--weight--extra-bold);
+  }
+  .formContainer h2 {
+    color: var(--neutral---main750);
+    font-size: var(--paragraph---m---light);
+    font-weight: var(--weight--medium);
+    margin-bottom: var(--spacing-3xs);
+  }
+  .applicationStatus > h2 > span {
+    font-size: var(--paragraph---l---light);
+  }
+}
