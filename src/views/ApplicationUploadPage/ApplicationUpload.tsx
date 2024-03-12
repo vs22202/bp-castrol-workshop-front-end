@@ -71,6 +71,7 @@ const ApplicationUpload: React.FC = () => {
     useState<OptionsUtilsProps>({
       services_offered: [],
       expertise: [],
+      brands:[]
     });
   const [existingFiles, setExistingFiles] = useState<FileData[]>([]);
   const formRef = useRef<HTMLFormElement>(null);
@@ -109,8 +110,10 @@ const ApplicationUpload: React.FC = () => {
         const data = res.result as ApplicationInputFields;
         const services_options = data.services_offered.split(",");
         const expertise_options = data.expertise.split(",");
+        const brands_options  = data.brands.split(",")
         const services: Option[] = [];
         const expertise: Option[] = [];
+        const brands: Option[] = [];
         services_options.forEach((option) => {
           const v = option.trim();
           services.push({ value: v, label: v, isFixed: false });
@@ -118,6 +121,10 @@ const ApplicationUpload: React.FC = () => {
         expertise_options.forEach((option) => {
           const v = option.trim();
           expertise.push({ value: v, label: v, isFixed: false });
+        });
+        brands_options.forEach((option) => {
+          const v = option.trim();
+          brands.push({ value: v, label: v, isFixed: false });
         });
         const fileUrls = JSON.parse(data.file_paths);
         let fileData: FileData[] = [];
@@ -143,6 +150,7 @@ const ApplicationUpload: React.FC = () => {
         setExistingOptionsList({
           services_offered: services,
           expertise: expertise,
+          brands:brands,
         });
         setExistingFiles(fileData);
         setApplicationStatus(data.application_status);
@@ -178,9 +186,7 @@ const ApplicationUpload: React.FC = () => {
         formData.append(field as string, `${data[field]}`);
       }
       for (const file in data.files) formData.append("files", data.files[file]);
-      formData.append("user_email", currentUser?.user_email || "");
       formData.append("filesOld", JSON.stringify(data.filesOld));
-      console.log(formData.getAll("user_email"));
       try {
         const result = await fetch("http://localhost:3000/application/edit", {
           method: "POST",
@@ -215,7 +221,6 @@ const ApplicationUpload: React.FC = () => {
       formData.append(key, `${data[key]}`);
     }
     for (const file in data.files) formData.append("files", data.files[file]);
-    formData.set("user_email", currentUser?.user_email || "");
     try {
       const result = await fetch("http://localhost:3000/application", {
         method: "POST",

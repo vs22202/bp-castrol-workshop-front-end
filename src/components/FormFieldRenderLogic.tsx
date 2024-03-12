@@ -15,6 +15,7 @@ import { Option } from "./DropDownComponent/Option";
 export interface OptionsUtilsProps {
   services_offered: Option[];
   expertise: Option[];
+  brands: Option[];
 }
 export interface FileData {
   filename: string; type: string; fileurl: string; key: string;
@@ -70,13 +71,21 @@ export const renderInput = (
           optionsList = existingOptionsList?.services_offered.slice(
             input.compulsorylist?.length
           );
-        } else {
+        } else if (input.name == "expertise") {
           defaultValue = existingOptionsList?.expertise
             .map((option) => option.value)
             .join(",");
           optionsList = existingOptionsList?.expertise.slice(
             input.compulsorylist?.length
           );
+        }
+        else {
+          defaultValue = existingOptionsList?.brands
+          .map((option) => option.value)
+          .join(",");
+        optionsList = existingOptionsList?.brands.slice(
+          input.compulsorylist?.length
+        );
         }
         defaultValue += input.compulsorylist
           ? input.compulsorylist.map((option) => option.value).join(",")

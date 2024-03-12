@@ -57,16 +57,25 @@ const SignupPage: React.FC = () => {
     watch,
     trigger,
   } = useForm();
-  const { signup, generateOtp } = useContext(AuthContext) as AuthContextProps;
+  const { signup, generateOtp,signupMobile,generateOtpMobile } = useContext(AuthContext) as AuthContextProps;
   const [otpActivated, setOtpActivated] = useState(false);
   const { sendAlert } = useContext(AlertContext) as AlertContextProps;
   const [isAllFieldsValid, setIsAllFieldsValid] = useState(false);
   const [otpSent, setOtpSent] = useState(false);
   const [otpTimer, setOtpTimer] = useState("02:00");
   const [loading, setLoading] = useState(false);
+  const [phoneSignup, setPhoneSignup] = useState<boolean>(false);
   const navigate = useNavigate();
 
+  inputs[0].type = !phoneSignup ? "text" : "hidden";
+  inputs[0].text_type = !phoneSignup ? "text" : "hidden";
+  inputs[0].required = !phoneSignup;
+  inputs[1].type = phoneSignup ? "text" : "hidden";
+  inputs[1].text_type = phoneSignup ? "text" : "hidden";
+  inputs[1].required = phoneSignup;
+
   const email = watch("user_email_id");
+  const mobile = watch("user_mobile");
   const pass = watch("user_password");
   const confirmpass = watch("user_password_confirm");
   const inputSize = useScreenSize();
@@ -75,7 +84,7 @@ const SignupPage: React.FC = () => {
     // if all three fields are filled and valid, enables GET OTP button
     console.log(errors);
     if (
-      email &&
+      (email || mobile) &&
       pass &&
       confirmpass &&
       Object.keys(errors).length === 0 &&
@@ -85,7 +94,7 @@ const SignupPage: React.FC = () => {
     } else {
       setIsAllFieldsValid(false);
     }
-  }, [email, pass, confirmpass, errors]);
+  }, [email,mobile, pass, confirmpass, errors]);
 
   //Handles all three buttons
   //Get OTP Button
@@ -96,8 +105,12 @@ const SignupPage: React.FC = () => {
 
     setOtpSent(true);
     startOtpTimer();
-
-    generateOtp(watch("user_email_id"));
+    if(phoneSignup){
+      generateOtpMobile(watch("user_mobile"));
+    }
+    else{
+      generateOtp(watch("user_email_id"));
+    }
     setOtpActivated(true);
   }
 
@@ -141,18 +154,28 @@ const SignupPage: React.FC = () => {
   ) => {
     event?.preventDefault();
     setLoading(true);
-    const result = await signup(
-      data.user_email_id,
-      data.user_password,
-      data.otp
-    );
+    let result = "";
+    if(phoneSignup){
+      result = await signupMobile(
+        data.user_mobile,
+        data.user_password,
+        data.otp
+      );
+    }
+    else{
+      result = await signup(
+        data.user_email_id,
+        data.user_password,
+        data.otp
+      );
+    }
     setLoading(false);
     if (result == "success") {
       sendAlert({
         message: "SignUp was successful",
         type: "success",
       });
-      navigate("/login", { replace: true });
+      navigate("/login", { replace: true ,state:{phoneLogin:phoneSignup}});
     }
   };
 
@@ -181,6 +204,14 @@ const SignupPage: React.FC = () => {
           <h2>
             Join the Castrol Community and take your workshop to the next level!
           </h2>
+          <p
+              className={styles.loginOptionToggler}
+              onClick={() => setPhoneSignup((s) => !s)}
+            >
+              {!phoneSignup
+                ? "SignUp using mobile instead?"
+                : "SignUp using email instead?"}
+            </p>
           {inputs.map((input) => renderInput(input, { register, errors }))}
 
           {/* this div will be rendered here itself */}
