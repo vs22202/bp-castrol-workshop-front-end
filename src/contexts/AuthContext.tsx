@@ -16,6 +16,7 @@ export type AuthContextProps = {
   signupMobile: (mobile_no: string, password: string, otp: string) => Promise<string>;
   generateOtp: (email: string) => void;
   generateOtpMobile: (mobile_no: string) => void;
+  changePassword: (password:string,old_password:string) => Promise<string>;
   logout: () => void;
 };
 
@@ -203,10 +204,34 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       console.log(err);
     }
   }
+  const changePassword = async (password: string, old_password: string) :Promise<string> => {
+    const formData = new FormData();
+    formData.append("new_password", password);
+    formData.append("old_password", old_password);
+    try {
+      const res = await fetch("http://localhost:3000/user/changepassword", {
+        method: "POST",
+        headers: {
+          Authorization:(currentUser?.auth_token as string)
+        },
+        body: formData,
+      });
+      const result = await res.json();
+      if (result.output == "fail") {
+        sendAlert({ message: result.msg as string, type: "error" });
+        return "failure";
+      }
+      sendAlert({message:"Password Changed Successfully",type:"success"})
+      return "success"
+    } catch (err) {
+      console.log(err);
+      return "failure"
+    }
+  }
 
   return (
     <AuthContext.Provider
-      value={{ currentUser, login,loginMobile, signup,signupMobile, logout, generateOtp,generateOtpMobile }}
+      value={{ currentUser, login,loginMobile, signup,signupMobile, logout, generateOtp,generateOtpMobile,changePassword }}
     >
       {children}
     </AuthContext.Provider>

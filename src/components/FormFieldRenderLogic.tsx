@@ -24,6 +24,7 @@ interface FormUtilsProps {
   register: any;
   errors: any;
   control?: any;
+  watch?: any;
   formMode?: string;
   existingOptionsList?: OptionsUtilsProps;
   existingFiles?: FileData[];
@@ -36,6 +37,7 @@ export const renderInput = (
     register,
     errors,
     control,
+    watch,
     formMode,
     existingOptionsList,
     existingFiles,
@@ -136,8 +138,10 @@ export const renderInput = (
           register={register}
           maxlen={input.maxlen}
           errors={errors}
+          watch={watch}
           required={input.required}
           placeholder={input.placeholder}
+          isDisabled={input.isDisabled}
           validationSchema={{
             required: input.required,
             minLength: {

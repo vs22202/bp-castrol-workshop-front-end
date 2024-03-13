@@ -11,6 +11,8 @@ import RequireAuth from "./components/RequireAuthComponent/RequireAuth";
 import { Routes, Route } from "react-router-dom";
 import HomePage from "./views/HomePage/HomePage";
 import LogoutPage from "./views/LogoutPage/LogoutPage";
+import { ProfilePage } from "./views/ProfilePage/ProfilePage";
+
 
 function App() {
   const { alert } = useContext(AlertContext) as AlertContextProps;
@@ -44,6 +46,14 @@ function App() {
               element={
                 <RequireAuth>
                   <ApplicationUpload />
+                </RequireAuth>
+              }
+            />
+            <Route
+              path="/profile"
+              element={
+                <RequireAuth>
+                  <ProfilePage />
                 </RequireAuth>
               }
             />
