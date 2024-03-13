@@ -1,4 +1,4 @@
-/* LoginForm css */
+/* ResetForm css */
 
 .logincontainer {
   display: grid;
@@ -29,6 +29,12 @@
 }
 .loginform h1 {
   color: var(--primary---main500);
+  display: flex;
+  gap: 0.5em;
+  justify-content: center;
+  align-items: center;
+}
+.loginform h1 > span {
   font-size: var(--heading---m---bold);
   font-weight: var(--weight--extra-bold);
 }
@@ -36,17 +42,18 @@
   color: var(--neutral---main750);
   font-size: var(--subheading---m---regular);
   font-weight: var(--weight--light);
+  text-align: center;
 }
-.loginOptionToggler{
+.loginOptionToggler {
   color: var(--neutral---main750);
-  font-size: var(--subheading---x-s---regular);
+  font-size: var(--subheading---xs---regular);
   font-weight: var(--weight--light);
-  width:max-content;
-  margin-left:auto;
-  cursor:pointer;
+  width: max-content;
+  margin-left: auto;
+  cursor: pointer;
   transition: color 100ms ease-in;
 }
-.loginOptionToggler:hover{
+.loginOptionToggler:hover {
   color: var(--neutral---main500);
 }
 .loginform > form {
@@ -74,7 +81,7 @@
 }
 
 /* Media query for mobile screens */
-@media(max-width: 884px) {
+@media (max-width: 884px) {
   .logincontainer {
     grid-template-columns: 1fr;
     min-width: 300px;
@@ -83,6 +90,10 @@
   .imagecontainer > svg {
     max-width: 100%;
     height: auto;
+  }
+
+  .loginform h1 {
+    gap: 0.25em;
   }
 
   .loginform h2 {

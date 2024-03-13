@@ -41,7 +41,7 @@
 }
 .loginOptionToggler{
   color: var(--neutral---main750);
-  font-size: var(--subheading---xs---regular);
+  font-size: var(--subheading---x-s---regular);
   font-weight: var(--weight--light);
   width:max-content;
   margin-left:auto;
@@ -81,12 +81,8 @@
     min-width: 300px;
   }
 
-  .signupform h1 {
-    font-size: var(--subheading---s---bold);
-    font-weight: var(--weight--extra-bold);
-  }
   .signupform h2 {
-    font-size: var(--paragraph---m---light);
+    font-size: var(--subheading---s---regular);
     font-weight: var(--weight--medium);
   }
   .imagecontainer {

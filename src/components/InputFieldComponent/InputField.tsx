@@ -18,6 +18,7 @@ export type InputFieldProps = {
   register: any;
   validationSchema?: any;
   errors: any;
+  watch?:any;
   customValidation?: any;
   hasFocus?: boolean;
   datatestid?: string;
@@ -103,6 +104,7 @@ export function InputField({
   register,
   validationSchema,
   errors,
+  watch,
   hasFocus = false,
   datatestid,
 }: InputFieldProps) {
@@ -152,7 +154,7 @@ export function InputField({
             errors[name]
               ? styles.isWronginputfieldcontainer
               : styles.defaultinputfieldcontainer
-          } `}
+          } ${isDisabled ? styles.disabled : ""}`}
         >
           <input
             id={name}
@@ -171,7 +173,6 @@ export function InputField({
             className={`${
               errors[name] ? styles.isWronginputfield : styles.defaultinputfield
             } ${styles[size]}`}
-            disabled={isDisabled}
             data-testid={datatestid}
           />
 
