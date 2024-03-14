@@ -121,7 +121,10 @@ const LoginPage: React.FC = () => {
                 ? "Login using mobile instead?"
                 : "Login using email instead?"}
             </p>
+            <div className={styles.inputFieldsContainer}>
             {inputs.map((input) => renderInput(input, { register, errors }))}
+              <p className={`${styles.loginOptionToggler} ${styles.forgotPassword}`} onClick={() => { navigate("/resetPassword", { replace: true }); }}>forgot password?</p>
+            </div>
             <div className={`${styles.buttonscontainer}`}>
               <Button
                 text="Login"

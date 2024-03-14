@@ -4,6 +4,7 @@ import { ApplicationUpload } from "./views/ApplicationUploadPage/ApplicationUplo
 import "./App.css";
 import { LoginPage } from "./views/LoginPage/LoginPage";
 import { SignupPage } from "./views/SignupPage/SignupPage";
+import { ResetPasswordPage } from "./views/ResetPasswordPage/ResetPasswordPage";
 import { Alert } from "./components/AlertComponent/Alert";
 import AlertContext, { AlertContextProps } from "./contexts/AlertContext";
 import { useContext } from "react";
@@ -12,7 +13,6 @@ import { Routes, Route } from "react-router-dom";
 import HomePage from "./views/HomePage/HomePage";
 import LogoutPage from "./views/LogoutPage/LogoutPage";
 import { ProfilePage } from "./views/ProfilePage/ProfilePage";
-
 
 function App() {
   const { alert } = useContext(AlertContext) as AlertContextProps;
@@ -30,6 +30,14 @@ function App() {
               element={
                 <RequireAuth requireAuth={false}>
                   <LoginPage />
+                </RequireAuth>
+              }
+            />
+            <Route
+              path="/resetpassword"
+              element={
+                <RequireAuth requireAuth={false}>
+                  <ResetPasswordPage />
                 </RequireAuth>
               }
             />
