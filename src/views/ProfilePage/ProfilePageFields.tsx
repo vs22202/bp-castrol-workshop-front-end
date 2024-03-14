@@ -44,6 +44,10 @@ const LoginPageFields: Input[] = [
     text_type: "password",
     placeholder: "New Password",
     label: "New Password",
+    pattern: /^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*()-_=+{}|;:'",.<>?]).{10,100}$/, //contains 1-special char, capital letter, number and should have 10 to 100 characters
+    minlen:10,
+    maxlen:100,
+    errorMessage: "Password should be 10 characters long. Add special characters, number and Capital Letters.",
     datatestid: "resetnewpassword",
     required: true,
   },
