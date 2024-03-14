@@ -37,17 +37,28 @@
   font-size: var(--subheading---m---regular);
   font-weight: var(--weight--light);
 }
-.loginOptionToggler{
+.loginOptionToggler {
   color: var(--neutral---main750);
   font-size: var(--subheading---x-s---regular);
   font-weight: var(--weight--light);
-  width:max-content;
-  margin-left:auto;
-  cursor:pointer;
+  width: max-content;
+  margin-left: auto;
+  cursor: pointer;
   transition: color 100ms ease-in;
 }
-.loginOptionToggler:hover{
+.loginOptionToggler:hover {
   color: var(--neutral---main500);
+}
+.inputFieldsContainer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3xs);
+}
+.forgotPassword {
+  position: absolute;
+  right: 0;
+  bottom: 12px;
 }
 .loginform > form {
   display: flex;
@@ -74,7 +85,7 @@
 }
 
 /* Media query for mobile screens */
-@media(max-width: 884px) {
+@media (max-width: 884px) {
   .logincontainer {
     grid-template-columns: 1fr;
     min-width: 300px;
@@ -100,5 +111,11 @@
   .buttonscontainer > span {
     font-size: 12px;
     font-weight: 600;
+  }
+}
+@media (max-width: 768px) {
+  .forgotPassword {
+    font-size: var(--paragraph---m---light);
+    bottom: 10px;
   }
 }

@@ -11,12 +11,18 @@ type User = {
 export type AuthContextProps = {
   currentUser: User | null;
   login: (email: string, password: string) => Promise<string>;
-  loginMobile:(mobile_no: string, password: string) => Promise<string>;
+  loginMobile: (mobile_no: string, password: string) => Promise<string>;
   signup: (email: string, password: string, otp: string) => Promise<string>;
-  signupMobile: (mobile_no: string, password: string, otp: string) => Promise<string>;
+  signupMobile: (
+    mobile_no: string,
+    password: string,
+    otp: string
+  ) => Promise<string>;
   generateOtp: (email: string) => void;
   generateOtpMobile: (mobile_no: string) => void;
-  changePassword: (password:string,old_password:string) => Promise<string>;
+  changePassword: (password: string, old_password: string) => Promise<string>;
+  generateResetOtp: (email?: string, mobile?: string) => void;
+  resetPassword: (password: string, otp: string, email?: string, mobile?: string) => Promise<string>;
   logout: () => void;
 };
 
@@ -48,21 +54,21 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const { sendAlert } = useContext(AlertContext) as AlertContextProps;
   //can return success message or promise if needed
   //pass one more parameter to verify if mobile / email login and change logic accordingly
-  const loginWithToken = async ():Promise<string> => {
-      const result = await fetch("http://localhost:3000/login", {
-        method: "POST",
-        headers: {
-          Authorization:(currentUser?.auth_token as string)
-        },
-      });
-      const res = await result.json();
-      if (res.output == "fail") {
-        setCurrentUser(null)
-        window.localStorage.removeItem("user");
-        return "failure"
-      }
-      return "success";
-  }
+  const loginWithToken = async (): Promise<string> => {
+    const result = await fetch("http://localhost:3000/login", {
+      method: "POST",
+      headers: {
+        Authorization: currentUser?.auth_token as string,
+      },
+    });
+    const res = await result.json();
+    if (res.output == "fail") {
+      setCurrentUser(null);
+      window.localStorage.removeItem("user");
+      return "failure";
+    }
+    return "success";
+  };
   const login = async (email: string, password: string): Promise<string> => {
     if (currentUser) return loginWithToken();
 
@@ -81,8 +87,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         sendAlert({ message: res.msg as string, type: "error" });
         return "failure";
       }
-      setCurrentUser({ auth_token:res.auth_token,...res.user });
-      window.localStorage.setItem("user", JSON.stringify({ auth_token:res.auth_token,...res.user }));
+      setCurrentUser({ auth_token: res.auth_token, ...res.user });
+      window.localStorage.setItem(
+        "user",
+        JSON.stringify({ auth_token: res.auth_token, ...res.user })
+      );
       sendAlert({ message: "Logged In Successfully", type: "success" });
       return "success";
     } catch (err) {
@@ -91,7 +100,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       return "failure";
     }
   };
-  const loginMobile = async (mobile_no: string, password: string): Promise<string> => {
+  const loginMobile = async (
+    mobile_no: string,
+    password: string
+  ): Promise<string> => {
     if (currentUser) return loginWithToken();
 
     const formData = new FormData();
@@ -109,8 +121,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         sendAlert({ message: res.msg as string, type: "error" });
         return "failure";
       }
-      setCurrentUser({ auth_token:res.auth_token,...res.user });
-      window.localStorage.setItem("user", JSON.stringify({ auth_token:res.auth_token,...res.user }));
+      setCurrentUser({ auth_token: res.auth_token, ...res.user });
+      window.localStorage.setItem(
+        "user",
+        JSON.stringify({ auth_token: res.auth_token, ...res.user })
+      );
       sendAlert({ message: "Logged In Successfully", type: "success" });
       return "success";
     } catch (err) {
@@ -203,8 +218,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     } catch (err) {
       console.log(err);
     }
-  }
-  const changePassword = async (password: string, old_password: string) :Promise<string> => {
+  };
+  const changePassword = async (
+    password: string,
+    old_password: string
+  ): Promise<string> => {
     const formData = new FormData();
     formData.append("new_password", password);
     formData.append("old_password", old_password);
@@ -212,7 +230,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       const res = await fetch("http://localhost:3000/user/changepassword", {
         method: "POST",
         headers: {
-          Authorization:(currentUser?.auth_token as string)
+          Authorization: currentUser?.auth_token as string,
         },
         body: formData,
       });
@@ -221,17 +239,102 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         sendAlert({ message: result.msg as string, type: "error" });
         return "failure";
       }
-      sendAlert({message:"Password Changed Successfully",type:"success"})
+      sendAlert({ message: "Password Changed Successfully", type: "success" });
+      return "success";
+    } catch (err) {
+      console.log(err);
+      return "failure";
+    }
+  };
+  const generateResetOtp = async (
+    email?: string,
+    mobile?: string
+  ): Promise<void> => {
+    let formData = new FormData();
+    let message = "";
+    if (email) {
+      formData.append("user_email", email);
+      message = "OTP sent to email";
+    } else if (mobile) {
+      formData.append("user_mobile", mobile);
+      message = "OTP sent to mobile number";
+    } else {
+      sendAlert({
+        message: "Please provide either email or mobile number",
+        type: "error",
+      });
+      return;
+    }
+    try {
+      const res = await fetch("http://localhost:3000/user/generateResetOtp", {
+        method: "POST",
+        headers: {},
+        body: formData,
+      });
+      const result = await res.json();
+      if (result.output == "fail") {
+        sendAlert({ message: result.msg, type: "error" });
+        return;
+      }
+      sendAlert({ message, type: "success" });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  const resetPassword = async (
+    password: string,
+    otp: string,
+    email?: string,
+    mobile?: string
+  ): Promise<string> => {
+    let formData = new FormData();
+    if (email) {
+      formData.append("user_email", email);
+    } else if (mobile) {
+      formData.append("user_mobile", mobile);
+    } else {
+      sendAlert({
+        message: "Please provide either email or mobile number",
+        type: "error",
+      });
+      return "failure";
+    }
+    formData.append("password", password);
+    formData.append("otp", otp);
+    try {
+      const res = await fetch("http://localhost:3000/user/resetPassword", {
+        method: "POST",
+        headers: {},
+        body: formData,
+      });
+      const result = await res.json();
+      if(result.output == "fail"){
+        sendAlert({message:result.msg,type:"error"})
+        return "failure"
+      }
+      sendAlert({message:"Password Reset Successfully",type:"success"})
       return "success"
     } catch (err) {
       console.log(err);
       return "failure"
     }
-  }
+  };
 
   return (
     <AuthContext.Provider
-      value={{ currentUser, login,loginMobile, signup,signupMobile, logout, generateOtp,generateOtpMobile,changePassword }}
+      value={{
+        currentUser,
+        login,
+        loginMobile,
+        signup,
+        signupMobile,
+        logout,
+        generateOtp,
+        generateOtpMobile,
+        changePassword,
+        generateResetOtp,
+        resetPassword
+      }}
     >
       {children}
     </AuthContext.Provider>
