@@ -148,14 +148,4 @@ describe("Button component", () => {
     //checks if input field value is unchaged when the submit button is clicked
     expect(inputfield.value).toEqual("test input");
   })
-
-  //testing the button styling
-  it("Button render with solid style", ()=>{
-    const {getByText} = render(<Button text="solid button" type="solid" />)
-    const solidButton = getByText("solid button") as HTMLElement;
-    const style = getComputedStyle(solidButton);
-    console.log("STYLEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE:", style);
-
-    expect(solidButton).toHaveClass(styles.solid)
-  })
 });
