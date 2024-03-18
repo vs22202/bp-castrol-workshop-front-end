@@ -3,7 +3,6 @@ import { fireEvent, render } from "@testing-library/react";
 import { Button } from "./Button";
 import styles from "./Button.module.css";
 
-
 describe("Button component", () => {
   //testing basic rendering
   it("Renders without crashing", () => { //checks proper rendering of the button
@@ -26,6 +25,24 @@ describe("Button component", () => {
   });
 
   //testing functionalities on button click
+  it("Button action on onclick function", ()=>{ //checks if the onclick function gets called
+    const clickfunc = jest.fn();
+
+    const {getByText} = render(
+      <form>
+        <Button text="Click me!" onClick={clickfunc}/>
+      </form>
+    )
+    //fetch button element
+    const button = getByText("Click me!");
+
+    //click on the button
+    fireEvent.click(button);
+
+    //expect the onclick function- clickfunc() to be called
+    expect(clickfunc).toHaveBeenCalledTimes(1);
+  })
+
   it("Button doesnt work when disabled", ()=>{//checks that buttons dont work when disabled
     const handleSubmit = jest.fn();
     const handleClick = jest.fn();
@@ -148,4 +165,82 @@ describe("Button component", () => {
     //checks if input field value is unchaged when the submit button is clicked
     expect(inputfield.value).toEqual("test input");
   })
+
+  //testing button styling
+  it("Button renders as solid or outlined", ()=>{ //check if the buttons renders as solid/outlined based on the value
+    const {getByText} = render(
+      <>
+      <Button text="Solid Button" type="solid" size="sm"/>
+      <Button text="Outline Button" type="outline" size="lg"/>
+      <Button text="Default Button"/>
+      </>
+    )
+    
+    //fetch the button components based on their text
+    const solidBtn = getByText("Solid Button");
+    const outlineBtn = getByText("Outline Button");
+    const defBtn = getByText("Default Button");
+
+    //check if the buttons have the apt styling type based on prop values
+    expect(solidBtn.parentElement).toHaveClass(styles.solid);
+    expect(outlineBtn.parentElement).toHaveClass(styles.outline);
+    expect(defBtn.parentElement).toHaveClass(styles.solid);
+  })
+
+  it("Button renders in different sizes", ()=>{ //check if the buttons renders in sizes: small, medium and large
+    const {getByText} = render(
+      <>
+      <Button text="Small Button" type="solid" size="sm"/>
+      <Button text="Medium Button" type="outline" size="md"/>
+      <Button text="Large Button" type="outline" size="lg"/>
+      <Button text="Default Button"/>
+      </>
+    )
+    //fetch the buttons
+    const smallBtn = getByText("Small Button");
+    const medBtn = getByText("Medium Button");
+    const largeBtn = getByText("Large Button");
+    const defBtn = getByText("Default Button");
+
+    //test if the buttons have the apt size classes based on the prop values
+    expect(smallBtn.parentElement).toHaveClass(styles.sm);
+    expect(medBtn.parentElement).toHaveClass(styles.md);
+    expect(largeBtn.parentElement).toHaveClass(styles.lg);
+    expect(defBtn.parentElement).toHaveClass(styles.md); //checks if defualt size value is getting rendered if no size mentioned
+  })
+
+  //Button icon rendering
+  it("Button Icon gets rendered", async():Promise<void>=>{
+    const {getByRole} = render(
+      <Button text="Sample Button" iconimg="signup_icon"/>
+    )
+    //get button icon element
+    const button = getByRole("button");
+
+    //provide delay for the icon to load
+    await new Promise(resolve=>setTimeout(resolve, 500))
+
+    //check if the icon component gets rendered
+    expect([...button.children].some(child=>
+      child.classList.contains("icon")
+      )).toBeTruthy()
+  })
+
+  it("Button Icon gets placed at the start/end of the button",()=>{ //checks the position of the button-icon
+    const {getByText} = render(
+      <>
+      <Button text="Sample Button1" iconimg="signup_icon" placeIconAfter={true} />
+      <Button text="Sample Button2" iconimg="signup_icon" placeIconAfter={false} />
+      </>
+    )
+
+    //get the button element
+    const button1 = getByText("Sample Button1");
+    const button2 = getByText("Sample Button2");
+
+    //check if the reverse class gets applied or not
+    expect(button1.parentElement).toHaveClass(styles.reverse);
+    expect(button2.parentElement).not.toHaveClass(styles.reverse);
+  })
+
 });

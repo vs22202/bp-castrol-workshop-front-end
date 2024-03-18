@@ -12,7 +12,7 @@ export type ButtonProps = {
   /** 
    * Defines the button style type, either "solid" or "outline".
    */
-  type: "solid" | "outline";
+  type?: "solid" | "outline";
   /** 
    * Specifies the size of the button: "sm" for small, "md" for medium, and "lg" for large.
    */
@@ -62,7 +62,7 @@ export type ButtonProps = {
 export function Button({
   text,
   type = "solid",
-  size,
+  size="md",
   disabled = false,
   action = "button",
   placeIconAfter,
@@ -71,7 +71,7 @@ export function Button({
 }: ButtonProps) {
   return (
     <button
-      className={`${styles[type]} ${styles[size || ""]} ${styles.button} ${placeIconAfter ? styles.reverse : ""}`}
+      className={`${styles[type]} ${styles[size+""]} ${styles.button} ${placeIconAfter ? styles.reverse : ""}`}
       type={action}
       disabled={disabled}
       onClick={onClick}
