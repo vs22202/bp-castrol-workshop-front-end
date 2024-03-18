@@ -1,4 +1,4 @@
-import { fireEvent, render, waitFor, screen } from "@testing-library/react";
+import { fireEvent, render, waitFor, screen, act } from "@testing-library/react";
 import '@testing-library/jest-dom';
 import { SignupPage } from "./SignupPage";
 import RequireAuth from "../../components/RequireAuthComponent/RequireAuth";
@@ -20,7 +20,7 @@ const sendAlert= jest.fn();
 const login = jest.fn();
 const currentUser = null;
 const signup = jest.fn();
-const signupMobile = jest.fn().mockResolvedValue('success');
+const signupMobile = jest.fn();
 const generateOtp =  jest.fn();
 const generateOtpMobile = jest.fn();
 const logout = jest.fn();
@@ -112,12 +112,13 @@ describe('SignUp Page Testing ', ()=>{
         const otpInput = getByRole('textbox', { name: 'OTP *' });
         const otpBtn = getByRole('button', { name: 'Get OTP' });
     
+        act(() => {
         fireEvent.change(emailInput, {target:{value:"testexample@gmail.com"}});
         fireEvent.change(passwordInput, {target:{value:"@Testexample2024"}});
         fireEvent.change(passwordConfirmInput, {target:{value:"@Testexample2024"}});
         fireEvent.click(otpBtn);
         fireEvent.change(otpInput, {target:{value:"123456"}});
-    
+    });
         expect(emailInput).toHaveValue("testexample@gmail.com");
         expect(passwordInput).toHaveValue("@Testexample2024");
         expect(passwordConfirmInput).toHaveValue("@Testexample2024");
@@ -145,6 +146,7 @@ describe('SignUp Page Testing ', ()=>{
         const SignupBtn = getByRole('button', { name: 'SignUp' });
         const otpBtn = getByRole('button', { name: 'Get OTP' });
     
+        act(() => {
         fireEvent.change(emailInput, {target:{value:"testexample@gmail.com"}});
         fireEvent.change(passwordInput, {target:{value:"@Testexample2024"}});
         fireEvent.change(passwordConfirmInput, {target:{value:"@Testexample2024"}});
@@ -152,6 +154,7 @@ describe('SignUp Page Testing ', ()=>{
         fireEvent.change(otpInput, {target:{value:"123456"}});
     
         fireEvent.click(SignupBtn) 
+    });
         await waitFor(()=>{
             expect(SignupForm).toHaveFormValues({
                 user_email_id: "testexample@gmail.com",
@@ -329,8 +332,9 @@ test('SignUp page integration tests ', async()=>{
           return "success";
           }
         } catch (err) {
-          console.log(err);
-          return "failure";
+            console.log(err);
+            sendAlert({ message: (err as Error).message, type: "error" });
+            return "failure";
         }
       })
 
@@ -358,14 +362,18 @@ test('SignUp page integration tests ', async()=>{
     const SignupBtn = getByRole('button', { name: 'SignUp' });
     const otpBtn = getByRole('button', { name: 'Get OTP' });
 
+    act(() => {
     fireEvent.change(emailInput, {target:{value:"testexample@gmail.com"}});
     fireEvent.change(passwordInput, {target:{value:"@Testexample2024"}});
     fireEvent.change(passwordConfirmInput, {target:{value:"@Testexample2024"}});
     fireEvent.click(otpBtn);
     fireEvent.change(otpInput, {target:{value:"123456"}});
-
+});
+    // 1. Successful case of sign up 
     fetchMock.mockResponseOnce(JSON.stringify({ success: true }));
+    act(() => {
     fireEvent.click(SignupBtn);
+});
 
     await modifiedMockAuthContextValue.signup("testexample@gmail.com", "@Testexample1234","123456");
 
@@ -390,6 +398,26 @@ test('SignUp page integration tests ', async()=>{
     
     }
 
+    //2.Failed sign up - Backend gave error
+
+    fetchMock.mockRejectOnce(new Error('Failed to connect to the server'));
+    act(() => {
+    fireEvent.click(SignupBtn);
+});
+
+    await modifiedMockAuthContextValue.signup("testexample@gmail.com", "@Testexample1234","123456");
+
+    await waitFor(() => {
+        expect(fetchMock).toHaveBeenCalledWith('http://localhost:3000/register', {
+            method: 'POST',
+            headers: { },
+            body: expect.any(FormData),
+        });
+
+        expect(signup).toHaveBeenCalledWith('testexample@gmail.com', '@Testexample1234', '123456');
+        expect(sendAlert).toHaveBeenCalledWith({ message: 'Failed to connect to the server', type: 'error' });
+    });
+
 });
 
 test('SignUp page mobile integration tests ', async()=>{
@@ -408,6 +436,7 @@ test('SignUp page mobile integration tests ', async()=>{
             headers: {},
             body: formData,
           });
+
           const res = await result.json();
           if (res.output == "fail") {
             sendAlert({ message: res.msg as string, type: "error" });
@@ -421,8 +450,8 @@ test('SignUp page mobile integration tests ', async()=>{
           return "success";
           }
         } catch (err) {
-          console.log(err);
-          return "failure";
+            console.log(err);
+            return "failure";
         }
       })
     const modifiedMockAuthContextValue: AuthContextProps = {
@@ -443,22 +472,27 @@ test('SignUp page mobile integration tests ', async()=>{
     );
 
     const mobileOption = getByText(/SignUp using mobile instead?/i) as HTMLInputElement;
+    act(() => {
     fireEvent.click(mobileOption);
+    });
     const mobileInput = getByRole('textbox', { name: 'Mobile Number *' });
     const passwordInput = getByLabelText(/Password/i, { selector: '#user_password' });
     const passwordConfirmInput = getByLabelText(/Confirm Password/i, { selector: '#user_password_confirm' });
     const otpInput = getByRole('textbox', { name: 'OTP *' });
     const SignupBtn = getByRole('button', { name: 'SignUp' });
     const otpBtn = getByRole('button', { name: 'Get OTP' });
-
+    act(() => {
     fireEvent.change(mobileInput, {target:{value:"1234567890"}});
     fireEvent.change(passwordInput, {target:{value:"@Testexample2024"}});
     fireEvent.change(passwordConfirmInput, {target:{value:"@Testexample2024"}});
     fireEvent.click(otpBtn);
     fireEvent.change(otpInput, {target:{value:"123456"}});
-
+    });
+    // 1. Successful case of sign up mobile
     fetchMock.mockResponseOnce(JSON.stringify({ success: true }));
+    act(() => {
     fireEvent.click(SignupBtn);
+    });
     
     await modifiedMockAuthContextValue.signupMobile("1234567890", "@Testexample1234","123456");
     
@@ -483,8 +517,69 @@ test('SignUp page mobile integration tests ', async()=>{
         expect(otp).toBe("123456");
     
     }
+    //2.Failed sign up mobile - Backend gave error
+
+    fetchMock.mockResponseOnce("", { status: 422 });
+    act(() => {
+    fireEvent.click(SignupBtn);
+    });
+    await modifiedMockAuthContextValue.signupMobile("1234567890", "@Testexample1234", "123456");
+
+    expect(sendAlert).toHaveBeenCalledWith({ message: 'Failed to connect to the server', type: 'error' });
 
 });
+
+test('SignUp page mobile integration tests - Incorrect OTP', async() => {
+
+    const signupMobile = jest.fn().mockResolvedValue('failure');
+
+    const modifiedMockAuthContextValue: AuthContextProps = {
+        ...mockAuthContextValue,
+        signupMobile: signupMobile
+    };
+
+    const { getByRole, getByLabelText, getByText } = render(
+        <AuthContext.Provider value={modifiedMockAuthContextValue}>
+            <AlertContext.Provider value={mockContextValue}>
+                <MemoryRouter>
+                    <RequireAuth requireAuth={false}>
+                        <SignupPage />
+                    </RequireAuth>
+                </MemoryRouter>
+            </AlertContext.Provider>
+        </AuthContext.Provider>
+    );
+
+    const mobileOption = getByText(/SignUp using mobile instead?/i) as HTMLInputElement;
+    act(() => {
+    fireEvent.click(mobileOption);
+    });
+
+    const mobileInput = getByRole('textbox', { name: 'Mobile Number *' });
+    const passwordInput = getByLabelText(/Password/i, { selector: '#user_password' });
+    const passwordConfirmInput = getByLabelText(/Confirm Password/i, { selector: '#user_password_confirm' });
+    const otpInput = getByRole('textbox', { name: 'OTP *' });
+    const SignupBtn = getByRole('button', { name: 'SignUp' });
+    const otpBtn = getByRole('button', { name: 'Get OTP' });
+    act(() => {
+
+    fireEvent.change(mobileInput, {target:{value:"1234567890"}});
+    fireEvent.change(passwordInput, {target:{value:"@Testexample2024"}});
+    fireEvent.change(passwordConfirmInput, {target:{value:"@Testexample2024"}});
+    fireEvent.click(otpBtn);
+    fireEvent.change(otpInput, {target:{value:"987654"}}); // Incorrect OTP
+    });
+
+    signupMobile.mockResolvedValueOnce('failure');
+    act(() => {
+    fireEvent.click(SignupBtn);
+    });
+    await waitFor(() => {
+        expect(sendAlert).toHaveBeenCalledWith({ message: 'Failed to connect to the server', type: 'error' });
+    });
+});
+
+
 
 });
 
