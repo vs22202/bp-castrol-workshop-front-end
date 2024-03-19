@@ -5,8 +5,9 @@ import { fireEvent, render, waitFor } from '@testing-library/react';
 import { SignupPage } from './SignupPage';
 import AlertContext, { AlertContextProps } from "../../contexts/AlertContext";
 import { AuthProvider } from '../../contexts/AuthContext';
-import fetch from 'jest-fetch-mock';
+import fetch,{ enableFetchMocks } from 'jest-fetch-mock'
 import {createMemoryHistory} from "history";
+enableFetchMocks()
 
 const alert = null;
 const sendAlert = jest.fn();
