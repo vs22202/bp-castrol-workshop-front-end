@@ -203,49 +203,6 @@ describe('SignupPage Component', () => {
 
     });
 
-    // test('Already registered user tried to signup-failing testcase', async () => {
-        
-    //     fetchMock.mockResponseOnce(JSON.stringify({ output: 'success', msg: 'OTP send successfully' }), { status: 200 });
-
-    //     const { getByRole, getByLabelText, getByText } = setup();
-    //     fireEvent.change(getByRole('textbox', { name: 'Email ID *' }), { target: { value: 'test@example.com' } });
-    //     fireEvent.change(getByLabelText(/Password/i, { selector: '#user_password' }), { target: { value: '@Testexample2001' } });
-    //     fireEvent.change(getByLabelText(/Confirm Password/i, { selector: '#user_password_confirm' }), { target: { value: '@Testexample2001' } });
-
-        
-    //     fireEvent.click(getByRole('button', { name: 'Get OTP' }));
-
-    //     // console.log("Fetch calls after OTP generation:", fetch.mock.calls.length);
-    //     // console.log("URL of last fetch call:", fetch.mock.calls[fetch.mock.calls.length - 1][0]);
-    //     expect(fetch.mock.calls.length).toEqual(1);
-    //     expect(fetch.mock.calls[0][0]).toEqual('http://localhost:3000/generateOtp');
-
-    
-    //     await waitFor(() => expect(getByText(/Resend OTP/i)).toBeInTheDocument());
-
-
-    //     fireEvent.change(getByRole('textbox', { name: 'OTP *' }), { target: { value: '123456' } });
-
-    //     fetchMock.mockResponseOnce(JSON.stringify({ output: 'fail', msg: 'User already registered' }), { status: 500 });
-
-    //     const SignupBtn = getByRole('button', { name: 'SignUp' });
-    //     await waitFor(() =>fireEvent.click(SignupBtn))
-
-    //     // console.log("Fetch calls after signup:", fetch.mock.calls.length);
-    //     // console.log("URL of last fetch call:", fetch.mock.calls[fetch.mock.calls.length - 1][0]);
-    //     expect(fetch.mock.calls.length).toEqual(2);
-    //     expect(fetch.mock.calls[1][0]).toEqual('http://localhost:3000/register');
-    //     expect(sendAlert).toHaveBeenCalledWith({ message: 'User already registered', type: 'error' });
-    //     await waitFor(() => {
-    //         const history = createMemoryHistory({ initialEntries: ['/signup'] }); // Set the initial path
-    //         history.listen(() => {
-    //           expect(history.location.pathname).not.toBe("/login");
-           
-    //         });
-    //       });
-
-    // });
-
 
     test('signup should fail due to incorrect otp', async () => {
         
@@ -583,54 +540,6 @@ test('otp sucessfully generated and verified but signup internal server error', 
       });
 
 });
-
-// test('Already registered user tried to signup-failing testcase', async () => {
-    
-//     fetchMock.mockResponseOnce(JSON.stringify({ output: 'success', msg: 'OTP send successfully' }), { status: 200 });
-
-//     const { getByRole, getByLabelText, getByText } = setup();
-// const mobileOption = getByText(/SignUp using mobile instead?/i) as HTMLInputElement;
-
-// act(() => {
-// fireEvent.click(mobileOption);
-// });
-//     fireEvent.change(getByRole('textbox', { name: 'Mobile Number *' }), { target: { value: '911234567890' } });
-//     fireEvent.change(getByLabelText(/Password/i, { selector: '#user_password' }), { target: { value: '@Testexample2001' } });
-//     fireEvent.change(getByLabelText(/Confirm Password/i, { selector: '#user_password_confirm' }), { target: { value: '@Testexample2001' } });
-
-    
-//     fireEvent.click(getByRole('button', { name: 'Get OTP' }));
-
-//     // console.log("Fetch calls after OTP generation:", fetch.mock.calls.length);
-//     // console.log("URL of last fetch call:", fetch.mock.calls[fetch.mock.calls.length - 1][0]);
-//     expect(fetch.mock.calls.length).toEqual(1);
-//     expect(fetch.mock.calls[0][0]).toEqual('http://localhost:3000/generateOtp/mobile');
-
-
-//     await waitFor(() => expect(getByText(/Resend OTP/i)).toBeInTheDocument());
-
-
-//     fireEvent.change(getByRole('textbox', { name: 'OTP *' }), { target: { value: '123456' } });
-
-//     fetchMock.mockResponseOnce(JSON.stringify({ output: 'fail', msg: 'User already registered' }), { status: 500 });
-
-//     const SignupBtn = getByRole('button', { name: 'SignUp' });
-//     await waitFor(() =>fireEvent.click(SignupBtn))
-
-//     // console.log("Fetch calls after signup:", fetch.mock.calls.length);
-//     // console.log("URL of last fetch call:", fetch.mock.calls[fetch.mock.calls.length - 1][0]);
-//     expect(fetch.mock.calls.length).toEqual(2);
-//     expect(fetch.mock.calls[1][0]).toEqual('http://localhost:3000/register/mobile');
-//     expect(sendAlert).toHaveBeenCalledWith({ message: 'User already registered', type: 'error' });
-//     await waitFor(() => {
-//         const history = createMemoryHistory({ initialEntries: ['/signup'] }); // Set the initial path
-//         history.listen(() => {
-//           expect(history.location.pathname).not.toBe("/login");
-       
-//         });
-//       });
-
-// });
 
 
 test('signup should fail due to incorrect otp', async () => {
