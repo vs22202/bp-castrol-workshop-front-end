@@ -355,7 +355,7 @@ describe('ApplicationUpload Component', () => {
         });
     });
 
-    test("ApplicationUpload Component - error in submitting the form ", async () => {
+    test("ApplicationUpload Component - error in submitting the form [Server Error] ", async () => {
         fetchMock.mockResponseOnce(JSON.stringify({
             output: 'no records',
             msg: 'No application found',
@@ -427,7 +427,7 @@ describe('ApplicationUpload Component', () => {
         expect(sendAlert).toHaveBeenCalledWith({ message: 'Error inserting application', type: 'error' });
 
     });
-    test('ApplicationUpload Component-error in fetching data for existing application', async () => {
+    test('ApplicationUpload Component - error in fetching data for existing application [Server Error]', async () => {
         fetchMock.mockResponseOnce(JSON.stringify({output: 'fail',msg: 'Error in fetching data'}), { status: 500 });
         setup();
         await waitFor(() => {
