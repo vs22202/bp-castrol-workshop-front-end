@@ -83,7 +83,6 @@ const ApplicationUpload: React.FC = () => {
     formState: { errors, isDirty, dirtyFields },
     trigger,
     reset,
-    watch,
     control,
   } = methods;
 
@@ -95,7 +94,7 @@ const ApplicationUpload: React.FC = () => {
     const fetchData = async () => {
       setLoading(true);
       const result = await fetch(
-        `${import.meta.env.VITE_BACKEND_URL}/application/getUserApplication`,
+        "http://localhost:3000/application/getUserApplication",
         {
           headers: {
             Authorization: currentUser?.auth_token as string,
@@ -269,6 +268,7 @@ const ApplicationUpload: React.FC = () => {
           onSubmit={handleSubmit(submitForm)}
           onChange={handleInputChange}
           ref={formRef}
+          name="AppuploadForm"
         >
           <div className={styles.formHeader}>
             <h1>

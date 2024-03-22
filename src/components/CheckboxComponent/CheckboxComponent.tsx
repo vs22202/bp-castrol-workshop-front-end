@@ -64,6 +64,7 @@ export function Checkbox({ name, size, text, required = false, register, errors,
         <div className={`${styles.group} ${styles[size]}`}>
           <input
             name={name}
+            aria-label={name}
             {...checkboxRegister}
             type="checkbox"
             data-testid={datatestid}
