@@ -223,7 +223,6 @@ describe('ApplicationUpload Component', () => {
                 "consent_receive_info": "1",
                 "file_paths": "[\"https://firebasestorage.googleapis.com/v0/b/bp-capstone-file-storage.appspot.com/o/userFiles%2FScreenshot%202023-03-06%20202940.png-1711020824395?alt=media&token=bff90d22-7446-41de-9432-004b3000419c\"]",
                 "application_status": "Pending",
-                "last_modified_date": "2024-03-21T11:33:44.395"
             }
         }), { status: 200 });
 
@@ -297,7 +296,6 @@ describe('ApplicationUpload Component', () => {
                 "consent_receive_info": "1",
                 "file_paths": "[\"https://firebasestorage.googleapis.com/v0/b/bp-capstone-file-storage.appspot.com/o/userFiles%2FScreenshot%202023-03-06%20202940.png-1711020824395?alt=media&token=bff90d22-7446-41de-9432-004b3000419c\"]",
                 "application_status": "Pending",
-                "last_modified_date": "2024-03-21T11:33:44.395"
             }
         }), { status: 200 });
     

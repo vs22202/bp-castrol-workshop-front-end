@@ -42,8 +42,6 @@ describe('Profile Page', () => {
           result:   {
             "user_id": 1,
             "user_email": "Testexample@gmail.com",
-            "user_mobile": null,
-            "password": "$2a$10$z8DHe0DMUym9IqnR8iPe9uJ1aD3Z3mDAysTjhpoQkchOZHvRKx.5u",
             "verified": "1"
           },
       }), { status: 200 });
@@ -85,8 +83,6 @@ describe('Profile Page', () => {
         result:   {
           "user_id": 1,
           "user_email": "Testexample@gmail.com",
-          "user_mobile": null,
-          "password": "$2a$10$z8DHe0DMUym9IqnR8iPe9uJ1aD3Z3mDAysTjhpoQkchOZHvRKx.5u",
           "verified": "1"
         },
     }), { status: 200 });
@@ -108,8 +104,6 @@ describe('Profile Page', () => {
           result:   {
             "user_id": 1,
             "user_email": "Testexample@gmail.com",
-            "user_mobile": null,
-            "password": "$2a$10$z8DHe0DMUym9IqnR8iPe9uJ1aD3Z3mDAysTjhpoQkchOZHvRKx.5u",
             "verified": "1"
           },
       }), { status: 200 });
@@ -166,8 +160,6 @@ describe('Profile Page', () => {
         result:   {
           "user_id": 1,
           "user_email": "Testexample@gmail.com",
-          "user_mobile": null,
-          "password": "$2a$10$z8DHe0DMUym9IqnR8iPe9uJ1aD3Z3mDAysTjhpoQkchOZHvRKx.5u",
           "verified": "1"
         },
     }), { status: 200 });
@@ -219,8 +211,6 @@ describe('Profile Page', () => {
         result:   {
           "user_id": 1,
           "user_email": "Testexample@gmail.com",
-          "user_mobile": null,
-          "password": "$2a$10$z8DHe0DMUym9IqnR8iPe9uJ1aD3Z3mDAysTjhpoQkchOZHvRKx.5u",
           "verified": "1"
         },
     }), { status: 200 });
@@ -272,8 +262,6 @@ describe('Profile Page', () => {
         result:   {
           "user_id": 1,
           "user_email": "Testexample@gmail.com",
-          "user_mobile": null,
-          "password": "$2a$10$z8DHe0DMUym9IqnR8iPe9uJ1aD3Z3mDAysTjhpoQkchOZHvRKx.5u",
           "verified": "1"
         },
     }), { status: 200 });
@@ -378,7 +366,6 @@ test("Successfully changes the password of user through mobile number", async ()
     result:  {
       "user_id": 7,
       "user_mobile": "917828806700",
-      "password": "$2a$10$V6tyMBwDyfUsSWcU8Py2X.tE/RzEm1N1yrYsOif5vcknCDS.15b.y",
       "verified": "1"
     },
 }), { status: 200 });
