@@ -21,7 +21,6 @@ export type InputFieldProps = {
   watch?:any;
   customValidation?: any;
   hasFocus?: boolean;
-  datatestid?: string;
 };
 
 /**
@@ -88,7 +87,6 @@ export type InputFieldProps = {
  * - `errors`: Object containing validation errors, where each key corresponds to an input name.
  * - `customValidation`: (Optional) Additional custom validation logic.
  * - `hasFocus`: (Optional) should the button be focused when rendering(controls the floating label).
- * - `datatestid`: (Optional) For unit testing of the component and the pages it is used in.
  */
 
 export function InputField({
@@ -104,9 +102,7 @@ export function InputField({
   register,
   validationSchema,
   errors,
-  watch,
   hasFocus = false,
-  datatestid,
 }: InputFieldProps) {
   const [inputValue, setInputValue] = useState(value);
   const [inputType, setInputType] = useState(type);
@@ -148,6 +144,7 @@ export function InputField({
         className={`${type == "hidden" ? styles.hidden : ""} ${
           styles.inputFieldContainer
         }`}
+        role="inputfieldContainer"
       >
         <div
           className={`${
@@ -157,6 +154,7 @@ export function InputField({
           } ${isDisabled ? styles.disabled : ""}`}
         >
           <input
+            role="inputfield"
             id={name}
             name={name}
             type={inputType}
@@ -173,11 +171,12 @@ export function InputField({
             className={`${
               errors[name] ? styles.isWronginputfield : styles.defaultinputfield
             } ${styles[size]}`}
-            data-testid={datatestid}
+            disabled={isDisabled} /* for testing */
           />
 
           {/* floatingLabel */}
           <label
+            role="inputfieldlabel"
             htmlFor={name}
             className={`${
               isFocused || hasFocus || inputValue

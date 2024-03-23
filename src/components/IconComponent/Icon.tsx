@@ -65,6 +65,10 @@ export type IconProps = {
      * The size of the icon. Can be 'sm' for small, 'md' for medium, or 'lg' for large.
      */
     size: "sm" | "md" | "lg";
+    /**
+     * an alt text for the icon image
+     */
+    alt?:string;
   };
   
  /**
@@ -79,15 +83,15 @@ export type IconProps = {
  * @example
  * Here's how to render an icon of size small with the 'loginW' key:
  * ```tsx
- * <Icon src="loginW" size="sm" />
+ * <Icon src="loginW" size="sm" alt="icon"/>
  * ```
  */
   
-  export function Icon ({size, src}: IconProps ){
+  export function Icon ({size, src, alt}: IconProps ){
   
     return (
       <>
-        <img src={icons[src]} className={`${styles[size]}`}/>
+        <img src={icons[src]} className={`${styles[size]}`} alt={alt}/>
       </>
     );
   };

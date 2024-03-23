@@ -224,6 +224,8 @@ describe("Button component", () => {
     expect([...button.children].some(child=>
       child.classList.contains("icon")
       )).toBeTruthy()
+
+      //further icon render testing in svgicon component
   })
 
   it("Button Icon gets placed at the start/end of the button",()=>{ //checks the position of the button-icon

@@ -269,6 +269,7 @@ const ApplicationUpload: React.FC = () => {
           onSubmit={handleSubmit(submitForm)}
           onChange={handleInputChange}
           ref={formRef}
+          noValidate
         >
           <div className={styles.formHeader}>
             <h1>
@@ -302,7 +303,6 @@ const ApplicationUpload: React.FC = () => {
                 : "lg"
             }
             type="solid"
-            datatestid="AppUploadSubmitBtn"
             action="submit"
             disabled={!isDirty}
           />
