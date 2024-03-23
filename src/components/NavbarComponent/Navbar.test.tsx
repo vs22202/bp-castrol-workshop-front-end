@@ -16,7 +16,25 @@ const mockAuthContextValue: AuthContextProps = {
   login: async () => 'success',
   signup: async () => 'success',
   generateOtp: async () => 'success',
-  logout: async () => 'success'
+  logout: async () => 'success',
+  loginMobile: function (_mobile_no: string, _password: string): Promise<string> {
+    throw new Error("Function not implemented.");
+  },
+  signupMobile: function (_mobile_no: string, _password: string, _otp: string): Promise<string> {
+    throw new Error("Function not implemented.");
+  },
+  generateOtpMobile: function (_mobile_no: string): void {
+    throw new Error("Function not implemented.");
+  },
+  changePassword: function (_password: string, _old_password: string): Promise<string> {
+    throw new Error("Function not implemented.");
+  },
+  generateResetOtp: function (_email?: string | undefined, _mobile?: string | undefined): void {
+    throw new Error("Function not implemented.");
+  },
+  resetPassword: function (_password: string, _otp: string, _email?: string | undefined, _mobile?: string | undefined): Promise<string> {
+    throw new Error("Function not implemented.");
+  }
 };
 
 // Mock useNavigate hook

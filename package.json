@@ -9,7 +9,7 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "test": "jest --watch",
-    "typedoc": "typedoc --out docs ./src/components/*/*.tsx ./src/views/**/*.tsx"
+    "typedoc": "typedoc --out docs ./src/components/*/*.tsx ./src/views/**/*.tsx "
   },
   "dependencies": {
     "@types/react-router-dom": "^5.3.3",

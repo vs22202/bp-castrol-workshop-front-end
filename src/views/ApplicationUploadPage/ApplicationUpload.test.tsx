@@ -146,13 +146,9 @@ describe('ApplicationUpload Component', () => {
         const consent_being_contacted = getByRole('checkbox', { name: "consent_being_contacted" });
         const consent_receive_info = getByRole('checkbox', { name: "consent_receive_info" });
         const submit=getByRole('button', { name: 'Submit' });
-        await waitFor(()=>{
         fireEvent.change(workshop_name, { target: { value: "New Workshop Name" } });
-        })
         fireEvent.change(workshop_post_code, { target: { value: "123456" } });
-        await waitFor(()=>{
         fireEvent.change(address, { target: { value: "123 Main St Vellore TamilNadu" } });
-        })
         fireEvent.change(state, { target: { value: "New State" } });
         fireEvent.change(city, { target: { value: "New City" } });
         fireEvent.change(user_name, { target: { value: "New User Name" } });
