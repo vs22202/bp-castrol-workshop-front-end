@@ -167,6 +167,9 @@ describe('ApplicationUpload Component', () => {
         fireEvent.click(consent_process_data);
         fireEvent.click(consent_being_contacted);
         fireEvent.click(consent_receive_info);
+        const chooseFilesButton = getByRole('button', { name: 'Choose Files' });
+        const file = new File(["hello"], "./test_assets/alex-suprun-AHnhdjyTNGM-unsplash.jpg", { type: "image/jpg" })
+        fireEvent.change(chooseFilesButton, { target: { files: [file] } });
         fetchMock.mockResponseOnce(JSON.stringify({output: 'success',msg: 'Application inserted successfully'}), { status: 201 });
         
         await waitFor(() => {fireEvent.click(submit);});
@@ -313,10 +316,13 @@ describe('ApplicationUpload Component', () => {
         expect(getByText('Application Status')).toBeInTheDocument(); 
         const workshop_name = getByRole('textbox', { name: "Workshop name *" });
         fireEvent.change(workshop_name, { target: { value: "New Workshop Name" } });
-    
+
+        fireEvent.mouseDown(getByRole('combobox', { name: "Expertise" }), "German Cars");
+        expect(getByText(/German Car/i)).toBeInTheDocument();
+        fireEvent.click(getByText(/German Car/i));
+
         const submit = getByRole('button', { name: 'Submit' });
     
-       
         fetchMock.mockResponseOnce(JSON.stringify({ output: 'success', msg: 'application updated successfully' }), { status: 200 });
     
         
@@ -346,7 +352,7 @@ describe('ApplicationUpload Component', () => {
                 "user_mobile": "1234567890",
                 "bay_count": 4,
                 "services_offered": ["Oil Change","Fluid Checks", "Routine Maintenance",],
-                "expertise": "Hybrid and Electric Luxury Cars",
+                "expertise": ["Hybrid and Electric Luxury Cars","German Cars",],
                 "brands": "BMW",
                 "consent_process_data": true,
                 "consent_being_contacted": true,
