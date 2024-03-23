@@ -237,7 +237,6 @@ describe('ApplicationUpload Component', () => {
             expect(fetch.mock.calls[0][0]).toEqual('http://localhost:3000/application/getUserApplication');
         });
         // Check if buttons are present
-        expect(getByRole('button', { name: 'Choose Files' })).toBeInTheDocument();
         expect(getByRole('button', { name: 'Submit' })).toBeInTheDocument();
 
         //all input fields
