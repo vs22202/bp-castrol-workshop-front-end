@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState, useEffect } from "react";
 import styles from "./InputField.module.css";
 import { SvgIcon } from "../IconComponent/SvgIcon";
@@ -18,7 +19,7 @@ export type InputFieldProps = {
   register: any;
   validationSchema?: any;
   errors: any;
-  watch?:any;
+ // watch?:any;
   customValidation?: any;
   hasFocus?: boolean;
   datatestid?: string;
@@ -104,7 +105,7 @@ export function InputField({
   register,
   validationSchema,
   errors,
-  watch,
+ // watch,
   hasFocus = false,
   datatestid,
 }: InputFieldProps) {
