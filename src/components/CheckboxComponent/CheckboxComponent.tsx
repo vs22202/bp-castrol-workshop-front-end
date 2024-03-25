@@ -15,7 +15,7 @@ export type CheckboxProps = {
    * The size of the checkbox. This controls the scaling of the checkbox's appearance.
    * While currently a string, consider restricting this to specific size options like "small", "medium", or "large" for consistency.
    */
-  size: string; // Consider changing to size: "small" | "medium" | "large";
+  size: "small" | "medium" | "large"; // Consider changing to size: "small" | "medium" | "large";
   /**
    * The display text associated with the checkbox. This text is shown to the user alongside the checkbox itself.
    */
@@ -40,10 +40,6 @@ export type CheckboxProps = {
    * Schema or rules for validating the checkbox input, used in conjunction with `register` to enforce validation constraints.
    */
   validationSchema?: any; // Consider providing a more specific type for better type safety.
-  /**
-   * to provide an ID for testing checkbox
-   */
-  datatestid?:string;
 }
 
 /**
@@ -55,7 +51,7 @@ export type CheckboxProps = {
  * @param props The {@link CheckboxProps} to configure the checkbox.
  * @returns A JSX element representing a stylized checkbox input, with associated label text.
  */
-export function Checkbox({ name, size, text, required = false, register, errors, validationSchema, datatestid }: CheckboxProps) {
+export function Checkbox({ name, size, text, required = false, register, errors, validationSchema }: CheckboxProps) {
   const checkboxRegister = register(name, validationSchema);
 
   return (
@@ -66,8 +62,8 @@ export function Checkbox({ name, size, text, required = false, register, errors,
             name={name}
             {...checkboxRegister}
             type="checkbox"
-            data-testid={datatestid}
             className={`${styles["icon" + size]} ${errors && errors[name] ? styles.error : ""}`}
+            required={required}
           />
           <div className={`${errors && errors[name] ? styles.texterror : styles.text} ${styles[size]}`}>{text}{required && <span style={{ color: 'red' }}>*</span>}</div>
         </div>

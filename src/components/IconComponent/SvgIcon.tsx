@@ -14,10 +14,10 @@ export function SvgIcon(props: IProps) {
   return (
       <>
       {loading && (
-        <span className="rounded-full bg-slate-400 animate-pulse h-8 w-8"></span>
+        <span className="rounded-full bg-slate-400 animate-pulse h-8 w-8" role="loading"></span>
       )}
       {Svg && (
-          <Svg className={`${styles[wrapperStyle || ""] } ${styles.icon}`} {...svgProp} />
+          <Svg className={`${styles[wrapperStyle || ""] } ${styles.icon}`} role={iconName} {...svgProp} />
       )}
     </>
   );

@@ -20,7 +20,7 @@ import styles from "./Footer.module.css";
 
 export function FooterWithLogo() {
   return (
-    <div className={`${styles.footerContainer}`}>
+    <div className={`${styles.footerContainer}`} data-testid="footercontainer">
       <img
         src="src\assets\castrol_logo.svg"
         alt="logo-ct"

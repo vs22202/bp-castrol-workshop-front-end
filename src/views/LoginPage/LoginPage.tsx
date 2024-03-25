@@ -138,7 +138,6 @@ const LoginPage: React.FC = () => {
                 type="solid"
                 iconimg="login_icon"
                 action="submit"
-                datatestid="LoginPageLoginBtn"
               />
               <span>or</span>
               <span>New to Castrol?</span>
@@ -153,7 +152,6 @@ const LoginPage: React.FC = () => {
                 }
                 type="outline"
                 iconimg="signup_icon"
-                datatestid="LoginPageSignupBtn"
                 onClick={handleSignup}
               />
             </div>

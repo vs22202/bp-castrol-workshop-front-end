@@ -37,10 +37,6 @@ export type ButtonProps = {
    * Optional click handler for the button. Receives the mouse event as an argument.
    */
   onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
-  /** 
-   * Optional test id for testing the component as well as the pages it is used in.
-   */
-  datatestid?: string;
 };
 
 /**
@@ -71,16 +67,14 @@ export function Button({
   action = "button",
   placeIconAfter,
   iconimg,
-  datatestid,
   onClick,
 }: ButtonProps) {
   return (
     <button
-      className={`${styles[type]} ${styles[size || ""]} ${styles.button} ${placeIconAfter ? styles.reverse : ""}`}
+      className={`${styles[type]} ${styles[size||""]} ${styles.button} ${placeIconAfter ? styles.reverse : ""}`}
       type={action}
       disabled={disabled}
       onClick={onClick}
-      data-testid={datatestid}
     >
       {iconimg && <SvgIcon iconName={iconimg} wrapperStyle={size} />}
       <span>{text}</span>
