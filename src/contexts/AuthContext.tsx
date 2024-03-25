@@ -235,7 +235,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         body: formData,
       });
       const result = await res.json();
-      if (result.output == "fail") {
+      if (result.output == "fail"|| result.output === "error") {
         sendAlert({ message: result.msg as string, type: "error" });
         return "failure";
       }

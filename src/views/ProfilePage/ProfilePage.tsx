@@ -8,20 +8,20 @@ import styles from "./ProfilePage.module.css";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { renderInput } from "../../components/FormFieldRenderLogic";
 import AuthContext, { AuthContextProps } from "../../contexts/AuthContext";
+import AlertContext, { AlertContextProps } from "../../contexts/AlertContext";
 import { useScreenSize } from "../../components/ScreenSizeLogic";
-import { useLocation, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import { SvgIcon } from "../../components/IconComponent/SvgIcon";
 
 /**
- * `LoginPage` Page
+ * `ProfilePage` Page
  *
- * Renders a login page where users can enter their email and password to log into the Castrol Community.
- * The page provides a welcoming interface with a login form and the option to sign up for new users.
- * It includes form validation, dynamic error feedback, and responsiveness for an optimal user experience.
+ * Renders a profile page where users can view and edit their profile information.
+ * The page includes a form for users to change their password and displays user details such as email or mobile number.
+ * It provides a user-friendly interface with form validation, dynamic error feedback, and responsiveness for an optimal user experience.
  *
  * @category Pages
- * @returns The rendered `LoginPage` component as a `JSX.Element`.
- *
+ * @returns The rendered `ProfilePage` component as a `JSX.Element`.
  *
  * ## Features
  * - **Dynamic Form Fields**: The login form dynamically adapts to varying screen sizes and includes fields for user email, password, and a "Remember me" checkbox.
@@ -32,21 +32,20 @@ import { SvgIcon } from "../../components/IconComponent/SvgIcon";
  * - **Navigation**: Allows users to navigate to the signup page for new registrations.
  *
  * ## Form Fields
- * The login form includes the following fields:
+ * The profile page form includes the following fields:
  * - `user_email_id`: User's email address (required).
- * - `user_password`: User's password (required).
- * - `remember_me?`: Checkbox for remembering the user's login state.
+ * - `user_mobile`: User's mobile number (required).
+ * - `user_password`: User's new password (required, 10-100 characters with special characters, numbers, and capital letters).
+ * - `user_old_password`: User's old password (required for password change).
  *
  * @example
  * ```tsx
- * <LoginPage />
+ * <ProfilePage />
  * ```
  *
  * ## Props
  * - None
  *
- * Whether users are returning to the Castrol Community or signing in for the first time,
- * the `LoginPage` page provides a user-friendly interface for a smooth login experience.
  */
 
 const ProfilePage: React.FC = () => {
@@ -61,6 +60,7 @@ const ProfilePage: React.FC = () => {
   const { changePassword, currentUser } = useContext(
     AuthContext
   ) as AuthContextProps;
+  const { sendAlert } = useContext(AlertContext) as AlertContextProps;
   const inputSize = useScreenSize();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
@@ -77,7 +77,7 @@ const ProfilePage: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
-      const result = await fetch(`${import.meta.env.VITE_BACKEND_URL}/user/`, {
+      const result = await fetch("http://localhost:3000/user/", {
         headers: {
           Authorization: currentUser?.auth_token as string,
         },
@@ -96,6 +96,9 @@ const ProfilePage: React.FC = () => {
           if (phoneReset == true) setPhoneReset(false);
           setValue("user_email_id", res.result.user_email);
         }
+      }else if (res.output === "error" && res.output === "fail") {
+        sendAlert({ message: res.msg as string, type: "error" });
+        navigate("/"); // Redirect to home page or handle as per your application flow
       }
       setFormMode("edit");
       setLoading(false);
@@ -131,6 +134,7 @@ const ProfilePage: React.FC = () => {
             onSubmit={handleSubmit(handleReset)}
             onChange={handleInputChange}
             data-testid="ResetForm"
+            name="ProfilePageForm"
           >
             <h1>
               <SvgIcon iconName="user_profile" />

@@ -85,7 +85,7 @@ export type DropDownProps = {
               validationSchema={{
                 required: input.required,
               }}
-              datatestid=
+
             />
  */
 
@@ -300,6 +300,7 @@ export function DropDown({
             }),
           }}
           value={value}
+          aria-label={placeholder}
           placeholder={placeholder}
           {...dropdownRegister}
           formatCreateLabel={formatCreateLabel}

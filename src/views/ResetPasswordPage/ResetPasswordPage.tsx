@@ -8,18 +8,26 @@ import ResetImg from "../../assets/reset_illustration.svg";
 import styles from "./ResetPasswordPage.module.css";
 import AuthContext, { AuthContextProps } from "../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
-import AlertContext, { AlertContextProps } from "../../contexts/AlertContext";
+// import AlertContext, { AlertContextProps } from "../../contexts/AlertContext";
 import { useScreenSize } from "../../components/ScreenSizeLogic";
 
 /**
  * `ResetPasswordPage` Page
  *
  * Renders a reset page for users to reset their password.
- *
+ * The page includes a reset password form with dynamic validations, OTP generation, and user-friendly interactions.
  * @category Page
  * @returns The rendered `ResetPasswordPage` component as a `JSX.Element`.
  *
  *
+ * ## Features
+ * - **Dynamic Form Fields**: The reset password form adapts to different screen sizes and includes fields for user email, mobile number, password, password confirmation, and OTP.
+ * - **Form Validation**: Utilizes React Hook Form for form validation, providing real-time error feedback and ensuring data integrity.
+ * - **OTP Generation**: Allows users to request and receive a one-time password (OTP) for secure password reset.
+ * - **Loading State**: Displays a loading state while the password reset process is in progress to provide visual feedback to the user.
+ * - **Alerts**: Utilizes the `AuthContext` to handle password reset requests and display success messages upon successful password reset.
+ * - **Responsive Design**: The component is designed to be responsive, ensuring a seamless user experience across different devices and screen sizes.
+ * 
  * ## Form Fields
  * The reset password form includes the following fields:
  * - `user_email_id`: User's email address (required, valid email format).
@@ -46,7 +54,7 @@ const ResetPasswordPage: React.FC = () => {
     AuthContext
   ) as AuthContextProps;
   const [otpActivated, setOtpActivated] = useState(false);
-  const { sendAlert } = useContext(AlertContext) as AlertContextProps;
+  // const { sendAlert } = useContext(AlertContext) as AlertContextProps;
   const [isAllFieldsValid, setIsAllFieldsValid] = useState(false);
   const [otpSent, setOtpSent] = useState(false);
   const [otpTimer, setOtpTimer] = useState("02:00");
@@ -176,6 +184,7 @@ const ResetPasswordPage: React.FC = () => {
           onSubmit={handleSubmit(handleResetPassword)}
           onChange={handleInputChange}
           data-testid="ResetPasswordForm"
+          name="ResetPasswordForm"
         >
           <h1>Reset Password</h1>
           <h2>Enter the six digit OTP to reset your password. </h2>
