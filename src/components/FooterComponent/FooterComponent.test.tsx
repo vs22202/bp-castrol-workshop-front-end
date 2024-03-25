@@ -1,9 +1,3 @@
-/* 
-checks if the logo with the alt text 'logo-ct' and 
-the copyright notice containing the text 'copyright © 1999-2024' 
-are present in the rendered output. 
-*/
-
 import { FooterWithLogo } from './Footer';
 import "@testing-library/jest-dom";
 import { render } from "@testing-library/react";

@@ -1,8 +1,3 @@
-/*
--Sets up a test suite for the Icon component 
--Ensure that the component renders without throwing any errors 
-when provided with the specified props.
-*/
 import "@testing-library/jest-dom";
 import { render } from "@testing-library/react";
 import { Icon } from "./Icon";
@@ -94,13 +89,4 @@ describe("Icon component", () => {
     expect(renderingTime).toBeLessThanOrEqual(50); //rendered within 50 milisecond
     console.log("Time took for rendering 100 icons: ",renderingTime)
   })
-  
-  //snapshot test
-  /* it('Rendered icon component matches exactly with the snapshot',()=>{//compares the rendered icon with its snapshot
-    const {container} = render(<Icon src="submitD" size="md"/>)
-    
-    // Assert that the rendered output matches exactly with the stored snapshot
-    expect(container).toMatchSnapshot();
-  }) */
-
 });

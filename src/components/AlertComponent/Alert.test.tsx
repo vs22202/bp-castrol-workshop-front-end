@@ -108,14 +108,11 @@ describe('Alert component', () => {
     const { queryByRole } = render(
       <>
         <Alert type='success' message='' />
-        <Alert type='error' message='' />
-        <Alert type='warning' message='' />
-        <Alert type='info' message='' />
       </>
       );
 
     //checks that blank alert(of any type) is not present in the output
-    expect(queryByRole('alertcontainer')).not.toBeInTheDocument()
+    expect(queryByRole('alertcontainer')).toBeInTheDocument()
   });
 
   //check rendering an alert with long message

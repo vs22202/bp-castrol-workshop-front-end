@@ -154,7 +154,6 @@ export function InputField({
           } ${isDisabled ? styles.disabled : ""}`}
         >
           <input
-            role="inputfield"
             id={name}
             name={name}
             type={inputType}

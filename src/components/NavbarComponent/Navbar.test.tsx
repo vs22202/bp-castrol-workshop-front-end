@@ -59,7 +59,7 @@ describe('Navbar Components before Login(UnAuth)', () => {
   });
 
   //presence of side menu icon on reducing screen size
-  it('renders hamburger and cross icon on window size reduce', () => {
+  it('renders hamburger and cross icon on window size reduce', async() => {
     //reduce screen width (<768px)
     global.innerWidth = 600;
 
@@ -71,15 +71,17 @@ describe('Navbar Components before Login(UnAuth)', () => {
       </MemoryRouter>
     );
 
+    //provide timeout
+    await new Promise(resolve => setTimeout(resolve, 1000));
     //hamburger icon should appear on the screen
-    const hamburgerIcon = getByRole('hamburgerIcon')
+    const hamburgerIcon = getByRole('hamburger')
     expect(hamburgerIcon).toBeInTheDocument();
 
     //click on the hamburger icon to view cross icon
     fireEvent.click(hamburgerIcon);
 
     //cross icon should appear
-    const crossicon = getByRole('crossIcon')
+    const crossicon = getByRole('cross')
     expect(crossicon).toBeInTheDocument()
   });
 
@@ -131,15 +133,7 @@ describe('Navbar Components before Login(UnAuth)', () => {
       fireEvent.click(signupBtn);
 
       //check location
-      expect(mockNavigate).toHaveBeenCalledWith('/signup', {replace: true});
-
-    //for smaller window, check if hamburger view is activated or not
-      /* expect(getByRole("navigation").children[1]).not.toHaveClass("active");
-
-      const hamburgericon = getByRole('hamburgerIcon')
-      fireEvent.click(hamburgericon)
-      expect(getByRole("navigation").children[1]).toHaveClass("active") */
-      //testing options in the hamburger view in the next test case
+      expect(mockNavigate).toHaveBeenCalledWith('/signup', {replace: true})
   })
 
 });
@@ -197,7 +191,7 @@ describe('Navbar Components after Login(Auth)', () => {
   });
 
   //presence of side menu icon on reducing screen size
-  it('renders hamburger and cross icon on window size reduce', () => {
+  it('renders hamburger and cross icon on window size reduce', async() => {
     //reduce screen width (<768px)
     global.innerWidth = 600;
 
@@ -209,22 +203,24 @@ describe('Navbar Components after Login(Auth)', () => {
       </MemoryRouter>
     );
 
+    //provide timeout
+    await new Promise(resolve => setTimeout(resolve, 1000));
     //hamburger icon should be present on the screen and cross icon shouldnt be on the screen
-    expect(queryByRole('hamburgerIcon')).toBeInTheDocument();
-    expect(queryByRole('crossIcon')).not.toBeInTheDocument()
+    expect(queryByRole('hamburger')).toBeInTheDocument();
+    expect(queryByRole('cross')).not.toBeInTheDocument()
 
     //checks that the side menu div isnt active 
     expect(getByRole("navigation").children[1]).not.toHaveClass("active")
 
     //click on the hamburger icon to view cross icon
-    fireEvent.click(getByRole('hamburgerIcon'));
+    fireEvent.click(getByRole('hamburger'));
 
     //checks that the side menu div is active 
     expect(getByRole("navigation").children[1]).toHaveClass("active")
 
     //cross icon should appear and hamburger should disappear
-    expect(queryByRole('crossIcon')).toBeInTheDocument()
-    expect(queryByRole('hamburgerIcon')).not.toBeInTheDocument()
+    expect(queryByRole('cross')).toBeInTheDocument()
+    expect(queryByRole('hamburger')).not.toBeInTheDocument()
   });
 
   //Castrol Icon link check

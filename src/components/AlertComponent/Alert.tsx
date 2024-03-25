@@ -34,9 +34,6 @@ export type AlertProps = {
  */
 
 export function Alert({message,type}: AlertProps) {
-  if (!message.trim()) {
-    return null; // Returns null if message is blank or only whitespace
-  }
   return (
       <div className={`${styles.alertContainer} ${styles[type]}`} role="alertcontainer">
           <p>{message}</p>

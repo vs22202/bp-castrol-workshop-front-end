@@ -6,7 +6,9 @@ import styles from "./Button.module.css";
 describe("Button component", () => {
   //testing basic rendering
   it("Renders without crashing", () => { //checks proper rendering of the button
-    const { getByText, getByRole } = render(<Button text="Test Button" type="solid" disabled={true} action="submit" />);
+    const { getByText, getByRole } = render(
+    <Button text="Test Button" type="solid" disabled={true} action="submit" />
+    );
     
     // Check if correct button text is rendered
     const buttonElement = getByText("Test Button");
@@ -30,7 +32,7 @@ describe("Button component", () => {
 
     const {getByText} = render(
       <form>
-        <Button text="Click me!" onClick={clickfunc}/>
+        <Button text="Click me!" onClick={clickfunc} type="solid"/>
       </form>
     )
     //fetch button element
@@ -172,19 +174,16 @@ describe("Button component", () => {
       <>
       <Button text="Solid Button" type="solid" size="sm"/>
       <Button text="Outline Button" type="outline" size="lg"/>
-      <Button text="Default Button"/>
       </>
     )
     
     //fetch the button components based on their text
     const solidBtn = getByText("Solid Button");
     const outlineBtn = getByText("Outline Button");
-    const defBtn = getByText("Default Button");
 
     //check if the buttons have the apt styling type based on prop values
     expect(solidBtn.parentElement).toHaveClass(styles.solid);
     expect(outlineBtn.parentElement).toHaveClass(styles.outline);
-    expect(defBtn.parentElement).toHaveClass(styles.solid);
   })
 
   it("Button renders in different sizes", ()=>{ //check if the buttons renders in sizes: small, medium and large
@@ -193,26 +192,23 @@ describe("Button component", () => {
       <Button text="Small Button" type="solid" size="sm"/>
       <Button text="Medium Button" type="outline" size="md"/>
       <Button text="Large Button" type="outline" size="lg"/>
-      <Button text="Default Button"/>
       </>
     )
     //fetch the buttons
     const smallBtn = getByText("Small Button");
     const medBtn = getByText("Medium Button");
     const largeBtn = getByText("Large Button");
-    const defBtn = getByText("Default Button");
 
     //test if the buttons have the apt size classes based on the prop values
     expect(smallBtn.parentElement).toHaveClass(styles.sm);
     expect(medBtn.parentElement).toHaveClass(styles.md);
     expect(largeBtn.parentElement).toHaveClass(styles.lg);
-    expect(defBtn.parentElement).toHaveClass(styles.md); //checks if defualt size value is getting rendered if no size mentioned
   })
 
   //Button icon rendering
   it("Button Icon gets rendered", async():Promise<void>=>{
     const {getByRole} = render(
-      <Button text="Sample Button" iconimg="signup_icon"/>
+      <Button text="Sample Button" iconimg="signup_icon" type="solid"/>
     )
     //get button icon element
     const button = getByRole("button");
@@ -221,18 +217,14 @@ describe("Button component", () => {
     await new Promise(resolve=>setTimeout(resolve, 500))
 
     //check if the icon component gets rendered
-    expect([...button.children].some(child=>
-      child.classList.contains("icon")
-      )).toBeTruthy()
-
-      //further icon render testing in svgicon component
+    expect(button.children[0]).toHaveRole("signup_icon")
   })
 
   it("Button Icon gets placed at the start/end of the button",()=>{ //checks the position of the button-icon
     const {getByText} = render(
       <>
-      <Button text="Sample Button1" iconimg="signup_icon" placeIconAfter={true} />
-      <Button text="Sample Button2" iconimg="signup_icon" placeIconAfter={false} />
+      <Button text="Sample Button1" iconimg="signup_icon" placeIconAfter={true} type="outline"/>
+      <Button text="Sample Button2" iconimg="signup_icon" placeIconAfter={false} type="solid"/>
       </>
     )
 

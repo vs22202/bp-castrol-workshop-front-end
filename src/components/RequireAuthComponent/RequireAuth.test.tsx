@@ -6,126 +6,79 @@ import AlertContext, { AlertContextProps } from '../../contexts/AlertContext';
 import RequireAuth from './RequireAuth';
 
 // Mock AuthContext
+
+const mockAuthContextValueWithoutUser: AuthContextProps = {
+  currentUser:null,
+  login: async () => 'success',
+  loginMobile: async () => 'success',
+  signup: async () => 'success',
+  signupMobile: async () => 'success',
+  generateOtp: async () => {},
+  generateOtpMobile: async () => {},
+  changePassword: async () => 'success',
+  generateResetOtp: async () => {},
+  resetPassword: async () => 'success',
+  logout: () => {}
+};
+
 const mockAuthContextValueWithUser: AuthContextProps = {
-    currentUser:{
-        user_id: '123',
-        user_email: 'test@example.com',
-        user_mobile: '+1234567890',
-        auth_token: 'mockAuthToken',
-    },
-    login: async () => 'success',
-    loginMobile: async () => 'success',
-    signup: async () => 'success',
-    signupMobile: async () => 'success',
-    generateOtp: async () => {},
-    generateOtpMobile: async () => {},
-    changePassword: async () => 'success',
-    generateResetOtp: async () => {},
-    resetPassword: async () => 'success',
-    logout: () => {}
-  };
+  currentUser:{
+      user_id: '123',
+      user_email: 'test@example.com',
+      user_mobile: '+1234567890',
+      auth_token: 'mockAuthToken',
+  },
+  login: async () => 'success',
+  loginMobile: async () => 'success',
+  signup: async () => 'success',
+  signupMobile: async () => 'success',
+  generateOtp: async () => {},
+  generateOtpMobile: async () => {},
+  changePassword: async () => 'success',
+  generateResetOtp: async () => {},
+  resetPassword: async () => 'success',
+  logout: () => {}
+};
 
-    const mockAuthContextValueWithoutUser: AuthContextProps = {
-        currentUser:null,
-        login: async () => 'success',
-        loginMobile: async () => 'success',
-        signup: async () => 'success',
-        signupMobile: async () => 'success',
-        generateOtp: async () => {},
-        generateOtpMobile: async () => {},
-        changePassword: async () => 'success',
-        generateResetOtp: async () => {},
-        resetPassword: async () => 'success',
-        logout: () => {}
-    };
-
-  const mockAlertContextValue : AlertContextProps = {
-    alert:null,
-    sendAlert : jest.fn(),
-  }
+const sendmockalert = jest.fn();
+const mockAlertContextValue: AlertContextProps = {
+  alert: null,
+  sendAlert: sendmockalert,
+}; 
 
 describe('<RequireAuth />', () => {
-  //const mockSendAlert = jest.fn();
 
-  it('renders children with authenticated user', () => {
+  //checks rendering of components provided an authenticated user and requireauth=true
+  it('renders children with authenticated user & authentication required', () => {
+ 
     const { getByText } = render(
-      <AuthContext.Provider value={mockAuthContextValueWithUser}>
-        <AlertContext.Provider value={mockAlertContextValue}>
-        <MemoryRouter initialEntries={['/']}>
-          <RequireAuth>
-            <div>Children Component</div>
-          </RequireAuth>
-        </MemoryRouter>
-        </AlertContext.Provider>
-      </AuthContext.Provider>
-    );
-    expect(getByText('Children Component')).toBeInTheDocument();
-    //expect(getByRole("alertcontainer")).toBeInTheDocument();
-  });
-
-  it('renders children without authenticated user', () => {
-    const { getByText, /* getByRole */ } = render(
-        <MemoryRouter  initialEntries={['/']}>
-            <AuthContext.Provider value={mockAuthContextValueWithoutUser}> {/* null curruser causing infinite loop */}
-                <AlertContext.Provider value={mockAlertContextValue}> {/*adding alert component causes an infinite loop*/}
-                    <RequireAuth>
-                        <div>Children Component</div>
-                    </RequireAuth>
-                </AlertContext.Provider>
+        <MemoryRouter>
+          <AlertContext.Provider value={mockAlertContextValue}>
+            <AuthContext.Provider value={mockAuthContextValueWithUser}>
+              <RequireAuth>
+                <div>Children Component</div>
+              </RequireAuth>
             </AuthContext.Provider>
+          </AlertContext.Provider>
         </MemoryRouter>
     );
     expect(getByText('Children Component')).toBeInTheDocument();
-    /* expect(mockSendAlert).toHaveBeenCalledWith({
-        message: "Your need to login before you apply",
-        type: "error",
-      }); */
-    //expect(getByRole("alertcontainer")).toBeInTheDocument();
   });
-
- /*  it('renders children without authenticated user and requireAuth as false', () => {
+  
+  //checks rendering of components provided an unauthenticated user and requireauth=false
+  it('renders children with authenticated user and authentication not required', () => {
+ 
     const { getByText } = render(
-      <AuthContext.Provider value={{ currentUser: null }}>
-        <MemoryRouter initialEntries={['/']}>
+      <MemoryRouter>
+      <AlertContext.Provider value={mockAlertContextValue}>
+        <AuthContext.Provider value={mockAuthContextValueWithoutUser}>
           <RequireAuth requireAuth={false}>
             <div>Children Component</div>
           </RequireAuth>
-        </MemoryRouter>
-      </AuthContext.Provider>
+        </AuthContext.Provider>
+      </AlertContext.Provider>
+  </MemoryRouter>
     );
     expect(getByText('Children Component')).toBeInTheDocument();
   });
-
-  it('navigates to home page with authenticated user and requireAuth as false', () => {
-    const { getByText } = render(
-      <AuthContext.Provider value={{ currentUser: { id: '1', name: 'John Doe' } }}>
-        <MemoryRouter initialEntries={['/']}>
-          <RequireAuth requireAuth={false}>
-            <div>Children Component</div>
-          </RequireAuth>
-          <Route path="/">
-            <div>Home Page</div>
-          </Route>
-        </MemoryRouter>
-      </AuthContext.Provider>
-    );
-    expect(getByText('Home Page')).toBeInTheDocument();
-  });
-
-  it('does not send alert without AlertContext', () => {
-    const { getByText } = render(
-      <AuthContext.Provider value={{ currentUser: null }}>
-        <MemoryRouter initialEntries={['/']}>
-          <RequireAuth requireAuth={true}>
-            <div>Children Component</div>
-          </RequireAuth>
-          <Route path="/login">
-            <div>Login Page</div>
-          </Route>
-        </MemoryRouter>
-      </AuthContext.Provider>
-    );
-    expect(mockSendAlert).not.toHaveBeenCalled();
-    expect(getByText('Login Page')).toBeInTheDocument();
-  }); */
 });

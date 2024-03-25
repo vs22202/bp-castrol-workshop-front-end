@@ -1,8 +1,3 @@
-/*
-The test in List.test.tsx checks that the List component renders with the specified 
-items and size. It iterates through each item in the mockItems array and ensures that 
-each item is present in the rendered component by querying the DOM.
-*/
 import "@testing-library/jest-dom";
 import { render } from "@testing-library/react";
 import { List, IListProps } from "./List";

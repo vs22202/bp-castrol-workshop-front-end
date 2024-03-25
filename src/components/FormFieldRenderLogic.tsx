@@ -114,7 +114,6 @@ export const renderInput = (
                 required={input.required}
                 register={register}
                 errors={errors}
-                datatestid={input.datatestid}
                 onchange={onChange}
                 validationSchema={{
                   required: input.required,
