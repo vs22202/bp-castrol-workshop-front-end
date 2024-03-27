@@ -72,7 +72,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const login = async (email: string, password: string): Promise<string> => {
     if (currentUser) return loginWithToken();
 
-    const formData = new FormData();
+    let formData = new FormData();
     formData.append("user_email", email);
     formData.append("password", password);
     try {
@@ -106,7 +106,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   ): Promise<string> => {
     if (currentUser) return loginWithToken();
 
-    const formData = new FormData();
+    let formData = new FormData();
     formData.append("user_mobile", mobile_no);
     formData.append("password", password);
     try {

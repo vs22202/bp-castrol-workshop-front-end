@@ -59,8 +59,9 @@ const LoginPage: React.FC = () => {
   const inputSize = useScreenSize();
   const navigate = useNavigate();
   const location = useLocation();
-  const [loading, setLoading] = useState(false);
-  const [phoneLogin, setPhoneLogin] = useState<boolean>(location.state?.phoneLogin || false);
+  const [loading, setLoading] = useState(false);const initialPhoneLogin = location.state?.phoneLogin !== undefined ? location.state.phoneLogin : false;
+  const [phoneLogin, setPhoneLogin] = useState<boolean>(initialPhoneLogin);
+ 
   const from = location.state?.from?.pathname || "/";
 
   inputs[0].type = !phoneLogin ? "text" : "hidden";
