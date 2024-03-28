@@ -200,12 +200,6 @@ describe('LoginPage Mobile Component', () => {
     act(() => {
     fireEvent.click(mobileOption);
     });
- 
-    fetchMock.mockResponseOnce(JSON.stringify({ output: 'fail', msg: 'Invalid Mobile No./Password' }), { status: 400 });
-    fireEvent.change(getByRole('textbox', { name: 'Mobile Number *' }), { target: { value: '911234567890' } });
-    fireEvent.change(getByLabelText(/Password/i, { selector: '#user_password' }), { target: { value: '@Testexample2001' } });
-    await waitFor(() =>{fireEvent.click(LoginBtn) });    
-    await waitFor(() => {expect(fetch.mock.calls.length).toEqual(1); }); 
 
     //all input fields
     const mobileInput = getByRole('textbox', { name: 'Mobile Number *' });
@@ -222,6 +216,12 @@ describe('LoginPage Mobile Component', () => {
     //all buttons are in the document
     expect(LoginBtn).toBeInTheDocument();
     expect(SignupBtn).toBeInTheDocument();
+ 
+    fetchMock.mockResponseOnce(JSON.stringify({ output: 'fail', msg: 'Invalid Mobile No./Password' }), { status: 400 });
+    fireEvent.change(getByRole('textbox', { name: 'Mobile Number *' }), { target: { value: '911234567890' } });
+    fireEvent.change(getByLabelText(/Password/i, { selector: '#user_password' }), { target: { value: '@Testexample2001' } });
+    await waitFor(() =>{fireEvent.click(LoginBtn) });    
+    await waitFor(() => {expect(fetch.mock.calls.length).toEqual(1); }); 
 
 })
 
