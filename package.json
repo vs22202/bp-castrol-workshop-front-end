@@ -12,9 +12,11 @@
     "typedoc": "typedoc --out docs ./src/components/*/*.tsx ./src/views/**/*.tsx"
   },
   "dependencies": {
+    "@types/history": "^5.0.0",
     "@types/react-router-dom": "^5.3.3",
     "jest-css-modules-transform": "^4.4.2",
     "jest-environment-jsdom": "^29.7.0",
+    "jest-fetch-mock": "^3.0.3",
     "jsdoc": "^4.0.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

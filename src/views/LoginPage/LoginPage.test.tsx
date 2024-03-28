@@ -1,104 +1,360 @@
-import { fireEvent, render, waitFor } from "@testing-library/react";
+
 import '@testing-library/jest-dom';
-import { LoginPage } from "./LoginPage";
 import RequireAuth from "../../components/RequireAuthComponent/RequireAuth";
-import AuthContext, {AuthContextProps} from "../../contexts/AuthContext";
-import { MemoryRouter } from "react-router-dom";
+import { MemoryRouter } from "react-router-dom"; 
+import { act, fireEvent, render, waitFor } from '@testing-library/react';
+import { LoginPage } from './LoginPage';
+import AlertContext, { AlertContextProps } from "../../contexts/AlertContext";
+import { AuthProvider } from '../../contexts/AuthContext';
+import fetch ,{ enableFetchMocks } from 'jest-fetch-mock';
+import {createMemoryHistory} from "history"; 
 
-// Mock the useLocation hook
-jest.mock('react-router-dom', () => ({
-...jest.requireActual('react-router-dom'), // Use the actual react-router-dom module
-useLocation: jest.fn().mockReturnValue({ pathname: '/mock-path' }), // Mock useLocation
-}));
+enableFetchMocks() 
 
-const login = jest.fn();
-const currentUser = null;
-const signup = jest.fn();
-const generateOtp = jest.fn();
-const logout = jest.fn();
+const alert = null;
+const sendAlert = jest.fn();
 
-//mock context values defined
-const mockContextValue: AuthContextProps = {
-    login,
-    currentUser,
-    signup,
-    generateOtp,
-    logout
+const mockContextValue: AlertContextProps = {
+alert,
+sendAlert,
 };
 
-describe('Login Page Testing ', ()=>{
-//test to check if the login page components are getting rendered or not
-test("Renders all components in the login page corectly", ()=>{
-    const {getByTestId} = render(
-        <AuthContext.Provider value={mockContextValue}>
-            <MemoryRouter>
-            <RequireAuth requireAuth={false}>
-                <LoginPage />
-            </RequireAuth>
-            </MemoryRouter>
-        </AuthContext.Provider>
-    )
+const setup=()=>{ return render(
+<MemoryRouter>
+<AlertContext.Provider value={mockContextValue}>
+<AuthProvider>
+<RequireAuth requireAuth={false}>
+<LoginPage />
+</RequireAuth>
+</AuthProvider>
+</AlertContext.Provider>
+</MemoryRouter>
+); 
+}
 
-    const emailInput = getByTestId('loginemailid');
-    const passwordInput = getByTestId('loginpassword');
-    const LoginBtn = getByTestId('LoginPageLoginBtn');
-    const SignupBtn = getByTestId('LoginPageSignupBtn');
 
+//test cases for LoginPage desktop
+describe('LoginPage Component', () => {   
+    beforeEach(() => {
+    fetchMock.mockClear();
+    });     
+    afterEach(() => {
+    jest.clearAllMocks(); // Clear all mocks after each test
+    });
+
+//Renders all components in the Login page corectly
+    test("Renders all components in the Login page corectly", ()=>{
+    const {getByRole, getByLabelText} = setup();
+    //all input fields
+    const emailInput = getByRole('textbox', { name: 'Email ID *' });
+    const passwordInput = getByLabelText(/Password/i, { selector: '#user_password' });
+
+    //all buttons
+    const LoginBtn = getByRole('button', { name: 'Login' });
+    const SignupBtn = getByRole('button', { name: 'SignUp' });
+
+    //all input fields are in the document
     expect(emailInput).toBeInTheDocument();
     expect(passwordInput).toBeInTheDocument();
+
+    //all buttons are in the document
     expect(LoginBtn).toBeInTheDocument();
     expect(SignupBtn).toBeInTheDocument();
 })
 
-//test to check whether the email and password input fields are working
-test("User can input their email and password",()=>{
-    const {getByTestId} = render(
-        <AuthContext.Provider value={mockContextValue}>
-            <MemoryRouter>
-            <RequireAuth requireAuth={false}>
-                <LoginPage />
-            </RequireAuth>
-            </MemoryRouter>
-        </AuthContext.Provider>
-    )
+//Login should fail due to Invalid Email/Password
+    test('Login should fail due to Invalid Email/Password', async () => {    
+    fetchMock.mockResponseOnce(JSON.stringify({ output: 'fail', msg: 'Invalid Email/Password' }), { status: 400 });
 
-    const emailInput = getByTestId("loginemailid");
-    const passwordInput = getByTestId("loginpassword");
+    const { getByRole, getByLabelText } = setup();
+    fireEvent.change(getByRole('textbox', { name: 'Email ID *' }), { target: { value: 'test@example.com' } });
+    fireEvent.change(getByLabelText(/Password/i, { selector: '#user_password' }), { target: { value: '@Testexample2001' } });
+    const LoginBtn = getByRole('button', { name: 'Login' });
+    fireEvent.click(LoginBtn);
 
-    fireEvent.change(emailInput, {target:{value:"richa21kiran@gmail.com"}});
-    fireEvent.change(passwordInput, {target:{value:"PASSWORDpassword123"}});
+    await waitFor(() => {
+    expect(fetchMock.mock.calls.length).toEqual(1);
+    expect(fetchMock.mock.calls[0][0]).toEqual('http://localhost:3000/login');
+    });
 
-    expect(emailInput).toHaveValue("richa21kiran@gmail.com");
-    expect(passwordInput).toHaveValue("PASSWORDpassword123");
+    await waitFor(() => {
+    expect(sendAlert).toHaveBeenCalledWith({ message: 'Invalid Email/Password', type: 'error' });
+    });
+
+    await waitFor(() => {
+    const history = createMemoryHistory({ initialEntries: ['/login'] });
+    history.listen(() => {
+    expect(history.location.pathname).not.toBe("/"); // Ensure user is not redirected
+    });
+    });
+});
+
+//Login should fail due to Server side error
+    test('Login should fail due to Server side error', async () => {
+    fetchMock.mockResponseOnce(JSON.stringify({ output: 'fail', msg: 'Server side error' }), { status: 500 });
+    // Mock Server side error response
+
+    const { getByRole, getByLabelText } = setup();
+    fireEvent.change(getByRole('textbox', { name: 'Email ID *' }), { target: { value: 'test@example.com' } });
+    fireEvent.change(getByLabelText(/Password/i, { selector: '#user_password' }), { target: { value: '@Testexample2001' } });
+
+    const LoginBtn = getByRole('button', { name: 'Login' });
+    fireEvent.click(LoginBtn);
+
+    await waitFor(() => {
+    // Verify that the correct API endpoint was called for login
+    expect(fetchMock.mock.calls.length).toEqual(1);
+    expect(fetchMock.mock.calls[0][0]).toEqual('http://localhost:3000/login');
+    });
+
+    await waitFor(() => {
+    expect(sendAlert).toHaveBeenCalledWith({ message: 'Server side error', type: 'error' });
+    });
+
+    await waitFor(() => {
+    const history = createMemoryHistory({ initialEntries: ['/login'] });
+    history.listen(() => {
+    expect(history.location.pathname).not.toBe("/"); // Ensure user is not redirected
+    });
+    });
+});
+
+//LOGIN SHOULD FAIL DUE TO USER NOT VERIFIED
+    test('Login should fail due to User not verified', async () => {
+    fetchMock.mockResponseOnce(JSON.stringify({ output: 'fail', msg: 'User not verified' }), { status: 400 });
+    // Mock Invalid Email/Password response
+
+    const { getByRole, getByLabelText } = setup();
+    fireEvent.change(getByRole('textbox', { name: 'Email ID *' }), { target: { value: 'test@example.com' } });
+    fireEvent.change(getByLabelText(/Password/i, { selector: '#user_password' }), { target: { value: '@Testexample2001' } });
+
+    const LoginBtn = getByRole('button', { name: 'Login' });
+    fireEvent.click(LoginBtn);
+
+    await waitFor(() => {
+    expect(fetchMock.mock.calls.length).toEqual(1);
+    expect(fetchMock.mock.calls[0][0]).toEqual('http://localhost:3000/login');
+    });
+
+    await waitFor(() => {
+    expect(sendAlert).toHaveBeenCalledWith({ message: 'User not verified', type: 'error' });
+    });
+
+    await waitFor(() => {
+    const history = createMemoryHistory({ initialEntries: ['/login'] });
+    history.listen(() => {
+    expect(history.location.pathname).not.toBe("/"); // Ensure user is not redirected
+    });
+    });
+});
+
+//should login successfully and navigate to the homepage
+    test('should login successfully and navigate to the homepage', async () => {
+    fetchMock.mockResponseOnce(JSON.stringify({ output: 'success', msg: 'Login Success' }), { status: 200 });
+    const { getByRole, getByLabelText } = setup();
+    const LoginForm = getByRole('form');
+    fireEvent.change(getByRole('textbox', { name: 'Email ID *' }), { target: { value: 'test@example.com' } });
+    fireEvent.change(getByLabelText(/Password/i, { selector: '#user_password' }), { target: { value: '@Testexample2001' } });
+    const LoginBtn = getByRole('button', { name: 'Login' });
+    fireEvent.click(LoginBtn);
+    await waitFor(() => { 
+    expect(fetchMock.mock.calls.length).toEqual(1);
+    expect(fetchMock.mock.calls[0][0]).toEqual('http://localhost:3000/login');
+    });
+    await waitFor(() => {
+    expect(sendAlert).toHaveBeenCalledWith({ message: "Logged In Successfully", type: "success" });
+    });
+    await waitFor(() => {
+    expect(LoginForm).toHaveFormValues({
+    user_email_id: "test@example.com",
+    user_password: "@Testexample2001"
+    });
+    });
+    await waitFor(() => {
+    const history = createMemoryHistory({ initialEntries: ['/login'] });
+    history.listen(() => {
+    expect(history.location.pathname).toBe("/"); // Assuming the homepage path is "/"
+    });
+    });
+    }); 
 })
 
-//test to check whether the login form submits on clicking on login button or not
-test("Submit action gets triggered when login button is clicked",async()=>{
 
-    //fetch each element by their test id
-    const { getByTestId }=render(
-        <AuthContext.Provider value={mockContextValue}>
-            <MemoryRouter>
-            <RequireAuth requireAuth={false}>
-                <LoginPage />
-            </RequireAuth>
-            </MemoryRouter>
-        </AuthContext.Provider>
-    )
+//LoginPage Mobile Component
 
-    const emailInput = getByTestId("loginemailid");
-    const passwordInput = getByTestId("loginpassword");
-    const loginBtn = getByTestId("LoginPageLoginBtn");
-    const LoginForm = getByTestId("LoginForm");
+describe('LoginPage Mobile Component', () => {
+    beforeEach(() => {
+    fetchMock.mockClear();
+    });
+    afterEach(() => {
+    jest.clearAllMocks(); // Clear all mocks after each test
+    });
 
-    fireEvent.change(emailInput, {target:{value:"richa21kiran@gmail.com"}});
-    fireEvent.change(passwordInput, {target:{value:"PASSWORDpassword123"}});
-    fireEvent.click(loginBtn) //click the login button
+
+//Renders all components in the Login mobile page corectly
+    test("Renders all components in the Login mobile page corectly", async ()=>{
+    const {getByRole, getByLabelText, getByText} = setup();
+
+    const mobileOption = getByText(/Login using mobile instead?/i) as HTMLInputElement;
+
+    act(() => {
+    fireEvent.click(mobileOption);
+    });
+
+    //all input fields
+    const mobileInput = getByRole('textbox', { name: 'Mobile Number *' });
+    const passwordInput = getByLabelText(/Password/i, { selector: '#user_password' });
+
+    //all buttons
+    const LoginBtn = getByRole('button', { name: 'Login' });
+    const SignupBtn = getByRole('button', { name: 'SignUp' });
+
+    //all input fields are in the document
+    expect(mobileInput).toBeInTheDocument();
+    expect(passwordInput).toBeInTheDocument();
+
+    //all buttons are in the document
+    expect(LoginBtn).toBeInTheDocument();
+    expect(SignupBtn).toBeInTheDocument();
+ 
+    fetchMock.mockResponseOnce(JSON.stringify({ output: 'fail', msg: 'Invalid Mobile No./Password' }), { status: 400 });
+    fireEvent.change(getByRole('textbox', { name: 'Mobile Number *' }), { target: { value: '911234567890' } });
+    fireEvent.change(getByLabelText(/Password/i, { selector: '#user_password' }), { target: { value: '@Testexample2001' } });
+    await waitFor(() =>{fireEvent.click(LoginBtn) });    
+    await waitFor(() => {expect(fetch.mock.calls.length).toEqual(1); }); 
+
+})
+
+//Login should fail due to Invalid Mobile No./Password
+    test('Login should fail due to Invalid Mobile No./Password ', async () => {
+
+    fetchMock.mockResponseOnce(JSON.stringify({ output: 'fail', msg: 'Invalid Mobile No./Password' }), { status: 400 });
+    const { getByRole, getByLabelText, getByText } = setup();
+    const mobileOption = getByText(/Login using mobile instead?/i) as HTMLInputElement;
+    act(() => {
+    fireEvent.click(mobileOption);
+    });
+
+    fireEvent.change(getByRole('textbox', { name: 'Mobile Number *' }), { target: { value: '911234567890' } });
+    fireEvent.change(getByLabelText(/Password/i, { selector: '#user_password' }), { target: { value: '@Testexample2001' } });
+    const LoginBtn = getByRole('button', { name: 'Login' });
+    await waitFor(() =>{fireEvent.click(LoginBtn)
+    });
+
+    await waitFor(() => {
+    expect(fetch.mock.calls.length).toEqual(1);
+    expect(fetch.mock.calls[0][0]).toEqual('http://localhost:3000/login/mobile');
+    });
+
+    await waitFor(() =>expect(sendAlert).toHaveBeenCalledWith({ message: 'Invalid Mobile No./Password', type: 'error' }));
+
+    await waitFor(() => {
+    const history = createMemoryHistory({ initialEntries: ['/login'] }); // Set the initial path
+    history.listen(() => {
+    expect(history.location.pathname).not.toBe("/");
+    // Ensure user is not redirected
+    });
+    });
+});
+
+//Login should be unsuccessful due to Server side error
+    test('Login should fail due to Server side error ', async () => {
+    fetchMock.mockResponseOnce(JSON.stringify({ output: 'fail', msg: 'Server side error' }), { status: 500 });
+    const { getByRole, getByLabelText, getByText } = setup();
+    const mobileOption = getByText(/Login using mobile instead?/i) as HTMLInputElement;
+    act(() => {
+    fireEvent.click(mobileOption);
+    });
+
+    fireEvent.change(getByRole('textbox', { name: 'Mobile Number *' }), { target: { value: '911234567890' } });
+    fireEvent.change(getByLabelText(/Password/i, { selector: '#user_password' }), { target: { value: '@Testexample2001' } });
+    const LoginBtn = getByRole('button', { name: 'Login' });
+    await waitFor(() =>fireEvent.click(LoginBtn));
+
+    await waitFor(() => {
+    expect(fetch.mock.calls.length).toEqual(1);
+    expect(fetch.mock.calls[0][0]).toEqual('http://localhost:3000/login/mobile');
+    });
+
+    await waitFor(() =>expect(sendAlert).toHaveBeenCalledWith({ message: 'Server side error', type: 'error' }))
+
+    await waitFor(() => {
+    const history = createMemoryHistory({ initialEntries: ['/login'] }); // Set the initial path
+    history.listen(() => {
+    expect(history.location.pathname).not.toBe("/");
+    // Ensure user is not redirected
+    });
+    });
+});
+
+//LOGIN SHOULD FAIL DUE TO USER NOT VERIFIED
+    test('Login should fail due to User not verified ', async () => {
+    fetchMock.mockResponseOnce(JSON.stringify({ output: 'fail', msg: 'User not verified' }), { status: 400 });
+    const { getByRole, getByLabelText, getByText } = setup();
+    const mobileOption = getByText(/Login using mobile instead?/i) as HTMLInputElement;
+    act(() => {
+    fireEvent.click(mobileOption);
+    });
+
+    fireEvent.change(getByRole('textbox', { name: 'Mobile Number *' }), { target: { value: '911234567890' } });
+    fireEvent.change(getByLabelText(/Password/i, { selector: '#user_password' }), { target: { value: '@Testexample2001' } });
+    const LoginBtn = getByRole('button', { name: 'Login' });
+    await waitFor(() =>fireEvent.click(LoginBtn));
+
+    await waitFor(() => {
+    expect(fetch.mock.calls.length).toEqual(1);
+    expect(fetch.mock.calls[0][0]).toEqual('http://localhost:3000/login/mobile');
+    });
+
+    await waitFor(() =>expect(sendAlert).toHaveBeenCalledWith({ message: 'User not verified', type: 'error' }));
+
+    await waitFor(() => {
+    const history = createMemoryHistory({ initialEntries: ['/login'] }); // Set the initial path
+    history.listen(() => {
+    expect(history.location.pathname).not.toBe("/");
+    // Ensure user is not redirected
+    });
+    });
+});
+
+//should login successfully and navigate to the homepage
+    test('should login successfully and navigate to homepage', async () => {
+    fetchMock.mockResponseOnce(JSON.stringify({ output: 'success', msg: 'Login Success' }), { status: 200 });
+    const { getByRole, getByLabelText, getByText } = setup();
+    const mobileOption = getByText(/Login using mobile instead?/i) as HTMLInputElement;
+    act(() => {
+    fireEvent.click(mobileOption);
+    });
+
+    const LoginForm = getByRole('form');
+
+    fireEvent.change(getByRole('textbox', { name: 'Mobile Number *' }), { target: { value: '911234567890' } });
+    fireEvent.change(getByLabelText(/Password/i, { selector: '#user_password' }), { target: { value: '@Testexample2001' } });
+    const LoginBtn = getByRole('button', { name: 'Login' });
+
+    await waitFor(() =>fireEvent.click(LoginBtn))
+
+    await waitFor(() => {
+    expect(fetch.mock.calls.length).toEqual(1);
+    expect(fetch.mock.calls[0][0]).toEqual('http://localhost:3000/login/mobile');
+    });
+
+    await waitFor(() => {
+    expect(sendAlert).toHaveBeenCalledWith({ message: "Logged In Successfully", type: "success" });
+    });
+
     await waitFor(()=>{
-        expect(LoginForm).toHaveFormValues({
-            user_email_id: "richa21kiran@gmail.com",
-            user_password: "PASSWORDpassword123"
-        })
-    })
-})
+    expect(LoginForm).toHaveFormValues({
+    user_mobile: "911234567890",
+    user_password: "@Testexample2001"
+    });
+    });
+    await waitFor(() => {
+    const history = createMemoryHistory({ initialEntries: ['/login'] }); // Set the initial path
+    history.listen(() => {
+    expect(history.location.pathname).toBe("/");
+    // Assuming the homepage path is "/"
+    });
+    });
+}); 
 })
