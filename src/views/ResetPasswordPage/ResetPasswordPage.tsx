@@ -238,7 +238,6 @@ const ResetPasswordPage: React.FC = () => {
                 type="solid"
                 onClick={getOtp}
                 disabled={!isAllFieldsValid}
-                datatestid="ResetPasswordOtpBtnActive"
               />
             ) : (
               <Button
@@ -252,7 +251,6 @@ const ResetPasswordPage: React.FC = () => {
                 }
                 type="outline"
                 disabled={true}
-                datatestid="ResetPasswordPageOtpBtnInactive"
               />
             )}
           </div>
@@ -271,7 +269,6 @@ const ResetPasswordPage: React.FC = () => {
               }
               type="solid"
               action="submit"
-              datatestid="ResetPageResetPasswordBtn"
             />
           </div>
         </form>

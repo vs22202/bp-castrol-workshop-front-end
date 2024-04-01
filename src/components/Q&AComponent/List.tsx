@@ -17,7 +17,7 @@ export interface IListProps {
   /** 
    * Specifies the size of the list: "small" and "large".
    */
-  size: "small" | "large";
+  size?: "small" | "large";
 }
 /**
  * Renders a customizable `List` component.
@@ -37,9 +37,9 @@ export interface IListProps {
  * <List items={items} size="large" />  />
  * ```
  */
-const List: React.FC<IListProps> = ({ items, size }): JSX.Element => {
+const List: React.FC<IListProps> = ({ items, size="small" }): JSX.Element => {
   return (
-    <div className={styles.list}>
+    <div className={styles.list} data-testid="list">
       {items.map((item, index) => (
         <div key={index} className={styles['list-item']}>
           <ListItem text={item} size={size} />

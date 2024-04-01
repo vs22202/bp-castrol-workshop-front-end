@@ -23,7 +23,6 @@ input[type="number"]::-webkit-outer-spin-button {
 .isWronginputfieldcontainer {
   position: relative;
   border: 1px solid var(--error---main900);
-  margin: var(--spacing-xs) 0;
   border-radius: var(--spacing-4xs);
 }
 .isWronginputfield {
@@ -150,4 +149,6 @@ input[type="number"]::-webkit-outer-spin-button {
 .error {
   color: var(--error---main900);
   font-size: var(--link---s---regular);
+  margin: 0; 
+  padding: 0;
 }

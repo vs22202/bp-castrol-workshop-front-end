@@ -63,7 +63,7 @@ function Navbar() {
             onClick={toggleActiveClass}
           >
             {!isActive ? (
-              <SvgIcon iconName="hamburger" data-testid="hamburger_icon" />
+              <SvgIcon iconName="hamburger" />
             ) : (
               <SvgIcon iconName="cross" />
             )}

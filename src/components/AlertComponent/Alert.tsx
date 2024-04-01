@@ -35,7 +35,7 @@ export type AlertProps = {
 
 export function Alert({message,type}: AlertProps) {
   return (
-      <div className={`${styles.alertContainer} ${styles[type]}`}>
+      <div className={`${styles.alertContainer} ${styles[type]}`} role="alertcontainer">
           <p>{message}</p>
     </div>
   );
