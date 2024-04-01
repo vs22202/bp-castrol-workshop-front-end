@@ -198,7 +198,7 @@ const SignupPage: React.FC = () => {
         <form
           onSubmit={handleSubmit(handleSignup)}
           onChange={handleInputChange}
-          data-testid="SignupForm"
+          name="SignupForm"
         >
           <h1>SignUp</h1>
           <h2>

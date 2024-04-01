@@ -294,6 +294,7 @@ export function DropDown({
             }),
           }}
           value={value}
+          aria-label={placeholder}
           placeholder={placeholder}
           {...dropdownRegister}
           formatCreateLabel={formatCreateLabel}
