@@ -167,7 +167,6 @@ const ProfilePage: React.FC = () => {
                 }
                 type="solid"
                 action="submit"
-                datatestid="LoginPageLoginBtn"
               />
             </div>
           </form>

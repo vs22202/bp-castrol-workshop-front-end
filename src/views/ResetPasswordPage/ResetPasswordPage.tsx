@@ -211,7 +211,6 @@ const ResetPasswordPage: React.FC = () => {
               register={register}
               errors={errors}
               isDisabled={!otpActivated}
-              datatestid="resetpasswordotp"
               required={true}
               validationSchema={{
                 required: true,
