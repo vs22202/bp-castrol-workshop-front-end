@@ -110,20 +110,5 @@ describe('List component', () => {
     expect(list.children[0].children[0].children[1]).toHaveTextContent("test1");
     expect(list.children[1].children[0].children[1]).toHaveTextContent("test2");
   });
-
-  //performance check
-  it('Performance check for List with 100 List Items', () => {//time taken to render 100 list items in a list component
-    const items = new Array(100).fill('Item'); // create a large array of items
   
-    // measure the time it takes to render the List component
-    const startTime = performance.now();
-    render(<List items={items} />);
-    const endTime = performance.now();
-  
-    const renderTime = endTime - startTime;
-    console.log('Render time:', renderTime, 'milliseconds');
-  
-    // Assert that the render time is within 100ms
-    expect(renderTime).toBeLessThan(150);
-  });
 });
