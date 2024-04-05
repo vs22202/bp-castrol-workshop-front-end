@@ -109,7 +109,7 @@ const LoginPage: React.FC = () => {
           <form
             onSubmit={handleSubmit(handleLogin)}
             onChange={handleInputChange}
-            data-testid="LoginForm"
+            name="LoginForm"
           >
             <h1>Login</h1>
             <h2>Welcome back to the Castrol Community!</h2>
