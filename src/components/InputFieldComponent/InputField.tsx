@@ -104,7 +104,6 @@ export function InputField({
   register,
   validationSchema,
   errors,
-  watch,
   hasFocus = false,
   datatestid,
 }: InputFieldProps) {

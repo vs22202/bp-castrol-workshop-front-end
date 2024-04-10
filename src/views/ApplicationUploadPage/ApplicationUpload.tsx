@@ -83,7 +83,6 @@ const ApplicationUpload: React.FC = () => {
     formState: { errors, isDirty, dirtyFields },
     trigger,
     reset,
-    watch,
     control,
   } = methods;
 

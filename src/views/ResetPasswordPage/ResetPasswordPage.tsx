@@ -8,7 +8,6 @@ import ResetImg from "../../assets/reset_illustration.svg";
 import styles from "./ResetPasswordPage.module.css";
 import AuthContext, { AuthContextProps } from "../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
-import AlertContext, { AlertContextProps } from "../../contexts/AlertContext";
 import { useScreenSize } from "../../components/ScreenSizeLogic";
 
 /**
@@ -46,7 +45,6 @@ const ResetPasswordPage: React.FC = () => {
     AuthContext
   ) as AuthContextProps;
   const [otpActivated, setOtpActivated] = useState(false);
-  const { sendAlert } = useContext(AlertContext) as AlertContextProps;
   const [isAllFieldsValid, setIsAllFieldsValid] = useState(false);
   const [otpSent, setOtpSent] = useState(false);
   const [otpTimer, setOtpTimer] = useState("02:00");
