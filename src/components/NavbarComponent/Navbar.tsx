@@ -4,6 +4,7 @@ import { Button } from "../ButtonComponent/Button";
 import { SvgIcon } from "../IconComponent/SvgIcon";
 import AuthContext, { AuthContextProps } from "../../contexts/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
+import LogoImg from "../../assets/Castrol.svg";
 
 /**
  * Properties for the `Navbar` component.
@@ -54,8 +55,8 @@ function Navbar() {
       <nav className={`${styles.navbar}`}>
         {/* logo */}
         <div className={`${styles.logoContainer}`}>
-          <Link to="/">
-            <img src="src\assets\Castrol.svg" alt="Logo" />
+          <Link to="/" className="illustration">
+            <LogoImg />
           </Link>
 
           <div

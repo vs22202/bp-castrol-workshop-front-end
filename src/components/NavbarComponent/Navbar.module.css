@@ -31,9 +31,10 @@ a {
 }
 /* Logo Container  */
 
-.logoContainer > a > img {
-  height: 60px;
+.logoContainer > a > svg {
+  width:180px;
 }
+
 .logoContainer > div {
   display: none;
   cursor: pointer;
@@ -118,8 +119,8 @@ a {
     justify-content: space-between;
     color: var(--primary---main900);
   }
-  .logoContainer > a > img {
-    height: 36px;
+  .logoContainer > a > svg {
+    width:144px;
   }
   .logoContainer > div {
     display: block;
