@@ -101,7 +101,7 @@ const ProfilePage: React.FC = () => {
           if (phoneReset == true) setPhoneReset(false);
           setValue("user_email_id", res.result.user_email);
         }
-      } else if (res.output === "error" && res.output === "fail") {
+      } else if (res.output === "error" || res.output === "fail") {
         sendAlert({ message: res.msg as string, type: "error" });
         navigate("/"); // Redirect to home page or handle as per your application flow
       }

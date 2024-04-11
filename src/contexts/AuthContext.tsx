@@ -282,7 +282,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         }
       );
       const result = await res.json();
-      if (result.output == "fail" || result.output === "error") {
+      if (result.output == "fail" || result.output == "error") {
         sendAlert({ message: result.msg as string, type: "error" });
         return "failure";
       }
