@@ -201,7 +201,7 @@ export function DropDown({
 
   return (
     <>
-      <div className="form-container" data-testid="dropdown">
+      <div className={`form-container`} data-value={placeholder} data-testid="dropdown">
         <CreatableSelect
           styles={{
             //for select box
