@@ -77,11 +77,16 @@ const ProfilePage: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
-      const result = await fetch("http://localhost:3000/user/", {
-        headers: {
-          Authorization: currentUser?.auth_token as string,
-        },
-      });
+      const result = await fetch(
+        `${
+          process.env.VITE_BACKEND_URL || "http://localhost:3000"
+        }http://localhost:3000/user/`,
+        {
+          headers: {
+            Authorization: currentUser?.auth_token as string,
+          },
+        }
+      );
       const res = await result.json();
       return res;
     };
@@ -96,7 +101,7 @@ const ProfilePage: React.FC = () => {
           if (phoneReset == true) setPhoneReset(false);
           setValue("user_email_id", res.result.user_email);
         }
-      }else if (res.output === "error" && res.output === "fail") {
+      } else if (res.output === "error" && res.output === "fail") {
         sendAlert({ message: res.msg as string, type: "error" });
         navigate("/"); // Redirect to home page or handle as per your application flow
       }

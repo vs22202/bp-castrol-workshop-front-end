@@ -94,7 +94,9 @@ const ApplicationUpload: React.FC = () => {
     const fetchData = async () => {
       setLoading(true);
       const result = await fetch(
-        "http://localhost:3000/application/getUserApplication",
+        `${
+          process.env.VITE_BACKEND_URL || "http://localhost:3000"
+        }/application/getUserApplication`,
         {
           headers: {
             Authorization: currentUser?.auth_token as string,
