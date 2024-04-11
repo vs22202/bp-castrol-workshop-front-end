@@ -1,1 +1,47 @@
+body,
+html {
+  font-family: "Noto Sans", sans-serif;
+  overflow: hidden;
+}
+.appContainer {
+  height: 79vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow-y: scroll;
+}
+.contentContainer {
+  padding-bottom: var(--spacing-sm);
+  padding-inline: var(--spacing-11xl);
+}
+.button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
+.button-row {
+  margin-top: 28px;
+}
+
+.form {
+  width: 100vh;
+}
+@media screen and (max-width: 1000px) {
+  .contentContainer {
+    padding-inline: var(--spacing-4xl);
+  }
+}
+@media screen and (max-width: 768px) {
+  .appContainer {
+    height: 90vh;
+  }
+  .contentContainer {
+    padding-inline: var(--spacing-xs);
+  }
+  .formContainer {
+    width: 100%;
+    display: flex;
+    padding-inline: var(--spacing-sm);
+  }
+}

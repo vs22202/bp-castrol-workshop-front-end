@@ -1,0 +1,160 @@
+* {
+  font-family: "Noto Sans", sans-serif;
+  font-weight: var(--weight--regular);
+}
+.inputFieldContainer {
+  width: 100%;
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0; /* Optional: Remove margin */
+}
+.disabled {
+  pointer-events: none;
+  border-color: var(--neutral---main250) !important;
+}
+.disabled > input {
+  color: var(--neutral---main250) !important;
+}
+.hidden {
+  display: none;
+}
+.isWronginputfieldcontainer {
+  position: relative;
+  border: 1px solid var(--error---main900);
+  margin: var(--spacing-xs) 0;
+  margin-bottom:0;
+  border-radius: var(--spacing-4xs);
+}
+.isWronginputfield {
+  border: none;
+  outline: none;
+  color: var(--error---main900);
+  font-size: var(--spacing-xs);
+  font-weight: var(--weight--bold);
+  padding: var(--spacing-2xs);
+  background: transparent;
+  z-index: 1111;
+  width: 100%;
+}
+.isWronginputfield:focus {
+  border: none;
+  outline: none;
+}
+
+.defaultinputfieldcontainer {
+  position: relative;
+  border: 1px solid var(--primary---main700);
+  border-radius: var(--spacing-4xs);
+  margin: var(--spacing-xs) 0;
+  margin-bottom:0;
+}
+.defaultinputfield {
+  border: none;
+  color: var(--primary---main700);
+  font-size: var(--spacing-xs);
+  padding: var(--spacing-2xs);
+  background: transparent;
+  font-weight: var(--weight--medium);
+  z-index: 1111;
+  width: 100%;
+}
+.defaultinputfield:focus {
+  border: none;
+  outline: none;
+}
+
+.defaultinputfield::placeholder,
+.isWronginputfield::placeholder {
+  color: var(--neutral---main150);
+  font-weight: var(--weight--regular);
+}
+
+/* input field icons */
+.icon {
+  position: absolute;
+  top: 50%;
+  right: 5px;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+/* floating label */
+.floatingLabel {
+  position: absolute;
+  pointer-events: none;
+  left: 8px;
+  top: 12px;
+  transition: 0.2s ease-out;
+  color: #7b7b7b;
+}
+
+.floatingLabeldefault {
+  position: absolute;
+  left: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: 0.2s ease-out;
+  color: var(--neutral---main350);
+  z-index: -1;
+}
+
+.defaultinputfield:focus + .floatingLabel,
+.defaultinputfield:not(:placeholder-shown) + .floatingLabel,
+.defaultinputfield:valid + .floatingLabel {
+  top: -14px;
+  color: var(--neutral---main750);
+  background-color: white;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+.isWronginputfield:focus + .floatingLabel,
+.isWronginputfield:not(:placeholder-shown) + .floatingLabel,
+.isWronginputfield:valid + .floatingLabel {
+  top: -14px;
+  color: var(--error---main900);
+  background-color: white;
+  padding-right: 4px;
+  padding-left: 4px;
+}
+
+/* input field and font sizes*/
+.small {
+  height: var(--spacing-3xl);
+  font-size: var(--spacing-xs);
+}
+.medium {
+  height: var(--spacing-4xl);
+  font-size: var(--spacing-sm);
+}
+.large {
+  height: var(--spacing-7xl);
+  font-size: var(--spacing-md);
+}
+
+/* label sizes */
+.labellarge {
+  font-size: var(--spacing-md);
+}
+.labelmedium {
+  font-size: var(--spacing-sm);
+}
+.labelsmall {
+  font-size: var(--spacing-xs);
+}
+
+.labelsizefloating {
+  font-size: var(--spacing-xs);
+}
+
+/* error class */
+.error {
+  top:80%;
+  left:0;
+  color: var(--error---main900);
+  font-size: var(--link---s---regular);
+  margin: 0; 
+  padding: 0;
+}

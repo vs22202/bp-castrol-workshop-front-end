@@ -1,0 +1,38 @@
+.list-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center; 
+}
+
+.icon-container {
+    display: flex;
+    align-items: center; 
+  }
+  
+  .icon > svg {
+    flex-shrink: 0;
+    object-fit: contain; 
+    color:var(--primary---main500);
+  }
+  .size-small .icon>svg {
+    width: 16px;
+    height: 16px;
+  }
+  .size-large .icon>svg {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .text {
+    margin-left: 8px; 
+    color: var(--neutral---main750);
+    font-weight: var(--weight--light);
+  }  
+  .size-small .text {
+    font-size: var(--paragraph---m---light);
+    line-height: var(--spacing-sm);
+  } 
+  .size-large .text{
+    font-size: var(--subheading---s---regular);
+    line-height: var(--spacing-xl);
+  }
