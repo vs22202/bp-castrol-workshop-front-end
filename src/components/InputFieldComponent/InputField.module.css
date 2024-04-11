@@ -24,6 +24,7 @@ input[type="number"]::-webkit-outer-spin-button {
   position: relative;
   border: 1px solid var(--error---main900);
   margin: var(--spacing-xs) 0;
+  margin-bottom:0;
   border-radius: var(--spacing-4xs);
 }
 .isWronginputfield {
@@ -46,6 +47,8 @@ input[type="number"]::-webkit-outer-spin-button {
   position: relative;
   border: 1px solid var(--primary---main700);
   border-radius: var(--spacing-4xs);
+  margin: var(--spacing-xs) 0;
+  margin-bottom:0;
 }
 .defaultinputfield {
   border: none;
@@ -148,6 +151,8 @@ input[type="number"]::-webkit-outer-spin-button {
 
 /* error class */
 .error {
+  top:80%;
+  left:0;
   color: var(--error---main900);
   font-size: var(--link---s---regular);
 }

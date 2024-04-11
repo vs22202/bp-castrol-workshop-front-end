@@ -195,7 +195,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         headers: {},
         body: formData,
       });
-      console.log(res.json());
+      const result = await res.json();
+      if (result.output == "fail") {
+        sendAlert({ message: result.msg as string, type: "error" });
+      }
+      sendAlert({ message: "OTP sent to email", type: "success" });
     } catch (err) {
       console.log(err);
     }
@@ -214,7 +218,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         headers: {},
         body: formData,
       });
-      console.log(res.json());
+      const result = await res.json();
+      if (result.output == "fail") {
+        sendAlert({ message: result.msg as string, type: "error" });
+      }
+      sendAlert({ message: "OTP sent to mobile number", type: "success" });
     } catch (err) {
       console.log(err);
     }
