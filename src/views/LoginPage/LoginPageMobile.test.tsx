@@ -3,7 +3,7 @@ import '@testing-library/jest-dom';
 import RequireAuth from "../../components/RequireAuthComponent/RequireAuth";
 import { MemoryRouter } from "react-router-dom"; 
 import { act, fireEvent, render, waitFor } from '@testing-library/react';
-import { LoginPage } from './LoginPage';
+import LoginPage from './LoginPage';
 import AlertContext, { AlertContextProps } from "../../contexts/AlertContext";
 import { AuthProvider } from '../../contexts/AuthContext';
 import fetch ,{ enableFetchMocks } from 'jest-fetch-mock';
@@ -43,7 +43,7 @@ describe('LoginPage Mobile Component', () => {
     test("Renders all components in the Login mobile page corectly", async ()=>{
     const {getByRole, getByLabelText, getByText} = setup();
 
-    const mobileOption = getByText(/Login using mobile instead?/i) as HTMLInputElement;
+    const mobileOption = getByText(/Login using phone instead?/i) as HTMLInputElement;
 
     act(() => {
     fireEvent.click(mobileOption);
@@ -55,7 +55,7 @@ describe('LoginPage Mobile Component', () => {
 
     //all buttons
     const LoginBtn = getByRole('button', { name: 'Login' });
-    const SignupBtn = getByRole('button', { name: 'SignUp' });
+    const SignupBtn = getByRole('button', { name: 'Sign Up' });
 
     //all input fields are in the document
     expect(mobileInput).toBeInTheDocument();
@@ -78,7 +78,7 @@ describe('LoginPage Mobile Component', () => {
 
     fetchMock.mockResponseOnce(JSON.stringify({ output: 'fail', msg: 'Invalid Mobile No./Password' }), { status: 400 });
     const { getByRole, getByLabelText, getByText } = setup();
-    const mobileOption = getByText(/Login using mobile instead?/i) as HTMLInputElement;
+    const mobileOption = getByText(/Login using phone instead?/i) as HTMLInputElement;
     act(() => {
     fireEvent.click(mobileOption);
     });
@@ -109,7 +109,7 @@ describe('LoginPage Mobile Component', () => {
     test('Login should fail due to Server side error ', async () => {
     fetchMock.mockResponseOnce(JSON.stringify({ output: 'fail', msg: 'Server side error' }), { status: 500 });
     const { getByRole, getByLabelText, getByText } = setup();
-    const mobileOption = getByText(/Login using mobile instead?/i) as HTMLInputElement;
+    const mobileOption = getByText(/Login using phone instead?/i) as HTMLInputElement;
     act(() => {
     fireEvent.click(mobileOption);
     });
@@ -139,7 +139,7 @@ describe('LoginPage Mobile Component', () => {
     test('Login should fail due to User not verified ', async () => {
     fetchMock.mockResponseOnce(JSON.stringify({ output: 'fail', msg: 'User not verified' }), { status: 400 });
     const { getByRole, getByLabelText, getByText } = setup();
-    const mobileOption = getByText(/Login using mobile instead?/i) as HTMLInputElement;
+    const mobileOption = getByText(/Login using phone instead?/i) as HTMLInputElement;
     act(() => {
     fireEvent.click(mobileOption);
     });
@@ -169,7 +169,7 @@ describe('LoginPage Mobile Component', () => {
     test('should login successfully and navigate to homepage', async () => {
     fetchMock.mockResponseOnce(JSON.stringify({ output: 'success', msg: 'Login Success' }), { status: 200 });
     const { getByRole, getByLabelText, getByText } = setup();
-    const mobileOption = getByText(/Login using mobile instead?/i) as HTMLInputElement;
+    const mobileOption = getByText(/Login using phone instead?/i) as HTMLInputElement;
     act(() => {
     fireEvent.click(mobileOption);
     });

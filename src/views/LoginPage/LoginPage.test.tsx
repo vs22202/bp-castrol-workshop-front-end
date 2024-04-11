@@ -3,7 +3,7 @@ import '@testing-library/jest-dom';
 import RequireAuth from "../../components/RequireAuthComponent/RequireAuth";
 import { MemoryRouter } from "react-router-dom"; 
 import {  fireEvent, render, waitFor } from '@testing-library/react';
-import { LoginPage } from './LoginPage';
+import LoginPage from './LoginPage';
 import AlertContext, { AlertContextProps } from "../../contexts/AlertContext";
 import { AuthProvider } from '../../contexts/AuthContext';
 import { enableFetchMocks } from 'jest-fetch-mock';
@@ -48,7 +48,7 @@ describe('LoginPage Component', () => {
 
     //all buttons
     const LoginBtn = getByRole('button', { name: 'Login' });
-    const SignupBtn = getByRole('button', { name: 'SignUp' });
+    const SignupBtn = getByRole('button', { name: 'Sign Up' });
 
     //all input fields are in the document
     expect(emailInput).toBeInTheDocument();
