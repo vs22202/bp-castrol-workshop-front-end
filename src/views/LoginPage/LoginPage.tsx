@@ -118,7 +118,7 @@ const LoginPage: React.FC = () => {
               onClick={() => setPhoneLogin((s) => !s)}
             >
               {!phoneLogin
-                ? "Login using mobile instead?"
+                ? "Login using phone instead?"
                 : "Login using email instead?"}
             </p>
             <div className={styles.inputFieldsContainer}>
@@ -143,7 +143,7 @@ const LoginPage: React.FC = () => {
               <span>or</span>
               <span>New to Castrol?</span>
               <Button
-                text="SignUp"
+                text="Sign Up"
                 size={
                   inputSize === "small"
                     ? "sm"

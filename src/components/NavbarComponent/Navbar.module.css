@@ -30,10 +30,12 @@ a {
   display: none;
 }
 /* Logo Container  */
-
-.logoContainer > a > img {
-  height: 60px;
+.logoContainer > a > svg{
+  width:210px;
+  height:52px;
 }
+
+
 .logoContainer > div {
   display: none;
   cursor: pointer;
@@ -85,7 +87,7 @@ a {
     flex-direction: column;
     justify-content: start;
     align-items: start;
-    padding-inline: var(--spacing-sm);
+    padding-inline: var(--spacing-xs);
   }
   .optionsContainer {
     width: 100%;
@@ -118,8 +120,8 @@ a {
     justify-content: space-between;
     color: var(--primary---main900);
   }
-  .logoContainer > a > img {
-    height: 36px;
+  .logoContainer > a > svg {
+    width:144px;
   }
   .logoContainer > div {
     display: block;

@@ -83,7 +83,6 @@ const ApplicationUpload: React.FC = () => {
     formState: { errors, isDirty, dirtyFields },
     trigger,
     reset,
-    watch,
     control,
   } = methods;
 
@@ -188,7 +187,7 @@ const ApplicationUpload: React.FC = () => {
       for (const file in data.files) formData.append("files", data.files[file]);
       formData.append("filesOld", JSON.stringify(data.filesOld));
       try {
-        const result = await fetch("http://localhost:3000/application/edit", {
+        const result = await fetch(`${import.meta.env.VITE_BACKEND_URL}/application/edit`, {
           method: "POST",
           headers: {
             Authorization: currentUser?.auth_token as string,
@@ -222,7 +221,7 @@ const ApplicationUpload: React.FC = () => {
     }
     for (const file in data.files) formData.append("files", data.files[file]);
     try {
-      const result = await fetch("http://localhost:3000/application", {
+      const result = await fetch(`${import.meta.env.VITE_BACKEND_URL}/application`, {
         method: "POST",
         headers: {
           Authorization: currentUser?.auth_token as string,

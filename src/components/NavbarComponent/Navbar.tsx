@@ -4,6 +4,7 @@ import { Button } from "../ButtonComponent/Button";
 import { SvgIcon } from "../IconComponent/SvgIcon";
 import AuthContext, { AuthContextProps } from "../../contexts/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
+import LogoImg from "../../assets/Castrol.svg";
 
 /**
  * Properties for the `Navbar` component.
@@ -54,8 +55,8 @@ function Navbar() {
       <nav className={`${styles.navbar}`}>
         {/* logo */}
         <div className={`${styles.logoContainer}`}>
-          <Link to="/">
-            <img src="src\assets\Castrol.svg" alt="Logo" />
+          <Link to="/" className="illustration">
+            <LogoImg />
           </Link>
 
           <div
@@ -99,7 +100,7 @@ function Navbar() {
                 </li>
                 <li onClick={removeActive}>
                   <SvgIcon iconName="signup_icon" />
-                  <Link to="/signup">SignUp</Link>
+                  <Link to="/signup">Sign Up</Link>
                 </li>
               </ul>
 
@@ -115,7 +116,7 @@ function Navbar() {
                 />
                 <div className={`${styles.verticalDivider}`}></div>
                 <Button
-                  text="SignUp"
+                  text="Sign Up"
                   type="outline"
                   size="md"
                     iconimg="signup_icon"

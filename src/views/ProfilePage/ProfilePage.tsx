@@ -9,7 +9,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { renderInput } from "../../components/FormFieldRenderLogic";
 import AuthContext, { AuthContextProps } from "../../contexts/AuthContext";
 import { useScreenSize } from "../../components/ScreenSizeLogic";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { SvgIcon } from "../../components/IconComponent/SvgIcon";
 
 /**

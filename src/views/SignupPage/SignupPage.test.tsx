@@ -15,11 +15,6 @@ useLocation: jest.fn().mockReturnValue({ pathname: '/mock-path' }), // Mock useL
 const alert = null;
 const sendAlert= jest.fn();
 
-const login = jest.fn();
-const currentUser = null;
-const signup = jest.fn();
-const generateOtp = jest.fn();
-const logout = jest.fn();
 
 //mock context values defined
 const mockContextValue: AlertContextProps = {
@@ -29,11 +24,17 @@ const mockContextValue: AlertContextProps = {
 
 //mock auth context values defined
 const mockAuthContextValue: AuthContextProps = {
-  login,
-  currentUser,
-  signup,
-  generateOtp,
-  logout
+    currentUser: null,
+    login: async () => 'success',
+    loginMobile: async () => 'success',
+    signup: async () => 'success',
+    signupMobile: async () => 'success',
+    generateOtp: async () => {},
+    generateOtpMobile: async () => {},
+    changePassword: async () => 'success',
+    generateResetOtp: async () => {},
+    resetPassword: async () => 'success',
+    logout: () => {}
 };
 
 describe('SignUp Page Testing ', ()=>{

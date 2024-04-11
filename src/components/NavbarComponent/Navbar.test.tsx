@@ -14,9 +14,15 @@ import { render, screen  } from '@testing-library/react';
 const mockAuthContextValue: AuthContextProps = {
   currentUser: null,
   login: async () => 'success',
+  loginMobile: async () => 'success',
   signup: async () => 'success',
-  generateOtp: async () => 'success',
-  logout: async () => 'success'
+  signupMobile: async () => 'success',
+  generateOtp: async () => {},
+  generateOtpMobile: async () => {},
+  changePassword: async () => 'success',
+  generateResetOtp: async () => {},
+  resetPassword: async () => 'success',
+  logout: () => {}
 };
 
 // Mock useNavigate hook

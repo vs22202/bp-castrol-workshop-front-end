@@ -172,7 +172,7 @@ const SignupPage: React.FC = () => {
     setLoading(false);
     if (result == "success") {
       sendAlert({
-        message: "SignUp was successful",
+        message: "Sign up was successful",
         type: "success",
       });
       navigate("/login", { replace: true ,state:{phoneLogin:phoneSignup}});
@@ -200,7 +200,7 @@ const SignupPage: React.FC = () => {
           onChange={handleInputChange}
           data-testid="SignupForm"
         >
-          <h1>SignUp</h1>
+          <h1>Sign Up</h1>
           <h2>
             Join the Castrol Community and take your workshop to the next level!
           </h2>
@@ -209,8 +209,8 @@ const SignupPage: React.FC = () => {
               onClick={() => setPhoneSignup((s) => !s)}
             >
               {!phoneSignup
-                ? "SignUp using mobile instead?"
-                : "SignUp using email instead?"}
+                ? "Sign up using phone instead?"
+                : "Sign up using email instead?"}
             </p>
           {inputs.map((input) => renderInput(input, { register, errors }))}
 
@@ -274,7 +274,7 @@ const SignupPage: React.FC = () => {
           </div>
           <div className={`${styles.buttonscontainer}`}>
             <Button
-              text="SignUp"
+              text="Sign Up"
               size={
                 inputSize === "small"
                   ? "sm"

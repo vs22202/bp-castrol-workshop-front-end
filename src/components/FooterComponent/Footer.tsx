@@ -1,4 +1,5 @@
 import styles from "./Footer.module.css";
+import FooterLogo from "../../assets/castrol_logo.svg";
 /** The props type of {@link Footer | `Footer`}. */
 
 /**
@@ -20,12 +21,8 @@ import styles from "./Footer.module.css";
 
 export function FooterWithLogo() {
   return (
-    <div className={`${styles.footerContainer}`}>
-      <img
-        src="src\assets\castrol_logo.svg"
-        alt="logo-ct"
-        className={`${styles.footerLogo}`}
-      />
+    <div className={`${styles.footerContainer} illustration`}>
+      <FooterLogo/>
       <p className={` ${styles.footerParagraph}`}>
         Copyright © 1999-2024
       </p>

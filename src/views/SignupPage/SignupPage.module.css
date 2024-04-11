@@ -55,6 +55,10 @@
   display: flex;
   gap: 0.5em;
   justify-content: space-between;
+  align-items:center;
+}
+.otpContainer > button{
+  margin-top:var(--spacing-xs);
 }
 .otpContainer > button > span {
   font-size: var(--subheading---x-s---bold);

@@ -55,7 +55,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   //can return success message or promise if needed
   //pass one more parameter to verify if mobile / email login and change logic accordingly
   const loginWithToken = async (): Promise<string> => {
-    const result = await fetch("http://localhost:3000/login", {
+    const result = await fetch(`${import.meta.env.VITE_BACKEND_URL}/login`, {
       method: "POST",
       headers: {
         Authorization: currentUser?.auth_token as string,
@@ -77,7 +77,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     formData.append("password", password);
     try {
       //try login
-      const result = await fetch("http://localhost:3000/login", {
+      const result = await fetch(`${import.meta.env.VITE_BACKEND_URL}/login`, {
         method: "POST",
         headers: {},
         body: formData,
@@ -111,7 +111,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     formData.append("password", password);
     try {
       //try login
-      const result = await fetch("http://localhost:3000/login/mobile", {
+      const result = await fetch(`${import.meta.env.VITE_BACKEND_URL}/login/mobile`, {
         method: "POST",
         headers: {},
         body: formData,
@@ -144,7 +144,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     formData.append("password", password);
     formData.append("otp", otp);
     try {
-      const result = await fetch("http://localhost:3000/register", {
+      const result = await fetch(`${import.meta.env.VITE_BACKEND_URL}/register`, {
         method: "POST",
         headers: {},
         body: formData,
@@ -170,7 +170,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     formData.append("password", password);
     formData.append("otp", otp);
     try {
-      const result = await fetch("http://localhost:3000/register/mobile", {
+      const result = await fetch(`${import.meta.env.VITE_BACKEND_URL}/register/mobile`, {
         method: "POST",
         headers: {},
         body: formData,
@@ -190,12 +190,16 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const formData = new FormData();
     formData.append("user_email", email);
     try {
-      const res = await fetch("http://localhost:3000/generateOtp", {
+      const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/generateOtp`, {
         method: "POST",
         headers: {},
         body: formData,
       });
-      console.log(res.json());
+      const result = await res.json();
+      if (result.output == "fail") {
+        sendAlert({ message: result.msg as string, type: "error" });
+      }
+      sendAlert({ message: "OTP sent to email", type: "success" });
     } catch (err) {
       console.log(err);
     }
@@ -209,12 +213,16 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const formData = new FormData();
     formData.append("user_mobile", mobile_no);
     try {
-      const res = await fetch("http://localhost:3000/generateOtp/mobile", {
+      const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/generateOtp/mobile`, {
         method: "POST",
         headers: {},
         body: formData,
       });
-      console.log(res.json());
+      const result = await res.json();
+      if (result.output == "fail") {
+        sendAlert({ message: result.msg as string, type: "error" });
+      }
+      sendAlert({ message: "OTP sent to mobile number", type: "success" });
     } catch (err) {
       console.log(err);
     }
@@ -227,7 +235,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     formData.append("new_password", password);
     formData.append("old_password", old_password);
     try {
-      const res = await fetch("http://localhost:3000/user/changepassword", {
+      const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/user/changepassword`, {
         method: "POST",
         headers: {
           Authorization: currentUser?.auth_token as string,
@@ -266,7 +274,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       return;
     }
     try {
-      const res = await fetch("http://localhost:3000/user/generateResetOtp", {
+      const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/user/generateResetOtp`, {
         method: "POST",
         headers: {},
         body: formData,
@@ -302,7 +310,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     formData.append("password", password);
     formData.append("otp", otp);
     try {
-      const res = await fetch("http://localhost:3000/user/resetPassword", {
+      const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/user/resetPassword`, {
         method: "POST",
         headers: {},
         body: formData,

@@ -9,10 +9,6 @@
   align-items: center;
 }
 
-.footerLogo {
-  height: 30px;
-  display: block;
-}
 
 .footerParagraph {
   font-size: var(--paragraph---m---regular);
@@ -27,9 +23,10 @@
   .footerContainer {
     min-height: 120px;
   }
-  .footerLogo {
-    height: 60px;
+  .footerContainer > svg {
+    transform:scale(1.45);
   }
+  
 
   .footerParagraph {
     font-size: var(--subheading---s---medium);

@@ -9,15 +9,16 @@
     align-items: center; 
   }
   
-  .icon {
+  .icon > svg {
     flex-shrink: 0;
     object-fit: contain; 
+    color:var(--primary---main500);
   }
-  .size-small .icon {
+  .size-small .icon>svg {
     width: 16px;
     height: 16px;
   }
-  .size-large .icon {
+  .size-large .icon>svg {
     width: 24px;
     height: 24px;
   }
