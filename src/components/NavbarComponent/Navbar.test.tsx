@@ -31,7 +31,7 @@ jest.mock('react-router-dom', () => ({
 describe('Navbar Components before Login(UnAuth)', () => {
   //basic rendering
   it('renders without crashing', () => {//checks if all elements are present
-    const { getAllByRole, getByRole, getByAltText, queryByTestId } = render(
+    const { getAllByRole, getByRole, queryByTestId } = render(
       <MemoryRouter>
         <AuthContext.Provider value={mockAuthContextValue}>
           <Navbar />
@@ -40,7 +40,7 @@ describe('Navbar Components before Login(UnAuth)', () => {
     );
 
     // Assert that the castrol logo is rendered
-    expect(getByAltText('Logo')).toBeInTheDocument();
+    expect(getByRole('Logo')).toBeInTheDocument();
 
     // Assert that the navigation menu is visible after clicking
     expect(getByRole('navigation')).toBeInTheDocument();
@@ -53,7 +53,7 @@ describe('Navbar Components before Login(UnAuth)', () => {
     // in unauth
     const buttons = getAllByRole("button");
     expect(buttons[0].children[1]).toHaveTextContent("Login")
-    expect(buttons[1].children[1]).toHaveTextContent("SignUp")
+    expect(buttons[1].children[1]).toHaveTextContent("Sign Up")
     expect(buttons[2].children[1]).toHaveTextContent("developer@bpcap.com")
     expect(buttons[3].children[1]).toHaveTextContent("+91 97000 09045")
   });
@@ -88,7 +88,7 @@ describe('Navbar Components before Login(UnAuth)', () => {
   //Castrol Icon link check
   it('Checks if castrol icon link leads to home page', () => {//castrol icon link should lead to the home page
 
-    const { getByAltText } = render(
+    const { getByRole } = render(
       <MemoryRouter initialEntries={['/login']}>
         <AuthContext.Provider value={mockAuthContextValue}>
           <Navbar />
@@ -97,7 +97,7 @@ describe('Navbar Components before Login(UnAuth)', () => {
     );
 
     //hamburger icon should appear on the screen
-    const castrolIcon = getByAltText('Logo');
+    const castrolIcon = getByRole('Logo');
 
     //click on the icon
     fireEvent.click(castrolIcon);
@@ -119,7 +119,7 @@ describe('Navbar Components before Login(UnAuth)', () => {
     //for bigger screen setup containing buttons
       //fetch login and signup buttons
       const loginBtn =  getByRole('button', { name: 'Login' });
-      const signupBtn = getByRole('button', { name: 'SignUp' })
+      const signupBtn = getByRole('button', { name: 'Sign Up' })
 
       //expect(getByRole("navigation")).toContain("kejf");
 
@@ -161,7 +161,7 @@ const mockAuthContextValue1: AuthContextProps = {
 describe('Navbar Components after Login(Auth)', () => {
   //basic rendering
   it('renders without crashing', () => {//checks if all elements are present
-    const { getAllByRole, getByRole, getByAltText, queryByTestId } = render(
+    const { getAllByRole, getByRole, queryByTestId } = render(
       <MemoryRouter>
         <AuthContext.Provider value={mockAuthContextValue1}>
           <Navbar />
@@ -170,7 +170,7 @@ describe('Navbar Components after Login(Auth)', () => {
     );
 
     // Assert that the castrol logo is rendered
-    expect(getByAltText('Logo')).toBeInTheDocument();
+    expect(getByRole('Logo')).toBeInTheDocument();
 
     // Assert that the navigation menu is visible after clicking
     expect(getByRole('navigation')).toBeInTheDocument();
@@ -226,7 +226,7 @@ describe('Navbar Components after Login(Auth)', () => {
   //Castrol Icon link check
   it('Checks if castrol icon link leads to home page', () => {//castrol icon link should lead to the home page
 
-    const { getByAltText } = render(
+    const { getByRole } = render(
       <MemoryRouter initialEntries={['/login']}>
         <AuthContext.Provider value={mockAuthContextValue1}>
           <Navbar />
@@ -235,7 +235,7 @@ describe('Navbar Components after Login(Auth)', () => {
     );
 
     //hamburger icon should appear on the screen
-    const castrolIcon = getByAltText('Logo');
+    const castrolIcon = getByRole('Logo');
 
     //click on the icon
     fireEvent.click(castrolIcon);

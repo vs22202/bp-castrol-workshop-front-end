@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom';
 import { MemoryRouter } from "react-router-dom";
 import { fireEvent,  render, waitFor } from '@testing-library/react';
-import { ApplicationUpload } from './ApplicationUpload';
+import ApplicationUpload from './ApplicationUpload';
 import AlertContext, { AlertContextProps } from "../../contexts/AlertContext";
 import AuthContext, { AuthContextProps } from '../../contexts/AuthContext';
 import fetch,{ enableFetchMocks } from 'jest-fetch-mock';

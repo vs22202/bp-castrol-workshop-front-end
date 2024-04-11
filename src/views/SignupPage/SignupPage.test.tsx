@@ -2,7 +2,7 @@ import '@testing-library/jest-dom';
 import RequireAuth from "../../components/RequireAuthComponent/RequireAuth";
 import { MemoryRouter } from "react-router-dom";
 import { act, fireEvent, render, waitFor } from '@testing-library/react';
-import { SignupPage } from './SignupPage';
+import SignupPage from './SignupPage';
 import AlertContext, { AlertContextProps } from "../../contexts/AlertContext";
 import { AuthProvider } from '../../contexts/AuthContext';
 import fetch,{ enableFetchMocks } from 'jest-fetch-mock'
@@ -47,7 +47,7 @@ describe('SignupPage Component', () => {
     
         //all buttons
         const LoginBtn = getByRole('button', { name: 'Login' });
-        const SignupBtn = getByRole('button', { name: 'SignUp' });
+        const SignupBtn = getByRole('button', { name: 'Sign Up' });
         const otpBtn = getByRole('button', { name: 'Get OTP' });
     
         //all input fields are in the document
@@ -98,7 +98,7 @@ describe('SignupPage Component', () => {
 
         fetchMock.mockResponseOnce(JSON.stringify({ output: 'success', msg: 'User registered successfully' }), { status: 200 });
 
-        const SignupBtn = getByRole('button', { name: 'SignUp' });
+        const SignupBtn = getByRole('button', { name: 'Sign Up' });
         await waitFor(() =>fireEvent.click(SignupBtn))
 
         await waitFor(()=>{
@@ -112,7 +112,7 @@ describe('SignupPage Component', () => {
 
         expect(fetch.mock.calls.length).toEqual(2);
         expect(fetch.mock.calls[1][0]).toEqual('http://localhost:3000/register');
-        expect(sendAlert).toHaveBeenCalledWith({ message: 'SignUp was successful', type: 'success' });
+        expect(sendAlert).toHaveBeenCalledWith({ message: 'Sign up was successful', type: 'success' });
         await waitFor(() => {
             const history = createMemoryHistory({ initialEntries: ['/signup'] }); // Set the initial path
             history.listen(() => {
@@ -148,7 +148,7 @@ describe('SignupPage Component', () => {
 
         fetchMock.mockReject(new Error('Error adding user to Users table'));
 
-        const SignupBtn = getByRole('button', { name: 'SignUp' });
+        const SignupBtn = getByRole('button', { name: 'Sign Up' });
         await waitFor(() =>fireEvent.click(SignupBtn))
 
 
@@ -187,7 +187,7 @@ describe('SignupPage Component', () => {
 
         fetchMock.mockResponseOnce(JSON.stringify({ output: 'fail', msg: 'Error inserting data' }), { status: 500 });
 
-        const SignupBtn = getByRole('button', { name: 'SignUp' });
+        const SignupBtn = getByRole('button', { name: 'Sign Up' });
         await waitFor(() =>fireEvent.click(SignupBtn))
 
         expect(fetch.mock.calls.length).toEqual(2);
@@ -228,7 +228,7 @@ describe('SignupPage Component', () => {
 
         fetchMock.mockResponseOnce(JSON.stringify({ output: 'fail', msg: 'Invalid OTP' }), { status: 400 });
 
-        const SignupBtn = getByRole('button', { name: 'SignUp' });
+        const SignupBtn = getByRole('button', { name: 'Sign Up' });
         await waitFor(() =>fireEvent.click(SignupBtn))
 
 
@@ -267,7 +267,7 @@ describe('SignupPage Component', () => {
 
         fetchMock.mockResponseOnce(JSON.stringify({ output: 'fail', msg: 'OTP expired, please regenerate' }), { status: 400 });
 
-        const SignupBtn = getByRole('button', { name: 'SignUp' });
+        const SignupBtn = getByRole('button', { name: 'Sign Up' });
         await waitFor(() =>fireEvent.click(SignupBtn))
 
         await waitFor(() => {
@@ -316,7 +316,7 @@ describe('SignupPage Component', () => {
 
         fetchMock.mockResponseOnce(JSON.stringify({ output: 'success', msg: 'User registered successfully' }), { status: 200 });
 
-        const SignupBtn = getByRole('button', { name: 'SignUp' });
+        const SignupBtn = getByRole('button', { name: 'Sign Up' });
         await waitFor(() =>fireEvent.click(SignupBtn))
 
         await waitFor(() => {
@@ -324,7 +324,7 @@ describe('SignupPage Component', () => {
             expect(fetch.mock.calls[2][0]).toEqual('http://localhost:3000/register');
         });
         
-        expect(sendAlert).toHaveBeenCalledWith({ message: 'SignUp was successful', type: 'success' });
+        expect(sendAlert).toHaveBeenCalledWith({ message: 'Sign up was successful', type: 'success' });
         await waitFor(() => {
             const history = createMemoryHistory({ initialEntries: ['/signup'] }); // Set the initial path
             history.listen(() => {
@@ -348,7 +348,7 @@ describe('SignupPage Mobile Component', () => {
 test("Renders all components in the Signup mobile page corectly", ()=>{
     const {getByRole, getByLabelText, getByText} = setup();
 
-    const mobileOption = getByText(/SignUp using mobile instead?/i) as HTMLInputElement;
+    const mobileOption = getByText(/Sign Up using phone instead?/i) as HTMLInputElement;
 
     act(() => {
     fireEvent.click(mobileOption);
@@ -361,7 +361,7 @@ test("Renders all components in the Signup mobile page corectly", ()=>{
 
     //all buttons
     const LoginBtn = getByRole('button', { name: 'Login' });
-    const SignupBtn = getByRole('button', { name: 'SignUp' });
+    const SignupBtn = getByRole('button', { name: 'Sign Up' });
     const otpBtn = getByRole('button', { name: 'Get OTP' });
 
     //all input fields are in the document
@@ -380,7 +380,7 @@ test('Validation check of signup mobile page', async () => {
 
     const { getByRole, getByLabelText, getByText } = setup();
 
-    const mobileOption = getByText(/SignUp using mobile instead?/i) as HTMLInputElement;
+    const mobileOption = getByText(/Sign Up using phone instead?/i) as HTMLInputElement;
 
     act(() => {
     fireEvent.click(mobileOption);
@@ -401,7 +401,7 @@ test('should signup successfully and navigate to login page', async () => {
     fetchMock.mockResponseOnce(JSON.stringify({ output: 'success', msg: 'OTP send successfully' }), { status: 200 });
 
     const { getByRole, getByLabelText, getByText } = setup();
-    const mobileOption = getByText(/SignUp using mobile instead?/i) as HTMLInputElement;
+    const mobileOption = getByText(/Sign Up using phone instead?/i) as HTMLInputElement;
 
     act(() => {
     fireEvent.click(mobileOption);
@@ -425,7 +425,7 @@ test('should signup successfully and navigate to login page', async () => {
 
     fetchMock.mockResponseOnce(JSON.stringify({ output: 'success', msg: 'User registered successfully' }), { status: 200 });
 
-    const SignupBtn = getByRole('button', { name: 'SignUp' });
+    const SignupBtn = getByRole('button', { name: 'Sign Up' });
     await waitFor(() =>fireEvent.click(SignupBtn))
 
     await waitFor(()=>{
@@ -440,7 +440,7 @@ await waitFor(() => {
     expect(fetch.mock.calls.length).toEqual(2);
     expect(fetch.mock.calls[1][0]).toEqual('http://localhost:3000/register/mobile');
 })
-    expect(sendAlert).toHaveBeenCalledWith({ message: 'SignUp was successful', type: 'success' });
+    expect(sendAlert).toHaveBeenCalledWith({ message: 'Sign up was successful', type: 'success' });
     await waitFor(() => {
         const history = createMemoryHistory({ initialEntries: ['/signup'] }); // Set the initial path
         history.listen(() => {
@@ -458,7 +458,7 @@ test('otp sucessfully generated and verified but signup error', async () => {
     fetchMock.mockResponseOnce(JSON.stringify({ output: 'success', msg: 'OTP send successfully' }), { status: 200 });
 
     const { getByRole, getByLabelText, getByText } = setup();
-    const mobileOption = getByText(/SignUp using mobile instead?/i) as HTMLInputElement;
+    const mobileOption = getByText(/Sign Up using phone instead?/i) as HTMLInputElement;
 
     act(() => {
     fireEvent.click(mobileOption);
@@ -481,7 +481,7 @@ test('otp sucessfully generated and verified but signup error', async () => {
 
     fetchMock.mockReject(new Error('Error adding user to Users table'));
 
-    const SignupBtn = getByRole('button', { name: 'SignUp' });
+    const SignupBtn = getByRole('button', { name: 'Sign Up' });
     await waitFor(() =>fireEvent.click(SignupBtn))
 
 
@@ -502,7 +502,7 @@ test('otp sucessfully generated and verified but signup internal server error', 
     fetchMock.mockResponseOnce(JSON.stringify({ output: 'success', msg: 'OTP send successfully' }), { status: 200 });
 
     const { getByRole, getByLabelText, getByText } = setup();
-    const mobileOption = getByText(/SignUp using mobile instead?/i) as HTMLInputElement;
+    const mobileOption = getByText(/Sign Up using phone instead?/i) as HTMLInputElement;
 
     act(() => {
     fireEvent.click(mobileOption);
@@ -525,7 +525,7 @@ test('otp sucessfully generated and verified but signup internal server error', 
 
     fetchMock.mockResponseOnce(JSON.stringify({ output: 'fail', msg: 'Error inserting data' }), { status: 500 });
 
-    const SignupBtn = getByRole('button', { name: 'SignUp' });
+    const SignupBtn = getByRole('button', { name: 'Sign Up' });
     await waitFor(() =>fireEvent.click(SignupBtn))
 
     expect(fetch.mock.calls.length).toEqual(2);
@@ -548,7 +548,7 @@ test('signup should fail due to incorrect otp', async () => {
 
     const { getByRole, getByLabelText, getByText } = setup();
 
-    const mobileOption = getByText(/SignUp using mobile instead?/i) as HTMLInputElement;
+    const mobileOption = getByText(/Sign Up using phone instead?/i) as HTMLInputElement;
 
     act(() => {
     fireEvent.click(mobileOption);
@@ -572,7 +572,7 @@ test('signup should fail due to incorrect otp', async () => {
 
     fetchMock.mockResponseOnce(JSON.stringify({ output: 'fail', msg: 'Invalid OTP' }), { status: 400 });
 
-    const SignupBtn = getByRole('button', { name: 'SignUp' });
+    const SignupBtn = getByRole('button', { name: 'Sign Up' });
     await waitFor(() =>fireEvent.click(SignupBtn))
 
 
@@ -593,7 +593,7 @@ test('signup unsuccessful due to OTP expiration', async () => {
     fetchMock.mockResponseOnce(JSON.stringify({ output: 'fail', msg: 'OTP expired, please regenerate' }), { status: 400 });
 
     const { getByRole, getByLabelText, getByText } = setup();
-    const mobileOption = getByText(/SignUp using mobile instead?/i) as HTMLInputElement;
+    const mobileOption = getByText(/Sign Up using phone instead?/i) as HTMLInputElement;
 
     act(() => {
     fireEvent.click(mobileOption);
@@ -616,7 +616,7 @@ test('signup unsuccessful due to OTP expiration', async () => {
 
     fetchMock.mockResponseOnce(JSON.stringify({ output: 'fail', msg: 'OTP expired, please regenerate' }), { status: 400 });
 
-    const SignupBtn = getByRole('button', { name: 'SignUp' });
+    const SignupBtn = getByRole('button', { name: 'Sign Up' });
     await waitFor(() =>fireEvent.click(SignupBtn))
 
     await waitFor(() => {
@@ -640,7 +640,7 @@ test('otp expired so otp regenrated and then signup successful', async () => {
 
     const { getByRole, getByLabelText, getByText, queryByRole } = setup();
 
-    const mobileOption = getByText(/SignUp using mobile instead?/i) as HTMLInputElement;
+    const mobileOption = getByText(/Sign Up using phone instead?/i) as HTMLInputElement;
 
     act(() => {
     fireEvent.click(mobileOption);
@@ -671,7 +671,7 @@ test('otp expired so otp regenrated and then signup successful', async () => {
 
     fetchMock.mockResponseOnce(JSON.stringify({ output: 'success', msg: 'User registered successfully' }), { status: 200 });
 
-    const SignupBtn = getByRole('button', { name: 'SignUp' });
+    const SignupBtn = getByRole('button', { name: 'Sign Up' });
     await waitFor(() =>fireEvent.click(SignupBtn))
 
     await waitFor(() => {
@@ -679,7 +679,7 @@ test('otp expired so otp regenrated and then signup successful', async () => {
         expect(fetch.mock.calls[2][0]).toEqual('http://localhost:3000/register/mobile');
     });
     
-    expect(sendAlert).toHaveBeenCalledWith({ message: 'SignUp was successful', type: 'success' });
+    expect(sendAlert).toHaveBeenCalledWith({ message: 'Sign up was successful', type: 'success' });
     await waitFor(() => {
         const history = createMemoryHistory({ initialEntries: ['/signup'] }); // Set the initial path
         history.listen(() => {

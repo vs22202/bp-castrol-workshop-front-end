@@ -220,11 +220,11 @@ export function InputField({
                 </div>
               )}
         </div>
-      </div>
       <div></div>
       {errors && errors[name] && (
-        <span className={`${styles.error}`}>{errors[name]?.message}</span>
+        <span className={`${styles.error}`}>{errors[name]?.message || "This field is required."}</span>
       )}
+      </div>
     </>
   );
 }

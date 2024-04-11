@@ -71,7 +71,7 @@ const ApplicationUpload: React.FC = () => {
     useState<OptionsUtilsProps>({
       services_offered: [],
       expertise: [],
-      brands:[]
+      brands: [],
     });
   const [existingFiles, setExistingFiles] = useState<FileData[]>([]);
   const formRef = useRef<HTMLFormElement>(null);
@@ -109,7 +109,7 @@ const ApplicationUpload: React.FC = () => {
         const data = res.result as ApplicationInputFields;
         const services_options = data.services_offered.split(",");
         const expertise_options = data.expertise.split(",");
-        const brands_options  = data.brands.split(",")
+        const brands_options = data.brands.split(",");
         const services: Option[] = [];
         const expertise: Option[] = [];
         const brands: Option[] = [];
@@ -149,7 +149,7 @@ const ApplicationUpload: React.FC = () => {
         setExistingOptionsList({
           services_offered: services,
           expertise: expertise,
-          brands:brands,
+          brands: brands,
         });
         setExistingFiles(fileData);
         setApplicationStatus(data.application_status);
@@ -187,13 +187,18 @@ const ApplicationUpload: React.FC = () => {
       for (const file in data.files) formData.append("files", data.files[file]);
       formData.append("filesOld", JSON.stringify(data.filesOld));
       try {
-        const result = await fetch("http://localhost:3000/application/edit", {
-          method: "POST",
-          headers: {
-            Authorization: currentUser?.auth_token as string,
-          },
-          body: formData,
-        });
+        const result = await fetch(
+          `${
+            process.env.VITE_BACKEND_URL || "http://localhost:3000"
+          }/application/edit`,
+          {
+            method: "POST",
+            headers: {
+              Authorization: currentUser?.auth_token as string,
+            },
+            body: formData,
+          }
+        );
         const res = await result.json();
         if (res.output == "success") {
           setLoading(false);
@@ -221,13 +226,18 @@ const ApplicationUpload: React.FC = () => {
     }
     for (const file in data.files) formData.append("files", data.files[file]);
     try {
-      const result = await fetch("http://localhost:3000/application", {
-        method: "POST",
-        headers: {
-          Authorization: currentUser?.auth_token as string,
-        },
-        body: formData,
-      });
+      const result = await fetch(
+        `${
+          process.env.VITE_BACKEND_URL || "http://localhost:3000"
+        }/application`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: currentUser?.auth_token as string,
+          },
+          body: formData,
+        }
+      );
       const res = await result.json();
       if (res.output == "success") {
         setLoading(false);
@@ -312,4 +322,4 @@ const ApplicationUpload: React.FC = () => {
   );
 };
 
-export { ApplicationUpload };
+export default ApplicationUpload;

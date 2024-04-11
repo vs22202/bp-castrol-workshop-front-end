@@ -19,7 +19,7 @@ describe('List component', () => {
 
     //fetch component elements
     const list = getByTestId("list");
-    const iconscount = list.querySelectorAll("img")?.length;
+    const iconscount = list.querySelectorAll(".icon")?.length;
     const textscount = list.querySelectorAll(".text")?.length;
 
     //check number of children inside list component

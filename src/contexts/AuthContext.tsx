@@ -22,7 +22,12 @@ export type AuthContextProps = {
   generateOtpMobile: (mobile_no: string) => void;
   changePassword: (password: string, old_password: string) => Promise<string>;
   generateResetOtp: (email?: string, mobile?: string) => void;
-  resetPassword: (password: string, otp: string, email?: string, mobile?: string) => Promise<string>;
+  resetPassword: (
+    password: string,
+    otp: string,
+    email?: string,
+    mobile?: string
+  ) => Promise<string>;
   logout: () => void;
 };
 
@@ -55,12 +60,15 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   //can return success message or promise if needed
   //pass one more parameter to verify if mobile / email login and change logic accordingly
   const loginWithToken = async (): Promise<string> => {
-    const result = await fetch("http://localhost:3000/login", {
-      method: "POST",
-      headers: {
-        Authorization: currentUser?.auth_token as string,
-      },
-    });
+    const result = await fetch(
+      `${process.env.VITE_BACKEND_URL || "http://localhost:3000"}/login`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: currentUser?.auth_token as string,
+        },
+      }
+    );
     const res = await result.json();
     if (res.output == "fail") {
       setCurrentUser(null);
@@ -77,11 +85,14 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     formData.append("password", password);
     try {
       //try login
-      const result = await fetch("http://localhost:3000/login", {
-        method: "POST",
-        headers: {},
-        body: formData,
-      });
+      const result = await fetch(
+        `${process.env.VITE_BACKEND_URL || "http://localhost:3000"}/login`,
+        {
+          method: "POST",
+          headers: {},
+          body: formData,
+        }
+      );
       const res = await result.json();
       if (res.output == "fail") {
         sendAlert({ message: res.msg as string, type: "error" });
@@ -111,11 +122,16 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     formData.append("password", password);
     try {
       //try login
-      const result = await fetch("http://localhost:3000/login/mobile", {
-        method: "POST",
-        headers: {},
-        body: formData,
-      });
+      const result = await fetch(
+        `${
+          process.env.VITE_BACKEND_URL || "http://localhost:3000"
+        }/login/mobile`,
+        {
+          method: "POST",
+          headers: {},
+          body: formData,
+        }
+      );
       const res = await result.json();
       if (res.output == "fail") {
         sendAlert({ message: res.msg as string, type: "error" });
@@ -144,11 +160,14 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     formData.append("password", password);
     formData.append("otp", otp);
     try {
-      const result = await fetch("http://localhost:3000/register", {
-        method: "POST",
-        headers: {},
-        body: formData,
-      });
+      const result = await fetch(
+        `${process.env.VITE_BACKEND_URL || "http://localhost:3000"}/register`,
+        {
+          method: "POST",
+          headers: {},
+          body: formData,
+        }
+      );
       const res = await result.json();
       if (res.output == "fail") {
         sendAlert({ message: res.msg as string, type: "error" });
@@ -170,11 +189,16 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     formData.append("password", password);
     formData.append("otp", otp);
     try {
-      const result = await fetch("http://localhost:3000/register/mobile", {
-        method: "POST",
-        headers: {},
-        body: formData,
-      });
+      const result = await fetch(
+        `${
+          process.env.VITE_BACKEND_URL || "http://localhost:3000"
+        }/register/mobile`,
+        {
+          method: "POST",
+          headers: {},
+          body: formData,
+        }
+      );
       const res = await result.json();
       if (res.output == "fail") {
         sendAlert({ message: res.msg as string, type: "error" });
@@ -190,12 +214,21 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const formData = new FormData();
     formData.append("user_email", email);
     try {
-      const res = await fetch("http://localhost:3000/generateOtp", {
-        method: "POST",
-        headers: {},
-        body: formData,
-      });
-      console.log(res.json());
+      const res = await fetch(
+        `${
+          process.env.VITE_BACKEND_URL || "http://localhost:3000"
+        }/generateOtp`,
+        {
+          method: "POST",
+          headers: {},
+          body: formData,
+        }
+      );
+      const result = await res.json();
+      if (result.output == "fail") {
+        sendAlert({ message: result.msg as string, type: "error" });
+      }
+      sendAlert({ message: "OTP sent to email", type: "success" });
     } catch (err) {
       console.log(err);
     }
@@ -209,12 +242,21 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const formData = new FormData();
     formData.append("user_mobile", mobile_no);
     try {
-      const res = await fetch("http://localhost:3000/generateOtp/mobile", {
-        method: "POST",
-        headers: {},
-        body: formData,
-      });
-      console.log(res.json());
+      const res = await fetch(
+        `${
+          process.env.VITE_BACKEND_URL || "http://localhost:3000"
+        }/generateOtp/mobile`,
+        {
+          method: "POST",
+          headers: {},
+          body: formData,
+        }
+      );
+      const result = await res.json();
+      if (result.output == "fail") {
+        sendAlert({ message: result.msg as string, type: "error" });
+      }
+      sendAlert({ message: "OTP sent to mobile number", type: "success" });
     } catch (err) {
       console.log(err);
     }
@@ -227,15 +269,20 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     formData.append("new_password", password);
     formData.append("old_password", old_password);
     try {
-      const res = await fetch("http://localhost:3000/user/changepassword", {
-        method: "POST",
-        headers: {
-          Authorization: currentUser?.auth_token as string,
-        },
-        body: formData,
-      });
+      const res = await fetch(
+        `${
+          process.env.VITE_BACKEND_URL || "http://localhost:3000"
+        }/user/changepassword`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: currentUser?.auth_token as string,
+          },
+          body: formData,
+        }
+      );
       const result = await res.json();
-      if (result.output == "fail"|| result.output === "error") {
+      if (result.output == "fail" || result.output === "error") {
         sendAlert({ message: result.msg as string, type: "error" });
         return "failure";
       }
@@ -266,11 +313,16 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       return;
     }
     try {
-      const res = await fetch("http://localhost:3000/user/generateResetOtp", {
-        method: "POST",
-        headers: {},
-        body: formData,
-      });
+      const res = await fetch(
+        `${
+          process.env.VITE_BACKEND_URL || "http://localhost:3000"
+        }/user/generateResetOtp`,
+        {
+          method: "POST",
+          headers: {},
+          body: formData,
+        }
+      );
       const result = await res.json();
       if (result.output == "fail") {
         sendAlert({ message: result.msg, type: "error" });
@@ -302,21 +354,26 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     formData.append("password", password);
     formData.append("otp", otp);
     try {
-      const res = await fetch("http://localhost:3000/user/resetPassword", {
-        method: "POST",
-        headers: {},
-        body: formData,
-      });
+      const res = await fetch(
+        `${
+          process.env.VITE_BACKEND_URL || "http://localhost:3000"
+        }/user/resetPassword`,
+        {
+          method: "POST",
+          headers: {},
+          body: formData,
+        }
+      );
       const result = await res.json();
-      if(result.output == "fail"){
-        sendAlert({message:result.msg,type:"error"})
-        return "failure"
+      if (result.output == "fail") {
+        sendAlert({ message: result.msg, type: "error" });
+        return "failure";
       }
-      sendAlert({message:"Password Reset Successfully",type:"success"})
-      return "success"
+      sendAlert({ message: "Password Reset Successfully", type: "success" });
+      return "success";
     } catch (err) {
       console.log(err);
-      return "failure"
+      return "failure";
     }
   };
 
@@ -333,7 +390,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         generateOtpMobile,
         changePassword,
         generateResetOtp,
-        resetPassword
+        resetPassword,
       }}
     >
       {children}

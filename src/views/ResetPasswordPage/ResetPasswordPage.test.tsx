@@ -2,7 +2,7 @@ import '@testing-library/jest-dom';
 import RequireAuth from "../../components/RequireAuthComponent/RequireAuth";
 import { MemoryRouter } from "react-router-dom";
 import {  act, fireEvent, render, waitFor } from '@testing-library/react';
-import { ResetPasswordPage } from './ResetPasswordPage';
+import ResetPasswordPage from './ResetPasswordPage';
 import AlertContext, { AlertContextProps } from "../../contexts/AlertContext";
 import { AuthProvider } from '../../contexts/AuthContext';
 import fetch,{ enableFetchMocks } from 'jest-fetch-mock'

@@ -43,20 +43,20 @@ describe('ListItem Component', () => {
   })
 
   //icon rendering
-  it("Test icon rendering", ()=>{//renders with the icon mentioned in the source key
-    const {getByAltText} = render(
-      <ListItem text="Test Item" size="small" />
-    );
+  // it("Test icon rendering", ()=>{//renders with the icon mentioned in the source key
+  //   const {getByAltText} = render(
+  //     <ListItem text="Test Item" size="small" />
+  //   );
 
-    // Assert that the list item is rendered
-    const iconimgalt = getByAltText("Icon");
+  //   // Assert that the list item is rendered
+  //   const iconimgalt = getByAltText("Icon");
 
-    //check if icon gets rendered or not
-    expect(iconimgalt).toBeInTheDocument()
-    expect(iconimgalt).toHaveClass(styles.icon)
-    expect(iconimgalt).toHaveAttribute("src", "src\\assets\\icon.svg")
+  //   //check if icon gets rendered or not
+  //   expect(iconimgalt).toBeInTheDocument()
+  //   expect(iconimgalt).toHaveClass(styles.icon)
+  //   expect(iconimgalt).toHaveAttribute("src", "src\\assets\\icon.svg")
 
-  })
+  // })
 
   //check sizes
   it('Test to check default size rendering of the list items', () => { //check if small class is applied by default

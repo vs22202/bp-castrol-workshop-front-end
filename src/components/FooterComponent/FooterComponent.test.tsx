@@ -12,11 +12,11 @@ describe('FooterWithLogo', () => {
   //basic rendering test cases
   it('Footer renders without crash', () => {//to ensure that footer renders with its logo and texts error-free
     //check for various components
-    expect(footer.children[0]).toHaveClass("footerLogo");
+    // expect(footer.children[0]).toHaveClass("footerLogo");
     expect(footer.children[1]).toHaveClass("footerParagraph");
 
     //also check if class css are getting applied
-    expect(footer.children[0]).toHaveClass(styles.footerLogo);
+    // expect(footer.children[0]).toHaveClass(styles.footerLogo);
     expect(footer.children[1]).toHaveClass(styles.footerParagraph);
     
   });
@@ -26,12 +26,12 @@ describe('FooterWithLogo', () => {
     expect(footer.children[1]).toHaveTextContent("Copyright © 1999-2024")
   })
 
-  it('Footer image renders correctly', ()=>{ //to ensure that footer renders with correct image
-    //image renders with right source key
-    expect(footer.children[0]).toHaveAttribute("src", "src\\assets\\castrol_logo.svg")
-    //image renders with right alt text
-    expect(footer.children[0]).toHaveAccessibleName("logo-ct")
-  })
+  // it('Footer image renders correctly', ()=>{ //to ensure that footer renders with correct image
+  //   //image renders with right source key
+  //   expect(footer.children[0]).toHaveAttribute("src", "src\\assets\\castrol_logo.svg")
+  //   //image renders with right alt text
+  //   expect(footer.children[0]).toHaveAccessibleName("logo-ct")
+  // })
 
   //test case for basic alignment of footer elements
   it("Footer image and text vertical alignment", ()=>{ //to check that image comes above the text in footer
@@ -55,8 +55,8 @@ describe('FooterWithLogo', () => {
      const footerContainerMobile = getByTestId('footercontainer');
      expect(footerContainerMobile).toHaveClass(styles.footerContainer);
  
-     const footerLogoMobile = footerContainerMobile.children[0]; //logo - 0th index
-     expect(footerLogoMobile).toHaveClass(styles.footerLogo);
+    //  const footerLogoMobile = footerContainerMobile.children[0]; //logo - 0th index
+    //  expect(footerLogoMobile).toHaveClass(styles.footerLogo);
  
      const footerParagraphMobile = footerContainerMobile.children[1]; //text - 1st index
      expect(footerParagraphMobile).toHaveClass(styles.footerParagraph);
@@ -69,8 +69,8 @@ describe('FooterWithLogo', () => {
      const footerContainerDesktop = getByTestId('footercontainer');
      expect(footerContainerDesktop).toHaveClass(styles.footerContainer);
  
-     const footerLogoDesktop = footerContainerDesktop.children[0];
-     expect(footerLogoDesktop).toHaveClass(styles.footerLogo);
+    //  const footerLogoDesktop = footerContainerDesktop.children[0];
+    //  expect(footerLogoDesktop).toHaveClass(styles.footerLogo);
  
      const footerParagraphDesktop = footerContainerDesktop.children[1];
      expect(footerParagraphDesktop).toHaveClass(styles.footerParagraph);

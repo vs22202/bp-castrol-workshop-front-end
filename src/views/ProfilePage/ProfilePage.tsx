@@ -10,7 +10,7 @@ import { renderInput } from "../../components/FormFieldRenderLogic";
 import AuthContext, { AuthContextProps } from "../../contexts/AuthContext";
 import AlertContext, { AlertContextProps } from "../../contexts/AlertContext";
 import { useScreenSize } from "../../components/ScreenSizeLogic";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { SvgIcon } from "../../components/IconComponent/SvgIcon";
 
 /**
@@ -176,4 +176,4 @@ const ProfilePage: React.FC = () => {
   );
 };
 
-export { ProfilePage };
+export default ProfilePage;

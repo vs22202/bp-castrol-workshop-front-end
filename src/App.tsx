@@ -1,18 +1,26 @@
+import { lazy, Suspense } from "react";
 import { Navbar } from "./components/NavbarComponent/Navbar";
 import { FooterWithLogo } from "./components/FooterComponent/Footer";
-import { ApplicationUpload } from "./views/ApplicationUploadPage/ApplicationUpload";
 import "./App.css";
-import { LoginPage } from "./views/LoginPage/LoginPage";
-import { SignupPage } from "./views/SignupPage/SignupPage";
-import { ResetPasswordPage } from "./views/ResetPasswordPage/ResetPasswordPage";
 import { Alert } from "./components/AlertComponent/Alert";
 import AlertContext, { AlertContextProps } from "./contexts/AlertContext";
 import { useContext } from "react";
 import RequireAuth from "./components/RequireAuthComponent/RequireAuth";
 import { Routes, Route } from "react-router-dom";
-import HomePage from "./views/HomePage/HomePage";
-import LogoutPage from "./views/LogoutPage/LogoutPage";
-import { ProfilePage } from "./views/ProfilePage/ProfilePage";
+
+//lazy loading the pages
+const HomePage = lazy(() => import("./views/HomePage/HomePage"));
+const LoginPage = lazy(() => import("./views/LoginPage/LoginPage"));
+const SignupPage = lazy(() => import("./views/SignupPage/SignupPage"));
+const ResetPasswordPage = lazy(
+  () => import("./views/ResetPasswordPage/ResetPasswordPage")
+);
+const LogoutPage = lazy(() => import("./views/LogoutPage/LogoutPage"));
+const ApplicationUpload = lazy(
+  () => import("./views/ApplicationUploadPage/ApplicationUpload")
+);
+const ProfilePage = lazy(() => import("./views/ProfilePage/ProfilePage"));
+const PageNotFound = lazy(() => import("./views/PageNotFound/PageNotFound"));
 
 function App() {
   const { alert } = useContext(AlertContext) as AlertContextProps;
@@ -29,7 +37,9 @@ function App() {
               path="/login"
               element={
                 <RequireAuth requireAuth={false}>
-                  <LoginPage />
+                  <Suspense fallback={<>...</>}>
+                    <LoginPage />
+                  </Suspense>
                 </RequireAuth>
               }
             />
@@ -37,7 +47,9 @@ function App() {
               path="/resetpassword"
               element={
                 <RequireAuth requireAuth={false}>
-                  <ResetPasswordPage />
+                  <Suspense fallback={<>...</>}>
+                    <ResetPasswordPage />
+                  </Suspense>
                 </RequireAuth>
               }
             />
@@ -45,7 +57,9 @@ function App() {
               path="/signup"
               element={
                 <RequireAuth requireAuth={false}>
-                  <SignupPage />
+                  <Suspense fallback={<>...</>}>
+                    <SignupPage />
+                  </Suspense>
                 </RequireAuth>
               }
             />
@@ -53,7 +67,9 @@ function App() {
               path="/upload"
               element={
                 <RequireAuth>
-                  <ApplicationUpload />
+                  <Suspense fallback={<>...</>}>
+                    <ApplicationUpload />
+                  </Suspense>
                 </RequireAuth>
               }
             />
@@ -61,7 +77,9 @@ function App() {
               path="/profile"
               element={
                 <RequireAuth>
-                  <ProfilePage />
+                  <Suspense fallback={<>...</>}>
+                    <ProfilePage />
+                  </Suspense>
                 </RequireAuth>
               }
             />
@@ -69,8 +87,18 @@ function App() {
               path="/logout"
               element={
                 <RequireAuth>
-                  <LogoutPage />
+                  <Suspense fallback={<>...</>}>
+                    <LogoutPage />
+                  </Suspense>
                 </RequireAuth>
+              }
+            />
+            <Route
+              path="*"
+              element={
+                <Suspense fallback={<>...</>}>
+                  <PageNotFound />
+                </Suspense>
               }
             />
           </Routes>
