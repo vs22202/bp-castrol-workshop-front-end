@@ -100,7 +100,7 @@ function Navbar() {
                 </li>
                 <li onClick={removeActive}>
                   <SvgIcon iconName="signup_icon" />
-                  <Link to="/signup">SignUp</Link>
+                  <Link to="/signup">Sign Up</Link>
                 </li>
               </ul>
 
@@ -116,7 +116,7 @@ function Navbar() {
                 />
                 <div className={`${styles.verticalDivider}`}></div>
                 <Button
-                  text="SignUp"
+                  text="Sign Up"
                   type="outline"
                   size="md"
                     iconimg="signup_icon"
