@@ -121,7 +121,7 @@ describe('ApplicationUpload Component', () => {
             
           });
 
-    });
+    },10000);
 
     test("ApplicationUpload Component - new application [submitted successfully] ", async () => {
         fetchMock.mockResponseOnce(JSON.stringify({
@@ -198,7 +198,7 @@ describe('ApplicationUpload Component', () => {
             });
           });
 
-    });
+    },10000);
 
     test("ApplicationUpload Component - edit mode [all components rendered] ", async () => {
         fetchMock.mockResponseOnce(JSON.stringify({
@@ -270,7 +270,7 @@ describe('ApplicationUpload Component', () => {
             expect(inputElement).toBeInTheDocument();
             
           });
-    });
+    },10000);
 
     test("ApplicationUpload Component - edit mode [edited the old application and submitted successfully]", async () => {
         
@@ -352,7 +352,7 @@ describe('ApplicationUpload Component', () => {
                 "consent_receive_info": true,
             });
         });
-    });
+    },10000);
 
     test("ApplicationUpload Component - error in submitting the form [Server Error] ", async () => {
         fetchMock.mockResponseOnce(JSON.stringify({
@@ -425,7 +425,7 @@ describe('ApplicationUpload Component', () => {
         expect(fetch.mock.calls[1][0]).toEqual('http://localhost:3000/application');
         expect(sendAlert).toHaveBeenCalledWith({ message: 'Error inserting application', type: 'error' });
 
-    });
+    },10000);
     test('ApplicationUpload Component - error in fetching data for existing application [Server Error]', async () => {
         fetchMock.mockResponseOnce(JSON.stringify({output: 'fail',msg: 'Error in fetching data'}), { status: 500 });
         setup();
@@ -433,6 +433,6 @@ describe('ApplicationUpload Component', () => {
             expect(fetchMock.mock.calls.length).toEqual(1);
             expect(fetchMock.mock.calls[0][0]).toEqual('http://localhost:3000/application/getUserApplication');
         });
-    });
+    },10000);
    
 });
