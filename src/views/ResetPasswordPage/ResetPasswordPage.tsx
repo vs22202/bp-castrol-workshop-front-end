@@ -269,4 +269,4 @@ const ResetPasswordPage: React.FC = () => {
   );
 };
 
-export { ResetPasswordPage };
+export default ResetPasswordPage ;

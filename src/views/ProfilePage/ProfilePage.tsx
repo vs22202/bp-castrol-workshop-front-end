@@ -173,4 +173,4 @@ const ProfilePage: React.FC = () => {
   );
 };
 
-export { ProfilePage };
+export default ProfilePage;

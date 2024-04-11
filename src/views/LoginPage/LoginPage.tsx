@@ -164,4 +164,4 @@ const LoginPage: React.FC = () => {
   );
 };
 
-export { LoginPage };
+export default LoginPage;

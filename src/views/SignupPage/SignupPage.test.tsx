@@ -1,6 +1,6 @@
 import { fireEvent, render, waitFor } from "@testing-library/react";
 import '@testing-library/jest-dom';
-import { SignupPage } from "./SignupPage";
+import SignupPage from "./SignupPage";
 import RequireAuth from "../../components/RequireAuthComponent/RequireAuth";
 import AuthContext, { AuthContextProps } from "../../contexts/AuthContext";
 import AlertContext, {AlertContextProps} from "../../contexts/AlertContext";
