@@ -21,7 +21,7 @@ import FooterLogo from "../../assets/castrol_logo.svg";
 
 export function FooterWithLogo() {
   return (
-    <div className={`${styles.footerContainer} illustration`}>
+    <div className={`${styles.footerContainer} illustration`} data-testid="footercontainer">
       <FooterLogo/>
       <p className={` ${styles.footerParagraph}`}>
         Copyright © 1999-2024

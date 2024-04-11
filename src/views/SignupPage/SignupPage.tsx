@@ -198,7 +198,7 @@ const SignupPage: React.FC = () => {
         <form
           onSubmit={handleSubmit(handleSignup)}
           onChange={handleInputChange}
-          data-testid="SignupForm"
+          name="SignupForm"
         >
           <h1>Sign Up</h1>
           <h2>
@@ -227,7 +227,6 @@ const SignupPage: React.FC = () => {
               register={register}
               errors={errors}
               isDisabled={!otpActivated}
-              datatestid="signupotp"
               required={true}
               validationSchema={{
                 required: true,
@@ -254,7 +253,6 @@ const SignupPage: React.FC = () => {
                 type="solid"
                 onClick={getOtp}
                 disabled={!isAllFieldsValid}
-                datatestid="SignupPageOtpBtnActive"
               />
             ) : (
               <Button
@@ -268,7 +266,6 @@ const SignupPage: React.FC = () => {
                 }
                 type="outline"
                 disabled={true}
-                datatestid="SignupPageOtpBtnInactive"
               />
             )}
           </div>
@@ -285,7 +282,6 @@ const SignupPage: React.FC = () => {
               type="solid"
               iconimg="signup_icon"
               action="submit"
-              datatestid="SignupPageSignupBtn"
             />
             <span>or</span>
             <span>Already have an account?</span>
@@ -300,7 +296,6 @@ const SignupPage: React.FC = () => {
               }
               type="outline"
               iconimg="login_icon"
-              datatestid="SignupPageLoginBtn"
               onClick={handleLogin}
             />
           </div>

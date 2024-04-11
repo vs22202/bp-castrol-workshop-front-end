@@ -55,7 +55,7 @@ function Navbar() {
       <nav className={`${styles.navbar}`}>
         {/* logo */}
         <div className={`${styles.logoContainer}`}>
-          <Link to="/" className="illustration">
+          <Link to="/" className="illustration" role="Logo">
             <LogoImg />
           </Link>
 
@@ -64,7 +64,7 @@ function Navbar() {
             onClick={toggleActiveClass}
           >
             {!isActive ? (
-              <SvgIcon iconName="hamburger" data-testid="hamburger_icon" />
+              <SvgIcon iconName="hamburger" />
             ) : (
               <SvgIcon iconName="cross" />
             )}

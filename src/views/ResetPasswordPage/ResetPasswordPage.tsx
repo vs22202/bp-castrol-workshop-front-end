@@ -14,11 +14,19 @@ import { useScreenSize } from "../../components/ScreenSizeLogic";
  * `ResetPasswordPage` Page
  *
  * Renders a reset page for users to reset their password.
- *
+ * The page includes a reset password form with dynamic validations, OTP generation, and user-friendly interactions.
  * @category Page
  * @returns The rendered `ResetPasswordPage` component as a `JSX.Element`.
  *
  *
+ * ## Features
+ * - **Dynamic Form Fields**: The reset password form adapts to different screen sizes and includes fields for user email, mobile number, password, password confirmation, and OTP.
+ * - **Form Validation**: Utilizes React Hook Form for form validation, providing real-time error feedback and ensuring data integrity.
+ * - **OTP Generation**: Allows users to request and receive a one-time password (OTP) for secure password reset.
+ * - **Loading State**: Displays a loading state while the password reset process is in progress to provide visual feedback to the user.
+ * - **Alerts**: Utilizes the `AuthContext` to handle password reset requests and display success messages upon successful password reset.
+ * - **Responsive Design**: The component is designed to be responsive, ensuring a seamless user experience across different devices and screen sizes.
+ * 
  * ## Form Fields
  * The reset password form includes the following fields:
  * - `user_email_id`: User's email address (required, valid email format).
@@ -174,6 +182,7 @@ const ResetPasswordPage: React.FC = () => {
           onSubmit={handleSubmit(handleResetPassword)}
           onChange={handleInputChange}
           data-testid="ResetPasswordForm"
+          name="ResetPasswordForm"
         >
           <h1>Reset Password</h1>
           <h2>Enter the six digit OTP to reset your password. </h2>
@@ -200,7 +209,6 @@ const ResetPasswordPage: React.FC = () => {
               register={register}
               errors={errors}
               isDisabled={!otpActivated}
-              datatestid="resetpasswordotp"
               required={true}
               validationSchema={{
                 required: true,
@@ -227,7 +235,6 @@ const ResetPasswordPage: React.FC = () => {
                 type="solid"
                 onClick={getOtp}
                 disabled={!isAllFieldsValid}
-                datatestid="ResetPasswordOtpBtnActive"
               />
             ) : (
               <Button
@@ -241,7 +248,6 @@ const ResetPasswordPage: React.FC = () => {
                 }
                 type="outline"
                 disabled={true}
-                datatestid="ResetPasswordPageOtpBtnInactive"
               />
             )}
           </div>
@@ -260,7 +266,6 @@ const ResetPasswordPage: React.FC = () => {
               }
               type="solid"
               action="submit"
-              datatestid="ResetPageResetPasswordBtn"
             />
           </div>
         </form>

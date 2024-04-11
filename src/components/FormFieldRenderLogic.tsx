@@ -51,14 +51,13 @@ export const renderInput = (
         <Checkbox
           key={input.id}
           name={input.name}
-          size={inputSize}
+          size={inputSize as "small" | "medium" | "large"}
           text={input.label}
           register={register}
           errors={errors}
           validationSchema={{
             required: input.required,
           }}
-          datatestid={input.datatestid}
           required={input.required}
         />
       );
@@ -115,7 +114,6 @@ export const renderInput = (
                 required={input.required}
                 register={register}
                 errors={errors}
-                datatestid={input.datatestid}
                 onchange={onChange}
                 validationSchema={{
                   required: input.required,
@@ -134,7 +132,6 @@ export const renderInput = (
           name={input.name}
           label={input.label}
           size={inputSize}
-          datatestid={input.datatestid}
           register={register}
           maxlen={input.maxlen}
           errors={errors}

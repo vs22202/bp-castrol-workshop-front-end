@@ -109,7 +109,7 @@ const LoginPage: React.FC = () => {
           <form
             onSubmit={handleSubmit(handleLogin)}
             onChange={handleInputChange}
-            data-testid="LoginForm"
+            name="LoginForm"
           >
             <h1>Login</h1>
             <h2>Welcome back to the Castrol Community!</h2>
@@ -138,7 +138,6 @@ const LoginPage: React.FC = () => {
                 type="solid"
                 iconimg="login_icon"
                 action="submit"
-                datatestid="LoginPageLoginBtn"
               />
               <span>or</span>
               <span>New to Castrol?</span>
@@ -153,7 +152,6 @@ const LoginPage: React.FC = () => {
                 }
                 type="outline"
                 iconimg="signup_icon"
-                datatestid="LoginPageSignupBtn"
                 onClick={handleSignup}
               />
             </div>
