@@ -12,6 +12,7 @@ import RequireAuth from "./components/RequireAuthComponent/RequireAuth";
 import { Routes, Route } from "react-router-dom";
 import HomePage from "./views/HomePage/HomePage";
 import LogoutPage from "./views/LogoutPage/LogoutPage";
+import PageNotFound from "./views/PageNotFound/PageNotFound";
 import { ProfilePage } from "./views/ProfilePage/ProfilePage";
 
 function App() {
@@ -73,6 +74,10 @@ function App() {
                 </RequireAuth>
               }
             />
+              <Route
+                  path="*"
+                  element={<PageNotFound />}
+              />
           </Routes>
         </div>
         <FooterWithLogo />
