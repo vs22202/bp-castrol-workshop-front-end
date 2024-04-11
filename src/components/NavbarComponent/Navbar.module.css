@@ -30,10 +30,11 @@ a {
   display: none;
 }
 /* Logo Container  */
-
-.logoContainer > a > svg {
-  width:180px;
+.logoContainer > a > svg{
+  width:210px;
+  height:52px;
 }
+
 
 .logoContainer > div {
   display: none;
@@ -86,7 +87,7 @@ a {
     flex-direction: column;
     justify-content: start;
     align-items: start;
-    padding-inline: var(--spacing-sm);
+    padding-inline: var(--spacing-xs);
   }
   .optionsContainer {
     width: 100%;
