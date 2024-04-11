@@ -311,4 +311,4 @@ const ApplicationUpload: React.FC = () => {
   );
 };
 
-export { ApplicationUpload };
+export default ApplicationUpload;

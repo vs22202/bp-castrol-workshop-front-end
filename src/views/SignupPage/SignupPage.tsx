@@ -310,4 +310,4 @@ const SignupPage: React.FC = () => {
   );
 };
 
-export { SignupPage };
+export default SignupPage;

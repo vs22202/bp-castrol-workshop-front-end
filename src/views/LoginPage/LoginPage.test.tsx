@@ -1,6 +1,6 @@
 import { fireEvent, render, waitFor } from "@testing-library/react";
 import '@testing-library/jest-dom';
-import { LoginPage } from "./LoginPage";
+import LoginPage from "./LoginPage";
 import RequireAuth from "../../components/RequireAuthComponent/RequireAuth";
 import AuthContext, {AuthContextProps} from "../../contexts/AuthContext";
 import { MemoryRouter } from "react-router-dom";
