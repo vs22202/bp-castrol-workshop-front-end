@@ -80,7 +80,7 @@ const ProfilePage: React.FC = () => {
       const result = await fetch(
         `${
           process.env.VITE_BACKEND_URL || "http://localhost:3000"
-        }http://localhost:3000/user/`,
+        }/user`,
         {
           headers: {
             Authorization: currentUser?.auth_token as string,
