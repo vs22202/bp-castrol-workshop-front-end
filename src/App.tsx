@@ -1,4 +1,4 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense,useEffect,useState } from "react";
 import { Navbar } from "./components/NavbarComponent/Navbar";
 import { FooterWithLogo } from "./components/FooterComponent/Footer";
 import "./App.css";
@@ -23,8 +23,41 @@ const ProfilePage = lazy(() => import("./views/ProfilePage/ProfilePage"));
 const PageNotFound = lazy(() => import("./views/PageNotFound/PageNotFound"));
 
 function App() {
-  const { alert } = useContext(AlertContext) as AlertContextProps;
-
+  const { alert, sendAlert } = useContext(AlertContext) as AlertContextProps;
+  const [retry,setRetry] = useState(0)
+  useEffect(()=>{
+    const checkBackendStatus = async () => {
+      try{
+      const result = await fetch(
+        `${
+          process.env.VITE_BACKEND_URL || "http://localhost:3000"
+        }/dbConnStatus`,
+      );
+      const res = await result.json();
+      return res;
+      } catch (err) {
+        console.log('Backend server is starting')
+        return { output: "fail" };
+      }
+    }
+    checkBackendStatus().then((res) => {
+      if (res.output == "fail") {
+        console.log(retry);
+        if (retry > 10) {
+          sendAlert({ message: "Backend services are down, please contact admin.", type: "error" })
+          return;
+        }
+        sendAlert({message:"Backend services are still booting please wait.",type:"error"})
+        setTimeout(() => {
+          setRetry(s=>s+1);
+        },30000)
+      }
+      else{
+        console.log("Backend services are up.")
+        sendAlert({ message: "Backend services are up.", type: "success" })
+      }
+    })
+  },[retry])
   return (
     <>
       {alert && <Alert message={alert.message} type={alert.type} />}
