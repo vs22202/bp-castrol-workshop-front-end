@@ -1,0 +1,53 @@
+/* LoginForm css */
+
+.logincontainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1em;
+  }
+  .loginform {
+    width: 100%;
+  }
+  .loginform h1 {
+    color: var(--primary---main500);
+    font-size: var(--heading---m---bold);
+    font-weight: var(--weight--extra-bold);
+  }
+  .loginform h2 {
+    color: var(--neutral---main750);
+    font-size: var(--subheading---m---regular);
+    font-weight: var(--weight--light);
+  }
+  .loginform p {
+    color: var(--neutral---main750);
+    font-size: var(--subheading---s---regular);
+    font-weight: var(--weight--light);
+  }
+  .imagecontainer {
+    display: flex;
+    justify-content: center;
+    width: 50vw;
+  }
+  
+  /* Media query for mobile screens */
+  @media (max-width: 884px) {
+    .logincontainer {
+      grid-template-columns: 1fr;
+      min-width: 300px;
+    }
+  
+    .imagecontainer > svg {
+      max-width: 100%;
+      height: auto;
+    }
+  
+    .loginform h2 {
+      color: var(--neutral---main750);
+      font-size: var(--subheading---s---regular);
+      font-weight: var(--weight--medium);
+    }
+  }
+
+  
