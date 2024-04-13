@@ -23,7 +23,7 @@ const SignupPageFields: Input[] = [
     type: "text",
     text_type: "text",
     placeholder: "919612347132",
-    errorMessage: "Mobile number should be of 10 digits",
+    errorMessage: "Mobile number should be of 12 digits including country code",
     label: "Mobile Number",
     pattern: /\d{12}/,
     datatestid: "singupemobileno",

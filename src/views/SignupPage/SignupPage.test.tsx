@@ -514,7 +514,9 @@ describe("SignupPage Mobile Component", () => {
     });
     await waitFor(() =>
       expect(
-        getByText(/Mobile number should be of 10 digits/i)
+        getByText(
+          /Mobile number should be of 12 digits including country code/i
+        )
       ).toBeInTheDocument()
     );
     fireEvent.change(

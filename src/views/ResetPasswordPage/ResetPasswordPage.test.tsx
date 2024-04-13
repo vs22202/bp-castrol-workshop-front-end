@@ -122,7 +122,9 @@ describe("Reset Password Page (OTP through Email) ", () => {
     });
     await waitFor(() =>
       expect(
-        getByText(/Mobile number should be of 10 digits/i)
+        getByText(
+          /Mobile number should be of 12 digits including country code/i
+        )
       ).toBeInTheDocument()
     );
   });
