@@ -172,7 +172,7 @@ const SignupPage: React.FC = () => {
     setLoading(false);
     if (result == "success") {
       sendAlert({
-        message: "Sign up was successful",
+        message: "Your account has been created",
         type: "success",
       });
       navigate("/login", { replace: true ,state:{phoneLogin:phoneSignup}});

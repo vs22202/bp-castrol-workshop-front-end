@@ -227,6 +227,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       const result = await res.json();
       if (result.output == "fail") {
         sendAlert({ message: result.msg as string, type: "error" });
+        return;
       }
       sendAlert({ message: "OTP sent to email", type: "success" });
     } catch (err) {
@@ -255,6 +256,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       const result = await res.json();
       if (result.output == "fail") {
         sendAlert({ message: result.msg as string, type: "error" });
+        return;
       }
       sendAlert({ message: "OTP sent to mobile number", type: "success" });
     } catch (err) {
