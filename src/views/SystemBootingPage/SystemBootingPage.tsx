@@ -11,11 +11,11 @@ const SystemBootingPage: React.FC = () => {
           <h1>System resources are booting, please wait.</h1>
           <h2>Pages will load automatically after resources are ready.</h2>
           <p>
-            Since this is application hosted using free tier services,
+            Since this application is hosted using free tier services,
             inactivity pauses the servers. These servers are started when a user
             like you visits the website.
           </p>
-          <p>This should take about 2-3 mins</p>
+          <p>This should take about 1-2 mins</p>
         </div>
       </div>
     </>
