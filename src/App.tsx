@@ -8,6 +8,7 @@ import { useContext } from "react";
 import RequireAuth from "./components/RequireAuthComponent/RequireAuth";
 import { Routes, Route } from "react-router-dom";
 import SystemBootingPage from "./views/SystemBootingPage/SystemBootingPage";
+import LoadingSkeletonPage from "./views/LoadingSkeletonPage/LoadingSkeletonPage"
 
 //lazy loading the pages
 const HomePage = lazy(() => import("./views/HomePage/HomePage"));
@@ -26,7 +27,7 @@ const PageNotFound = lazy(() => import("./views/PageNotFound/PageNotFound"));
 function App() {
   const { alert, sendAlert } = useContext(AlertContext) as AlertContextProps;
   const [retry, setRetry] = useState(0);
-  const [backendStatus, setBackendStatus] = useState(true);
+  const [backendStatus, setBackendStatus] = useState(false);
   useEffect(() => {
     const checkBackendStatus = async () => {
       try {
@@ -81,7 +82,7 @@ function App() {
                   path="/login"
                   element={
                     <RequireAuth requireAuth={false}>
-                      <Suspense fallback={<>...</>}>
+                      <Suspense fallback={<LoadingSkeletonPage/>}>
                         <LoginPage />
                       </Suspense>
                     </RequireAuth>
@@ -91,7 +92,7 @@ function App() {
                   path="/resetpassword"
                   element={
                     <RequireAuth requireAuth={false}>
-                      <Suspense fallback={<>...</>}>
+                      <Suspense fallback={<LoadingSkeletonPage/>}>
                         <ResetPasswordPage />
                       </Suspense>
                     </RequireAuth>
@@ -101,7 +102,7 @@ function App() {
                   path="/signup"
                   element={
                     <RequireAuth requireAuth={false}>
-                      <Suspense fallback={<>...</>}>
+                      <Suspense fallback={<LoadingSkeletonPage/>}>
                         <SignupPage />
                       </Suspense>
                     </RequireAuth>
@@ -111,7 +112,7 @@ function App() {
                   path="/upload"
                   element={
                     <RequireAuth>
-                      <Suspense fallback={<>...</>}>
+                      <Suspense fallback={<LoadingSkeletonPage/>}>
                         <ApplicationUpload />
                       </Suspense>
                     </RequireAuth>
@@ -121,7 +122,7 @@ function App() {
                   path="/profile"
                   element={
                     <RequireAuth>
-                      <Suspense fallback={<>...</>}>
+                      <Suspense fallback={<LoadingSkeletonPage/>}>
                         <ProfilePage />
                       </Suspense>
                     </RequireAuth>
@@ -131,7 +132,7 @@ function App() {
                   path="/logout"
                   element={
                     <RequireAuth>
-                      <Suspense fallback={<>...</>}>
+                      <Suspense fallback={<LoadingSkeletonPage/>}>
                         <LogoutPage />
                       </Suspense>
                     </RequireAuth>
@@ -140,7 +141,7 @@ function App() {
                 <Route
                   path="*"
                   element={
-                    <Suspense fallback={<>...</>}>
+                    <Suspense fallback={<LoadingSkeletonPage/>}>
                       <PageNotFound />
                     </Suspense>
                   }
@@ -152,7 +153,7 @@ function App() {
                 <Route
                   path="*"
                   element={
-                    <Suspense fallback={<>...</>}>
+                    <Suspense fallback={<LoadingSkeletonPage/>}>
                       <PageNotFound backendStatus/>
                     </Suspense>
                   }

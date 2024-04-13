@@ -1,0 +1,36 @@
+.container{
+    background-color:var(--neutral---main50);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    height: 79vh;
+    border-radius:20px;
+    animation: 2s ease-out 0s infinite blink;
+}
+@keyframes blink {
+    0% {
+        opacity:0.3;
+        transform: scale(0.98);
+    }
+    50% {
+        opacity:1;
+        transform: scale(1);
+    }
+    100%{
+        opacity:0.3;
+        transform: scale(0.98);
+    }
+}
+.container h1 {
+    color: var(--neutral---main550);
+    font-size: var(--heading---m---bold);
+    font-weight: var(--weight--extra-bold);
+}
+@media screen and (max-width: 768px) {
+    .container {
+      height: 90vh;
+    }
+    .container h1 {
+        font-size: var(--heading---s---bold);
+    }
+}
