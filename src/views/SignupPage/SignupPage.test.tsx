@@ -72,7 +72,7 @@ describe("SignupPage Component", () => {
     });
     await waitFor(() =>
       expect(
-        getByText(/email id should be of minimum 5 characters./i)
+        getByText(/Email address must be at least 5 characters long./i)
       ).toBeInTheDocument()
     );
     fireEvent.change(
@@ -82,7 +82,7 @@ describe("SignupPage Component", () => {
     await waitFor(() =>
       expect(
         getByText(
-          /Password should be 10 characters long. Add special characters, number and Capital Letters/i
+          /Your password must contain at least 10 characters and include a mix of uppercase letters, lowercase letters, numbers, and special characters./i
         )
       ).toBeInTheDocument()
     );
@@ -524,7 +524,7 @@ describe("SignupPage Mobile Component", () => {
     await waitFor(() =>
       expect(
         getByText(
-          /Password should be 10 characters long. Add special characters, number and Capital Letters/i
+          /Your password must contain at least 10 characters and include a mix of uppercase letters, lowercase letters, numbers, and special characters./i
         )
       ).toBeInTheDocument()
     );

@@ -1,6 +1,6 @@
 import { Input } from "../../components/FormInputs";
 
-const LoginPageFields: Input[] = [
+const ProfilePageFields: Input[] = [
   {
     id: 1,
     size: "medium",
@@ -44,10 +44,12 @@ const LoginPageFields: Input[] = [
     text_type: "password",
     placeholder: "New Password",
     label: "New Password",
-    pattern: /^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*()-_=+{}|;:'",.<>?]).{10,100}$/, //contains 1-special char, capital letter, number and should have 10 to 100 characters
-    minlen:10,
-    maxlen:100,
-    errorMessage: "Password should be 10 characters long. Add special characters, number and Capital Letters.",
+    pattern:
+      /^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*()-_=+{}|;:'",.<>?]).{10,100}$/, //contains 1-special char, capital letter, number and should have 10 to 100 characters
+    minlen: 10,
+    maxlen: 100,
+    errorMessage:
+      "Your password must contain at least 10 characters and include a mix of uppercase letters, lowercase letters, numbers, and special characters.",
     datatestid: "resetnewpassword",
     required: true,
   },
@@ -64,4 +66,4 @@ const LoginPageFields: Input[] = [
   },
 ];
 
-export default LoginPageFields;
+export default ProfilePageFields;
