@@ -26,7 +26,7 @@ import { useScreenSize } from "../../components/ScreenSizeLogic";
  * - **Loading State**: Displays a loading state while the password reset process is in progress to provide visual feedback to the user.
  * - **Alerts**: Utilizes the `AuthContext` to handle password reset requests and display success messages upon successful password reset.
  * - **Responsive Design**: The component is designed to be responsive, ensuring a seamless user experience across different devices and screen sizes.
- * 
+ *
  * ## Form Fields
  * The reset password form includes the following fields:
  * - `user_email_id`: User's email address (required, valid email format).
@@ -191,8 +191,8 @@ const ResetPasswordPage: React.FC = () => {
             onClick={() => setPhoneReset((s) => !s)}
           >
             {!phoneReset
-              ? "send otp to mobile instead?"
-              : "send otp to email instead?"}
+              ? "send OTP to mobile number instead?"
+              : "send OTP to email instead?"}
           </p>
           {inputs.map((input) => renderInput(input, { register, errors }))}
 
@@ -274,4 +274,4 @@ const ResetPasswordPage: React.FC = () => {
   );
 };
 
-export default ResetPasswordPage ;
+export default ResetPasswordPage;
