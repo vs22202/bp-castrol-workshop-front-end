@@ -54,6 +54,7 @@ const ProfilePage: React.FC = () => {
     handleSubmit,
     formState: { errors },
     watch,
+    setError,
     trigger,
     setValue,
   } = useForm();
@@ -117,6 +118,10 @@ const ProfilePage: React.FC = () => {
 
   //Handles Change Password Button click
   const handleReset: SubmitHandler<Record<string, any>> = async (data) => {
+    if (data.user_confirm_password != data.user_password) {
+      setError('user_confirm_password', { type: 'custom', message: 'New passwords do not match' });
+      return;
+    }
     setLoading(true);
     let result = "";
     result = await changePassword(data.user_password, data.user_old_password);
