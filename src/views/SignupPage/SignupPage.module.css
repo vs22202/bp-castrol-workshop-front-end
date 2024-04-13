@@ -55,7 +55,7 @@
   display: flex;
   gap: 0.5em;
   justify-content: space-between;
-  align-items:center;
+  align-items:start;
 }
 .otpContainer > button{
   margin-top:var(--spacing-xs);
