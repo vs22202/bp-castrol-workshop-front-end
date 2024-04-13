@@ -1,5 +1,11 @@
 .formContainer {
 }
+.formContainer  input{
+  text-transform:capitalize;
+}
+.formContainer  label{
+  text-transform:capitalize;
+}
 .formContainer h1 {
   color: var(--primary---main500);
   font-size: var(--heading---m---bold);
