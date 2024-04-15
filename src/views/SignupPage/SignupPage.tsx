@@ -150,7 +150,6 @@ const SignupPage: React.FC = () => {
     setLoading(true);
     let result = "";
     if (phoneSignup) {
-      console.log(data.user_mobile)
       result = await signupMobile(
         data.user_mobile,
         data.user_password,
@@ -158,7 +157,6 @@ const SignupPage: React.FC = () => {
       );
     }
     else {
-      console.log(data.user_email_id)
       result = await signup(
         data.user_email_id,
         data.user_password,
