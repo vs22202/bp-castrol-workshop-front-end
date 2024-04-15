@@ -56,6 +56,7 @@ const SignupPage: React.FC = () => {
     formState: { errors },
     watch,
     trigger,
+    setValue
   } = useForm();
   const { signup, generateOtp,signupMobile,generateOtpMobile } = useContext(AuthContext) as AuthContextProps;
   const [otpActivated, setOtpActivated] = useState(false);
@@ -66,13 +67,6 @@ const SignupPage: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [phoneSignup, setPhoneSignup] = useState<boolean>(false);
   const navigate = useNavigate();
-
-  inputs[0].type = !phoneSignup ? "text" : "hidden";
-  inputs[0].text_type = !phoneSignup ? "text" : "hidden";
-  inputs[0].required = !phoneSignup;
-  inputs[1].type = phoneSignup ? "text" : "hidden";
-  inputs[1].text_type = phoneSignup ? "text" : "hidden";
-  inputs[1].required = phoneSignup;
 
   const email = watch("user_email_id");
   const mobile = watch("user_mobile");
@@ -155,14 +149,16 @@ const SignupPage: React.FC = () => {
     event?.preventDefault();
     setLoading(true);
     let result = "";
-    if(phoneSignup){
+    if (phoneSignup) {
+      console.log(data.user_mobile)
       result = await signupMobile(
         data.user_mobile,
         data.user_password,
         data.otp
       );
     }
-    else{
+    else {
+      console.log(data.user_email_id)
       result = await signup(
         data.user_email_id,
         data.user_password,
@@ -182,6 +178,20 @@ const SignupPage: React.FC = () => {
   //triggers validation as soon as input is given
   const handleInputChange = async (e: any) => {
     const name = e.target.name;
+    const value = e.target.value;
+    let intRegex = /[0-9 -()+]+$/;
+    if (name == "user_id") {
+      if (intRegex.test(value)) {
+        setValue('user_mobile', value);
+        setPhoneSignup(true);
+        inputs[0].errorMessage = "Mobile number should be of 12 digits including country code"
+      }
+      else{
+        setValue('user_email_id', value);
+        setPhoneSignup(false);
+        inputs[0].errorMessage = "Email address must be at least 5 characters long."
+      }
+    }
     await trigger(name);
   };
 
@@ -204,14 +214,7 @@ const SignupPage: React.FC = () => {
           <h2>
             Join the Castrol Community and take your workshop to the next level!
           </h2>
-          <p
-              className={styles.loginOptionToggler}
-              onClick={() => setPhoneSignup((s) => !s)}
-            >
-              {!phoneSignup
-                ? "Sign up using phone instead?"
-                : "Sign up using email instead?"}
-            </p>
+
           {inputs.map((input) => renderInput(input, { register, errors }))}
 
           {/* this div will be rendered here itself */}
