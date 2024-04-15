@@ -1,7 +1,7 @@
 import "@testing-library/jest-dom";
 import RequireAuth from "../../components/RequireAuthComponent/RequireAuth";
 import { MemoryRouter } from "react-router-dom";
-import { act, fireEvent, render, waitFor } from "@testing-library/react";
+import { fireEvent, render, waitFor } from "@testing-library/react";
 import ResetPasswordPage from "./ResetPasswordPage";
 import AlertContext, { AlertContextProps } from "../../contexts/AlertContext";
 import { AuthProvider } from "../../contexts/AuthContext";
@@ -37,9 +37,9 @@ describe("Reset Password Page (OTP through Email) ", () => {
   });
 
   test("Renders all components in the Reset Password page corectly [through mobile and email both]", () => {
-    const { getByRole, getByLabelText, getByText } = setup();
+    const { getByRole, getByLabelText } = setup();
     //all input fields
-    const emailInput = getByRole("textbox", { name: "Email ID *" });
+    const emailInput = getByRole("textbox", { name: "Email ID / Phone Number *" });
     const passwordInput = getByLabelText(/Password/i, {
       selector: "#user_password",
     });
@@ -67,27 +67,16 @@ describe("Reset Password Page (OTP through Email) ", () => {
     expect(
       getByRole("checkbox", { name: "delete_warning" })
     ).toBeInTheDocument();
-
-    const mobileOption = getByText(
-      /send OTP to mobile number instead?/i
-    ) as HTMLInputElement;
-
-    act(() => {
-      fireEvent.click(mobileOption);
-    });
-
-    const mobileInput = getByRole("textbox", { name: "Mobile Number *" });
-    expect(mobileInput).toBeInTheDocument();
   });
 
   test("Validation check of Reset Password page [through mobile and email both]", async () => {
     const { getByRole, getByLabelText, getByText } = setup();
-    fireEvent.change(getByRole("textbox", { name: "Email ID *" }), {
+    fireEvent.change(getByRole("textbox", { name: "Email ID / Phone Number *" }), {
       target: { value: "testexample.com" },
     });
     await waitFor(() =>
       expect(
-        getByText(/Email address must be at least 5 characters long./i)
+        getByText("Please enter a valid email Id / phone number(with country code).")
       ).toBeInTheDocument()
     );
     fireEvent.change(
@@ -109,21 +98,14 @@ describe("Reset Password Page (OTP through Email) ", () => {
     );
     expect(getByRole("button", { name: "Get OTP" })).toBeDisabled();
 
-    const mobileOption = getByText(
-      /send OTP to mobile number instead?/i
-    ) as HTMLInputElement;
 
-    act(() => {
-      fireEvent.click(mobileOption);
-    });
-
-    fireEvent.change(getByRole("textbox", { name: "Mobile Number *" }), {
-      target: { value: "testexample.com" },
+    fireEvent.change(getByRole("textbox", { name: "Email ID / Phone Number *" }), {
+      target: { value: "test.example" },
     });
     await waitFor(() =>
       expect(
         getByText(
-          /Mobile number should be of 12 digits including country code/i
+          /Email address must be at least 5 characters long./i
         )
       ).toBeInTheDocument()
     );
@@ -137,7 +119,7 @@ describe("Reset Password Page (OTP through Email) ", () => {
 
     const { getByRole, getByLabelText, getByText } = setup();
     const ResetPasswordForm = getByRole("form");
-    fireEvent.change(getByRole("textbox", { name: "Email ID *" }), {
+    fireEvent.change(getByRole("textbox", { name: "Email ID / Phone Number *" }), {
       target: { value: "test@example.com" },
     });
     fireEvent.change(
@@ -180,7 +162,7 @@ describe("Reset Password Page (OTP through Email) ", () => {
 
     await waitFor(() => {
       expect(ResetPasswordForm).toHaveFormValues({
-        user_email_id: "test@example.com",
+        user_id: "test@example.com",
         user_password: "@Testexample2001",
         user_password_confirm: "@Testexample2001",
         otp: "123456",
@@ -212,7 +194,7 @@ describe("Reset Password Page (OTP through Email) ", () => {
     );
 
     const { getByRole, getByLabelText, getByText } = setup();
-    fireEvent.change(getByRole("textbox", { name: "Email ID *" }), {
+    fireEvent.change(getByRole("textbox", { name: "Email ID / Phone Number *" }), {
       target: { value: "test@example.com" },
     });
     fireEvent.change(
@@ -269,7 +251,7 @@ describe("Reset Password Page (OTP through Email) ", () => {
     );
 
     const { getByRole, getByLabelText, getByText } = setup();
-    fireEvent.change(getByRole("textbox", { name: "Email ID *" }), {
+    fireEvent.change(getByRole("textbox", { name: "Email ID / Phone Number *" }), {
       target: { value: "test@example.com" },
     });
     fireEvent.change(
@@ -331,7 +313,7 @@ describe("Reset Password Page (OTP through Email) ", () => {
     );
 
     const { getByRole, getByLabelText } = setup();
-    fireEvent.change(getByRole("textbox", { name: "Email ID *" }), {
+    fireEvent.change(getByRole("textbox", { name: "Email ID / Phone Number *" }), {
       target: { value: "test@example.com" },
     });
     fireEvent.change(
@@ -374,7 +356,7 @@ describe("Reset Password Page (OTP through Email) ", () => {
     );
 
     const { getByRole, getByLabelText } = setup();
-    fireEvent.change(getByRole("textbox", { name: "Email ID *" }), {
+    fireEvent.change(getByRole("textbox", { name: "Email ID / Phone Number *" }), {
       target: { value: "test@example.com" },
     });
     fireEvent.change(
@@ -417,7 +399,7 @@ describe("Reset Password Page (OTP through Email) ", () => {
     );
 
     const { getByRole, getByLabelText } = setup();
-    fireEvent.change(getByRole("textbox", { name: "Email ID *" }), {
+    fireEvent.change(getByRole("textbox", { name: "Email ID / Phone Number *" }), {
       target: { value: "test@example.com" },
     });
     fireEvent.change(
@@ -461,7 +443,7 @@ describe("Reset Password Page (OTP through Email) ", () => {
 
     const { getByRole, getByLabelText, getByText } = setup();
 
-    fireEvent.change(getByRole("textbox", { name: "Email ID *" }), {
+    fireEvent.change(getByRole("textbox", { name: "Email ID / Phone Number *" }), {
       target: { value: "test@example.com" },
     });
     fireEvent.change(
@@ -524,7 +506,7 @@ describe("Reset Password Page (OTP through Email) ", () => {
 
     const { getByRole, getByLabelText, getByText } = setup();
 
-    fireEvent.change(getByRole("textbox", { name: "Email ID *" }), {
+    fireEvent.change(getByRole("textbox", { name: "Email ID / Phone Number *" }), {
       target: { value: "test@example.com" },
     });
     fireEvent.change(
@@ -590,7 +572,7 @@ describe("Reset Password Page (OTP through Email) ", () => {
 
     const { getByRole, getByLabelText, getByText, queryByRole } = setup();
 
-    fireEvent.change(getByRole("textbox", { name: "Email ID *" }), {
+    fireEvent.change(getByRole("textbox", { name: "Email ID / Phone Number *" }), {
       target: { value: "test@example.com" },
     });
     fireEvent.change(
@@ -675,15 +657,9 @@ describe("Reset Password Page (OTP through Mobile Number) ", () => {
     );
 
     const { getByRole, getByLabelText, getByText } = setup();
-    const mobileOption = getByText(
-      /send OTP to mobile number instead?/i
-    ) as HTMLInputElement;
 
-    act(() => {
-      fireEvent.click(mobileOption);
-    });
     const ResetPasswordForm = getByRole("form");
-    fireEvent.change(getByRole("textbox", { name: "Mobile Number *" }), {
+    fireEvent.change(getByRole("textbox", { name: "Email ID / Phone Number *" }), {
       target: { value: "911234567890" },
     });
     fireEvent.change(
@@ -726,7 +702,7 @@ describe("Reset Password Page (OTP through Mobile Number) ", () => {
 
     await waitFor(() => {
       expect(ResetPasswordForm).toHaveFormValues({
-        user_mobile: "911234567890",
+        user_id: "911234567890",
         user_password: "@Testexample2001",
         user_password_confirm: "@Testexample2001",
         otp: "123456",
@@ -758,14 +734,8 @@ describe("Reset Password Page (OTP through Mobile Number) ", () => {
     );
 
     const { getByRole, getByLabelText, getByText } = setup();
-    const mobileOption = getByText(
-      /send OTP to mobile number instead?/i
-    ) as HTMLInputElement;
 
-    act(() => {
-      fireEvent.click(mobileOption);
-    });
-    fireEvent.change(getByRole("textbox", { name: "Mobile Number *" }), {
+    fireEvent.change(getByRole("textbox", { name: "Email ID / Phone Number *" }), {
       target: { value: "911234567890" },
     });
     fireEvent.change(
@@ -822,14 +792,8 @@ describe("Reset Password Page (OTP through Mobile Number) ", () => {
     );
 
     const { getByRole, getByLabelText, getByText } = setup();
-    const mobileOption = getByText(
-      /send OTP to mobile number instead?/i
-    ) as HTMLInputElement;
 
-    act(() => {
-      fireEvent.click(mobileOption);
-    });
-    fireEvent.change(getByRole("textbox", { name: "Mobile Number *" }), {
+    fireEvent.change(getByRole("textbox", { name: "Email ID / Phone Number *" }), {
       target: { value: "911234567890" },
     });
     fireEvent.change(
@@ -891,16 +855,10 @@ describe("Reset Password Page (OTP through Mobile Number) ", () => {
       { status: 400 }
     );
 
-    const { getByRole, getByLabelText, getByText } = setup();
-    const mobileOption = getByText(
-      /send OTP to mobile number instead?/i
-    ) as HTMLInputElement;
+    const { getByRole, getByLabelText } = setup();
 
-    act(() => {
-      fireEvent.click(mobileOption);
-    });
 
-    fireEvent.change(getByRole("textbox", { name: "Mobile Number *" }), {
+    fireEvent.change(getByRole("textbox", { name: "Email ID / Phone Number *" }), {
       target: { value: "911234567890" },
     });
     fireEvent.change(
@@ -942,16 +900,10 @@ describe("Reset Password Page (OTP through Mobile Number) ", () => {
       { status: 500 }
     );
 
-    const { getByRole, getByLabelText, getByText } = setup();
-    const mobileOption = getByText(
-      /send OTP to mobile number instead?/i
-    ) as HTMLInputElement;
+    const { getByRole, getByLabelText } = setup();
 
-    act(() => {
-      fireEvent.click(mobileOption);
-    });
 
-    fireEvent.change(getByRole("textbox", { name: "Mobile Number *" }), {
+    fireEvent.change(getByRole("textbox", { name: "Email ID / Phone Number *" }), {
       target: { value: "911234567890" },
     });
     fireEvent.change(
@@ -993,16 +945,10 @@ describe("Reset Password Page (OTP through Mobile Number) ", () => {
       { status: 500 }
     );
 
-    const { getByRole, getByLabelText, getByText } = setup();
-    const mobileOption = getByText(
-      /send OTP to mobile number instead?/i
-    ) as HTMLInputElement;
+    const { getByRole, getByLabelText } = setup();
 
-    act(() => {
-      fireEvent.click(mobileOption);
-    });
 
-    fireEvent.change(getByRole("textbox", { name: "Mobile Number *" }), {
+    fireEvent.change(getByRole("textbox", { name: "Email ID / Phone Number *" }), {
       target: { value: "911234567890" },
     });
     fireEvent.change(
@@ -1046,15 +992,8 @@ describe("Reset Password Page (OTP through Mobile Number) ", () => {
 
     const { getByRole, getByLabelText, getByText } = setup();
 
-    const mobileOption = getByText(
-      /send OTP to mobile number instead?/i
-    ) as HTMLInputElement;
 
-    act(() => {
-      fireEvent.click(mobileOption);
-    });
-
-    fireEvent.change(getByRole("textbox", { name: "Mobile Number *" }), {
+    fireEvent.change(getByRole("textbox", { name: "Email ID / Phone Number *" }), {
       target: { value: "911234567890" },
     });
     fireEvent.change(
@@ -1117,15 +1056,8 @@ describe("Reset Password Page (OTP through Mobile Number) ", () => {
 
     const { getByRole, getByLabelText, getByText } = setup();
 
-    const mobileOption = getByText(
-      /send OTP to mobile number instead?/i
-    ) as HTMLInputElement;
 
-    act(() => {
-      fireEvent.click(mobileOption);
-    });
-
-    fireEvent.change(getByRole("textbox", { name: "Mobile Number *" }), {
+    fireEvent.change(getByRole("textbox", { name: "Email ID / Phone Number *" }), {
       target: { value: "911234567890" },
     });
     fireEvent.change(
@@ -1191,15 +1123,8 @@ describe("Reset Password Page (OTP through Mobile Number) ", () => {
 
     const { getByRole, getByLabelText, getByText, queryByRole } = setup();
 
-    const mobileOption = getByText(
-      /send OTP to mobile number instead?/i
-    ) as HTMLInputElement;
 
-    act(() => {
-      fireEvent.click(mobileOption);
-    });
-
-    fireEvent.change(getByRole("textbox", { name: "Mobile Number *" }), {
+    fireEvent.change(getByRole("textbox", { name: "Email ID / Phone Number *" }), {
       target: { value: "911234567890" },
     });
     fireEvent.change(

@@ -53,6 +53,7 @@ const LoginPage: React.FC = () => {
     register,
     handleSubmit,
     formState: { errors },
+    setValue,
     trigger,
   } = useForm();
   const { login ,loginMobile} = useContext(AuthContext) as AuthContextProps;
@@ -63,15 +64,22 @@ const LoginPage: React.FC = () => {
   const [phoneLogin, setPhoneLogin] = useState<boolean>(location.state?.phoneLogin || false);
   const from = location.state?.from?.pathname || "/";
 
-  inputs[0].type = !phoneLogin ? "text" : "hidden";
-  inputs[0].text_type = !phoneLogin ? "text" : "hidden";
-  inputs[0].required = !phoneLogin;
-  inputs[1].type = phoneLogin ? "text" : "hidden";
-  inputs[1].text_type = phoneLogin ? "text" : "hidden";
-  inputs[1].required = phoneLogin;
+
   //triggers validation as soon as the input is given
   const handleInputChange = async (e: any) => {
     const name = e.target.name;
+    const value = e.target.value;
+    let intRegex = /[0-9 -()+]+$/;
+    if (name == "user_id") {
+      if (intRegex.test(value)) {
+        setValue('user_mobile', value);
+        setPhoneLogin(true);
+      }
+      else{
+        setValue('user_email_id', value);
+        setPhoneLogin(false);
+      }
+    }
     await trigger(name);
   };
 
@@ -90,7 +98,8 @@ const LoginPage: React.FC = () => {
     if (phoneLogin) {
       result = await(loginMobile(data.user_mobile, data.user_password))
     }
-    else {result = await login(data.user_email_id, data.user_password); }
+    else {
+      result = await login(data.user_email_id, data.user_password); }
     setLoading(false);
     if (result == "success") navigate(from, { replace: true });
   };
@@ -113,14 +122,6 @@ const LoginPage: React.FC = () => {
           >
             <h1>Login</h1>
             <h2>Welcome back to the Castrol Community!</h2>
-            <p
-              className={styles.loginOptionToggler}
-              onClick={() => setPhoneLogin((s) => !s)}
-            >
-              {!phoneLogin
-                ? "Login using phone instead?"
-                : "Login using email instead?"}
-            </p>
             <div className={styles.inputFieldsContainer}>
             {inputs.map((input) => renderInput(input, { register, errors }))}
               <p className={`${styles.loginOptionToggler} ${styles.forgotPassword}`} onClick={() => { navigate("/resetPassword", { replace: true }); }}>forgot password?</p>

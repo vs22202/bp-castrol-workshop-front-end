@@ -48,6 +48,7 @@ const ResetPasswordPage: React.FC = () => {
     formState: { errors },
     watch,
     trigger,
+    setValue
   } = useForm();
   const { generateResetOtp, resetPassword } = useContext(
     AuthContext
@@ -60,12 +61,6 @@ const ResetPasswordPage: React.FC = () => {
   const [phoneReset, setPhoneReset] = useState<boolean>(false);
   const navigate = useNavigate();
 
-  inputs[0].type = !phoneReset ? "text" : "hidden";
-  inputs[0].text_type = !phoneReset ? "text" : "hidden";
-  inputs[0].required = !phoneReset;
-  inputs[1].type = phoneReset ? "text" : "hidden";
-  inputs[1].text_type = phoneReset ? "text" : "hidden";
-  inputs[1].required = phoneReset;
 
   const email = watch("user_email_id");
   const mobile = watch("user_mobile");
@@ -165,6 +160,20 @@ const ResetPasswordPage: React.FC = () => {
   //triggers validation as soon as input is given
   const handleInputChange = async (e: any) => {
     const name = e.target.name;
+    const value = e.target.value;
+    let intRegex = /[0-9 -()+]+$/;
+    if (name == "user_id") {
+      if (intRegex.test(value)) {
+        setValue('user_mobile', value);
+        setPhoneReset(true);
+        inputs[0].errorMessage = "Mobile number should be of 12 digits including country code"
+      }
+      else{
+        setValue('user_email_id', value);
+        setPhoneReset(false);
+        inputs[0].errorMessage = "Email address must be at least 5 characters long."
+      }
+    }
     await trigger(name);
   };
 
@@ -186,14 +195,7 @@ const ResetPasswordPage: React.FC = () => {
         >
           <h1>Reset Password</h1>
           <h2>Enter the six digit OTP to reset your password. </h2>
-          <p
-            className={styles.loginOptionToggler}
-            onClick={() => setPhoneReset((s) => !s)}
-          >
-            {!phoneReset
-              ? "send OTP to mobile number instead?"
-              : "send OTP to email instead?"}
-          </p>
+
           {inputs.map((input) => renderInput(input, { register, errors }))}
 
           {/* this div will be rendered here itself */}
