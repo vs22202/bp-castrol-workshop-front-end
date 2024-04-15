@@ -1,7 +1,7 @@
 import "@testing-library/jest-dom";
 import RequireAuth from "../../components/RequireAuthComponent/RequireAuth";
 import { MemoryRouter } from "react-router-dom";
-import { act, fireEvent, render, waitFor } from "@testing-library/react";
+import { fireEvent, render, waitFor } from "@testing-library/react";
 import SignupPage from "./SignupPage";
 import AlertContext, { AlertContextProps } from "../../contexts/AlertContext";
 import { AuthProvider } from "../../contexts/AuthContext";
@@ -39,7 +39,7 @@ describe("SignupPage Component", () => {
   test("Renders all components in the Signup page corectly", () => {
     const { getByRole, getByLabelText } = setup();
     //all input fields
-    const emailInput = getByRole("textbox", { name: "Email ID *" });
+    const emailInput = getByRole("textbox", { name: "Email ID / Phone Number *" });
     const passwordInput = getByLabelText(/Password/i, {
       selector: "#user_password",
     });
@@ -67,12 +67,12 @@ describe("SignupPage Component", () => {
 
   test("Validation check of signup page", async () => {
     const { getByRole, getByLabelText, getByText } = setup();
-    fireEvent.change(getByRole("textbox", { name: "Email ID *" }), {
+    fireEvent.change(getByRole("textbox", { name: "Email ID / Phone Number *" }), {
       target: { value: "testexample.com" },
     });
     await waitFor(() =>
       expect(
-        getByText(/Email address must be at least 5 characters long./i)
+        getByText("Please enter a valid email Id / phone number(with country code).")
       ).toBeInTheDocument()
     );
     fireEvent.change(
@@ -103,7 +103,7 @@ describe("SignupPage Component", () => {
 
     const { getByRole, getByLabelText, getByText } = setup();
     const SignupForm = getByRole("form");
-    fireEvent.change(getByRole("textbox", { name: "Email ID *" }), {
+    fireEvent.change(getByRole("textbox", { name: "Email ID / Phone Number *" }), {
       target: { value: "test@example.com" },
     });
     fireEvent.change(
@@ -141,7 +141,7 @@ describe("SignupPage Component", () => {
 
     await waitFor(() => {
       expect(SignupForm).toHaveFormValues({
-        user_email_id: "test@example.com",
+        user_id: "test@example.com",
         user_password: "@Testexample2001",
         user_password_confirm: "@Testexample2001",
         otp: "123456",
@@ -169,7 +169,7 @@ describe("SignupPage Component", () => {
     );
 
     const { getByRole, getByLabelText, getByText } = setup();
-    fireEvent.change(getByRole("textbox", { name: "Email ID *" }), {
+    fireEvent.change(getByRole("textbox", { name: "Email ID / Phone Number *" }), {
       target: { value: "test@example.com" },
     });
     fireEvent.change(
@@ -216,7 +216,7 @@ describe("SignupPage Component", () => {
     );
 
     const { getByRole, getByLabelText, getByText } = setup();
-    fireEvent.change(getByRole("textbox", { name: "Email ID *" }), {
+    fireEvent.change(getByRole("textbox", { name: "Email ID / Phone Number *" }), {
       target: { value: "test@example.com" },
     });
     fireEvent.change(
@@ -271,7 +271,7 @@ describe("SignupPage Component", () => {
 
     const { getByRole, getByLabelText, getByText } = setup();
 
-    fireEvent.change(getByRole("textbox", { name: "Email ID *" }), {
+    fireEvent.change(getByRole("textbox", { name: "Email ID / Phone Number *" }), {
       target: { value: "test@example.com" },
     });
     fireEvent.change(
@@ -327,7 +327,7 @@ describe("SignupPage Component", () => {
 
     const { getByRole, getByLabelText, getByText } = setup();
 
-    fireEvent.change(getByRole("textbox", { name: "Email ID *" }), {
+    fireEvent.change(getByRole("textbox", { name: "Email ID / Phone Number *" }), {
       target: { value: "test@example.com" },
     });
     fireEvent.change(
@@ -387,7 +387,7 @@ describe("SignupPage Component", () => {
 
     const { getByRole, getByLabelText, getByText, queryByRole } = setup();
 
-    fireEvent.change(getByRole("textbox", { name: "Email ID *" }), {
+    fireEvent.change(getByRole("textbox", { name: "Email ID / Phone Number *" }), {
       target: { value: "test@example.com" },
     });
     fireEvent.change(
@@ -462,17 +462,11 @@ describe("SignupPage Mobile Component", () => {
   });
 
   test("Renders all components in the Signup mobile page corectly", () => {
-    const { getByRole, getByLabelText, getByText } = setup();
+    const { getByRole, getByLabelText } = setup();
 
-    const mobileOption = getByText(
-      /Sign Up using phone instead?/i
-    ) as HTMLInputElement;
 
-    act(() => {
-      fireEvent.click(mobileOption);
-    });
     //all input fields
-    const mobileInput = getByRole("textbox", { name: "Mobile Number *" });
+    const mobileInput = getByRole("textbox", { name: "Email ID / Phone Number *" });
     const passwordInput = getByLabelText(/Password/i, {
       selector: "#user_password",
     });
@@ -501,21 +495,14 @@ describe("SignupPage Mobile Component", () => {
   test("Validation check of signup mobile page", async () => {
     const { getByRole, getByLabelText, getByText } = setup();
 
-    const mobileOption = getByText(
-      /Sign Up using phone instead?/i
-    ) as HTMLInputElement;
 
-    act(() => {
-      fireEvent.click(mobileOption);
-    });
-
-    fireEvent.change(getByRole("textbox", { name: "Mobile Number *" }), {
+    fireEvent.change(getByRole("textbox", { name: "Email ID / Phone Number *" }), {
       target: { value: "testexample.com" },
     });
     await waitFor(() =>
       expect(
         getByText(
-          /Mobile number should be of 12 digits including country code/i
+          /Email address must be at least 5 characters long./i
         )
       ).toBeInTheDocument()
     );
@@ -546,15 +533,9 @@ describe("SignupPage Mobile Component", () => {
     );
 
     const { getByRole, getByLabelText, getByText } = setup();
-    const mobileOption = getByText(
-      /Sign Up using phone instead?/i
-    ) as HTMLInputElement;
 
-    act(() => {
-      fireEvent.click(mobileOption);
-    });
     const SignupForm = getByRole("form");
-    fireEvent.change(getByRole("textbox", { name: "Mobile Number *" }), {
+    fireEvent.change(getByRole("textbox", { name: "Email ID / Phone Number *" }), {
       target: { value: "911234567890" },
     });
     fireEvent.change(
@@ -594,7 +575,7 @@ describe("SignupPage Mobile Component", () => {
 
     await waitFor(() => {
       expect(SignupForm).toHaveFormValues({
-        user_mobile: "911234567890",
+        user_id: "911234567890",
         user_password: "@Testexample2001",
         user_password_confirm: "@Testexample2001",
         otp: "123456",
@@ -625,14 +606,8 @@ describe("SignupPage Mobile Component", () => {
     );
 
     const { getByRole, getByLabelText, getByText } = setup();
-    const mobileOption = getByText(
-      /Sign Up using phone instead?/i
-    ) as HTMLInputElement;
 
-    act(() => {
-      fireEvent.click(mobileOption);
-    });
-    fireEvent.change(getByRole("textbox", { name: "Mobile Number *" }), {
+    fireEvent.change(getByRole("textbox", { name: "Email ID / Phone Number *" }), {
       target: { value: "911234567890" },
     });
     fireEvent.change(
@@ -683,14 +658,8 @@ describe("SignupPage Mobile Component", () => {
     );
 
     const { getByRole, getByLabelText, getByText } = setup();
-    const mobileOption = getByText(
-      /Sign Up using phone instead?/i
-    ) as HTMLInputElement;
 
-    act(() => {
-      fireEvent.click(mobileOption);
-    });
-    fireEvent.change(getByRole("textbox", { name: "Mobile Number *" }), {
+    fireEvent.change(getByRole("textbox", { name: "Email ID / Phone Number *" }), {
       target: { value: "911234567890" },
     });
     fireEvent.change(
@@ -749,15 +718,9 @@ describe("SignupPage Mobile Component", () => {
 
     const { getByRole, getByLabelText, getByText } = setup();
 
-    const mobileOption = getByText(
-      /Sign Up using phone instead?/i
-    ) as HTMLInputElement;
 
-    act(() => {
-      fireEvent.click(mobileOption);
-    });
 
-    fireEvent.change(getByRole("textbox", { name: "Mobile Number *" }), {
+    fireEvent.change(getByRole("textbox", { name: "Email ID / Phone Number *" }), {
       target: { value: "911234567890" },
     });
     fireEvent.change(
@@ -816,15 +779,9 @@ describe("SignupPage Mobile Component", () => {
     );
 
     const { getByRole, getByLabelText, getByText } = setup();
-    const mobileOption = getByText(
-      /Sign Up using phone instead?/i
-    ) as HTMLInputElement;
 
-    act(() => {
-      fireEvent.click(mobileOption);
-    });
 
-    fireEvent.change(getByRole("textbox", { name: "Mobile Number *" }), {
+    fireEvent.change(getByRole("textbox", { name: "Email ID / Phone Number *" }), {
       target: { value: "911234567890" },
     });
     fireEvent.change(
@@ -888,15 +845,9 @@ describe("SignupPage Mobile Component", () => {
 
     const { getByRole, getByLabelText, getByText, queryByRole } = setup();
 
-    const mobileOption = getByText(
-      /Sign Up using phone instead?/i
-    ) as HTMLInputElement;
 
-    act(() => {
-      fireEvent.click(mobileOption);
-    });
 
-    fireEvent.change(getByRole("textbox", { name: "Mobile Number *" }), {
+    fireEvent.change(getByRole("textbox", { name: "Email ID / Phone Number *" }), {
       target: { value: "911234567890" },
     });
     fireEvent.change(

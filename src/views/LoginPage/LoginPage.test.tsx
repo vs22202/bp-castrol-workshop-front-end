@@ -43,7 +43,7 @@ describe('LoginPage Component', () => {
     test("Renders all components in the Login page corectly", ()=>{
     const {getByRole, getByLabelText} = setup();
     //all input fields
-    const emailInput = getByRole('textbox', { name: 'Email ID *' });
+    const emailInput = getByRole('textbox', { name: 'Email ID / Phone Number *' });
     const passwordInput = getByLabelText(/Password/i, { selector: '#user_password' });
 
     //all buttons
@@ -64,7 +64,7 @@ describe('LoginPage Component', () => {
     fetchMock.mockResponseOnce(JSON.stringify({ output: 'fail', msg: 'Invalid Email/Password' }), { status: 400 });
 
     const { getByRole, getByLabelText } = setup();
-    fireEvent.change(getByRole('textbox', { name: 'Email ID *' }), { target: { value: 'test@example.com' } });
+    fireEvent.change(getByRole('textbox', { name: 'Email ID / Phone Number *' }), { target: { value: 'test@example.com' } });
     fireEvent.change(getByLabelText(/Password/i, { selector: '#user_password' }), { target: { value: '@Testexample2001' } });
     const LoginBtn = getByRole('button', { name: 'Login' });
     fireEvent.click(LoginBtn);
@@ -92,7 +92,7 @@ describe('LoginPage Component', () => {
     // Mock Server side error response
 
     const { getByRole, getByLabelText } = setup();
-    fireEvent.change(getByRole('textbox', { name: 'Email ID *' }), { target: { value: 'test@example.com' } });
+    fireEvent.change(getByRole('textbox', { name: 'Email ID / Phone Number *' }), { target: { value: 'test@example.com' } });
     fireEvent.change(getByLabelText(/Password/i, { selector: '#user_password' }), { target: { value: '@Testexample2001' } });
 
     const LoginBtn = getByRole('button', { name: 'Login' });
@@ -122,7 +122,7 @@ describe('LoginPage Component', () => {
     // Mock Invalid Email/Password response
 
     const { getByRole, getByLabelText } = setup();
-    fireEvent.change(getByRole('textbox', { name: 'Email ID *' }), { target: { value: 'test@example.com' } });
+    fireEvent.change(getByRole('textbox', { name: 'Email ID / Phone Number *' }), { target: { value: 'test@example.com' } });
     fireEvent.change(getByLabelText(/Password/i, { selector: '#user_password' }), { target: { value: '@Testexample2001' } });
 
     const LoginBtn = getByRole('button', { name: 'Login' });
@@ -150,7 +150,7 @@ describe('LoginPage Component', () => {
     fetchMock.mockResponseOnce(JSON.stringify({ output: 'success', msg: 'Login Success' }), { status: 200 });
     const { getByRole, getByLabelText } = setup();
     const LoginForm = getByRole('form');
-    fireEvent.change(getByRole('textbox', { name: 'Email ID *' }), { target: { value: 'test@example.com' } });
+    fireEvent.change(getByRole('textbox', { name: 'Email ID / Phone Number *' }), { target: { value: 'test@example.com' } });
     fireEvent.change(getByLabelText(/Password/i, { selector: '#user_password' }), { target: { value: '@Testexample2001' } });
     const LoginBtn = getByRole('button', { name: 'Login' });
     fireEvent.click(LoginBtn);
@@ -163,7 +163,7 @@ describe('LoginPage Component', () => {
     });
     await waitFor(() => {
     expect(LoginForm).toHaveFormValues({
-    user_email_id: "test@example.com",
+    user_id: "test@example.com",
     user_password: "@Testexample2001"
     });
     });
