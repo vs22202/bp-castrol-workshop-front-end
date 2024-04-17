@@ -1,6 +1,6 @@
 /*Mobile*/
 .footerContainer {
-  width: 100vw;
+  /* width: 100vw; */
   min-height: 80px;
   background-color: var(--neutral---main50);
   display: flex;

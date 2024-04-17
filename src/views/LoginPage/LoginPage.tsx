@@ -74,12 +74,10 @@ const LoginPage: React.FC = () => {
       if (intRegex.test(value)) {
         setValue('user_mobile', value);
         setPhoneLogin(true);
-        // inputs[0].errorMessage = "Mobile number should be of 12 digits including country code"
       }
       else{
         setValue('user_email_id', value);
         setPhoneLogin(false);
-        // inputs[0].errorMessage = "Email address must be at least 5 characters long."
       }
     }
     await trigger(name);
@@ -98,11 +96,9 @@ const LoginPage: React.FC = () => {
     setLoading(true);
     let result = "";
     if (phoneLogin) {
-      console.log(data.user_mobile)
       result = await(loginMobile(data.user_mobile, data.user_password))
     }
     else {
-      console.log(data.user_email_id)
       result = await login(data.user_email_id, data.user_password); }
     setLoading(false);
     if (result == "success") navigate(from, { replace: true });
@@ -126,17 +122,9 @@ const LoginPage: React.FC = () => {
           >
             <h1>Login</h1>
             <h2>Welcome back to the Castrol Community!</h2>
-            {/* <p
-              className={styles.loginOptionToggler}
-              onClick={() => setPhoneLogin((s) => !s)}
-            >
-              {!phoneLogin
-                ? "Login using phone instead?"
-                : "Login using email instead?"}
-            </p> */}
             <div className={styles.inputFieldsContainer}>
             {inputs.map((input) => renderInput(input, { register, errors }))}
-              <p className={`${styles.loginOptionToggler} ${styles.forgotPassword}`} onClick={() => { navigate("/resetPassword", { replace: true }); }}>forgot password?</p>
+              <p className={`${styles.loginOptionToggler} ${styles.forgotPassword}`} onClick={() => { navigate("/resetPassword", { replace: true }); }}>Forgot password?</p>
             </div>
             <div className={`${styles.buttonscontainer}`}>
               <Button

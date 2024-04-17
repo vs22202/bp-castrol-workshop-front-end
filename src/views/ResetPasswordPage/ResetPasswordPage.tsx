@@ -138,14 +138,13 @@ const ResetPasswordPage: React.FC = () => {
     setLoading(true);
     let result = "";
     if (phoneReset) {
-      console.log(data.user_mobile)
       result = await resetPassword(
         data.user_password,
         data.otp,
+        undefined,
         data.user_mobile
       );
     } else {
-      console.log(data.user_email_id)
       result = await resetPassword(
         data.user_password,
         data.otp,
