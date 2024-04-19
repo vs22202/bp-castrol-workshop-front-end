@@ -9,12 +9,15 @@
   align-items: center;
 }
 
-
 .footerParagraph {
   font-size: var(--paragraph---m---regular);
   font-weight: var(--weight--regular);
   color: var(-neutral---main750);
   width: fit-content;
+}
+
+.footercontactinfo{
+  display: none;
 }
 
 /*Desktop*/
@@ -26,10 +29,25 @@
   .footerContainer > svg {
     transform:scale(1.45);
   }
-  
 
   .footerParagraph {
     font-size: var(--subheading---s---medium);
     font-weight: var(--weight--medium);
   }
+
+  /* contact info */
+  .footercontactinfo{
+    display: flex;
+    justify-content: space-between;
+    gap:var(--spacing-sm);
+  }
+  .email,
+  .phoneno{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap:var(--spacing-4xs);
+    color:var(--shades---main-black);
+    margin:var(--spacing-4xs);
+  } 
 }

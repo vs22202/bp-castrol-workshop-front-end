@@ -52,7 +52,7 @@ const SignupPageFields: Input[] = [
     text_type: "password",
     placeholder: "Password",
     pattern:
-      /^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*()-_=+{}|;:'",.<>?]).{10,100}$/, //contains 1-special char, capital letter, number and should have 10 to 100 characters
+      /^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*()_+{}|:\"<>?`\-=[\];',./]).{10,100}$/, //contains 1-special char, capital letter, number and should have 10 to 100 characters
     minlen: 10,
     maxlen: 100,
     errorMessage:
