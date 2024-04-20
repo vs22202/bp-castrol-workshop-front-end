@@ -208,15 +208,16 @@ describe('End To End Tests', () => {
     try {
       //Step 1
         await page.goto('http://localhost:5173/', { waitUntil: 'domcontentloaded', timeout:10000 });
-        await page.goto('http://localhost:5173/login', { waitUntil: 'domcontentloaded', timeout:10000 });
-/* 
+
         // Wait for the login button to appear
         await page.waitForSelector('._navbar_13z3g_21 button._solid_15241_63._md_15241_43._button_15241_27', { timeout: 5000 });
         console.log('Login button found',);
 
         // Click the Login button
         await page.click('._navbar_13z3g_21 button._solid_15241_63._md_15241_43._button_15241_27');
-        console.log('Login button clicked'); */
+        console.log('Login button clicked');
+
+        await page.goto('http://localhost:5173/login', { waitUntil: 'domcontentloaded', timeout:10000 });
 
         // Assert that the URL has changed to the login page after clicking the button
         console.log('Current URL:', page.url());

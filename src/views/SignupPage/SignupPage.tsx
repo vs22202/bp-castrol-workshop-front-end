@@ -56,7 +56,9 @@ const SignupPage: React.FC = () => {
     formState: { errors },
     watch,
     trigger,
-    setValue
+    setValue,
+    setError,
+    clearErrors
   } = useForm();
   const { signup, generateOtp,signupMobile,generateOtpMobile } = useContext(AuthContext) as AuthContextProps;
   const [otpActivated, setOtpActivated] = useState(false);
@@ -76,7 +78,6 @@ const SignupPage: React.FC = () => {
 
   useEffect(() => {
     // if all three fields are filled and valid, enables GET OTP button
-    console.log(errors);
     if (
       (email || mobile) &&
       pass &&
@@ -89,6 +90,24 @@ const SignupPage: React.FC = () => {
       setIsAllFieldsValid(false);
     }
   }, [email,mobile, pass, confirmpass, errors]);
+
+
+  //validation for confirm password field
+  useEffect(() => {
+    console.log("PASS: ", pass);
+    console.log("CONFIRM PASS: ", confirmpass);
+    if (pass && confirmpass && pass !== confirmpass) {
+      // Set an error for 'user_password_confirm' and trigger validation
+      setError("user_password_confirm", {
+        type: "manual",
+        message: "Passwords do not match",
+      });
+    } else {
+      clearErrors("user_password_confirm");
+    }
+  }, [pass, confirmpass, setError, clearErrors]);
+
+
 
   //Handles all three buttons
   //Get OTP Button
@@ -190,7 +209,11 @@ const SignupPage: React.FC = () => {
         inputs[0].errorMessage = "Email address must be at least 5 characters long."
       }
     }
-    await trigger(name);
+
+    //validation for confirm password happens in above useeffect
+    if(name!="user_password_confirm"){
+      await trigger(name);
+    }
   };
 
   return (
