@@ -1,11 +1,12 @@
 const puppeteer = require('puppeteer');
 const config = require('./e2econfig.json');
+const fetchfunc  = require('cross-fetch');
 
 describe('End To End Tests', () => {
   let browser:any;
   let page:any;
 
-  beforeAll(async () => {
+  /* beforeAll(async () => {
     try {
       browser = await puppeteer.launch({ headless: false });
       page = await browser.newPage();
@@ -51,6 +52,15 @@ describe('End To End Tests', () => {
     } catch (error) {
       console.error('Failed to launch browser:', error);
     }
+  }); */
+  
+  beforeAll(async () => {
+    try {
+      browser = await puppeteer.launch({ headless: false });
+      page = await browser.newPage();
+    } catch (error) {
+      console.error('Failed to launch browser:', error);
+    }
   });
   
   afterAll(async () => {
@@ -72,9 +82,6 @@ describe('End To End Tests', () => {
         await page.goto('http://localhost:5173', { waitUntil: 'domcontentloaded',timeout:10000});
 
         //go to signup
-        //await page.waitForSelector('._navbar_13z3g_21 ._optionsContainer_13z3g_43 ._authContainer_13z3g_89 button._outline_15241_89._md_15241_43._button_15241_27', {visible:true})
-        //await page.waitForSelector('._navbar_13z3g_21 ._authContainer_13z3g_89 button._outline_15241_89._md_15241_43._button_15241_27', {visible:true})
-        //await page.waitForSelector('._alertContainer_7h75f_1._success_7h75f_29', {hidden:true})
         await page.click('button._outline_15241_89._md_15241_43._button_15241_27',{waitUntil:"domcontentloaded"});
         console.log("Clicked on Navbar Sign Up button")
 
@@ -88,21 +95,46 @@ describe('End To End Tests', () => {
         
       //step 2
       await page.waitForSelector('#user_id');
-      await page.type('#user_id', config.email);
       await page.type('#user_password', config.password);
       await page.type("#user_password_confirm", config.password)
+      await page.type('#user_id', config.email);
 
+      await page.waitForSelector("._signupform_hvsf1_45 ._otpContainer_hvsf1_107 ._solid_15241_63._md_15241_43._button_15241_27")
       await page.click("._signupform_hvsf1_45 ._otpContainer_hvsf1_107 ._solid_15241_63._md_15241_43._button_15241_27");
-      await page.type("#otp", "497012");
+      
+      //fetch otp from backend
+      const fetchotp = async (): Promise<string> => {
+        try {
+          await new Promise(resolve => setTimeout(resolve, 3000)); // Wait for 3 seconds
+          const result = await fetchfunc(
+            `http://localhost:3000/register/fetch-otp?user_email=${config.email}`,
+            {
+              method: "GET",
+              headers: {},
+            }
+          );
+          const res = await result.json();
+          if (res.output == "fail") {
+            return "failure";
+          }
+          return res.otp;
+        } catch (err) {
+          console.log(err);
+          return "failure";
+        }
+      };
+      
+      const otp = await fetchotp();
+      await page.type("#otp", otp);
 
       //step 3
-
       const divSelector = '._signupform_hvsf1_45 ._buttonscontainer_hvsf1_133'; // Update with the appropriate selector
 
       // Define the selector for the button inside the div
       const buttonSelector = `${divSelector} ._solid_15241_63._md_15241_43._button_15241_27`; // Update with the appropriate selector
 
       // Use Puppeteer's `page.click()` method to click the button
+      await page.waitForSelector(buttonSelector)
       await page.click(buttonSelector);
       console.log("TEST FOR SIGNUP SUCCESSFUL")
 
@@ -468,12 +500,35 @@ describe('End To End Tests', () => {
 
         //fill in details
         await page.waitForSelector('#user_id');
-        await page.type('#user_id', config.email);
         await page.type('#user_password', config.password);
-        await page.type("#user_password_confirm", config.password)
+        await page.type("#user_password_confirm", config.password);
+        await page.type('#user_id', config.email);
         //click on getotp
         await page.click("._signupform_jn6tm_45 ._otpContainer_jn6tm_107 ._solid_15241_63._md_15241_43._button_15241_27")
-        await page.type("#otp", "497012");
+
+        //fetch otp from backend
+        const fetchotp = async (): Promise<string> => {
+          try {
+            await new Promise(resolve => setTimeout(resolve, 3000)); // Wait for 3 seconds
+            const result = await fetchfunc(
+              `http://localhost:3000/user/resetpass-fetch-otp?user_email=${config.email}`,
+              {
+                method: "GET",
+                headers: {},
+              }
+            );
+            const res = await result.json();
+            if (res.output == "fail") {
+              return "failure";
+            }
+            return res.otp;
+          } catch (err) {
+            console.log(err);
+            return "failure";
+          }
+        };
+        const otp = await fetchotp();
+        await page.type("#otp", otp);
 
         const divSelector = '._signupform_jn6tm_45 ._buttonscontainer_jn6tm_131'; // Update with the appropriate selector
 

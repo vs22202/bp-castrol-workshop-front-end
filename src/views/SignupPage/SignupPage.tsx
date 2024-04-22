@@ -94,8 +94,6 @@ const SignupPage: React.FC = () => {
 
   //validation for confirm password field
   useEffect(() => {
-    console.log("PASS: ", pass);
-    console.log("CONFIRM PASS: ", confirmpass);
     if (pass && confirmpass && pass !== confirmpass) {
       // Set an error for 'user_password_confirm' and trigger validation
       setError("user_password_confirm", {
