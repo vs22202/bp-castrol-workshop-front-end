@@ -1,3 +1,37 @@
+/**
+ * This test suite covers the functionality of the SignupPage component and its mobile version,
+ * including rendering, validation, signup process, and error handling scenarios.
+ * 
+ * Test Cases:
+ * - Renders all components on the Signup page correctly.
+ * - Validates input fields on the Signup page for email, password, and OTP.
+ * - Successfully signs up a new user and navigates to the login page.
+ * - Handles scenarios where OTP is successfully generated but signup fails due to an internal server error.
+ * - Handles scenarios where OTP is successfully generated but signup fails due to incorrect OTP.
+ * - Handles scenarios where signup fails due to OTP expiration.
+ * - Handles scenarios where OTP expiration triggers OTP regeneration and successful signup.
+ * - Renders all components in the Signup mobile page correctly.
+ * - Validates signup mobile page inputs.
+ * - Tests OTP generation success but signup error.
+ * 
+ * Dependencies:
+ * - @testing-library/jest-dom: Provides custom Jest matchers for DOM elements.
+ * - @testing-library/react: Provides utilities for testing React components.
+ * - react-router-dom: Provides routing components for React applications.
+ * - jest-fetch-mock: Provides utilities for mocking fetch requests in Jest tests.
+ * - history: Provides utilities for managing session history with JavaScript.
+ * 
+ * Components:
+ * - RequireAuth: A component for authentication requirement handling.
+ * - SignupPage: The component for user signup.
+ * - AlertContext: Context for displaying alerts.
+ * - AuthProvider: Provider for authentication context.
+ * - MemoryRouter: A router that keeps the history of "visited" pages in memory.
+ * 
+ * @module SignupPageTests
+ */
+
+
 import "@testing-library/jest-dom";
 import RequireAuth from "../../components/RequireAuthComponent/RequireAuth";
 import { MemoryRouter } from "react-router-dom";

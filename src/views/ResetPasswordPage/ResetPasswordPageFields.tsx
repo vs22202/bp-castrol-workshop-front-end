@@ -1,3 +1,9 @@
+/**
+ * Defines the input fields for the Reset Password page.
+ * 
+ * @module ResetPasswordPageFields
+ */
+
 import { Input } from "../../components/FormInputs";
 
 const ResetPasswordPageFields: Input[] = [

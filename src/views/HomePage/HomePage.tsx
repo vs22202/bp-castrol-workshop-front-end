@@ -9,10 +9,17 @@ import { useScreenSize } from "../../components/ScreenSizeLogic";
 import { List } from "../../components/Q&AComponent/List";
 import { useContext, useEffect, useState } from "react";
 
+/**
+ * Homepage component renders the landing page of the application.
+ * It includes information about the Castrol workshop network and allows users to navigate to the application page.
+ */
+
 const HomePage: React.FC = () => {
   const navigate = useNavigate();
   
+  // Determine screen size for responsive rendering
   const screenSize = useScreenSize();
+  // Fetch user's application status
   const { currentUser } = useContext(AuthContext) as AuthContextProps;
   const [hasApplication, setHasApplication] = useState(false);
   useEffect(() => {

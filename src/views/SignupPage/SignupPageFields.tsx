@@ -1,3 +1,7 @@
+/**
+ * Configuration for Signup Page Fields.
+ */
+
 import { Input } from "../../components/FormInputs";
 
 const SignupPageFields: Input[] = [

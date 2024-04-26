@@ -1,5 +1,17 @@
+/*
+This file defines interfaces for form input configurations and application input fields.
+The Input interface represents the configuration of a single form input, including its type,
+label, validation rules, and other properties. The ApplicationInputFields interface defines
+the structure of input fields for an application form, including workshop details, user information,
+consent flags, file paths, and status.
+*/
+
 import { Option } from "../components/DropDownComponent/Option";
 import { FileData } from "./FormFieldRenderLogic";
+
+/**
+ * Interface representing the configuration of a single form input.
+ */
 export interface Input {
   id: number;
   name: string;
@@ -19,6 +31,10 @@ export interface Input {
   isDisabled?: boolean;
   size?: "small" | "medium" | "large";
 }
+
+/**
+ * Interface representing the input fields for an application form.
+ */
 export interface ApplicationInputFields {
   application_id?: number;
   workshop_name: string;

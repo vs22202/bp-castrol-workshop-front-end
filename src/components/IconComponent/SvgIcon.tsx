@@ -1,3 +1,8 @@
+/*
+This SvgIcon component renders an SVG icon dynamically imported using the 
+useDynamicSvgImport hook, with optional wrapper styles and additional SVG properties.
+*/
+
 import { useDynamicSvgImport } from "../../utils/DynamicSVGImport";
 import styles from './SvgIcon.module.css';
 

@@ -9,6 +9,27 @@ import fetch, { enableFetchMocks } from "jest-fetch-mock";
 import { createMemoryHistory } from "history";
 enableFetchMocks();
 
+/**
+ * File: ProfilePage.test.js
+ * Description: This file contains unit tests for the ProfilePage component.
+ * Dependencies:
+ *   - @testing-library/jest-dom
+ *   - react-router-dom
+ *   - @testing-library/react
+ *   - jest-fetch-mock
+ *   - history
+ * Test suite for the Profile Page component:
+ * - Renders all components successfully.
+ * - Validates profile page.
+ * - Successfully changes the password of user.
+ * - Handles internal server error for change password.
+ * - Handles old password does not match error for change password.
+ * - Handles user not found error when change password button clicked.
+ * - Handles user data not found error for profile page.
+ * - Handles internal server error for profile page.
+ * - Successfully changes the password of user through mobile number.
+ */
+
 const alert = null;
 const sendAlert = jest.fn();
 
