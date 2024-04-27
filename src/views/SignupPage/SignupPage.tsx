@@ -109,7 +109,7 @@ const SignupPage: React.FC = () => {
 
   //Handles all three buttons
   //Get OTP Button
-  async function getOtp(
+ /*  async function getOtp(
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) {
     event.preventDefault();
@@ -123,7 +123,28 @@ const SignupPage: React.FC = () => {
       generateOtp(watch("user_email_id"));
     }
     setOtpActivated(true);
+  } */
+  async function getOtp(
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) {
+    event.preventDefault();
+
+    let output:any;
+    
+    if(phoneSignup){
+      output = await generateOtpMobile(watch("user_mobile"));
+    }
+    else{
+      output = await generateOtp(watch("user_email_id"));
+    }
+    console.log("OUTPUT:", output)
+    if(output){
+      setOtpSent(true);
+      startOtpTimer();
+      setOtpActivated(true);
+    }
   }
+  
 
   //for otp button timer
   const startOtpTimer = () => {
