@@ -10,7 +10,7 @@
     "preview": "vite preview",
     "test:unit": "jest --watchAll --silent --config ./jest.config.ts --selectProjects unit-tests",
     "test:e2e": "jest --watchAll --config ./jest.config.ts --selectProjects e2e-tests",
-    "typedoc": "typedoc --out docs ./src/components/*/*.tsx ./src/views/**/*.tsx ",
+    "typedoc": "typedoc --out docs ./src/components/*/*.tsx ./src/views/**/*.tsx --exclude ./src/**/*.test.tsx --exclude ./src/**/*Fields.tsx",
     "test": "jest --watchAll"
   },
   "dependencies": {
