@@ -1,3 +1,14 @@
+/**
+ * SystemBootingPage component displays a message indicating that system resources are booting.
+ * Pages will load automatically after resources are ready.
+ * 
+ * Dependencies:
+ * - BootingImg: SVG image component for system booting illustration.
+ * - styles: CSS module for styling SystemBootingPage component.
+ * 
+ * @module SystemBootingPage
+ */
+
 import BootingImg from "../../assets/system_booting.svg";
 import styles from "./SystemBootingPage.module.css";
 const SystemBootingPage: React.FC = () => {

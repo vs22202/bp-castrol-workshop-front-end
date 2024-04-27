@@ -1,3 +1,8 @@
+/*
+This RequireAuth component manages route authentication, redirecting users based 
+on their authentication status and displaying alert messages using context.
+*/
+
 import AlertContext, { AlertContextProps } from "../../contexts/AlertContext";
 import AuthContext, { AuthContextProps } from "../../contexts/AuthContext";
 import { useContext } from "react";

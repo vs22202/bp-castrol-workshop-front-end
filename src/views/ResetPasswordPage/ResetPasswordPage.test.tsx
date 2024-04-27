@@ -9,6 +9,37 @@ import fetch, { enableFetchMocks } from "jest-fetch-mock";
 import { createMemoryHistory } from "history";
 enableFetchMocks();
 
+/**
+ * This test suite covers the Reset Password functionality of the ResetPasswordPage component
+ * for resetting passwords using both OTP through Email and Mobile Number.
+ * 
+ * Test Cases:
+ * 1. Resets password successfully and navigates to the login page.
+ * 2. Handles scenarios of OTP generation failure.
+ * 3. Handles scenarios of OTP generation and password reset errors due to internal server errors.
+ * 4. Handles scenarios of unregistered user attempting password reset through mobile.
+ * 5. Handles scenarios of OTP generation failure due to invalid requests.
+ * 6. Handles scenarios of password reset failure due to incorrect OTP.
+ * 7. Handles scenarios of OTP expiration and regeneration.
+ * 8. Handles scenarios of successful password reset after OTP regeneration.
+ * 
+ * Dependencies:
+ * - @testing-library/jest-dom: Provides custom Jest matchers for DOM elements.
+ * - @testing-library/react: Provides utilities for testing React components.
+ * - react-router-dom: Provides routing components for React applications.
+ * - jest-fetch-mock: Provides utilities for mocking fetch requests in Jest tests.
+ * - history: Provides utilities for managing session history with JavaScript.
+ * 
+ * Components:
+ * - RequireAuth: A component for authentication requirement handling.
+ * - ResetPasswordPage: The component for resetting passwords.
+ * - AlertContext: Context for displaying alerts.
+ * - AuthProvider: Provider for authentication context.
+ * - MemoryRouter: A router that keeps the history of "visited" pages in memory.
+ * 
+ * @module ResetPasswordPageTests
+ */
+
 const alert = null;
 const sendAlert = jest.fn();
 
