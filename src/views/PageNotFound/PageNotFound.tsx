@@ -6,7 +6,10 @@ import AlertContext, { AlertContextProps } from "../../contexts/AlertContext";
  * PageNotFound component renders when a page route is not found.
  * It displays an error message to the user and redirects them to the home page.
  * Optionally, it can display a different message when a backend status is provided.
- * @param {boolean} backendStatus - Indicates if there is a backend status affecting the page.
+ * @component
+ * @param {Object} props - The component props.
+ * @param {boolean} [props.backendStatus] - Indicates if there is a backend status affecting the page.
+ * @returns {JSX.Element} The rendered PageNotFound component.
  */
 
 export type PageNotFoundProps = {

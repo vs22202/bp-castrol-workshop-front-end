@@ -7,6 +7,8 @@
  * - styles: CSS module for styling SystemBootingPage component.
  * 
  * @module SystemBootingPage
+ * @requires BootingImg - SVG image component for system booting illustration.
+ * @requires styles - CSS module for styling SystemBootingPage component.
  */
 
 import BootingImg from "../../assets/system_booting.svg";
