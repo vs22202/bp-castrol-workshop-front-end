@@ -11,6 +11,7 @@ import { FileData } from "./FormFieldRenderLogic";
 
 /**
  * Interface representing the configuration of a single form input.
+ * @interface
  */
 export interface Input {
   id: number;
@@ -34,6 +35,7 @@ export interface Input {
 
 /**
  * Interface representing the input fields for an application form.
+ * @interface
  */
 export interface ApplicationInputFields {
   application_id?: number;
