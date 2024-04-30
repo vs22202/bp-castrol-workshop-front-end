@@ -1,4 +1,8 @@
-
+/*
+This test suite validates the functionality and UI rendering of the FileGrid component. 
+It ensures the component renders without errors, displays upload options with 
+drag-and-drop functionality, and allows users to add new files successfully.
+*/
 import "@testing-library/jest-dom";
 import { render, fireEvent } from '@testing-library/react';
 import FileGrid from './FileGrid';

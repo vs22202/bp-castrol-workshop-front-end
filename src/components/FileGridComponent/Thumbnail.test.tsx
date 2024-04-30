@@ -1,3 +1,7 @@
+/*
+Validates the rendering of the Thumbnail component with an image and tests the 
+functionality of removing the thumbnail by simulating a click event on the delete icon.
+*/
 import "@testing-library/jest-dom";
 import { fireEvent, render } from "@testing-library/react";
 import Thumbnail from "./Thumbnail";

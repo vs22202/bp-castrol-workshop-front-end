@@ -4,13 +4,55 @@ import styles from "./Homepage.module.css";
 import LandingStat1 from "../../assets/landing-stat-1.svg";
 import LandingStat2 from "../../assets/landing-stat-2.svg";
 import MobileLandingStat2 from "../../assets/landing-stat-mobile.svg";
-
+import AuthContext, { AuthContextProps } from "../../contexts/AuthContext";
 import { useScreenSize } from "../../components/ScreenSizeLogic";
 import { List } from "../../components/Q&AComponent/List";
+import { useContext, useEffect, useState } from "react";
+
+
+/**
+ * @description Homepage component renders the landing page of the application.
+ * It includes information about the Castrol workshop network and allows users to navigate to the application page.
+ * @component
+ * @returns {React.FC} Returns the Homepage component.
+ */
 
 const HomePage: React.FC = () => {
   const navigate = useNavigate();
+  
+  // Determine screen size for responsive rendering
   const screenSize = useScreenSize();
+  // Fetch user's application status
+  const { currentUser } = useContext(AuthContext) as AuthContextProps;
+  const [hasApplication, setHasApplication] = useState(false);
+  
+  /**
+   * @description Fetches the user's application status on component mount.
+   * If the user has an application, sets 'hasApplication' state to true.
+   */
+  
+  useEffect(() => {
+    const fetchUserApplication = async () => {
+
+      const result = await fetch(
+        `${
+          process.env.VITE_BACKEND_URL || "http://localhost:3000"
+        }/application/getUserApplication`,
+        {
+          headers: {
+            Authorization: currentUser?.auth_token as string,
+          },
+        }
+      );
+      const res = await result.json();
+      return res;
+    };
+    fetchUserApplication().then((res) => {
+      if (res.output == "success") {
+        setHasApplication(true)
+      }
+    });
+    }, []);
   return (
     <div>
       <div className={`${styles.statCard} illustration`}>
@@ -20,7 +62,7 @@ const HomePage: React.FC = () => {
       <div className={styles.homePageButton}>   
       <Button
         type="solid"
-        text="Apply Now"
+        text={hasApplication ? "View Application" : "Apply Now"}
         iconimg="right-arrow"
         placeIconAfter={true}
         onClick={() => {

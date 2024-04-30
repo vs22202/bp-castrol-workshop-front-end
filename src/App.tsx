@@ -1,3 +1,5 @@
+/** Main component of the application responsible for routing and bootstrapping.*/
+
 import { lazy, Suspense, useEffect, useState } from "react";
 import { Navbar } from "./components/NavbarComponent/Navbar";
 import { FooterWithLogo } from "./components/FooterComponent/Footer";

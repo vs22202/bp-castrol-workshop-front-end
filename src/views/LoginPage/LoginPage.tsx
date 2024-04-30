@@ -124,7 +124,7 @@ const LoginPage: React.FC = () => {
             <h2>Welcome back to the Castrol Community!</h2>
             <div className={styles.inputFieldsContainer}>
             {inputs.map((input) => renderInput(input, { register, errors }))}
-              <p className={`${styles.loginOptionToggler} ${styles.forgotPassword}`} onClick={() => { navigate("/resetPassword", { replace: true }); }}>forgot password?</p>
+              <p className={`${styles.loginOptionToggler} ${styles.forgotPassword}`} onClick={() => { navigate("/resetPassword", { replace: true }); }}>Forgot password?</p>
             </div>
             <div className={`${styles.buttonscontainer}`}>
               <Button

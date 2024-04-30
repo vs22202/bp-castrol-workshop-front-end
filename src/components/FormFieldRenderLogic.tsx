@@ -1,3 +1,9 @@
+/*
+Facilitates rendering various form input components based on the provided input configuration. 
+It supports rendering checkboxes, dropdowns, text inputs, and hidden inputs, utilizing components 
+like Checkbox, DropDown, and InputField. Additionally, it handles the rendering of a FileGrid 
+component for file uploads, with options for existing files in edit mode.
+*/
 import { InputField } from "../components/InputFieldComponent/InputField";
 import { Checkbox } from "../components/CheckboxComponent/CheckboxComponent";
 import { Input } from "./FormInputs";
@@ -30,6 +36,19 @@ interface FormUtilsProps {
   existingFiles?: FileData[];
 }
 
+/**
+ * Renders form input components based on the provided configuration.
+ * Supports rendering checkboxes, dropdowns, text inputs, and hidden inputs.
+ * @param input The configuration object for the input component.
+ * @param register The function for registering form inputs.
+ * @param errors Object containing form validation errors.
+ * @param control Object for controlling form inputs in React Hook Form.
+ * @param watch Function to watch form input values.
+ * @param formMode The mode of the form (e.g., 'edit').
+ * @param existingOptionsList Object containing existing options for dropdowns.
+ * @param existingFiles Array of existing file data for file uploads.
+ * @returns The rendered JSX element of the input component.
+ */
 
 export const renderInput = (
   input: Input,

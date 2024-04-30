@@ -12,33 +12,30 @@ describe('FooterWithLogo', () => {
   //basic rendering test cases
   it('Footer renders without crash', () => {//to ensure that footer renders with its logo and texts error-free
     //check for various components
-    // expect(footer.children[0]).toHaveClass("footerLogo");
-    expect(footer.children[1]).toHaveClass("footerParagraph");
+    expect(footer.children[1]).toHaveClass("footercontactinfo");
+    expect(footer.children[2]).toHaveClass("footerParagraph");
 
     //also check if class css are getting applied
-    // expect(footer.children[0]).toHaveClass(styles.footerLogo);
-    expect(footer.children[1]).toHaveClass(styles.footerParagraph);
+    expect(footer.children[1]).toHaveClass(styles.footercontactinfo);
+    expect(footer.children[2]).toHaveClass(styles.footerParagraph);
     
   });
 
   it('Footer texts rendered correctly', ()=>{ //to ensure that footer renders with correct text
     //match with expected text
-    expect(footer.children[1]).toHaveTextContent("Copyright © 1999-2024")
+    expect(footer.children[1]).toHaveTextContent("developer@bpcap.com+91 97000 09045") //contact info
+    expect(footer.children[2]).toHaveTextContent("Copyright © 1999-2024") //copyright
   })
-
-  // it('Footer image renders correctly', ()=>{ //to ensure that footer renders with correct image
-  //   //image renders with right source key
-  //   expect(footer.children[0]).toHaveAttribute("src", "src\\assets\\castrol_logo.svg")
-  //   //image renders with right alt text
-  //   expect(footer.children[0]).toHaveAccessibleName("logo-ct")
-  // })
 
   //test case for basic alignment of footer elements
   it("Footer image and text vertical alignment", ()=>{ //to check that image comes above the text in footer
     const logoindex = Array.from(footer.children).findIndex(child=>child.classList.contains("footerLogo"));
     const textindex = Array.from(footer.children).findIndex(child=>child.classList.contains("footerParagraph"));
+    const contactindex = Array.from(footer.children).findIndex(child=>child.classList.contains("footercontactinfo"));
 
-    expect(logoindex).toBeLessThan(textindex);
+    expect(logoindex).toBeLessThan(textindex); //logo comes before copyright text
+    expect(logoindex).toBeLessThan(contactindex); //logo comes before contact info
+    expect(contactindex).toBeLessThan(textindex); //contact info comes before copyright text
   })
 
   //test case for element resize with screen resizing
@@ -55,10 +52,7 @@ describe('FooterWithLogo', () => {
      const footerContainerMobile = getByTestId('footercontainer');
      expect(footerContainerMobile).toHaveClass(styles.footerContainer);
  
-    //  const footerLogoMobile = footerContainerMobile.children[0]; //logo - 0th index
-    //  expect(footerLogoMobile).toHaveClass(styles.footerLogo);
- 
-     const footerParagraphMobile = footerContainerMobile.children[1]; //text - 1st index
+     const footerParagraphMobile = footerContainerMobile.children[2]; //text - 1st index
      expect(footerParagraphMobile).toHaveClass(styles.footerParagraph);
  
      // Set up viewport size for desktop
@@ -69,10 +63,7 @@ describe('FooterWithLogo', () => {
      const footerContainerDesktop = getByTestId('footercontainer');
      expect(footerContainerDesktop).toHaveClass(styles.footerContainer);
  
-    //  const footerLogoDesktop = footerContainerDesktop.children[0];
-    //  expect(footerLogoDesktop).toHaveClass(styles.footerLogo);
- 
-     const footerParagraphDesktop = footerContainerDesktop.children[1];
+     const footerParagraphDesktop = footerContainerDesktop.children[2];
      expect(footerParagraphDesktop).toHaveClass(styles.footerParagraph);
   })
 
