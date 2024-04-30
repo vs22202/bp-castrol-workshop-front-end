@@ -18,8 +18,8 @@ export type AuthContextProps = {
     password: string,
     otp: string
   ) => Promise<string>;
-  generateOtp: (email: string) => void;
-  generateOtpMobile: (mobile_no: string) => void;
+  generateOtp: (email: string) => Promise<boolean>;
+  generateOtpMobile: (mobile_no: string) => Promise<boolean>;
   changePassword: (password: string, old_password: string) => Promise<string>;
   generateResetOtp: (email?: string, mobile?: string) => void;
   resetPassword: (
@@ -210,7 +210,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       return "failure";
     }
   };
-  const generateOtp = async (email: string): Promise<void> => {
+  const generateOtp = async (email: string): Promise<boolean> => {
     const formData = new FormData();
     formData.append("user_email", email);
     try {
@@ -227,11 +227,13 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       const result = await res.json();
       if (result.output == "fail") {
         sendAlert({ message: result.msg as string, type: "error" });
-        return;
+        return false;
       }
       sendAlert({ message: "OTP sent to email", type: "success" });
+      return true;
     } catch (err) {
       console.log(err);
+      return false;
     }
   };
   const logout = () => {
@@ -239,7 +241,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     setCurrentUser(null);
     sendAlert({ message: "Logged Out Successfully", type: "success" });
   };
-  const generateOtpMobile = async (mobile_no: string): Promise<void> => {
+  const generateOtpMobile = async (mobile_no: string): Promise<boolean> => {
     const formData = new FormData();
     formData.append("user_mobile", mobile_no);
     try {
@@ -256,11 +258,13 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       const result = await res.json();
       if (result.output == "fail") {
         sendAlert({ message: result.msg as string, type: "error" });
-        return;
+        return false;
       }
       sendAlert({ message: "OTP sent to mobile number", type: "success" });
+      return true;
     } catch (err) {
       console.log(err);
+      return false;
     }
   };
   const changePassword = async (

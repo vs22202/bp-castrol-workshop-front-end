@@ -48,6 +48,8 @@ const ResetPasswordPage: React.FC = () => {
     formState: { errors },
     watch,
     trigger,
+    setError,
+    clearErrors,
     setValue
   } = useForm();
   const { generateResetOtp, resetPassword } = useContext(
@@ -83,6 +85,20 @@ const ResetPasswordPage: React.FC = () => {
       setIsAllFieldsValid(false);
     }
   }, [email, mobile, pass, confirmpass, errors]);
+
+  //confirm password validation
+  useEffect(() => {
+    if (pass && confirmpass && pass !== confirmpass) {
+      // Set an error for 'user_password_confirm' and trigger validation
+      setError("user_password_confirm", {
+        type: "manual",
+        message: "Passwords do not match",
+      });
+    } else {
+      clearErrors("user_password_confirm");
+    }
+  }, [pass, confirmpass, setError, clearErrors]);
+
 
   //Handles all three buttons
   //Get OTP Button
@@ -174,7 +190,11 @@ const ResetPasswordPage: React.FC = () => {
         inputs[0].errorMessage = "Email address must be at least 5 characters long."
       }
     }
-    await trigger(name);
+
+    //validation for confirm password happens in above useeffect
+    if(name!="user_password_confirm"){
+      await trigger(name);
+    }
   };
 
   return (

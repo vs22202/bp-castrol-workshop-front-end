@@ -1,5 +1,6 @@
 import styles from "./Footer.module.css";
 import FooterLogo from "../../assets/castrol_logo.svg";
+import { SvgIcon } from "../IconComponent/SvgIcon";
 /** The props type of {@link Footer | `Footer`}. */
 
 /**
@@ -23,6 +24,17 @@ export function FooterWithLogo() {
   return (
     <div className={`${styles.footerContainer} illustration`} data-testid="footercontainer">
       <FooterLogo/>
+      <div className={styles.footercontactinfo}>
+        <div className={styles.email}>
+          <SvgIcon iconName="mail" wrapperStyle="sm"/>
+          <a href="">developer@bpcap.com</a>
+        </div>
+        <div className={`${styles.verticalDivider}`}></div>
+        <div className={styles.phoneno}>
+          <SvgIcon iconName="phone" wrapperStyle="sm"/>
+          <a href="">+91 97000 09045</a>
+        </div>
+      </div>
       <p className={` ${styles.footerParagraph}`}>
         Copyright © 1999-2024
       </p>

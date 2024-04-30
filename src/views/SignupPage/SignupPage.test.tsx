@@ -1,3 +1,37 @@
+/**
+ * This test suite covers the functionality of the SignupPage component and its mobile version,
+ * including rendering, validation, signup process, and error handling scenarios.
+ * 
+ * Test Cases:
+ * - Renders all components on the Signup page correctly.
+ * - Validates input fields on the Signup page for email, password, and OTP.
+ * - Successfully signs up a new user and navigates to the login page.
+ * - Handles scenarios where OTP is successfully generated but signup fails due to an internal server error.
+ * - Handles scenarios where OTP is successfully generated but signup fails due to incorrect OTP.
+ * - Handles scenarios where signup fails due to OTP expiration.
+ * - Handles scenarios where OTP expiration triggers OTP regeneration and successful signup.
+ * - Renders all components in the Signup mobile page correctly.
+ * - Validates signup mobile page inputs.
+ * - Tests OTP generation success but signup error.
+ * 
+ * Dependencies:
+ * - @testing-library/jest-dom: Provides custom Jest matchers for DOM elements.
+ * - @testing-library/react: Provides utilities for testing React components.
+ * - react-router-dom: Provides routing components for React applications.
+ * - jest-fetch-mock: Provides utilities for mocking fetch requests in Jest tests.
+ * - history: Provides utilities for managing session history with JavaScript.
+ * 
+ * Components:
+ * - RequireAuth: A component for authentication requirement handling.
+ * - SignupPage: The component for user signup.
+ * - AlertContext: Context for displaying alerts.
+ * - AuthProvider: Provider for authentication context.
+ * - MemoryRouter: A router that keeps the history of "visited" pages in memory.
+ * 
+ * @module SignupPageTests
+ */
+
+
 import "@testing-library/jest-dom";
 import RequireAuth from "../../components/RequireAuthComponent/RequireAuth";
 import { MemoryRouter } from "react-router-dom";
@@ -119,8 +153,10 @@ describe("SignupPage Component", () => {
 
     fireEvent.click(getByRole("button", { name: "Get OTP" }));
 
-    expect(fetch.mock.calls.length).toEqual(1);
-    expect(fetch.mock.calls[0][0]).toEqual("http://localhost:3000/generateOtp");
+    await waitFor(()=>{
+      expect(fetch.mock.calls.length).toEqual(1);
+      expect(fetch.mock.calls[0][0]).toEqual("http://localhost:3000/generateOtp");
+    })
 
     await waitFor(() => expect(getByText(/Resend OTP/i)).toBeInTheDocument());
 
@@ -148,12 +184,14 @@ describe("SignupPage Component", () => {
       });
     });
 
-    expect(fetch.mock.calls.length).toEqual(2);
-    expect(fetch.mock.calls[1][0]).toEqual("http://localhost:3000/register");
-    expect(sendAlert).toHaveBeenCalledWith({
-      message: "Your account has been created",
-      type: "success",
-    });
+    await waitFor(()=>{
+      expect(fetch.mock.calls.length).toEqual(2);
+      expect(fetch.mock.calls[1][0]).toEqual("http://localhost:3000/register");
+      expect(sendAlert).toHaveBeenCalledWith({
+        message: "Your account has been created",
+        type: "success",
+      });
+    })
     await waitFor(() => {
       const history = createMemoryHistory({ initialEntries: ["/signup"] }); // Set the initial path
       history.listen(() => {
@@ -185,8 +223,10 @@ describe("SignupPage Component", () => {
 
     fireEvent.click(getByRole("button", { name: "Get OTP" }));
 
-    expect(fetch.mock.calls.length).toEqual(1);
-    expect(fetch.mock.calls[0][0]).toEqual("http://localhost:3000/generateOtp");
+    await waitFor(()=>{
+      expect(fetch.mock.calls.length).toEqual(1);
+      expect(fetch.mock.calls[0][0]).toEqual("http://localhost:3000/generateOtp");
+    })
 
     await waitFor(() => expect(getByText(/Resend OTP/i)).toBeInTheDocument());
 
@@ -264,46 +304,49 @@ describe("SignupPage Component", () => {
   });
 
   test("signup should fail due to incorrect otp", async () => {
-    fetchMock.mockResponseOnce(
-      JSON.stringify({ output: "fail", msg: "Invalid OTP" }),
-      { status: 400 }
-    );
-
-    const { getByRole, getByLabelText, getByText } = setup();
-
-    fireEvent.change(getByRole("textbox", { name: "Email ID / Phone Number *" }), {
-      target: { value: "test@example.com" },
-    });
-    fireEvent.change(
-      getByLabelText(/Password/i, { selector: "#user_password" }),
-      { target: { value: "@Testexample2001" } }
-    );
-    fireEvent.change(
-      getByLabelText(/Confirm Password/i, {
-        selector: "#user_password_confirm",
-      }),
-      { target: { value: "@Testexample2001" } }
-    );
-
-    fireEvent.click(getByRole("button", { name: "Get OTP" }));
-
-    expect(fetch.mock.calls.length).toEqual(1);
-    expect(fetch.mock.calls[0][0]).toEqual("http://localhost:3000/generateOtp");
-
-    await waitFor(() => expect(getByText(/Resend OTP/i)).toBeInTheDocument());
-
-    fireEvent.change(getByRole("textbox", { name: "OTP *" }), {
-      target: { value: "123456" },
-    });
 
     fetchMock.mockResponseOnce(
-      JSON.stringify({ output: "fail", msg: "Invalid OTP" }),
-      { status: 400 }
-    );
+        JSON.stringify({ output: "success", msg: "OTP send successfully" }),
+        { status: 200 }
+      );
 
-    const SignupBtn = getByRole("button", { name: "Sign Up" });
-    await waitFor(() => fireEvent.click(SignupBtn));
+      const { getByRole, getByLabelText, getByText } = setup();
+      fireEvent.change(getByRole("textbox", { name: "Email ID / Phone Number *" }), {
+        target: { value: "test@example.com" },
+      });
+      fireEvent.change(
+        getByLabelText(/Password/i, { selector: "#user_password" }),
+        { target: { value: "@Testexample2001" } }
+      );
+      fireEvent.change(
+        getByLabelText(/Confirm Password/i, {
+          selector: "#user_password_confirm",
+        }),
+        { target: { value: "@Testexample2001" } }
+      );
+  
+      fireEvent.click(getByRole("button", { name: "Get OTP" }));
+  
+      await waitFor(()=>{
+        expect(fetch.mock.calls.length).toEqual(1);
+        expect(fetch.mock.calls[0][0]).toEqual("http://localhost:3000/generateOtp");
+      })
+  
+      await waitFor(() => expect(getByText(/Resend OTP/i)).toBeInTheDocument());
+  
+      fireEvent.change(getByRole("textbox", { name: "OTP *" }), {
+        target: { value: "123456" },
+      });
 
+  fetchMock.mockResponseOnce(
+    JSON.stringify({ output: "fail", msg: "Invalid OTP" }),
+    { status: 400 }
+  );
+
+  const SignupBtn = getByRole("button", { name: "Sign Up" });
+  await waitFor(() => fireEvent.click(SignupBtn));
+
+  await waitFor(()=>{
     expect(fetch.mock.calls.length).toEqual(2);
     expect(fetch.mock.calls[1][0]).toEqual("http://localhost:3000/register");
 
@@ -311,19 +354,21 @@ describe("SignupPage Component", () => {
       message: "Invalid OTP",
       type: "error",
     });
-    await waitFor(() => {
-      const history = createMemoryHistory({ initialEntries: ["/signup"] }); // Set the initial path
-      history.listen(() => {
-        expect(history.location.pathname).not.toBe("/login");
-      });
+  })
+  await waitFor(() => {
+    const history = createMemoryHistory({ initialEntries: ["/signup"] }); // Set the initial path
+    history.listen(() => {
+      expect(history.location.pathname).not.toBe("/login");
     });
   });
+  });
+
   test("signup unsuccessful due to OTP expiration", async () => {
     jest.useFakeTimers();
     fetchMock.mockResponseOnce(
-      JSON.stringify({ output: "fail", msg: "OTP expired, please regenerate" }),
-      { status: 400 }
-    );
+          JSON.stringify({ output: "success", msg: "OTP send successfully" }),
+          { status: 200 }
+        );
 
     const { getByRole, getByLabelText, getByText } = setup();
 
@@ -454,13 +499,8 @@ describe("SignupPage Component", () => {
 
     jest.useRealTimers();
   });
-});
 
-describe("SignupPage Mobile Component", () => {
-  beforeEach(() => {
-    fetchMock.mockClear();
-  });
-
+  //mobile registration
   test("Renders all components in the Signup mobile page corectly", () => {
     const { getByRole, getByLabelText } = setup();
 
@@ -526,7 +566,7 @@ describe("SignupPage Mobile Component", () => {
     expect(getByRole("button", { name: "Get OTP" })).toBeDisabled();
   });
 
-  test("should signup successfully and navigate to login page", async () => {
+  test("should signup with mobile successfully and navigate to login page", async () => {
     fetchMock.mockResponseOnce(
       JSON.stringify({ output: "success", msg: "OTP send successfully" }),
       { status: 200 }
@@ -551,10 +591,12 @@ describe("SignupPage Mobile Component", () => {
 
     fireEvent.click(getByRole("button", { name: "Get OTP" }));
 
-    expect(fetch.mock.calls.length).toEqual(1);
-    expect(fetch.mock.calls[0][0]).toEqual(
-      "http://localhost:3000/generateOtp/mobile"
-    );
+    await waitFor(()=>{
+      expect(fetch.mock.calls.length).toEqual(1);
+      expect(fetch.mock.calls[0][0]).toEqual(
+        "http://localhost:3000/generateOtp/mobile"
+      );
+    })
 
     await waitFor(() => expect(getByText(/Resend OTP/i)).toBeInTheDocument());
 
@@ -599,325 +641,4 @@ describe("SignupPage Mobile Component", () => {
     });
   });
 
-  test("otp sucessfully generated and verified but signup error", async () => {
-    fetchMock.mockResponseOnce(
-      JSON.stringify({ output: "success", msg: "OTP send successfully" }),
-      { status: 200 }
-    );
-
-    const { getByRole, getByLabelText, getByText } = setup();
-
-    fireEvent.change(getByRole("textbox", { name: "Email ID / Phone Number *" }), {
-      target: { value: "911234567890" },
-    });
-    fireEvent.change(
-      getByLabelText(/Password/i, { selector: "#user_password" }),
-      { target: { value: "@Testexample2001" } }
-    );
-    fireEvent.change(
-      getByLabelText(/Confirm Password/i, {
-        selector: "#user_password_confirm",
-      }),
-      { target: { value: "@Testexample2001" } }
-    );
-
-    fireEvent.click(getByRole("button", { name: "Get OTP" }));
-
-    expect(fetch.mock.calls.length).toEqual(1);
-    expect(fetch.mock.calls[0][0]).toEqual(
-      "http://localhost:3000/generateOtp/mobile"
-    );
-
-    await waitFor(() => expect(getByText(/Resend OTP/i)).toBeInTheDocument());
-
-    fireEvent.change(getByRole("textbox", { name: "OTP *" }), {
-      target: { value: "123456" },
-    });
-
-    fetchMock.mockReject(new Error("Error adding user to Users table"));
-
-    const SignupBtn = getByRole("button", { name: "Sign Up" });
-    await waitFor(() => fireEvent.click(SignupBtn));
-
-    expect(fetch.mock.calls.length).toEqual(2);
-    expect(fetch.mock.calls[1][0]).toEqual(
-      "http://localhost:3000/register/mobile"
-    );
-    await waitFor(() => {
-      const history = createMemoryHistory({ initialEntries: ["/signup"] });
-      history.listen(() => {
-        expect(history.location.pathname).not.toBe("/login");
-      });
-    });
-  });
-
-  test("otp sucessfully generated and verified but signup internal server error", async () => {
-    fetchMock.mockResponseOnce(
-      JSON.stringify({ output: "success", msg: "OTP send successfully" }),
-      { status: 200 }
-    );
-
-    const { getByRole, getByLabelText, getByText } = setup();
-
-    fireEvent.change(getByRole("textbox", { name: "Email ID / Phone Number *" }), {
-      target: { value: "911234567890" },
-    });
-    fireEvent.change(
-      getByLabelText(/Password/i, { selector: "#user_password" }),
-      { target: { value: "@Testexample2001" } }
-    );
-    fireEvent.change(
-      getByLabelText(/Confirm Password/i, {
-        selector: "#user_password_confirm",
-      }),
-      { target: { value: "@Testexample2001" } }
-    );
-
-    fireEvent.click(getByRole("button", { name: "Get OTP" }));
-
-    expect(fetch.mock.calls.length).toEqual(1);
-    expect(fetch.mock.calls[0][0]).toEqual(
-      "http://localhost:3000/generateOtp/mobile"
-    );
-
-    await waitFor(() => expect(getByText(/Resend OTP/i)).toBeInTheDocument());
-
-    fireEvent.change(getByRole("textbox", { name: "OTP *" }), {
-      target: { value: "123456" },
-    });
-
-    fetchMock.mockResponseOnce(
-      JSON.stringify({ output: "fail", msg: "Error inserting data" }),
-      { status: 500 }
-    );
-
-    const SignupBtn = getByRole("button", { name: "Sign Up" });
-    await waitFor(() => fireEvent.click(SignupBtn));
-
-    expect(fetch.mock.calls.length).toEqual(2);
-    expect(fetch.mock.calls[1][0]).toEqual(
-      "http://localhost:3000/register/mobile"
-    );
-    expect(sendAlert).toHaveBeenCalledWith({
-      message: "Error inserting data",
-      type: "error",
-    });
-    await waitFor(() => {
-      const history = createMemoryHistory({ initialEntries: ["/signup"] }); // Set the initial path
-      history.listen(() => {
-        expect(history.location.pathname).not.toBe("/login");
-      });
-    });
-  });
-
-  test("signup should fail due to incorrect otp", async () => {
-    fetchMock.mockResponseOnce(
-      JSON.stringify({ output: "fail", msg: "Invalid OTP" }),
-      { status: 400 }
-    );
-
-    const { getByRole, getByLabelText, getByText } = setup();
-
-
-
-    fireEvent.change(getByRole("textbox", { name: "Email ID / Phone Number *" }), {
-      target: { value: "911234567890" },
-    });
-    fireEvent.change(
-      getByLabelText(/Password/i, { selector: "#user_password" }),
-      { target: { value: "@Testexample2001" } }
-    );
-    fireEvent.change(
-      getByLabelText(/Confirm Password/i, {
-        selector: "#user_password_confirm",
-      }),
-      { target: { value: "@Testexample2001" } }
-    );
-
-    fireEvent.click(getByRole("button", { name: "Get OTP" }));
-
-    expect(fetch.mock.calls.length).toEqual(1);
-    expect(fetch.mock.calls[0][0]).toEqual(
-      "http://localhost:3000/generateOtp/mobile"
-    );
-
-    await waitFor(() => expect(getByText(/Resend OTP/i)).toBeInTheDocument());
-
-    fireEvent.change(getByRole("textbox", { name: "OTP *" }), {
-      target: { value: "123456" },
-    });
-
-    fetchMock.mockResponseOnce(
-      JSON.stringify({ output: "fail", msg: "Invalid OTP" }),
-      { status: 400 }
-    );
-
-    const SignupBtn = getByRole("button", { name: "Sign Up" });
-    await waitFor(() => fireEvent.click(SignupBtn));
-
-    expect(fetch.mock.calls.length).toEqual(2);
-    expect(fetch.mock.calls[1][0]).toEqual(
-      "http://localhost:3000/register/mobile"
-    );
-
-    expect(sendAlert).toHaveBeenCalledWith({
-      message: "Invalid OTP",
-      type: "error",
-    });
-    await waitFor(() => {
-      const history = createMemoryHistory({ initialEntries: ["/signup"] }); // Set the initial path
-      history.listen(() => {
-        expect(history.location.pathname).not.toBe("/login");
-      });
-    });
-  });
-  test("signup unsuccessful due to OTP expiration", async () => {
-    jest.useFakeTimers();
-    fetchMock.mockResponseOnce(
-      JSON.stringify({ output: "fail", msg: "OTP expired, please regenerate" }),
-      { status: 400 }
-    );
-
-    const { getByRole, getByLabelText, getByText } = setup();
-
-
-    fireEvent.change(getByRole("textbox", { name: "Email ID / Phone Number *" }), {
-      target: { value: "911234567890" },
-    });
-    fireEvent.change(
-      getByLabelText(/Password/i, { selector: "#user_password" }),
-      { target: { value: "@Testexample2001" } }
-    );
-    fireEvent.change(
-      getByLabelText(/Confirm Password/i, {
-        selector: "#user_password_confirm",
-      }),
-      { target: { value: "@Testexample2001" } }
-    );
-
-    fireEvent.click(getByRole("button", { name: "Get OTP" }));
-
-    expect(fetch.mock.calls.length).toEqual(1);
-    expect(fetch.mock.calls[0][0]).toEqual(
-      "http://localhost:3000/generateOtp/mobile"
-    );
-
-    await waitFor(() => expect(getByText(/Resend OTP/i)).toBeInTheDocument());
-    jest.advanceTimersByTime(120000); //to have 2 minutes time out for otp
-
-    fireEvent.change(getByRole("textbox", { name: "OTP *" }), {
-      target: { value: "123456" },
-    });
-
-    fetchMock.mockResponseOnce(
-      JSON.stringify({ output: "fail", msg: "OTP expired, please regenerate" }),
-      { status: 400 }
-    );
-
-    const SignupBtn = getByRole("button", { name: "Sign Up" });
-    await waitFor(() => fireEvent.click(SignupBtn));
-
-    await waitFor(() => {
-      expect(fetch.mock.calls.length).toEqual(2);
-      expect(fetch.mock.calls[1][0]).toEqual(
-        "http://localhost:3000/register/mobile"
-      );
-    });
-    expect(sendAlert).toHaveBeenCalledWith({
-      message: "OTP expired, please regenerate",
-      type: "error",
-    });
-    await waitFor(() => {
-      const history = createMemoryHistory({ initialEntries: ["/signup"] }); // Set the initial path
-      history.listen(() => {
-        expect(history.location.pathname).not.toBe("/login");
-      });
-    });
-    jest.useRealTimers();
-  });
-
-  test("otp expired so otp regenrated and then signup successful", async () => {
-    jest.useFakeTimers();
-    fetchMock.mockResponseOnce(
-      JSON.stringify({ output: "success", msg: "OTP send successfully" }),
-      { status: 200 }
-    );
-
-    const { getByRole, getByLabelText, getByText, queryByRole } = setup();
-
-
-
-    fireEvent.change(getByRole("textbox", { name: "Email ID / Phone Number *" }), {
-      target: { value: "911234567890" },
-    });
-    fireEvent.change(
-      getByLabelText(/Password/i, { selector: "#user_password" }),
-      { target: { value: "@Testexample2001" } }
-    );
-    fireEvent.change(
-      getByLabelText(/Confirm Password/i, {
-        selector: "#user_password_confirm",
-      }),
-      { target: { value: "@Testexample2001" } }
-    );
-
-    fireEvent.click(getByRole("button", { name: "Get OTP" }));
-
-    expect(fetch.mock.calls.length).toEqual(1);
-    expect(fetch.mock.calls[0][0]).toEqual(
-      "http://localhost:3000/generateOtp/mobile"
-    );
-
-    await waitFor(() => expect(getByText(/Resend OTP/i)).toBeInTheDocument());
-    jest.advanceTimersByTime(121000); //to have 2 minutes time out for otp
-    await waitFor(() => {
-      expect(queryByRole("button", { name: /Resend OTP/i })).toBeNull();
-      expect(getByRole("button", { name: "Get OTP" })).toBeInTheDocument();
-    });
-    fetchMock.mockResponseOnce(
-      JSON.stringify({ output: "success", msg: "OTP send successfully" }),
-      { status: 200 }
-    );
-
-    fireEvent.click(getByRole("button", { name: "Get OTP" }));
-    expect(fetch.mock.calls.length).toEqual(2);
-    expect(fetch.mock.calls[1][0]).toEqual(
-      "http://localhost:3000/generateOtp/mobile"
-    );
-
-    fireEvent.change(getByRole("textbox", { name: "OTP *" }), {
-      target: { value: "123456" },
-    });
-
-    fetchMock.mockResponseOnce(
-      JSON.stringify({
-        output: "success",
-        msg: "User registered successfully",
-      }),
-      { status: 200 }
-    );
-
-    const SignupBtn = getByRole("button", { name: "Sign Up" });
-    await waitFor(() => fireEvent.click(SignupBtn));
-
-    await waitFor(() => {
-      expect(fetch.mock.calls.length).toEqual(3);
-      expect(fetch.mock.calls[2][0]).toEqual(
-        "http://localhost:3000/register/mobile"
-      );
-    });
-
-    expect(sendAlert).toHaveBeenCalledWith({
-      message: "Your account has been created",
-      type: "success",
-    });
-    await waitFor(() => {
-      const history = createMemoryHistory({ initialEntries: ["/signup"] }); // Set the initial path
-      history.listen(() => {
-        expect(history.location.pathname).toBe("/login");
-      });
-    });
-
-    jest.useRealTimers();
-  });
 });

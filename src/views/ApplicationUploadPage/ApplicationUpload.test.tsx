@@ -1,3 +1,14 @@
+/**
+ * Test Suite for the ApplicationUpload Component.
+ *
+ * This suite covers various scenarios for testing the ApplicationUpload component, including:
+ * - Rendering of all components in new application mode.
+ * - Successful submission of a new application.
+ * - Rendering of all components in edit mode.
+ * - Successful submission of an edited application.
+ * - Handling of errors during form submission and data fetching.
+ */
+
 import '@testing-library/jest-dom';
 import { MemoryRouter } from "react-router-dom";
 import { fireEvent,  render, waitFor } from '@testing-library/react';

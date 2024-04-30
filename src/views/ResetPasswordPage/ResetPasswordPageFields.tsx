@@ -1,3 +1,9 @@
+/**
+ * Defines the input fields for the Reset Password page.
+ * 
+ * @module ResetPasswordPageFields
+ */
+
 import { Input } from "../../components/FormInputs";
 
 const ResetPasswordPageFields: Input[] = [
@@ -52,7 +58,7 @@ const ResetPasswordPageFields: Input[] = [
     text_type: "password",
     placeholder: "Enter password",
     pattern:
-      /^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*()-_=+{}|;:'",.<>?]).{10,100}$/, //contains 1-special char, capital letter, number and should have 10 to 100 characters
+      /^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*()_+{}|:\"<>?`\-=[\];',./]).{10,100}$/, //contains 1-special char, capital letter, number and should have 10 to 100 characters
     minlen: 10,
     maxlen: 100,
     errorMessage:
