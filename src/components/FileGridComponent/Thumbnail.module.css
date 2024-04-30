@@ -38,7 +38,6 @@ video.fullScreen {
   position: absolute;
   top: 5%;
   right: 5%;
-  z-index: 2;
   transition: color 100ms ease-in;
 }
 .deleteIcon > svg:hover {
