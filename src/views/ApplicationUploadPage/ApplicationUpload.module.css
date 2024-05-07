@@ -9,12 +9,12 @@
 .formContainer h1 {
   color: var(--primary---main500);
   font-size: var(--heading---m---bold);
-  font-weight: var(--weight--extra-bold);
+  font-weight: var(--weight--bold);
 }
 .formContainer h2 {
   color: var(--neutral---main750);
   font-size: var(--subheading---m---regular);
-  font-weight: var(--weight--light);
+  font-weight: var(--weight--regular);
   margin-bottom: var(--spacing-3xs);
 }
 .formHeader{
@@ -24,7 +24,7 @@
 .applicationStatus > h2 > span {
   font-size: var(--subheading---m---regular);
   color: var(--primary---main500);
-  font-weight: var(--weight--bold);
+  font-weight: var(--weight--regular);
 }
 .formContainer.loadingState {
   pointer-events: none;
@@ -55,12 +55,12 @@ div[data-value="Services Offered"] {
   }
   .formContainer h1 {
     font-size: var(--subheading---s---bold);
-    font-weight: var(--weight--extra-bold);
+    font-weight: var(--weight--bold);
   }
   .formContainer h2 {
     color: var(--neutral---main750);
     font-size: var(--paragraph---m---light);
-    font-weight: var(--weight--medium);
+    font-weight: var(--weight--light);
     margin-bottom: var(--spacing-3xs);
   }
   .applicationStatus > h2 > span {

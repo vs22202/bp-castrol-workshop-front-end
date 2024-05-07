@@ -33,6 +33,7 @@ button {
   background-color: var(--primary---main500);
   color: var(--shades---main-white);
   box-shadow: 2px var(--primaryshdw--md);
+  font-weight: var(--weight--extra-light);
 }
 .solid:hover {
   background-color: var(--primary---main300);
@@ -46,6 +47,7 @@ button {
   border: 2px solid var(--primary---main500);
   color: var(--primary---main500);
   box-shadow: 2px var(--primaryshdw--md);
+  font-weight: var(--weight--extra-light);
 }
 .outline:hover {
   border: 2px solid var(--primary---main300);

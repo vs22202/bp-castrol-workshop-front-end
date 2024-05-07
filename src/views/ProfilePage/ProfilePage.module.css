@@ -36,7 +36,7 @@
 }
 .loginform h1 > span {
   font-size: var(--heading---m---bold);
-  font-weight: var(--weight--extra-bold);
+  font-weight: var(--weight--bold);
 }
 .loginform h2 {
   color: var(--neutral---main750);

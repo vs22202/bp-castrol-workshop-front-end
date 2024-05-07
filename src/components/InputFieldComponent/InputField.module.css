@@ -1,6 +1,6 @@
 * {
   font-family: "Noto Sans", sans-serif;
-  font-weight: var(--weight--regular);
+  font-weight: var(--weight--light);
 }
 .inputFieldContainer {
   width: 100%;
@@ -32,7 +32,7 @@ input[type="number"]::-webkit-outer-spin-button {
   outline: none;
   color: var(--error---main900);
   font-size: var(--spacing-xs);
-  font-weight: var(--weight--bold);
+  font-weight: var(--weight--light);
   padding: var(--spacing-2xs);
   background: transparent;
   z-index: 1111;
@@ -56,7 +56,7 @@ input[type="number"]::-webkit-outer-spin-button {
   font-size: var(--spacing-xs);
   padding: var(--spacing-2xs);
   background: transparent;
-  font-weight: var(--weight--medium);
+  font-weight: var(--weight--light);
   z-index: 1111;
   width: 100%;
 }
@@ -68,7 +68,7 @@ input[type="number"]::-webkit-outer-spin-button {
 .defaultinputfield::placeholder,
 .isWronginputfield::placeholder {
   color: var(--neutral---main150);
-  font-weight: var(--weight--regular);
+  font-weight: var(--weight--light);
 }
 
 /* input field icons */

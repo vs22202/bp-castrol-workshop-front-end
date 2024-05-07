@@ -63,7 +63,7 @@ video.fullScreen {
 }
 .viewButton > span {
   font-size: var(--subheading---m---regular);
-  font-weight: var(--weight--bold);
+  font-weight: var(--weight--regular);
 }
 .thumb:hover .viewButton {
   opacity: 1;
