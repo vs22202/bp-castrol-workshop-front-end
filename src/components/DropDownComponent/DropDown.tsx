@@ -268,7 +268,7 @@ export function DropDown({
               const data = state.data as Option;
               return {
                 ...base,
-                fontWeight: "bold",
+                fontWeight: "regular",
                 color: "black",
                 paddingRight: 6,
               };

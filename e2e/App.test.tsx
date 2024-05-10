@@ -5,54 +5,6 @@ const fetchfunc  = require('cross-fetch');
 describe('End To End Tests', () => {
   let browser:any;
   let page:any;
-
-  /* beforeAll(async () => {
-    try {
-      browser = await puppeteer.launch({ headless: false });
-      page = await browser.newPage();
-      
-      // // Enable request interception
-      await page.setRequestInterception(true);
-
-      // Mock API responses using request interception
-      page.on('request', (request: { url: () => string; respond: (arg0: { status: number; contentType: string; body: string; }) => void; continue: () => void; }) => {
-        if (request.url() === 'http://localhost:3000/generateOtp') {
-          // Mock response for OTP API request
-          request.respond({
-            status: 200,
-            contentType: 'application/json',
-            body: JSON.stringify({ output: 'success', msg: 'OTP sent to email' }),
-          });
-        } else if (request.url() === 'http://localhost:3000/register') {
-          // Mock response for user registration API request
-          request.respond({
-            status: 200,
-            contentType: 'application/json',
-            body: JSON.stringify({ output: 'success', msg: 'User registered successfully' }),
-          });
-        } else if (request.url() === 'http://localhost:3000/generateResetOtp') {
-          // Mock response for user registration API request
-          request.respond({
-            status: 200,
-            contentType: 'application/json',
-            body: JSON.stringify({ output: 'success', msg: 'OTP sent to email' }),
-          });
-        } else if (request.url() === 'http://localhost:3000/user/resetPassword') {
-          // Mock response for user registration API request
-          request.respond({
-            status: 200,
-            contentType: 'application/json',
-            body: JSON.stringify({ output: 'success', msg: 'Password Reset Successfully' }),
-          });
-        } else {
-          request.continue();
-        }
-      });
-
-    } catch (error) {
-      console.error('Failed to launch browser:', error);
-    }
-  }); */
   
   beforeAll(async () => {
     try {
@@ -82,7 +34,9 @@ describe('End To End Tests', () => {
         await page.goto('http://localhost:5173', { waitUntil: 'domcontentloaded',timeout:10000});
 
         //go to signup
-        await page.click('button._outline_15241_89._md_15241_43._button_15241_27',{waitUntil:"domcontentloaded"});
+        //button._outline_tlo32_91._md_tlo32_43._button_tlo32_27 
+        await page.click('button._outline_tlo32_91._md_tlo32_43._button_tlo32_27',{waitUntil:"domcontentloaded"})
+        //await page.click('button._outline_15241_89._md_15241_43._button_15241_27',{waitUntil:"domcontentloaded"});
         console.log("Clicked on Navbar Sign Up button")
 
         //navigation
@@ -99,8 +53,9 @@ describe('End To End Tests', () => {
       await page.type("#user_password_confirm", config.password)
       await page.type('#user_id', config.email);
 
-      await page.waitForSelector("._signupform_hvsf1_45 ._otpContainer_hvsf1_107 ._solid_15241_63._md_15241_43._button_15241_27")
-      await page.click("._signupform_hvsf1_45 ._otpContainer_hvsf1_107 ._solid_15241_63._md_15241_43._button_15241_27");
+      //await page.waitForSelector("._signupform_hvsf1_45 ._otpContainer_hvsf1_107 ._solid_15241_63._md_15241_43._button_15241_27")
+      await page.waitForSelector("._signupform_tytni_45 ._otpContainer_tytni_107 ._solid_tlo32_63._md_tlo32_43._button_tlo32_27");
+      await page.click("._signupform_tytni_45 ._otpContainer_tytni_107 ._solid_tlo32_63._md_tlo32_43._button_tlo32_27 ");
       
       //fetch otp from backend
       const fetchotp = async (): Promise<string> => {
@@ -128,10 +83,10 @@ describe('End To End Tests', () => {
       await page.type("#otp", otp);
 
       //step 3
-      const divSelector = '._signupform_hvsf1_45 ._buttonscontainer_hvsf1_133'; // Update with the appropriate selector
+      const divSelector = '._signupform_tytni_45 ._buttonscontainer_tytni_133'; // Update with the appropriate selector
 
       // Define the selector for the button inside the div
-      const buttonSelector = `${divSelector} ._solid_15241_63._md_15241_43._button_15241_27`; // Update with the appropriate selector
+      const buttonSelector = `${divSelector} ._solid_tlo32_63._md_tlo32_43._button_tlo32_27 `; // Update with the appropriate selector
 
       // Use Puppeteer's `page.click()` method to click the button
       await page.waitForSelector(buttonSelector)
@@ -162,16 +117,16 @@ describe('End To End Tests', () => {
 
       //step 2
         // Wait for the Apply Now button to appear
-        await page.waitForSelector('._homePageButton_7wljo_45');
+        await page.waitForSelector('._homePageButton_fakq6_45');
         console.log('Apply Now button found',);
 
         // Click the Apply Now button
-        await page.click('._homePageButton_7wljo_45');
+        await page.click('._homePageButton_fakq6_45');
         console.log('Clicked Apply Now button'); // Log message indicating button is clicked
 
       //step 3
         //check for alert about loggin in before applying
-        await page.waitForSelector('._alertContainer_7h75f_1._error_7h75f_37');
+        await page.waitForSelector('._alertContainer_19u7s_1._error_19u7s_37');
         console.log("Warning error message for Logging in received");
 
         // Assert that the URL has changed to the login page after clicking the button
@@ -186,7 +141,7 @@ describe('End To End Tests', () => {
         console.log("Entered Email and Password");
 
         //click on the login button
-        await page.click('._buttonscontainer_8uoy6_145 button._solid_15241_63._md_15241_43._button_15241_27 ')
+        await page.click('._buttonscontainer_16asm_145 button._solid_tlo32_63._md_tlo32_43._button_tlo32_27  ')
         console.log("Clicked Login Button")
 
         //wait for browser to navigate to application upload page
@@ -215,17 +170,17 @@ describe('End To End Tests', () => {
       //step 2
         // click on logout
         //check if alert has gone and logout option is visible
-        await page.waitForSelector('._navbar_13z3g_21 a[href="/logout"]', {visible:true})
+        await page.waitForSelector('._navbar_13z3g_21 ._optionsContainer_13z3g_43 ._navMenu_13z3g_111 a[href="/logout"]', {visible:true})
         await page.waitForSelector('._alertContainer_7h75f_1._success_7h75f_29', {hidden:true})
-        await page.click('._navbar_13z3g_21 a[href="/logout"]', {waitUntil:"domcontentloaded", timeout:20000});
+        await page.$eval('._navbar_13z3g_21 ._optionsContainer_13z3g_43 ._navMenu_13z3g_111 a[href="/logout"]', (elem: HTMLAnchorElement) => elem.click());
+
         console.log('Clicked logout');
 
         //wait for navigation
-        //await page.waitForNavigation({waitUntil:"domcontentloaded", timeout:10000})
+        await page.waitForNavigation({waitUntil:"domcontentloaded", timeout:10000})
 
         //check if Home(Before login) page has been reached
         console.log('Current URL(after logout):', page.url());
-        //expect(page.url()).toBe('http://localhost:5173/');
 
         console.log("TEST FOR LOGGING OUT SUCCESSFUL.")
     } catch (error) {
@@ -233,7 +188,7 @@ describe('End To End Tests', () => {
     }
   }, 30000)
 
-  it('Navigates to Login Page from Home(Before Login) Page and Signs the User in.', async () => {
+   it('Navigates to Login Page from Home(Before Login) Page and Signs the User in.', async () => {
     //1. Navigate to the login page from home page
     //2. logs the user in using correct email, password -> check if brwoser reaches Home(After Login) Page.
     console.log("Test for simply logging in.")
@@ -242,14 +197,14 @@ describe('End To End Tests', () => {
         await page.goto('http://localhost:5173/', { waitUntil: 'domcontentloaded', timeout:10000 });
 
         // Wait for the login button to appear
-        await page.waitForSelector('._navbar_13z3g_21 button._solid_15241_63._md_15241_43._button_15241_27', { timeout: 5000 });
+        await page.waitForSelector('._navbar_13z3g_21 button._solid_tlo32_63._md_tlo32_43._button_tlo32_27', { timeout: 5000 });
         console.log('Login button found',);
 
         // Click the Login button
-        await page.click('._navbar_13z3g_21 button._solid_15241_63._md_15241_43._button_15241_27');
+        await page.click('._navbar_13z3g_21 button._solid_tlo32_63._md_tlo32_43._button_tlo32_27');
         console.log('Login button clicked');
 
-        await page.goto('http://localhost:5173/login', { waitUntil: 'domcontentloaded', timeout:10000 });
+        //await page.goto('http://localhost:5173/login', { waitUntil: 'domcontentloaded', timeout:10000 });
 
         // Assert that the URL has changed to the login page after clicking the button
         console.log('Current URL:', page.url());
@@ -263,7 +218,7 @@ describe('End To End Tests', () => {
         console.log("Entered Email and Password");
 
         //click on the login button
-        await page.click('._loginform_8uoy6_53 ._buttonscontainer_8uoy6_145 button._solid_15241_63._md_15241_43._button_15241_27 ')
+        await page.click('._loginform_16asm_53 ._buttonscontainer_16asm_145 button._solid_tlo32_63._md_tlo32_43._button_tlo32_27')
         console.log("Clicked Login Button")
 
         //wait for browser to navigate to application upload page
@@ -334,7 +289,7 @@ describe('End To End Tests', () => {
         console.log("Entered values in all fields");
 
         //click on the login button
-        await page.click('._formContainer_eh3bp_1 button._solid_15241_63._md_15241_43._button_15241_27 ')
+        await page.click('._formContainer_ymg7s_1 button._solid_tlo32_63._md_tlo32_43._button_tlo32_27')
         console.log("Clicked Submit Button")
 
         //wait for navigation
@@ -394,7 +349,7 @@ describe('End To End Tests', () => {
         console.log("Modified values in some fields");
 
         //click on the login button
-        await page.click('._formContainer_eh3bp_1 button._solid_15241_63._md_15241_43._button_15241_27 ')
+        await page.click('._formContainer_ymg7s_1 button._solid_tlo32_63._md_tlo32_43._button_tlo32_27')
         console.log("Clicked Submit Button")
 
         //wait for browser to navigate to application upload page
@@ -431,7 +386,7 @@ describe('End To End Tests', () => {
         console.log("Entered old and new passwords and confirmed.");
 
         //click on the login button
-        await page.click('._logincontainer_1wvov_5 ._loginform_1wvov_53 button._solid_15241_63._md_15241_43._button_15241_27  ')
+        await page.click('._logincontainer_6i4y4_5 ._loginform_6i4y4_53 button._solid_tlo32_63._md_tlo32_43._button_tlo32_27   ')
         console.log("Clicked Change Password Button")
 
         //wait for browser to navigate to home page
@@ -442,41 +397,15 @@ describe('End To End Tests', () => {
         expect(page.url()).toBe('http://localhost:5173/');
       //Step 3
         //logout
-        await page.waitForSelector('._navbar_13z3g_21 a[href="/logout"]', {visible:true})
+        await page.waitForSelector('._navbar_13z3g_21 ._optionsContainer_13z3g_43 ._navMenu_13z3g_111 a[href="/logout"]', {visible:true})
         await page.waitForSelector('._alertContainer_7h75f_1._success_7h75f_29', {hidden:true})
-        await page.click('._navbar_13z3g_21 a[href="/logout"]', {waitUntil:"domcontentloaded", timeout:20000});
-        console.log("Clicked on Logout Option");
+        await page.$eval('._navbar_13z3g_21 ._optionsContainer_13z3g_43 ._navMenu_13z3g_111 a[href="/logout"]', (elem: HTMLAnchorElement) => elem.click());
+
+        console.log('Clicked logout');
 
         await page.goto('http://localhost:5173/', { waitUntil: 'domcontentloaded', timeout:10000 });
         console.log("Logged out")
-/* 
-        //login with new password
-        await page.goto('http://localhost:5173/login', { waitUntil: 'domcontentloaded', timeout:10000 });
-        await page.waitForSelector("#user_id")
-        await page.type('#user_id', config.email);
-        await page.type('#user_password', config.password+"#");
-        console.log("Entered Email and Password");
-
-        //click on the login button
-        await page.waitForSelector('._navbar_13z3g_21 button._solid_15241_63._md_15241_43._button_15241_27', { timeout: 5000 });
-        await page.click('._navbar_13z3g_21 button._solid_15241_63._md_15241_43._button_15241_27 ');
-        console.log("Clicked Login Button with new password")
-
-        //wait for navigation
-        await page.waitForNavigation({ waitUntil: 'domcontentloaded', timeout:10000 });
-
-        //check if home page has been reached
-        console.log('Current URL:', page.url());
-        expect(page.url()).toBe('http://localhost:5173/');
-        console.log("Login successful with new password")
-
-        console.log("TEST FOR RESET PASSWORD SUCSESSFUL")
-
-        //logout for next test case
-        await page.waitForSelector('._navbar_13z3g_21 a[href="/logout"]', {visible:true})
-        await page.waitForSelector('._alertContainer_7h75f_1._success_7h75f_29', {hidden:true})
-        await page.click('._navbar_13z3g_21 a[href="/logout"]', {waitUntil:"domcontentloaded", timeout:20000}); */
-    } catch (error) {
+      } catch (error) {
       console.error('Test failed:', error);
     }
   }, 30000);
@@ -504,7 +433,7 @@ describe('End To End Tests', () => {
         await page.type("#user_password_confirm", config.password);
         await page.type('#user_id', config.email);
         //click on getotp
-        await page.click("._signupform_jn6tm_45 ._otpContainer_jn6tm_107 ._solid_15241_63._md_15241_43._button_15241_27")
+        await page.click("._signupcontainer_1v2ci_1 ._otpContainer_1v2ci_107 button._solid_tlo32_63._md_tlo32_43._button_tlo32_27 ")
 
         //fetch otp from backend
         const fetchotp = async (): Promise<string> => {
@@ -530,10 +459,10 @@ describe('End To End Tests', () => {
         const otp = await fetchotp();
         await page.type("#otp", otp);
 
-        const divSelector = '._signupform_jn6tm_45 ._buttonscontainer_jn6tm_131'; // Update with the appropriate selector
+        const divSelector = '._signupform_1v2ci_45 ._buttonscontainer_1v2ci_131'; // Update with the appropriate selector
 
         // Define the selector for the button inside the div
-        const buttonSelector = `${divSelector} ._solid_15241_63._md_15241_43._button_15241_27`; // Update with the appropriate selector
+        const buttonSelector = `${divSelector} button._solid_tlo32_63._md_tlo32_43._button_tlo32_27 `; // Update with the appropriate selector
   
         // Use Puppeteer's `page.click()` method to click the button
         await page.click(buttonSelector);
