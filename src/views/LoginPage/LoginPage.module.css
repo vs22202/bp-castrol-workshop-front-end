@@ -30,7 +30,7 @@
 .loginform h1 {
   color: var(--primary---main500);
   font-size: var(--heading---m---bold);
-  font-weight: var(--weight--extra-bold);
+  font-weight: var(--weight--bold);
 }
 .loginform h2 {
   color: var(--neutral---main750);
@@ -40,7 +40,7 @@
 .loginOptionToggler {
   color: var(--neutral---main750);
   font-size: var(--subheading---x-s---regular);
-  font-weight: var(--weight--light);
+  font-weight: var(--weight--regular);
   width: max-content;
   margin-left: auto;
   cursor: pointer;
@@ -74,14 +74,15 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
-  gap: 10px;
+  gap: 2px;
   max-width: fit-content;
   text-align: center;
 }
 
 .buttonscontainer > span {
   font-size: var(--paragraph---m---light);
-  font-weight: var(--weight--medium);
+  font-weight: var(--weight--regular);
+  color:var(--neutral---main750)
 }
 
 /* Media query for mobile screens */
@@ -99,7 +100,7 @@
   .loginform h2 {
     color: var(--neutral---main750);
     font-size: var(--subheading---s---regular);
-    font-weight: var(--weight--medium);
+    font-weight: var(--weight--light);
   }
   .loginform > form {
     gap: var(--spacing-3xs);
@@ -109,8 +110,9 @@
     max-width: fit-content;
   }
   .buttonscontainer > span {
-    font-size: 12px;
-    font-weight: 600;
+    font-size: var(--paragraph---m---light);
+    font-weight: var(--weight--regular);
+    color:var(--neutral---main750)
   }
 }
 @media (max-width: 768px) {

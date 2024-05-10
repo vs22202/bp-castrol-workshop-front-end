@@ -61,7 +61,7 @@
 }
 .acceptanceFormats {
   font-size: var(--paragraph---m---regular);
-  font-weight: var(--weight--regular);
+  font-weight: var(--weight--light);
   color: var(--neutral---main550);
 }
 

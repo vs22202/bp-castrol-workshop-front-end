@@ -12,7 +12,7 @@
 .footerParagraph {
   font-size: var(--paragraph---m---regular);
   font-weight: var(--weight--regular);
-  color: var(-neutral---main750);
+  color: var(--neutral---main750);
   width: fit-content;
 }
 
@@ -32,7 +32,8 @@
 
   .footerParagraph {
     font-size: var(--subheading---s---medium);
-    font-weight: var(--weight--medium);
+    font-weight: var(--weight--regular);
+    
   }
 
   /* contact info */

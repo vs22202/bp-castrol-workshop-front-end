@@ -24,7 +24,7 @@
 .container h1 {
     color: var(--neutral---main550);
     font-size: var(--heading---m---bold);
-    font-weight: var(--weight--extra-bold);
+    font-weight: var(--weight--bold);
 }
 @media screen and (max-width: 768px) {
     .container {
