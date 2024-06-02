@@ -20,6 +20,13 @@
   display: none;
 }
 
+a{
+    color: var(--neutral---main750);
+}
+a:hover{
+    color: var(--neutral---main850);
+}
+
 /*Desktop*/
 
 @media (min-width: 768px) {

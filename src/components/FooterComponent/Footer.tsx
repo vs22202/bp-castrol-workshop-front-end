@@ -27,12 +27,12 @@ export function FooterWithLogo() {
       <div className={styles.footercontactinfo}>
         <div className={styles.email}>
           <SvgIcon iconName="mail" wrapperStyle="sm"/>
-          <a href="">developer@bpcap.com</a>
+          <a href="mailto:developer@bpcap.com">developer@bpcap.com</a>
         </div>
         <div className={`${styles.verticalDivider}`}></div>
         <div className={styles.phoneno}>
           <SvgIcon iconName="phone" wrapperStyle="sm"/>
-          <a href="">+91 97000 09045</a>
+          <a href="tel:+9196000009045">+91 97000 09045</a>
         </div>
       </div>
       <p className={` ${styles.footerParagraph}`}>
